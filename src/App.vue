@@ -8,6 +8,5 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
-  position: relative;
 }
 </style>

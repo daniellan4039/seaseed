@@ -1,4 +1,4 @@
-import {Button, Checkbox, Input, Layout} from "ant-design-vue";
+import {Button, Checkbox, Input, Layout, Menu} from "ant-design-vue";
 
 export default {
     install: (app) => {
@@ -6,5 +6,6 @@ export default {
         app.use(Input)
         app.use(Checkbox)
         app.use(Layout)
+        app.use(Menu)
     }
 }
