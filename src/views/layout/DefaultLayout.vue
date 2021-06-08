@@ -8,10 +8,14 @@
       ></cus-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header>
-        <a-button @click="toggleCollapsed">
-          K
-        </a-button>
+      <a-layout-header class="cus-header">
+        <div class="menu">
+          <MenuUnfoldOutlined v-if="collapsed" @click="toggleCollapsed"/>
+          <MenuFoldOutlined v-else @click="toggleCollapsed"/>
+        </div>
+        <div>
+
+        </div>
       </a-layout-header>
       <a-layout-content>
         <router-view #="{Component}">
@@ -27,12 +31,12 @@
 
 <script>
 import CusMenu from '@/components/cusMenu'
-import {UserOutlined} from "@ant-design/icons-vue";
+import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
 
 export default {
   name: "DefaultLayout",
   components: {
-    CusMenu, UserOutlined
+    CusMenu, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
   },
   data() {
     return {
@@ -94,4 +98,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.menu{
+  font-size: 22px;
+  color: white;
+}
+.cus-header{
+  padding: 0 20px;
+}
 </style>
