@@ -1,10 +1,29 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import EmployeeInfo from "@/views/employee/EmployeeInfo";
+import EmployeeFamily from "@/views/employee/EmployeeFamily";
 
+/**
+ * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
+ *
+ * @type {[{path: string, component: (function(): Promise<*>), name: string}]}
+ */
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/layout/DefaultLayout')
+    component: () => import('@/views/layout/DefaultLayout'),
+    children: [
+      {
+        path: '/employee/info',
+        name: 'EmployeeCenter',
+        component: EmployeeInfo
+      },
+      {
+        path: '/employee/family',
+        name: 'EmployeeFamily',
+        component: EmployeeFamily
+      }
+    ]
   }
 ]
 
