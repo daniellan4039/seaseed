@@ -11,9 +11,10 @@ export default {
         collapsed: {
             type: Boolean,
             default: () => false
-        }
+        },
+        selectedKeys: Array
     },
-    emits: ['change:select'],
+    emits: ['change:select', 'update:selectedKeys'],
     data() {
         return {
             openKeys: [],
@@ -30,7 +31,7 @@ export default {
             if (menuItemsTree instanceof Array) {
                 subMenuTree = menuItemsTree.map(i => {
                     if (i.type === 'menuItem') {
-                        return h(<a-menu-item></a-menu-item>, null, {
+                        return h(<a-menu-item></a-menu-item>, { key:i?.key, title: i?.title }, {
                             default: () => {
                                 return [
                                     <UserOutlined/>,
@@ -39,7 +40,7 @@ export default {
                         })
                     } else if (i.type === 'subMenu') {
                         const subMenu = this.setSubMenu(i.children)
-                        return h(<a-sub-menu></a-sub-menu>, {onTitleClick: this.onSubMenuClick}, {
+                        return h(<a-sub-menu></a-sub-menu>, {onTitleClick: this.onSubMenuClick, key: i?.key}, {
                             default: () => {
                                 return subMenu
                             },
@@ -77,6 +78,7 @@ export default {
          */
         onSelect(arg) {
             this.$emit('change:select', arg)
+            this.$emit('update:selectedKeys', [arg.key])
         }
     },
     computed: {
@@ -99,7 +101,8 @@ export default {
                 onOpenChange: onMenuOpenChange,
                 openKeys: menuOpenKey,
                 onSelect: onSelect,
-                inlineCollapsed: collapsed
+                inlineCollapsed: collapsed,
+                selectedKeys: this.selectedKeys
             },
             {
                 default: () => {

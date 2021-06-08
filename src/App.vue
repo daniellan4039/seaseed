@@ -3,6 +3,7 @@
 </template>
 
 <style lang="less">
+@import "style/index";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

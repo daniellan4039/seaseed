@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <a-input></a-input>
+  <div class="cus-table-container">
+
   </div>
 </template>
 
@@ -10,6 +10,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 
 </style>
