@@ -29,11 +29,13 @@
             </a-breadcrumb>
           </div>
         </div>
-        <router-view #="{Component}">
-          <keep-alive>
-            <component :is="Component"></component>
-          </keep-alive>
-        </router-view>
+        <a-config-provider :locale="locale">
+          <router-view #="{Component}">
+            <keep-alive>
+              <component :is="Component"></component>
+            </keep-alive>
+          </router-view>
+        </a-config-provider>
       </a-layout-content>
       <a-layout-footer>Footer</a-layout-footer>
     </a-layout>
@@ -41,14 +43,13 @@
 </template>
 
 <script>
-import CusMenu from '@/components/cusMenu'
+import CusMenu from '@/components/CusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
-import CusTabs from '@/components/cusTabs'
-// eslint-disable-next-line no-unused-vars
+import CusTabs from '@/components/CusTabs'
 import {reactive, toRaw} from "vue";
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
-// eslint-disable-next-line no-unused-vars
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
 
 export default {
@@ -109,7 +110,8 @@ export default {
       },
       collapsed: false,
       openTabs: [],
-      menuSelectedKeys: null
+      menuSelectedKeys: null,
+      locale: zhCN
     }
   },
   computed: {
@@ -121,7 +123,7 @@ export default {
         this.menuSelectedKeys = [value]
       }
     },
-    matchedRoutes () {
+    matchedRoutes() {
       return this.$route.matched
     }
   },
@@ -163,7 +165,7 @@ export default {
       this.loadLastTabs()
       this.loadLastOpenTab()
     },
-    loadLastTabs(){
+    loadLastTabs() {
       const lastTabs = JSON.parse(localStorage.getItem(LAST_OPEN_TABS))
       if (lastTabs) {
         this.openTabs = reactive(lastTabs)
@@ -206,7 +208,8 @@ export default {
   max-width: 200px;
   overflow: hidden;
 }
-.navigation-bar{
+
+.navigation-bar {
   padding-left: 16px;
   padding-bottom: 16px;
 }

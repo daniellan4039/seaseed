@@ -1,4 +1,16 @@
-import {Breadcrumb, Button, Checkbox, Dropdown, Input, Layout, Menu, Tabs, Typography} from "ant-design-vue";
+import {
+    Breadcrumb,
+    Button,
+    Checkbox,
+    ConfigProvider,
+    Dropdown,
+    Input,
+    Layout,
+    Menu,
+    Table,
+    Tabs,
+    Typography
+} from "ant-design-vue";
 
 export default {
     install: (app) => {
@@ -11,5 +23,7 @@ export default {
         app.use(Tabs)
         app.use(Breadcrumb)
         app.use(Dropdown)
+        app.use(Table)
+        app.use(ConfigProvider)
     }
 }
