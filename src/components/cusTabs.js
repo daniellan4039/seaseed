@@ -1,5 +1,4 @@
 import {h} from "vue";
-// eslint-disable-next-line no-unused-vars
 import {MoreOutlined} from '@ant-design/icons-vue'
 
 export default {
