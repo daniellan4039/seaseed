@@ -14,6 +14,12 @@ export default {
         return {
         }
     },
+    computed: {
+        doTabClosable () {
+            const result = this.tabs.length !== 1
+            return result
+        }
+    },
     methods: {
         onTabEdit(key) {
             this.$emit('edit', key)
@@ -33,7 +39,7 @@ export default {
             {
                 default: () => {
                     return this.tabs?.map(i => {
-                        return <a-tab-pane tab={i.title} key={i.key}></a-tab-pane>
+                        return <a-tab-pane tab={i.title} key={i.key} closable={this.doTabClosable}></a-tab-pane>
                     })
                 },
                 tabBarExtraContent: () => {

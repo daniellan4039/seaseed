@@ -5,6 +5,7 @@
           v-model:selectedKeys="menuSelectedKeys"
           :collapsed="collapsed"
           :data-source="menu"
+          :open-one="true"
           v-on:change:select="onMenuItemSelect"
       ></cus-menu>
     </a-layout-sider>
@@ -37,6 +38,12 @@
 import CusMenu from '@/components/cusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
 import CusTabs from '@/components/cusTabs'
+// eslint-disable-next-line no-unused-vars
+import {reactive, toRaw} from "vue";
+
+const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
+// eslint-disable-next-line no-unused-vars
+const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
 
 export default {
   name: "DefaultLayout",
@@ -99,9 +106,6 @@ export default {
       menuSelectedKeys: null
     }
   },
-  setup() {
-
-  },
   computed: {
     activeTabKey: {
       get() {
@@ -110,6 +114,11 @@ export default {
       set(value) {
         this.menuSelectedKeys = [value]
       }
+    }
+  },
+  watch: {
+    menuSelectedKeys(val) {
+      this.saveScene(val?.[0])
     }
   },
   methods: {
@@ -131,13 +140,41 @@ export default {
         const index = this.openTabs.findIndex(i => i.key === key)
         if (index >= 0) {
           this.openTabs.splice(index, 1)
-          const lastIndex = (this.openTabs.length ?? 0) - 1
-          if (lastIndex >= 0) {
-            this.activeTabKey = this.openTabs[lastIndex]?.key
-          }
+          this.loadLastOpenTab()
+        }
+      }
+    },
+    saveScene(menuItemKey) {
+      const rawOpenTabs = toRaw(this.openTabs)
+      const rawCurrentTab = rawOpenTabs?.find(i => i.key === menuItemKey)
+      localStorage.setItem(LAST_OPEN_TABS, JSON.stringify(rawOpenTabs))
+      localStorage.setItem(LAST_SELECTED_TAB, JSON.stringify(rawCurrentTab))
+    },
+    loadLastScene() {
+      this.loadLastTabs()
+      this.loadLastOpenTab()
+    },
+    loadLastTabs(){
+      const lastTabs = JSON.parse(localStorage.getItem(LAST_OPEN_TABS))
+      if (lastTabs) {
+        this.openTabs = reactive(lastTabs)
+      }
+    },
+    loadLastOpenTab() {
+      const lastSelectedTab = JSON.parse(localStorage.getItem(LAST_SELECTED_TAB))
+      const lastSelectedTabIndex = this.openTabs?.findIndex(i => i.key === lastSelectedTab?.key)
+      if (lastSelectedTabIndex >= 0) {
+        this.menuSelectedKeys = [lastSelectedTab.key]
+      } else {
+        const lastIndex = (this.openTabs.length ?? 0) - 1
+        if (lastIndex >= 0) {
+          this.activeTabKey = this.openTabs[lastIndex]?.key
         }
       }
     }
+  },
+  mounted() {
+    this.loadLastScene()
   }
 }
 </script>
