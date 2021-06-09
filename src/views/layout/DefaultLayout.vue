@@ -21,7 +21,13 @@
       </a-layout-header>
       <a-layout-content class="cus-content-container">
         <div class="cus-tabs-main">
-          <cus-tabs v-model:activeKey="activeTabKey" :tabs="openTabs" @edit="onTabsEdit"></cus-tabs>
+          <cus-tabs v-model:activeKey="activeTabKey" v-model:tabs="openTabs" @edit="onTabsEdit">
+          </cus-tabs>
+          <div class="navigation-bar">
+            <a-breadcrumb>
+              <a-breadcrumb-item v-for="(i, k) in matchedRoutes" :key="k">{{ i?.meta?.title }}</a-breadcrumb-item>
+            </a-breadcrumb>
+          </div>
         </div>
         <router-view #="{Component}">
           <keep-alive>
@@ -114,6 +120,9 @@ export default {
       set(value) {
         this.menuSelectedKeys = [value]
       }
+    },
+    matchedRoutes () {
+      return this.$route.matched
     }
   },
   watch: {
@@ -196,5 +205,9 @@ export default {
   font-size: 16px;
   max-width: 200px;
   overflow: hidden;
+}
+.navigation-bar{
+  padding-left: 16px;
+  padding-bottom: 16px;
 }
 </style>

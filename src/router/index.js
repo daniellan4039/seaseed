@@ -12,16 +12,25 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/views/layout/DefaultLayout'),
+    meta: {
+      title: '首页'
+    },
     children: [
       {
         path: '/employee/info',
         name: 'EmployeeCenter',
-        component: EmployeeInfo
+        component: EmployeeInfo,
+        meta: {
+          title: '职工中心'
+        }
       },
       {
         path: '/employee/family',
         name: 'EmployeeFamily',
-        component: EmployeeFamily
+        component: EmployeeFamily,
+        meta: {
+          title: '职工家庭'
+        }
       }
     ]
   }
