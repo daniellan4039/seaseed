@@ -8,7 +8,7 @@
 
 <script>
 import CusTable from '@/components/CusTable'
-import {tableDef} from "@/definition/employee/employeeCenter"
+import {tableDef} from "@/definition/employee/employeeDef"
 import CusTableContainer from '@/components/CusTableContainer'
 
 export default {

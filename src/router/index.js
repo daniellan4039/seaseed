@@ -17,8 +17,8 @@ const routes = [
     },
     children: [
       {
-        path: '/employee/info',
-        name: 'EmployeeCenter',
+        path: '/employee/table',
+        name: 'EmployeeTable',
         component: EmployeeInfo,
         meta: {
           title: '职工中心'

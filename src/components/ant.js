@@ -3,10 +3,10 @@ import {
     Button,
     Checkbox,
     ConfigProvider,
-    Dropdown,
+    Dropdown, Form,
     Input,
     Layout,
-    Menu,
+    Menu, Select,
     Table,
     Tabs,
     Typography
@@ -16,6 +16,7 @@ export default {
     install: (app) => {
         app.use(Button)
         app.use(Input)
+        app.use(Select)
         app.use(Checkbox)
         app.use(Layout)
         app.use(Menu)
@@ -25,5 +26,6 @@ export default {
         app.use(Dropdown)
         app.use(Table)
         app.use(ConfigProvider)
+        app.use(Form)
     }
 }
