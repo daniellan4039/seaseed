@@ -6,7 +6,7 @@ import {
     Dropdown, Form,
     Input,
     Layout,
-    Menu, Select,
+    Menu, Modal, Select,
     Table,
     Tabs,
     Typography
@@ -27,5 +27,6 @@ export default {
         app.use(Table)
         app.use(ConfigProvider)
         app.use(Form)
+        app.use(Modal)
     }
 }

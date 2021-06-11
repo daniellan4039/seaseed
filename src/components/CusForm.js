@@ -1,6 +1,7 @@
-// eslint-disable-next-line no-unused-vars
-import {h, reactive, ref} from "vue";
+import {h, reactive, ref} from "vue"
 import _ from 'lodash'
+import {Modal} from "ant-design-vue";
+import CusFormInput from "@/components/CusFormInput";
 
 export default {
     name: 'CusForm',
@@ -14,15 +15,17 @@ export default {
             default: null
         }
     },
+    components: {
+        CusFormInput
+    },
     setup(props) {
-        //fixme: 这里可能会有问题, 待验证
-        const formRef = ref(props.formDef.formRef)
+        const formRef = ref()
 
         const parseFormModel = (formItems) => {
             let formModel = {}
             if (formItems instanceof Array) {
                 formItems.forEach(i => {
-                    formModel[i.key] = null
+                    formModel[i.key] = i?.default
                 })
             }
             return formModel
@@ -43,12 +46,39 @@ export default {
 
         const getFormModel = () => {
             const parsedModel = parseFormModel(props.formDef?.formItems)
-            // return loadDefaultModel(parsedModel ?? {}, props.defaultModel ?? {})
-            return parsedModel
+            return loadDefaultModel(parsedModel ?? {}, props.defaultModel ?? {})
         }
 
         const getRules = () => {
             return parseFormRules(props.formDef?.formItems)
+        }
+
+        const submiForm = () => {
+            formRef.value.validate().then(() => {
+                props.formDef?.actions?.save(formModel).then(res => {
+                    const {isSuccess, msg} = res
+                    if (isSuccess) {
+                        Modal.success({
+                            title: '提示',
+                            content: msg
+                        })
+                    } else {
+                        Modal.warning({
+                            title: '提示',
+                            content: msg
+                        })
+                    }
+                })
+            }).catch(() => {
+                Modal.error({
+                    title: '提示',
+                    content: '请完善表格'
+                })
+            })
+        }
+
+        const resetForm = () => {
+            formRef.value.resetFields();
         }
 
         const formModel = reactive(getFormModel())
@@ -62,12 +92,14 @@ export default {
             parseFormRules,
             loadDefaultModel,
             getFormModel,
-            getRules
+            getRules,
+            submiForm,
+            resetForm
         }
     },
     render() {
         const {formItems} = this.formDef
-        const {formModel, formRef, rules, formDef} = this
+        const {formModel, rules, formDef, submiForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
             return h(
                 <a-form-item></a-form-item>,
@@ -78,59 +110,63 @@ export default {
                 },
                 {
                     default: () => {
-                        let input
-                        switch (i.inputType) {
-                            case 'input:string':
-                                input = h(
-                                    <a-input></a-input>,
-                                    {
-                                        placeholder: i.placeholder,
-                                        value: formModel[i.key],
-                                        onChange: $event => formModel[i.key] = $event.target.value
-                                    }
-                                )
-                                break
-                            case 'select':
-                                input = h(
-                                    <a-select></a-select>,
-                                    {
-                                        placeholder: i.placeholder,
-                                        value: formModel[i.key],
-                                        onChange: val => formModel[i.key] = val
-                                    },
-                                    {
-                                        default: () => {
-                                            return i?.meta.options?.map(o => {
-                                                return h(
-                                                    <a-select-option>{o.text}</a-select-option>,
-                                                    {
-                                                        value: o.value
-                                                    }
-                                                )
-                                            })
-                                        }
-                                    }
-                                )
-
-                        }
-                        return input
+                        return h(
+                            <cus-form-input></cus-form-input>,
+                            {
+                                item: i,
+                                value: formModel[i.key],
+                                'onChange': val => formModel[i.key] = val
+                            }
+                        )
                     }
                 }
             )
         })
 
+        const submitButton = h(
+            <a-form-item></a-form-item>,
+            {
+                wrapperCol: {span: formDef.wrapperCol, offset: formDef.labelCol}
+            },
+            {
+                default: () => {
+                    return [
+                        h(
+                            <a-button>保存</a-button>,
+                            {
+                                type: 'primary',
+                                onClick: submiForm
+                            }
+                        ),
+                        h(
+                            <a-button>重置</a-button>,
+                            {
+                                style: 'margin-left: 10px;',
+                                onClick: resetForm
+                            }
+                        )
+                    ]
+                }
+            }
+        )
 
         return h(
             <a-form></a-form>,
             {
-                ref: formRef,
+                ref: 'formRef',
                 model: formModel,
                 rules: rules,
-                labelCol: formDef.labelCol ?? {span: 4},
-                wrapperCol: formDef.wrapperCol ?? {span: 14}
+                labelCol: {span: formDef.labelCol ?? 4},
+                wrapperCol: {span: formDef.wrapperCol ?? 14},
+                ...formDef.config
             },
             {
-                default: () => formItemsDOM
+                default: () => {
+                    return [
+                        formItemsDOM,
+                        submitButton
+                    ]
+                }
             }
         )
     }

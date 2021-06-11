@@ -63,7 +63,7 @@ export default {
             {
                 columns: columnsParsed,
                 dataSource: dataSourceParsed,
-                bordered: tableDef.bordered
+                ...tableDef.config
             })
     }
 

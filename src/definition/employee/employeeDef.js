@@ -1,10 +1,12 @@
 export const tableDef = {
     key: 'EmployeeInfo',
-    size: 'small',
-    bordered: false,
-    rowKey: 'EmployeeInfo',
     title: '职工中心',
     url: 'test url',
+    config: {
+        rowKey: 'EmployeeInfo',
+        size: 'small',
+        bordered: false,
+    },
     columns: [
         {
             title: '职工编号',
@@ -73,9 +75,14 @@ export const tableDef = {
 export const formDef = {
     key: 'employeeForm',
     formType: 'normal',
-    url: '',
-    labelCol: { span: 7 },
-    wrapperCol: { span: 10 },
+    url: {
+        save: '',
+        update: ''
+    },
+    labelCol: 7,
+    wrapperCol: 10,
+    config: {
+    },
     formRef: 'employeeFormRef',
     formItems: [
         {
@@ -87,7 +94,8 @@ export const formDef = {
                 {
                     required: true,
                     message: '职工姓名必填',
-                    trigger: 'blur'
+                    trigger: 'blur',
+                    type: 'string'
                 }
             ]
         },
@@ -100,7 +108,8 @@ export const formDef = {
                 {
                     required: true,
                     message: '性别必填',
-                    trigger: 'blur'
+                    trigger: 'blur',
+                    type: 'string'
                 }
             ],
             meta: {
@@ -142,7 +151,9 @@ export const formDef = {
             placeholder: '请选择状态',
             inputType: 'select:code',
             rules: [],
-            meta: {}
+            meta: {
+                // code: 'hr_employee_status'
+            }
         },
         {
             key: 'departmentId',
@@ -150,7 +161,8 @@ export const formDef = {
             placeholder: '请选择所属部门',
             inputType: 'select:code',
             rules: [],
-            meta: {}
+            meta: {
+            }
         },
         {
             key: 'password',
@@ -161,7 +173,7 @@ export const formDef = {
             meta: {}
         },
         {
-            key: 'password',
+            key: 'password2',
             label: '确认密码',
             placeholder: '请再次输入密码',
             inputType: 'input:psw',

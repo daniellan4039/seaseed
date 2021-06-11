@@ -30,11 +30,12 @@
           </div>
         </div>
         <a-config-provider :locale="locale">
-          <router-view #="{Component}">
-            <keep-alive>
-              <component :is="Component"></component>
-            </keep-alive>
-          </router-view>
+<!--          <router-view #="{Component}">-->
+<!--            <keep-alive>-->
+<!--              <component :is="Component"></component>-->
+<!--            </keep-alive>-->
+<!--          </router-view>-->
+          <router-view></router-view>
         </a-config-provider>
       </a-layout-content>
       <a-layout-footer>Footer</a-layout-footer>
@@ -55,6 +56,7 @@ const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
 export default {
   name: "DefaultLayout",
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     CusMenu, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
     CusTabs
   },
