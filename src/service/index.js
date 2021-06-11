@@ -9,6 +9,9 @@ const $ = axios.create({
 })
 
 $.interceptors.request.use((config) => {
+    config.headers = {
+        token: `Bearer ${localStorage.getItem('HRMS_USER_TOKEN')}`
+    }
     return config
 }, (error) => {
     return Promise.reject(error)

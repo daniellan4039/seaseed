@@ -16,6 +16,7 @@ export function login(data) {
             const {isSuccess, data} = res
             if (isSuccess) {
                 localStorage.setItem('HRMS_USER', JSON.stringify(data))
+                localStorage.setItem('HRMS_USER_TOKEN', data.token)
             }
             resolve(res)
         })
