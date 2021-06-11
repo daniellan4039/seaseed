@@ -79,8 +79,8 @@ export const formDef = {
         save: '',
         update: ''
     },
-    labelCol: 7,
-    wrapperCol: 10,
+    labelCol: 8,
+    wrapperCol: 7,
     config: {
     },
     formRef: 'employeeFormRef',
@@ -152,7 +152,7 @@ export const formDef = {
             inputType: 'select:code',
             rules: [],
             meta: {
-                // code: 'hr_employee_status'
+                code: 'hr_employee_status'
             }
         },
         {

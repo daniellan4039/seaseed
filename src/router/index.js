@@ -19,7 +19,7 @@ const routes = [
     },
     children: [
       {
-        path: '/employee/table',
+        path: '/employee',
         name: 'EmployeeTable',
         component: EmployeeInfo,
         meta: {

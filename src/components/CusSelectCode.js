@@ -1,5 +1,5 @@
-import {h, reactive} from 'vue'
-import { dictionaryApi } from '@/service/index'
+import {h, ref} from 'vue'
+import {dictionaryApi} from '@/service/index'
 
 export default {
     name: 'CusSelectCode',
@@ -12,35 +12,41 @@ export default {
     },
     emits: ['change'],
     setup (props) {
-        let options = reactive([])
-        props.def?.meta?.code && dictionaryApi.getByCode(props.def.meta.code).then(res => {
-            const { isSuccess, data, msg } = res
-            if (isSuccess) {
-                options = data[props.code]
-            } else {
-                Promise.reject(`HRMS: Component 'select code' initializing failed for ${props.code} : ${msg}`)
-            }
-        })
+        let options = ref([])
+        const initialize = () => {
+             props.def?.meta?.code && dictionaryApi.getByCode({ codes: props.def.meta.code }).then(res => {
+                const { isSuccess, data, msg } = res
+                if (isSuccess) {
+                    options.value = data[props.def.meta.code]
+                } else {
+                    Promise.reject(`HRMS: Component 'select code' initializing failed for ${props.code} : ${msg}`)
+                }
+            })
+        }
         return {
-            options
+            options,
+            initialize
         }
     },
+    mounted() {
+        this.initialize()
+    },
     render() {
-        const { options, def, value } = this
+        let self = this
         return h(
             <a-select></a-select>,
             {
-                placeholder: def.placeholder,
-                value: value,
+                placeholder: self.def.placeholder,
+                value: self.value,
                 'onChange': nv => this.$emit('change', nv),
             },
             {
                 default: () => {
-                    return options.map(i => {
+                    return self.options.map(i => {
                         return h(
-                            <a-select-option>{i.text}</a-select-option>,
+                            <a-select-option>{i.dictTxt}</a-select-option>,
                             {
-                                value: i.value
+                                value: i.dictValue
                             }
                         )
                     })

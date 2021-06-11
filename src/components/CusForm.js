@@ -99,7 +99,6 @@ export default {
     },
     render() {
         const {formItems} = this.formDef
-        console.log("hello?")
         const {formModel, rules, formDef, submiForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
             return h(
