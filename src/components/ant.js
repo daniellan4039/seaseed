@@ -6,7 +6,7 @@ import {
     Dropdown, Form,
     Input,
     Layout,
-    Menu, Modal, Row, Select,
+    Menu, Modal, Row, Select, Space,
     Table,
     Tabs, Tooltip,
     Typography
@@ -31,5 +31,6 @@ export default {
         app.use(Tooltip)
         app.use(Row)
         app.use(Col)
+        app.use(Space)
     }
 }

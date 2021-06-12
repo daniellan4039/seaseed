@@ -12,7 +12,7 @@ export const tableDef = {
     searchParams: {
         meta: {
             gutter: 16,
-            col: 4
+            col: 6
         },
         formItems: [
             {

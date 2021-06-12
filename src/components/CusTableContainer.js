@@ -22,69 +22,31 @@ export default {
             null,
             {
                 default: () => {
+                    const formItems = self.def.formItems.map(i => {
+                        return <a-col span={self.def.meta.col}>
+                            <a-form-item label={i.label} labelCol={{ span: 8}} wrapperCol={{ span: 16 }}>
+                                <cus-form-input item={i} />
+                            </a-form-item>
+                        </a-col>
+                    })
+                    const searchForm = <a-form>
+                        <a-row gutter={self.def.meta.gutter}>
+                            {formItems}
+                        </a-row>
+                        <a-row>
+                            <a-col offset='20' span='4' class='search-actions-block'>
+                                <a-space align='end'>
+                                    <a-button type='primary'>搜索</a-button>
+                                    <a-button>重置</a-button>
+                                </a-space>
+                            </a-col>
+                        </a-row>
+                    </a-form>
                     const header = h(
-                        <div className='search-block'></div>,
+                        <div className='search-block'/>,
                         null,
-                        {
-                            default: () => {
-                                // const formItems = self.def.formItems.map(i => {
-                                //     return <a-col span={self.def.meta.col ?? 4}>
-                                //         <a-form-item label={i.label}>
-                                //             <cus-form-input item={i}></cus-form-input>
-                                //         </a-form-item>
-                                //     </a-col>
-                                // })
-                                //
-                                // const searchForm = <a-form>
-                                //     <a-row gutter={self.def.meta.gutter ?? 16}>
-                                //         <formItems></formItems>
-                                //     </a-row>
-                                // </a-form>
-
-                                // eslint-disable-next-line no-unused-vars
-                                const formItems = self.def.formItems.map(i => {
-                                    return h(
-                                        <a-col></a-col>,
-                                        {
-                                            span: self.def.meta.col ?? 4
-                                        },{
-                                            default: () => {
-                                                return h(
-                                                    <a-form-item></a-form-item>,
-                                                    {
-                                                        label: i.label
-                                                    },
-                                                    {
-                                                        default: () => {
-                                                            return h(
-                                                                <cus-form-input></cus-form-input>,
-                                                                {
-                                                                    item: i
-                                                                }
-                                                            )
-                                                        }
-                                                    }
-                                                )
-                                            }
-                                        }
-                                    )
-                                })
-
-                                const searchForm = h(
-                                    <div></div>,
-                                    {
-                                        gutter: self.def.meta.gutter
-                                    },
-                                    {
-                                        default: () => 'sdfsfsf'
-                                    }
-                                )
-
-                                return searchForm
-                            }
-                        }
+                        searchForm
                     )
-
                     return [
                         header,
                         this.$slots.default()
@@ -92,5 +54,6 @@ export default {
                 }
             }
         )
+
     }
 }
