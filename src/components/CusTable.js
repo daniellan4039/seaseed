@@ -1,4 +1,5 @@
 import {computed, h, reactive} from "vue";
+import CusTableOpsBar from '@/components/CusTableOperationBar'
 import _ from 'lodash'
 
 const indexCol = {
@@ -20,6 +21,9 @@ export default {
             default: []
         }
     },
+    components: {
+        CusTableOpsBar
+    },
     setup(props) {
         const columnKeys = reactive([])
         const columnsParsed = computed(() => {
@@ -33,7 +37,7 @@ export default {
         const tableWidth = computed(() => {
             let width = 0
             columnsParsed.value.forEach(i => {
-                width += i.width??0
+                width += i.width ?? 0
             })
             return width
         })
@@ -57,14 +61,30 @@ export default {
         }
     },
     render() {
-        const { tableDef, columnsParsed, dataSourceParsed} = this
-        return h(
+        const self = this
+        // eslint-disable-next-line no-unused-vars
+        const table = h(
             <a-table></a-table>,
             {
-                columns: columnsParsed,
-                dataSource: dataSourceParsed,
-                ...tableDef.config
-            })
+                columns: self.columnsParsed,
+                dataSource: self.dataSourceParsed,
+                // rowClassName:"(record, index) => (index % 2 === 1 ? 'table-striped' : null)",
+                ...self.tableDef?.config
+            }
+        )
+        const opsBar = <cus-table-ops-bar></cus-table-ops-bar>
+        return h(
+            <div></div>,
+            null,
+            {
+                default: () => {
+                    return [
+                        opsBar,
+                        table
+                    ]
+                }
+            }
+        )
     }
 
 }

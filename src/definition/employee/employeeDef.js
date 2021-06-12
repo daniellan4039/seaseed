@@ -1,3 +1,5 @@
+import {employeeApi} from "@/service";
+
 export const tableDef = {
     key: 'EmployeeInfo',
     title: '职工中心',
@@ -7,67 +9,96 @@ export const tableDef = {
         size: 'small',
         bordered: false,
     },
+    searchParams: {
+        meta: {
+            gutter: 16,
+            col: 4
+        },
+        formItems: [
+            {
+                key: 'realName',
+                label: '职工姓名',
+                inputType: 'input:string',
+                placeholder: '请输入职工姓名'
+            },
+            {
+                key: 'departmentId',
+                label: '所在部门',
+                placeholder: '请选择所在部门',
+                inputType: 'select',
+                rules: [],
+                meta: {
+                    options: [
+                        {
+                            text: '软件部',
+                            value: '1'
+                        }
+                    ]
+                }
+            },
+        ]
+    },
     columns: [
         {
             title: '职工编号',
             dataIndex: 'employeeNo',
             width: 100,
-            scopedSlots: { customRender: 'ellipsisCustom' }
+            scopedSlots: {customRender: 'ellipsisCustom'}
         },
         {
             title: '职工姓名',
             dataIndex: 'realName',
-            scopedSlots: { customRender: 'ellipsisCustom' },
+            scopedSlots: {customRender: 'ellipsisCustom'},
             width: 120
         },
         {
             title: '证件号码',
             dataIndex: 'certificationId',
-            scopedSlots: { customRender: 'ellipsisCustom' },
+            scopedSlots: {customRender: 'ellipsisCustom'},
             width: 170
         },
         {
             title: '所属组织',
             dataIndex: 'companyId',
-            scopedSlots: { customRender: 'companyId' },
+            scopedSlots: {customRender: 'companyId'},
             width: 280
         },
         {
             title: '所属部门',
             dataIndex: 'departmentId',
-            scopedSlots: { customRender: 'departmentId' },
+            scopedSlots: {customRender: 'departmentId'},
             width: 170
         },
         {
             title: '职位',
             dataIndex: 'positionId',
-            scopedSlots: { customRender: 'positionId' },
+            scopedSlots: {customRender: 'positionId'},
             width: 120
         },
         {
             title: '联系电话',
             dataIndex: 'telNum',
             width: 120,
-            scopedSlots: { customRender: 'ellipsisCustom' }
+            scopedSlots: {customRender: 'ellipsisCustom'}
         },
         {
             title: '职工状态',
             dataIndex: 'status',
-            scopedSlots: { customRender: 'status' },
+            scopedSlots: {customRender: 'status'},
             width: 90
         },
         {
             title: '创建时间',
             width: 160,
             dataIndex: 'createTime',
-            scopedSlots: { customRender: 'ellipsisCustom' }
+            scopedSlots: {customRender: 'ellipsisCustom'}
         },
         {
             title: '操作',
             dataIndex: 'action',
             width: 110,
             fixed: 'right',
-            scopedSlots: { customRender: 'action' }
+            scopedSlots: {customRender: 'action'}
         }
     ]
 }
@@ -75,14 +106,13 @@ export const tableDef = {
 export const formDef = {
     key: 'employeeForm',
     formType: 'normal',
-    url: {
-        save: '',
-        update: ''
+    actions: {
+        save: employeeApi.save,
+        update: employeeApi.update
     },
     labelCol: 8,
     wrapperCol: 7,
-    config: {
-    },
+    config: {},
     formRef: 'employeeFormRef',
     formItems: [
         {
@@ -102,7 +132,7 @@ export const formDef = {
         {
             key: 'sex',
             label: '性别',
-            inputType: 'select',
+            inputType: 'select:code',
             placeholder: '请选择性别',
             rules: [
                 {
@@ -113,20 +143,7 @@ export const formDef = {
                 }
             ],
             meta: {
-                options: [
-                    {
-                        text: '男',
-                        value: '1'
-                    },
-                    {
-                        text: '女',
-                        value: '2'
-                    },
-                    {
-                        text: '未知',
-                        value: '0'
-                    }
-                ]
+                code: 'sex'
             },
         },
         {
@@ -161,8 +178,7 @@ export const formDef = {
             placeholder: '请选择所属部门',
             inputType: 'select:code',
             rules: [],
-            meta: {
-            }
+            meta: {}
         },
         {
             key: 'password',

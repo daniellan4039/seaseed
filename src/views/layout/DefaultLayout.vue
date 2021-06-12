@@ -20,7 +20,7 @@
         </div>
       </a-layout-header>
       <a-layout-content class="cus-content-container">
-        <div class="cus-tabs-main">
+        <div class="cus-tabs-container">
           <cus-tabs v-model:activeKey="activeTabKey" v-model:tabs="openTabs" @edit="onTabsEdit">
           </cus-tabs>
           <div class="navigation-bar">

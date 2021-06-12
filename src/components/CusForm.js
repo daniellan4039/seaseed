@@ -53,22 +53,28 @@ export default {
             return parseFormRules(props.formDef?.formItems)
         }
 
+        const handleResult = (res) => {
+            const {isSuccess, msg} = res
+            if (isSuccess) {
+                Modal.success({
+                    title: '提示',
+                    content: msg
+                })
+            } else {
+                Modal.warning({
+                    title: '提示',
+                    content: msg
+                })
+            }
+        }
+
         const submiForm = () => {
             formRef.value.validate().then(() => {
-                props.formDef?.actions?.save(formModel).then(res => {
-                    const {isSuccess, msg} = res
-                    if (isSuccess) {
-                        Modal.success({
-                            title: '提示',
-                            content: msg
-                        })
-                    } else {
-                        Modal.warning({
-                            title: '提示',
-                            content: msg
-                        })
-                    }
-                })
+                if (!props.defaultModel) {
+                    props.formDef?.actions?.save(formModel).then(res => handleResult(res))
+                } else {
+                    props.formDef?.actions?.update(formModel).then(res => handleResult(res))
+                }
             }).catch(() => {
                 Modal.error({
                     title: '提示',

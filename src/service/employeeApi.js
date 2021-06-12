@@ -3,8 +3,11 @@ import { $ } from '@/service/index'
 const prefix = '/hrms'
 const module = '/hrEmployee'
 
+const basePrefix = '/base'
+const baseModule = '/baseEmployee'
+
 export const api = {
-    saveUrl: `${prefix}${module}/save`,
+    saveUrl: `${basePrefix}${baseModule}/save`,
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,

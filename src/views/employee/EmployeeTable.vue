@@ -1,15 +1,14 @@
 <template>
-  <cus-table-container>
-    <div class="table">
+  <cus-table-container :def="tableDef.searchParams">
+    <div class="table-block">
       <cus-table :table-def="tableDef"></cus-table>
     </div>
   </cus-table-container>
 </template>
 
 <script>
-import CusTable from '@/components/CusTable'
 import {tableDef} from "@/definition/employee/employeeDef"
-import CusTableContainer from '@/components/CusTableContainer'
+import {CusTable, CusTableContainer} from '@/components'
 
 export default {
   name: "EmployeeInfo",

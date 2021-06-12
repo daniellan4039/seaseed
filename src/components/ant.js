@@ -1,14 +1,14 @@
 import {
     Breadcrumb,
     Button,
-    Checkbox,
+    Checkbox, Col,
     ConfigProvider,
     Dropdown, Form,
     Input,
     Layout,
-    Menu, Modal, Select,
+    Menu, Modal, Row, Select,
     Table,
-    Tabs,
+    Tabs, Tooltip,
     Typography
 } from "ant-design-vue";
 
@@ -28,5 +28,8 @@ export default {
         app.use(ConfigProvider)
         app.use(Form)
         app.use(Modal)
+        app.use(Tooltip)
+        app.use(Row)
+        app.use(Col)
     }
 }

@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import DefaultLayout from "@/views/layout/DefaultLayout";
-import EmployeeInfo from "@/views/employee/EmployeeInfo";
+import EmployeeInfo from "@/views/employee/EmployeeTable";
 import EmployeeForm from "@/views/employee/EmployeeForm";
 import LoginForm from "@/views/user/LoginForm";
 

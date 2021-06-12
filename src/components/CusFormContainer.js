@@ -1,7 +1,7 @@
 import {h} from "vue";
 
 export default {
-    name: 'CusForm',
+    name: 'CusFormContainer',
     props: {
         title: {
             type: String,

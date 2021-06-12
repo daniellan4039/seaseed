@@ -5,12 +5,13 @@ import * as userApi from './userApi'
 
 const $ = axios.create({
     baseURL: '/api',
-    timeout: 1000,
+    timeout: 1000
 })
 
 $.interceptors.request.use((config) => {
     config.headers = {
-        token: `Bearer ${localStorage.getItem('HRMS_USER_TOKEN')}`
+        token: `Bearer ${localStorage.getItem('HRMS_USER_TOKEN')}`,
+        app_id: '68816749155319814'
     }
     return config
 }, (error) => {
