@@ -127,7 +127,37 @@ export const formDef = {
                     trigger: 'blur',
                     type: 'string'
                 }
-            ]
+            ],
+            meta: {
+                searchDef: {
+                    formItems: [
+                        {
+                            key: 'realName',
+                            label: '姓名',
+                            placeholder: '请输入职工姓名',
+                            inputType: 'input:string',
+                            rules: [],
+                            meta: {}
+                        }
+                    ]
+                },
+                tableDef: {
+                    columns: [
+                        {
+                            title: '职工编号',
+                            dataIndex: 'empNum',
+                            width: 80,
+                            scopedSlots: {customRender: 'empNum'}
+                        },
+                        {
+                            title: '职工姓名',
+                            dataIndex: 'realName',
+                            width: 100,
+                            scopedSlots: {customRender: 'realName'}
+                        },
+                    ]
+                }
+            }
         },
         {
             key: 'sex',

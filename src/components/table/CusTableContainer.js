@@ -15,15 +15,13 @@ export default {
         CusFormInput, CusSearchBar
     },
     render() {
-        // eslint-disable-next-line no-unused-vars
         let self = this
-
         return h(
             <div className="cus-table-container"/>,
             null,
             {
                 default: () => {
-                    const header = <cus-search-bar formDef={self.def}></cus-search-bar>
+                    const header = <cus-search-bar formDef={self.def} />
                     return [
                         header,
                         this.$slots.default()
