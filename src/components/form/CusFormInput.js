@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import {h} from 'vue'
-import CusSelectCode from "@/components/CusSelectCode";
+import CusSelectCode from "@/components/table/CusSelectCode";
 
 export default {
     name: 'CusFormInput',

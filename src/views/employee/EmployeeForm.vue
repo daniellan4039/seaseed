@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import CusFormContainer from "@/components/CusFormContainer";
-import CusForm from "@/components/CusForm";
+import CusFormContainer from "@/components/form/CusFormContainer";
+import CusForm from "@/components/form/CusForm";
 import { formDef } from "@/definition/employee/employeeDef";
 
 export default {

@@ -1,7 +1,7 @@
 import {h, reactive, ref} from "vue"
 import _ from 'lodash'
 import {Modal} from "ant-design-vue";
-import CusFormInput from "@/components/CusFormInput";
+import CusFormInput from "@/components/form/CusFormInput";
 
 export default {
     name: 'CusForm',

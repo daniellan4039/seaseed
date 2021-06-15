@@ -1,5 +1,5 @@
 import {computed, h, reactive} from "vue";
-import CusTableOpsBar from '@/components/CusTableOperationBar'
+import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 
 const indexCol = {

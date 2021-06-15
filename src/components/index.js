@@ -1,12 +1,12 @@
-import CusForm from "@/components/CusForm";
-import CusFormInput from "@/components/CusFormInput";
-import CusSelectCode from "@/components/CusSelectCode";
-import CusTable from "@/components/CusTable";
-import CusTableContainer from "@/components/CusTableContainer";
-import CusFormContainer from "@/components/CusFormContainer";
-import CusMenu from "@/components/CusMenu"
-import CusTableOpsBar from "@/components/CusTableOperationBar"
-import CusTabs from "@/components/CusTabs"
+import CusForm from "@/components/form/CusForm";
+import CusFormInput from "@/components/form/CusFormInput";
+import CusSelectCode from "@/components/table/CusSelectCode";
+import CusTable from "@/components/table/CusTable";
+import CusTableContainer from "@/components/table/CusTableContainer";
+import CusFormContainer from "@/components/form/CusFormContainer";
+import CusMenu from "@/components/menu/CusMenu"
+import CusTableOpsBar from "@/components/table/CusTableOperationBar"
+import CusTabs from "@/components/table/CusTabs"
 
 export {
     CusForm,

@@ -1,5 +1,5 @@
 import {h, ref} from 'vue'
-import {dictionaryApi} from '@/service/index'
+import {dictionaryApi} from '@/service'
 
 export default {
     name: 'CusSelectCode',
