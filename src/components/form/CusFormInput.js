@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import {h, resolveComponent} from 'vue'
 import CusSelectCode from "@/components/table/CusSelectCode";
+import CusSelectSearch from "@/components/form/CusSelectSearch";
 
 export default {
     name: 'CusFormInput',
@@ -58,6 +59,16 @@ export default {
             case 'select:code':
                 input = h(
                     CusSelectCode,
+                    {
+                        def: item,
+                        value: value,
+                        'onChange': val => this.$emit('change', val)
+                    }
+                )
+                break
+            case 'select:search':
+                input = h(
+                    CusSelectSearch,
                     {
                         def: item,
                         value: value,

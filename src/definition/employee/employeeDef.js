@@ -118,7 +118,7 @@ export const formDef = {
         {
             key: 'realName',
             label: '职工姓名',
-            inputType: 'input:string',
+            inputType: 'select:search',
             placeholder: '请输入职工姓名',
             rules: [
                 {

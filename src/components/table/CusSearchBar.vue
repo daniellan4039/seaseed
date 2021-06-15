@@ -1,9 +1,9 @@
 <template>
   <div class="search-block">
     <a-form>
-      <a-row :gutter="16" :offset='20'>
-        <a-col :span="4" v-for="(formItem, formItemIndex) in formDef?.formItems" :key="formItemIndex" class='search-actions-block'>
-          <a-form-item :label="formItem.label" :label-col="{ span: 7 }" :wrapper-col="{span: 17}">
+      <a-row :gutter="18">
+        <a-col :span="6" v-for="(formItem, formItemIndex) in formDef?.formItems" :key="formItemIndex">
+          <a-form-item :label="formItem.label" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
             <cus-form-input :item="formItem"></cus-form-input>
           </a-form-item>
         </a-col>
