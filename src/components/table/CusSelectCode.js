@@ -1,4 +1,4 @@
-import {h, ref} from 'vue'
+import {h, ref, resolveComponent} from 'vue'
 import {dictionaryApi} from '@/service'
 
 export default {
@@ -34,7 +34,7 @@ export default {
     render() {
         let self = this
         return h(
-            <a-select></a-select>,
+            resolveComponent('a-select'),
             {
                 placeholder: self.def.placeholder,
                 value: self.value,

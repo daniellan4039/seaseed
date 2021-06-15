@@ -46,7 +46,9 @@ export default {
                                     {
                                         value: o.value
                                     },
-                                    o.text
+                                    {
+                                        default: () => o.text
+                                    }
                                 )
                             })
                         }

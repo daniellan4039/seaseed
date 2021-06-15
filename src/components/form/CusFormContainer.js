@@ -18,7 +18,7 @@ export default {
             {
                 default: () => {
                     const header = h(
-                        <div/>,
+                        'div',
                         {
                             class: 'form-header'
                         },

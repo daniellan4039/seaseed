@@ -1,4 +1,4 @@
-import {h, reactive, ref} from "vue"
+import {h, reactive, ref, resolveComponent} from "vue"
 import _ from 'lodash'
 import {Modal} from "ant-design-vue";
 import CusFormInput from "@/components/form/CusFormInput";
@@ -108,7 +108,7 @@ export default {
         const {formModel, rules, formDef, submiForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
             return h(
-                <a-form-item></a-form-item>,
+                resolveComponent('a-form-item'),
                 {
                     ref: i.key,
                     name: i.key,
@@ -117,7 +117,7 @@ export default {
                 {
                     default: () => {
                         return h(
-                            <cus-form-input></cus-form-input>,
+                            CusFormInput,
                             {
                                 item: i,
                                 value: formModel[i.key],
@@ -130,7 +130,7 @@ export default {
         })
 
         const submitButton = h(
-            <a-form-item></a-form-item>,
+            resolveComponent('a-form-item'),
             {
                 wrapperCol: {span: formDef.wrapperCol, offset: formDef.labelCol}
             },
@@ -138,17 +138,23 @@ export default {
                 default: () => {
                     return [
                         h(
-                            <a-button>保存</a-button>,
+                            resolveComponent('a-button'),
                             {
                                 type: 'primary',
                                 onClick: submiForm
+                            },
+                            {
+                                default: () => '保存'
                             }
                         ),
                         h(
-                            <a-button>重置</a-button>,
+                            resolveComponent('a-button'),
                             {
                                 style: 'margin-left: 10px;',
                                 onClick: resetForm
+                            },
+                            {
+                                default: () => '重置'
                             }
                         )
                     ]
@@ -157,7 +163,7 @@ export default {
         )
 
         return h(
-            <a-form></a-form>,
+            resolveComponent('a-form'),
             {
                 ref: 'formRef',
                 model: formModel,
