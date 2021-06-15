@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {h, watch, reactive} from "vue";
+import {h, watch, reactive, resolveComponent} from "vue";
 import {UserOutlined} from "@ant-design/icons-vue";
 
 export default {
@@ -109,7 +109,7 @@ export default {
             if (menuItemsTree instanceof Array) {
                 subMenuTree = menuItemsTree.map(i => {
                     if (i.type === 'menuItem') {
-                        return h(<a-menu-item></a-menu-item>, {key: i?.key, title: i?.title}, {
+                        return h(resolveComponent('a-menu-item'), {key: i?.key, title: i?.title}, {
                             default: () => {
                                 return [
                                     <UserOutlined/>,
@@ -118,7 +118,7 @@ export default {
                         })
                     } else if (i.type === 'subMenu') {
                         const subMenu = this.setSubMenu(i.children)
-                        return h(<a-sub-menu></a-sub-menu>, {onTitleClick: this.onSubMenuClick, key: i?.key}, {
+                        return h(resolveComponent('a-sub-menu'), {onTitleClick: this.onSubMenuClick, key: i?.key}, {
                             default: () => {
                                 return subMenu
                             },
@@ -174,7 +174,7 @@ export default {
     render() {
         const {setSubMenu, onMenuOpenChange, menuOpenKey, onSelect, collapsed} = this
         const subMenus = setSubMenu(this.dataSource.items)
-        return h(<a-menu></a-menu>,
+        return h(resolveComponent('a-menu'),
             {
                 mode: 'inline',
                 theme: 'dark',
