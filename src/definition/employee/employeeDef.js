@@ -44,65 +44,65 @@ export const tableDef = {
             title: '职工编号',
             dataIndex: 'employeeNo',
             width: 100,
-            scopedSlots: {customRender: 'ellipsisCustom'},
+            slots: {customRender: 'employeeNo'},
             ellipsis: true
         },
         {
             title: '职工姓名',
             dataIndex: 'realName',
-            scopedSlots: {customRender: 'ellipsisCustom'},
+            slots: {customRender: 'realName'},
             width: 120,
             ellipsis: true
         },
         {
             title: '证件号码',
             dataIndex: 'certificationId',
-            scopedSlots: {customRender: 'ellipsisCustom'},
+            slots: {customRender: 'certificationId'},
             width: 170,
             ellipsis: true
         },
         {
             title: '所属组织',
             dataIndex: 'companyId',
-            scopedSlots: {customRender: 'companyId'},
+            slots: {customRender: 'companyId'},
             width: 280
         },
         {
             title: '所属部门',
             dataIndex: 'departmentId',
-            scopedSlots: {customRender: 'departmentId'},
+            slots: {customRender: 'departmentId'},
             width: 170
         },
         {
             title: '职位',
             dataIndex: 'positionId',
-            scopedSlots: {customRender: 'positionId'},
+            slots: {customRender: 'positionId'},
             width: 120
         },
         {
             title: '联系电话',
             dataIndex: 'telNum',
             width: 120,
-            scopedSlots: {customRender: 'ellipsisCustom'}
+            slots: {customRender: 'telNum'}
         },
         {
             title: '职工状态',
             dataIndex: 'status',
-            scopedSlots: {customRender: 'status'},
+            slots: {customRender: 'status'},
             width: 90
         },
         {
             title: '创建时间',
             width: 160,
             dataIndex: 'createTime',
-            scopedSlots: {customRender: 'ellipsisCustom'}
+            slots: {customRender: 'createTime'}
         },
         {
             title: '操作',
             dataIndex: 'action',
-            width: 110,
+            width: 140,
             fixed: 'right',
-            scopedSlots: {customRender: 'action'}
+            slots: {customRender: 'action'}
         }
     ]
 }
@@ -151,13 +151,13 @@ export const formDef = {
                             title: '职工编号',
                             dataIndex: 'empNum',
                             width: 80,
-                            scopedSlots: {customRender: 'empNum'}
+                            slots: {customRender: 'empNum'}
                         },
                         {
                             title: '职工姓名',
                             dataIndex: 'realName',
                             width: 100,
-                            scopedSlots: {customRender: 'realName'}
+                            slots: {customRender: 'realName'}
                         },
                     ]
                 }

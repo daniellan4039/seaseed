@@ -2,7 +2,7 @@ import {
     Breadcrumb,
     Button,
     Checkbox, Col,
-    ConfigProvider,
+    ConfigProvider, Divider,
     Dropdown, Form,
     Input,
     Layout,
@@ -32,5 +32,6 @@ export default {
         app.use(Row)
         app.use(Col)
         app.use(Space)
+        app.use(Divider)
     }
 }

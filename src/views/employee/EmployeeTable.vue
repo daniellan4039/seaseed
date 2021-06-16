@@ -1,7 +1,8 @@
 <template>
   <cus-table-container :def="tableDef.searchParams">
     <div class="table-block">
-      <cus-table :table-def="tableDef"></cus-table>
+      <cus-table :table-def="tableDef">
+      </cus-table>
     </div>
   </cus-table-container>
 </template>
