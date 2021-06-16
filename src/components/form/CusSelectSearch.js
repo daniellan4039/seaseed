@@ -16,12 +16,7 @@ export default {
         const onMore = () => {
             tableVisible.value = !tableVisible.value
         }
-        let options = ref([
-            {
-                value: '1',
-                text: '222'
-            }
-        ])
+        let options = ref([])
         return {
             onMore,
             tableVisible,
@@ -55,7 +50,7 @@ export default {
                             }
                         ),
                         h(
-                            <cus-embed-table />,
+                            CusEmbedTable,
                             {
                                 visible: self.tableVisible,
                                 'onUpdate': val => {
