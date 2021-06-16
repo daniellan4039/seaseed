@@ -221,7 +221,7 @@ export const formDef = {
             meta: {}
         },
         {
-            key: 'employeeStatus',
+            key: 'status',
             label: '状态',
             placeholder: '请选择状态',
             inputType: 'select:code',
