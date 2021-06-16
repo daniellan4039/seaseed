@@ -11,7 +11,8 @@ const $ = axios.create({
 $.interceptors.request.use((config) => {
     config.headers = {
         token: `Bearer ${localStorage.getItem('HRMS_USER_TOKEN')}`,
-        app_id: '68816749155319814'
+        app_id: '68816749155319814',
+        grayversion: process.env.NODE_ENV === 'development' ? 'dev' : ''
     }
     return config
 }, (error) => {

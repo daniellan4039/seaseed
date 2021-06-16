@@ -4,7 +4,20 @@ export const tableDef = {
     key: 'EmployeeInfo',
     title: '职工中心',
     actions: {
-      page: employeeApi.page
+        page: employeeApi.page,
+        add: employeeApi.save,
+        update: employeeApi.update,
+        remove: employeeApi.remove,
+        get: employeeApi.get
+    },
+    routes: {
+        add: '/employee/form',
+        edit: '/employee/form'
+    },
+    store: {
+        module: 'employeeStore',
+        key: 'employee',
+        set: 'setEmployee'
     },
     config: {
         size: 'small',
@@ -52,6 +65,13 @@ export const tableDef = {
             dataIndex: 'realName',
             slots: {customRender: 'realName'},
             width: 120,
+            ellipsis: true
+        },
+        {
+            title: '职工性别',
+            dataIndex: 'sex',
+            slots: {customRender: 'sex'},
+            width: 80,
             ellipsis: true
         },
         {
@@ -113,6 +133,10 @@ export const formDef = {
     actions: {
         save: employeeApi.save,
         update: employeeApi.update
+    },
+    store: {
+        module: 'employeeStore',
+        key: 'employee'
     },
     labelCol: 8,
     wrapperCol: 7,

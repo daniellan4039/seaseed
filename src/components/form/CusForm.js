@@ -2,6 +2,7 @@ import {h, reactive, ref, resolveComponent} from "vue"
 import _ from 'lodash'
 import {Modal} from "ant-design-vue";
 import CusFormInput from "@/components/form/CusFormInput";
+import store from '@/store/index'
 
 export default {
     name: 'CusForm',
@@ -10,17 +11,24 @@ export default {
             type: Object,
             required: true
         },
-        defaultModel: {
-            type: Object,
-            default: null
-        }
+        // defaultModel: {
+        //     type: Object,
+        //     default: null
+        // }
     },
     components: {
         CusFormInput
     },
     setup(props) {
         const formRef = ref()
-
+        const defaultModel = ref({})
+        //set defaultModel from vuex
+        if (props.formDef.store) {
+            const module = props.formDef.store?.module
+            const key = props.formDef.store?.key
+            module && key && (defaultModel.value = store.state[module][key])
+            console.log(defaultModel)
+        }
         const parseFormModel = (formItems) => {
             let formModel = {}
             if (formItems instanceof Array) {
@@ -46,7 +54,7 @@ export default {
 
         const getFormModel = () => {
             const parsedModel = parseFormModel(props.formDef?.formItems)
-            return loadDefaultModel(parsedModel ?? {}, props.defaultModel ?? {})
+            return loadDefaultModel(parsedModel ?? {}, defaultModel.value ?? {})
         }
 
         const getRules = () => {
@@ -70,7 +78,7 @@ export default {
 
         const submiForm = () => {
             formRef.value.validate().then(() => {
-                if (!props.defaultModel) {
+                if (!defaultModel.value) {
                     props.formDef?.actions?.save(formModel).then(res => handleResult(res))
                 } else {
                     props.formDef?.actions?.update(formModel).then(res => handleResult(res))
@@ -94,13 +102,14 @@ export default {
             formRef,
             formModel,
             rules,
+            defaultModel,
             parseFormModel,
             parseFormRules,
             loadDefaultModel,
             getFormModel,
             getRules,
             submiForm,
-            resetForm
+            resetForm,
         }
     },
     render() {

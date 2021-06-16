@@ -36,7 +36,7 @@ export default {
     },
     render() {
         return h(
-            <a-tabs type='editable-card' hide-add tabBarStyle={{paddingLeft: '16px'}}></a-tabs>,
+            <a-tabs type='editable-card' hide-add tabBarStyle={{paddingLeft: '16px'}}/>,
             {
                 onEdit: this.onTabEdit,
                 activeKey: this.activeKey,
@@ -45,12 +45,12 @@ export default {
             {
                 default: () => {
                     return this.tabs?.map(i => {
-                        return <a-tab-pane tab={i.title} key={i.key} closable={this.doTabClosable}></a-tab-pane>
+                        return <a-tab-pane tab={i.title} key={i.key} closable={this.doTabClosable} />
                     })
                 },
                 tabBarExtraContent: () => {
                     return [
-                        h(<a-dropdown></a-dropdown>, null, {
+                        h(<a-dropdown/>, null, {
                             default: () => {
                                 return <div style='margin: 0 20px; cursor: pointer'>
                                     <MoreOutlined/>

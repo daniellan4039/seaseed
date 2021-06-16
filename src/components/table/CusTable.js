@@ -1,13 +1,14 @@
-// eslint-disable-next-line no-unused-vars
 import {computed, h, reactive, ref, watch} from "vue";
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
+import router from "@/router";
+import store from '@/store/index'
 
 const indexCol = {
     key: 'Index',
     title: '序号',
     dataIndex: 'index',
-    width: 80
+    width: 60
 }
 
 export default {
@@ -63,6 +64,7 @@ export default {
                 }
                 alterRecord.key = i.id
                 alterRecord['index'] = ++rowIndex.value
+                alterRecord.raw = i
                 return alterRecord
             })
         })
@@ -82,6 +84,9 @@ export default {
 
         // event methods
         const onEditBtnClick = (arg) => {
+            const {record} = arg
+            store.dispatch(props.tableDef.store.set, record.raw)
+            navigateTo(props.tableDef.routes.edit)
             ctx.emit('edit', arg)
         }
         const onDeleteBtnClick = (arg) => {
@@ -93,6 +98,15 @@ export default {
         const onPageChange = (page, pageSize) => {
             pageParams.current = page
             pageParams.size = pageSize
+        }
+        const navigateTo = (route) => {
+            router.push({
+                path: route
+            })
+            ctx.emit('addNew', route)
+        }
+        const addNewRecord = () => {
+            navigateTo(props.tableDef.routes.add)
         }
 
         return {
@@ -107,17 +121,12 @@ export default {
             onEditBtnClick,
             onDeleteBtnClick,
             onDetailBtnClick,
-            onPageChange
+            onPageChange,
+            navigateTo,
+            addNewRecord
         }
     },
-    methods: {
-        navigateTo(route) {
-            this.$router.push({
-                path: route
-            })
-            this.$emit('addNew', route)
-        }
-    },
+    methods: {},
     mounted() {
         this.searchPage()
     },
@@ -129,7 +138,7 @@ export default {
                 columns: self.columnsParsed,
                 dataSource: self.dataSourceParsed,
                 rowClassName: (record, index) => (index % 2 === 1 ? 'table-striped' : null),
-                scroll: { x: self.tableWidth },
+                scroll: {x: self.tableWidth},
                 pagination: {
                     current: self.pageParams.current,
                     pageSize: self.pageParams.size,
@@ -153,7 +162,7 @@ export default {
                 }
             }
         )
-        const opsBar = <cus-table-ops-bar/>
+        const opsBar = <cus-table-ops-bar onAdd={self.addNewRecord}/>
         return h(
             'div',
             null,

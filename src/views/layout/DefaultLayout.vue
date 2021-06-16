@@ -46,7 +46,7 @@
 <script>
 import CusMenu from '@/components/menu/CusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
-import CusTabs from '@/components/table/CusTabs'
+import CusTabs from '@/components/menu/CusTabs'
 import {reactive, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 
