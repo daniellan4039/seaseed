@@ -3,9 +3,10 @@ import {employeeApi} from "@/service";
 export const tableDef = {
     key: 'EmployeeInfo',
     title: '职工中心',
-    url: 'test url',
+    actions: {
+      page: employeeApi.page
+    },
     config: {
-        rowKey: 'EmployeeInfo',
         size: 'small',
         bordered: false,
     },
@@ -43,19 +44,22 @@ export const tableDef = {
             title: '职工编号',
             dataIndex: 'employeeNo',
             width: 100,
-            scopedSlots: {customRender: 'ellipsisCustom'}
+            scopedSlots: {customRender: 'ellipsisCustom'},
+            ellipsis: true
         },
         {
             title: '职工姓名',
             dataIndex: 'realName',
             scopedSlots: {customRender: 'ellipsisCustom'},
-            width: 120
+            width: 120,
+            ellipsis: true
         },
         {
             title: '证件号码',
             dataIndex: 'certificationId',
             scopedSlots: {customRender: 'ellipsisCustom'},
-            width: 170
+            width: 170,
+            ellipsis: true
         },
         {
             title: '所属组织',

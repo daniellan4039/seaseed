@@ -7,7 +7,21 @@ export default {
         PlusOutlined
     },
     props: {},
+    emits: ['add', 'densityChange', 'settingChange'],
+    setup (props, ctx) {
+        const onAddBtnClick = () => {
+            ctx.emit('add')
+        }
+        const onDensityBtnClick = (arg) => {
+            ctx.emit('densityChange', arg)
+        }
+        return {
+            onAddBtnClick,
+            onDensityBtnClick
+        }
+    },
     render: function () {
+        const { onAddBtnClick, onDensityBtnClick } = this
         const shrinkTitle = {
             title: () => '密度'
         }
@@ -15,14 +29,14 @@ export default {
             title: () => '设置'
         }
         const shrinkMenuSlot = {
-            overlay: () => <a-menu>
+            overlay: () => <a-menu onClick={onDensityBtnClick}>
                 <a-menu-item>默认</a-menu-item>
                 <a-menu-item>中等</a-menu-item>
                 <a-menu-item>紧凑</a-menu-item>
             </a-menu>
         }
         return <div className='table-ops-bar-container'>
-            <a-button type='primary'>
+            <a-button type='primary' onClick={onAddBtnClick}>
                 <PlusOutlined/>
                 新增
             </a-button>
