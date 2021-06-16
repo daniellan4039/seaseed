@@ -10,11 +10,7 @@ export default {
         formDef: {
             type: Object,
             required: true
-        },
-        // defaultModel: {
-        //     type: Object,
-        //     default: null
-        // }
+        }
     },
     components: {
         CusFormInput
@@ -27,7 +23,6 @@ export default {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
             module && key && (defaultModel.value = store.state[module][key])
-            console.log(defaultModel)
         }
         const parseFormModel = (formItems) => {
             let formModel = {}

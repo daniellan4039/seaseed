@@ -17,6 +17,10 @@ export default {
         tableDef: {
             type: Object,
             required: true
+        },
+        opsBarVisible: {
+            type: Boolean,
+            default: true
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -106,6 +110,7 @@ export default {
             ctx.emit('addNew', route)
         }
         const addNewRecord = () => {
+            store.dispatch(props.tableDef.store.set, null)
             navigateTo(props.tableDef.routes.add)
         }
 
@@ -162,7 +167,7 @@ export default {
                 }
             }
         )
-        const opsBar = <cus-table-ops-bar onAdd={self.addNewRecord}/>
+        const opsBar = self.opsBarVisible ? <cus-table-ops-bar onAdd={self.addNewRecord}/> : null
         return h(
             'div',
             null,

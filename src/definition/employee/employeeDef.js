@@ -170,6 +170,10 @@ export const formDef = {
                     ]
                 },
                 tableDef: {
+                    actions: {
+                        page: employeeApi.page
+                    },
+                    text: 'realName',
                     columns: [
                         {
                             title: '职工编号',
@@ -181,8 +185,27 @@ export const formDef = {
                             title: '职工姓名',
                             dataIndex: 'realName',
                             width: 100,
-                            slots: {customRender: 'realName'}
+                            slots: {customRender: 'realName'},
+                            ellipsis: true
                         },
+                        {
+                            title: '所属部门',
+                            dataIndex: 'departmentId',
+                            slots: {customRender: 'departmentId'},
+                            width: 170
+                        },
+                        {
+                            title: '职位',
+                            dataIndex: 'positionId',
+                            slots: {customRender: 'positionId'},
+                            width: 120
+                        },
+                        {
+                            title: '联系电话',
+                            dataIndex: 'telNum',
+                            width: 120,
+                            slots: {customRender: 'telNum'}
+                        }
                     ]
                 }
             }
