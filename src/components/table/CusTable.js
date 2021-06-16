@@ -66,6 +66,7 @@ export default {
                 return alterRecord
             })
         })
+
         const searchPage = () => {
             loading.value = true
             page(pageParams).then(res => {
@@ -128,10 +129,11 @@ export default {
                 columns: self.columnsParsed,
                 dataSource: self.dataSourceParsed,
                 rowClassName: (record, index) => (index % 2 === 1 ? 'table-striped' : null),
+                scroll: { x: self.tableWidth },
                 pagination: {
                     current: self.pageParams.current,
                     pageSize: self.pageParams.size,
-                    total: self.dataSource.total??0,
+                    total: self.dataSource.total ?? 0,
                     onChange: self.onPageChange
                 },
                 loading: self.loading,
