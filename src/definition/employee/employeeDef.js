@@ -8,7 +8,7 @@ export const tableDef = {
     },
     config: {
         size: 'small',
-        bordered: false,
+        bordered: true
     },
     searchParams: {
         meta: {

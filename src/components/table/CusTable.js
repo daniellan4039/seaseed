@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {computed, h, reactive, ref} from "vue";
+import {computed, h, reactive, ref, watch} from "vue";
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 
@@ -24,9 +24,10 @@ export default {
     },
     setup(props, ctx) {
         const columnKeys = reactive([])
-        let dataSource = ref({records: []})
+        let dataSource = ref({records: [], total: 0})
         let rowIndex = ref(0)
-        const pageParams = reactive({
+        let loading = ref(true)
+        let pageParams = reactive({
             current: 1,
             extra: {},
             model: {},
@@ -66,11 +67,19 @@ export default {
             })
         })
         const searchPage = () => {
+            loading.value = true
             page(pageParams).then(res => {
                 const {isSuccess, data} = res
                 isSuccess && (dataSource.value = data)
+                loading.value = false
             })
         }
+
+        watch(pageParams, () => {
+            searchPage()
+        })
+
+        // event methods
         const onEditBtnClick = (arg) => {
             ctx.emit('edit', arg)
         }
@@ -80,6 +89,10 @@ export default {
         const onDetailBtnClick = (arg) => {
             ctx.emit('detail', arg)
         }
+        const onPageChange = (page, pageSize) => {
+            pageParams.current = page
+            pageParams.size = pageSize
+        }
 
         return {
             columnKeys,
@@ -88,10 +101,12 @@ export default {
             dataSourceParsed,
             dataSource,
             pageParams,
+            loading,
             searchPage,
             onEditBtnClick,
             onDeleteBtnClick,
-            onDetailBtnClick
+            onDetailBtnClick,
+            onPageChange
         }
     },
     methods: {
@@ -113,6 +128,13 @@ export default {
                 columns: self.columnsParsed,
                 dataSource: self.dataSourceParsed,
                 rowClassName: (record, index) => (index % 2 === 1 ? 'table-striped' : null),
+                pagination: {
+                    current: self.pageParams.current,
+                    pageSize: self.pageParams.size,
+                    total: self.dataSource.total??0,
+                    onChange: self.onPageChange
+                },
+                loading: self.loading,
                 ...self.tableDef?.config
             },
             {
