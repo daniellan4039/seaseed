@@ -6,7 +6,7 @@
           <a-col v-for="(formItem, formItemIndex) in searchDef.formItems" :key="formItemIndex" :span="6"
                  class='search-actions-block'>
             <a-form-item :label="formItem.label" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <a-input :placeholder="formItem.placeholder"/>
+              <cus-base-input :item="formItem"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -29,13 +29,14 @@
 <script>
 import {ref,} from "vue";
 import CusTable from "@/components/table/CusTable";
+import CusBaseInput from "@/components/form/select/CusBaseInput";
 
 export default {
   name: "CusEmbedTable",
   props: ['searchDef', 'tableDef', 'visible'],
   emits: ['update', 'selected'],
   components: {
-    CusTable
+    CusTable, CusBaseInput
   },
   setup() {
     let selectedKeys = ref([])
