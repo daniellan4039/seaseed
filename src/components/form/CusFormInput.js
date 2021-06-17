@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import {h, resolveComponent} from 'vue'
-import CusSelectCode from "@/components/form/CusSelectCode";
-import CusSelectSearch from "@/components/form/CusSelectSearch";
+import CusSelectCode from "@/components/form/select/CusSelectCode";
+import CusSelectSearch from "@/components/form/select/CusSelectSearch";
 
 export default {
     name: 'CusFormInput',

@@ -1,6 +1,6 @@
 import CusForm from "@/components/form/CusForm";
 import CusFormInput from "@/components/form/CusFormInput";
-import CusSelectCode from "@/components/form/CusSelectCode";
+import CusSelectCode from "@/components/form/select/CusSelectCode";
 import CusTable from "@/components/table/CusTable";
 import CusTableContainer from "@/components/table/CusTableContainer";
 import CusFormContainer from "@/components/form/CusFormContainer";

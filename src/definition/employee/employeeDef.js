@@ -166,7 +166,15 @@ export const formDef = {
                             inputType: 'input:string',
                             rules: [],
                             meta: {}
-                        }
+                        },
+                        {
+                            key: 'departmentId',
+                            label: '部门',
+                            placeholder: '请输入职工姓名',
+                            inputType: 'input:string',
+                            rules: [],
+                            meta: {}
+                        },
                     ]
                 },
                 tableDef: {
