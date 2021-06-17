@@ -9,7 +9,7 @@ const indexCol = {
     key: 'Index',
     title: '序号',
     dataIndex: 'index',
-    width: 60
+    width: 80
 }
 
 export default {
@@ -43,7 +43,6 @@ export default {
     setup(props, ctx) {
         const columnKeys = reactive([])
         let dataSource = ref({records: [], total: 0})
-        let rowIndex = ref(0)
         let loading = ref(true)
         let pageParams = reactive({
             current: 1,
@@ -69,7 +68,7 @@ export default {
             return width
         })
         const dataSourceParsed = computed(() => {
-            return dataSource.value.records.map((i) => {
+            return dataSource.value.records.map((i, k) => {
                 const echoMap = i?.echoMap
                 let alterRecord = {}
                 _.assign(alterRecord, i)
@@ -79,7 +78,7 @@ export default {
                     }
                 }
                 alterRecord.key = i.id
-                alterRecord['index'] = ++rowIndex.value
+                alterRecord['index'] = (pageParams.current - 1) * pageParams.size + k + 1
                 alterRecord.raw = i
                 return alterRecord
             })

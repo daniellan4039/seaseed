@@ -21,7 +21,8 @@ export const tableDef = {
         set: 'setEmployee'
     },
     config: {
-        bordered: true
+        bordered: true,
+        size: 'small'
     },
     searchParams: {
         meta: {
@@ -132,7 +133,8 @@ export const formDef = {
     formType: 'normal',
     actions: {
         save: employeeApi.save,
-        update: employeeApi.update
+        update: employeeApi.update,
+        get: employeeApi.get
     },
     store: {
         module: 'employeeStore',
@@ -216,7 +218,7 @@ export const formDef = {
                         }
                     ]
                 },
-                scope: ['form']
+                scope: ['form', 'detail']
             }
         },
         {
@@ -234,7 +236,7 @@ export const formDef = {
             ],
             meta: {
                 code: 'sex',
-                scope: ['form']
+                scope: ['form', 'detail']
             },
         },
         {
@@ -244,7 +246,7 @@ export const formDef = {
             inputType: 'input:string',
             rules: [],
             meta: {
-                scope: ['form']
+                scope: ['form', 'detail']
             }
         },
         {
@@ -254,7 +256,7 @@ export const formDef = {
             inputType: 'input:string',
             rules: [],
             meta: {
-                scope: ['form']
+                scope: ['form', 'detail']
             }
         },
         {
@@ -265,7 +267,7 @@ export const formDef = {
             rules: [],
             meta: {
                 code: 'hr_employee_status',
-                scope: ['form']
+                scope: ['form', 'detail']
             }
         },
         {
@@ -275,7 +277,7 @@ export const formDef = {
             inputType: 'select:code',
             rules: [],
             meta: {
-                scope: ['form']
+                scope: ['form', 'detail']
             }
         },
         {
@@ -308,8 +310,7 @@ export const formDef = {
             rules: [],
             meta: {
                 submit: false,
-                scope: ['detail'],
-                group: 'default'
+                scope: ['detail']
             }
         },
     ]

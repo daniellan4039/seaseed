@@ -1,7 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import DefaultLayout from "@/views/layout/DefaultLayout";
 import EmployeeInfo from "@/views/employee/EmployeeTable";
 import EmployeeForm from "@/views/employee/EmployeeForm";
+import EmployeeDetail from "@/views/employee/EmployeeDetail";
 import LoginForm from "@/views/user/LoginForm";
 
 /**
@@ -10,55 +11,60 @@ import LoginForm from "@/views/user/LoginForm";
  * @type {[{path: string, component: (function(): Promise<*>), name: string}]}
  */
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: DefaultLayout,
-    meta: {
-      title: '首页'
+    {
+        path: '/',
+        name: 'Home',
+        component: DefaultLayout,
+        meta: {
+            title: '首页'
+        },
+        children: [
+            {
+                path: '/login',
+                name: 'Login',
+                component: LoginForm,
+                meta: {
+                    title: '登陆表单'
+                }
+            },
+            {
+                path: '/employee',
+                name: 'EmployeeTable',
+                component: EmployeeInfo,
+                meta: {
+                    title: '职工中心'
+                }
+            },
+            {
+                path: '/employee/form',
+                name: 'EmployeeForm',
+                component: EmployeeForm,
+                meta: {
+                    title: '职工信息表单'
+                }
+            },
+            {
+                path: '/employee/detail',
+                name: 'EmployeeDetail',
+                component: EmployeeDetail,
+                meta: {title: '职工详情'}
+            },
+        ]
     },
-    children: [
-      {
-        path: '/employee',
-        name: 'EmployeeTable',
-        component: EmployeeInfo,
+    {
+        path: '/dev',
+        name: 'Development',
+        component: DefaultLayout,
         meta: {
-          title: '职工中心'
-        }
-      },
-      {
-        path: '/employee/form',
-        name: 'EmployeeForm',
-        component: EmployeeForm,
-        meta: {
-          title: '职工信息表单'
-        }
-      }
-    ]
-  },
-  {
-    path: '/dev',
-    name: 'Development',
-    component: DefaultLayout,
-    meta: {
-      title: '开发系统'
-    },
-    children: [
-      {
-        path: '/login',
-        name: 'Login',
-        component: LoginForm,
-        meta: {
-          title: '登陆表单'
-        }
-      }
-    ]
-  }
+            title: '开发系统'
+        },
+        children: []
+    }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+    history: createWebHashHistory(),
+    routes
 })
 
 export default router

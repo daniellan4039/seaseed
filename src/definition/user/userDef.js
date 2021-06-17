@@ -4,7 +4,8 @@ export const formDef = {
     key: 'loginForm',
     formType: 'normal',
     actions: {
-        save: userApi.login
+        save: userApi.login,
+        update: userApi.login
     },
     labelCol: 7,
     wrapperCol: 10,
@@ -26,7 +27,11 @@ export const formDef = {
                     trigger: 'blur',
                     type: 'string'
                 }
-            ]
+            ],
+            meta: {
+                submit: true,
+                scope: ['form']
+            }
         },
         {
             key: 'password',
@@ -41,7 +46,11 @@ export const formDef = {
                     trigger: 'blur',
                     type: 'string'
                 }
-            ]
+            ],
+            meta: {
+                submit: true,
+                scope: ['form']
+            }
         },
     ]
 }

@@ -30,8 +30,8 @@ export default {
             if (formItems instanceof Array) {
                 formKeys.length = 0
                 formItems.forEach(i => {
-                    const submit = i.meta.submit ?? true
-                    const scope = i.meta.scope?.includes('form')
+                    const submit = i.meta?.submit
+                    const scope = i.meta?.scope?.includes('form')
                     if (submit && scope) {
                         formModel[i.key] = i?.default
                         formKeys.push(i.key)
@@ -119,7 +119,7 @@ export default {
         const {formItems} = this.formDef
         const {formModel, rules, formDef, submitForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
-            const scope = i.meta.scope?.includes('form')
+            const scope = i.meta?.scope?.includes('form')
             if (scope) {
                 return h(
                     resolveComponent('a-form-item'),
