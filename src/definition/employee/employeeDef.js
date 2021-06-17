@@ -12,7 +12,8 @@ export const tableDef = {
     },
     routes: {
         add: '/employee/form',
-        edit: '/employee/form'
+        edit: '/employee/form',
+        detail: '/employee/detail'
     },
     store: {
         module: 'employeeStore',
@@ -20,7 +21,6 @@ export const tableDef = {
         set: 'setEmployee'
     },
     config: {
-        size: 'small',
         bordered: true
     },
     searchParams: {
@@ -120,7 +120,7 @@ export const tableDef = {
         {
             title: '操作',
             dataIndex: 'action',
-            width: 140,
+            width: 160,
             fixed: 'right',
             slots: {customRender: 'action'}
         }
@@ -215,7 +215,8 @@ export const formDef = {
                             slots: {customRender: 'telNum'}
                         }
                     ]
-                }
+                },
+                scope: ['form']
             }
         },
         {
@@ -232,7 +233,8 @@ export const formDef = {
                 }
             ],
             meta: {
-                code: 'sex'
+                code: 'sex',
+                scope: ['form']
             },
         },
         {
@@ -241,7 +243,9 @@ export const formDef = {
             placeholder: '请输入身份证号码',
             inputType: 'input:string',
             rules: [],
-            meta: {}
+            meta: {
+                scope: ['form']
+            }
         },
         {
             key: 'telNum',
@@ -249,7 +253,9 @@ export const formDef = {
             placeholder: '请输入手机号或者电话号码',
             inputType: 'input:string',
             rules: [],
-            meta: {}
+            meta: {
+                scope: ['form']
+            }
         },
         {
             key: 'status',
@@ -258,7 +264,8 @@ export const formDef = {
             inputType: 'select:code',
             rules: [],
             meta: {
-                code: 'hr_employee_status'
+                code: 'hr_employee_status',
+                scope: ['form']
             }
         },
         {
@@ -267,7 +274,9 @@ export const formDef = {
             placeholder: '请选择所属部门',
             inputType: 'select:code',
             rules: [],
-            meta: {}
+            meta: {
+                scope: ['form']
+            }
         },
         {
             key: 'password',
@@ -275,7 +284,9 @@ export const formDef = {
             placeholder: '请输入密码',
             inputType: 'input:psw',
             rules: [],
-            meta: {}
+            meta: {
+                scope: ['form']
+            }
         },
         {
             key: 'password2',
@@ -284,16 +295,22 @@ export const formDef = {
             inputType: 'input:psw',
             rules: [],
             meta: {
-                submit: false
+                submit: false,
+                scope: ['form'],
+                group: 'default'
             }
         },
         {
-            key: 'joinAt',
-            label: '加入日期',
+            key: 'polistics',
+            label: '政治面貌',
             placeholder: '',
-            inputType: 'date:date',
+            inputType: '',
             rules: [],
-            meta: {}
+            meta: {
+                submit: false,
+                scope: ['detail'],
+                group: 'default'
+            }
         },
     ]
 }

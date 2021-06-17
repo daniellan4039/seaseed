@@ -18,6 +18,7 @@ export default {
     setup(props) {
         const formRef = ref()
         const defaultModel = ref({})
+        const formKeys = []
         //set defaultModel from vuex
         if (props.formDef.store) {
             const module = props.formDef.store?.module
@@ -27,8 +28,14 @@ export default {
         const parseFormModel = (formItems) => {
             let formModel = {}
             if (formItems instanceof Array) {
+                formKeys.length = 0
                 formItems.forEach(i => {
-                    formModel[i.key] = i?.default
+                    const submit = i.meta.submit ?? true
+                    const scope = i.meta.scope?.includes('form')
+                    if (submit && scope) {
+                        formModel[i.key] = i?.default
+                        formKeys.push(i.key)
+                    }
                 })
             }
             return formModel
@@ -73,10 +80,11 @@ export default {
 
         const submitForm = () => {
             formRef.value.validate().then(() => {
+                let pickedModel = _.pick(formModel, formKeys)
                 if (!defaultModel.value) {
-                    props.formDef?.actions?.save(formModel).then(res => handleResult(res))
+                    props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
-                    props.formDef?.actions?.update(formModel).then(res => handleResult(res))
+                    props.formDef?.actions?.update(pickedModel).then(res => handleResult(res))
                 }
             }).catch(() => {
                 Modal.error({
@@ -90,7 +98,7 @@ export default {
             formRef.value.resetFields();
         }
 
-        const formModel = reactive(getFormModel())
+        let formModel = reactive(getFormModel())
         const rules = reactive(getRules())
 
         return {
@@ -111,26 +119,31 @@ export default {
         const {formItems} = this.formDef
         const {formModel, rules, formDef, submitForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
-            return h(
-                resolveComponent('a-form-item'),
-                {
-                    ref: i.key,
-                    name: i.key,
-                    label: i.label
-                },
-                {
-                    default: () => {
-                        return h(
-                            CusFormInput,
-                            {
-                                item: i,
-                                'modelValue': formModel[i.key],
-                                'onUpdate:modelValue': val => formModel[i.key] = val
-                            }
-                        )
+            const scope = i.meta.scope?.includes('form')
+            if (scope) {
+                return h(
+                    resolveComponent('a-form-item'),
+                    {
+                        ref: i.key,
+                        name: i.key,
+                        label: i.label
+                    },
+                    {
+                        default: () => {
+
+                            return h(
+                                CusFormInput,
+                                {
+                                    item: i,
+                                    'modelValue': formModel[i.key],
+                                    'onUpdate:modelValue': val => formModel[i.key] = val
+                                }
+                            )
+                        }
                     }
-                }
-            )
+                )
+            }
+
         })
 
         const submitButton = h(

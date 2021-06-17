@@ -3,6 +3,7 @@ import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 import router from "@/router";
 import store from '@/store/index'
+import {Modal} from "ant-design-vue";
 
 const indexCol = {
     key: 'Index',
@@ -51,7 +52,7 @@ export default {
             size: 10,
             sort: 'id'
         })
-        const {page} = props.tableDef.actions
+        const {page, get} = props.tableDef.actions
         const columnsParsed = computed(() => {
             const tempCols = [indexCol, ...props.tableDef?.columns]
             if (columnKeys.length === 0) {
@@ -87,7 +88,7 @@ export default {
         const searchPage = () => {
             loading.value = true
             let searchParams = {}
-            _.assign(searchParams, pageParams, { model: props.searchModel })
+            _.assign(searchParams, pageParams, {model: props.searchModel})
             page(searchParams).then(res => {
                 const {isSuccess, data} = res
                 isSuccess && (dataSource.value = data)
@@ -102,15 +103,39 @@ export default {
         // event methods
         const onEditBtnClick = (arg) => {
             const {record} = arg
-            store.dispatch(props.tableDef.store.set, record.raw)
-            navigateTo(props.tableDef.routes.edit)
-            ctx.emit('edit', arg)
+            get({id: record.raw.id}).then(res => {
+                const {isSuccess, data} = res
+                if (isSuccess) {
+                    store.dispatch(props.tableDef.store.set, data)
+                    navigateTo(props.tableDef.routes.edit)
+                    ctx.emit('edit', arg)
+                } else {
+                    Modal.warn({
+                        title: '提示',
+                        content: '服务器正在维护中，请稍后，如果急需处理，请联系管理员'
+                    })
+                }
+            })
+
         }
         const onDeleteBtnClick = (arg) => {
             ctx.emit('delete', arg)
         }
         const onDetailBtnClick = (arg) => {
-            ctx.emit('detail', arg)
+            const {record} = arg
+            get({id: record.raw.id}).then(res => {
+                const {isSuccess, data} = res
+                if (isSuccess) {
+                    store.dispatch(props.tableDef.store.set, data)
+                    navigateTo(props.tableDef.routes.detail)
+                    ctx.emit('edit', arg)
+                } else {
+                    Modal.warn({
+                        title: '提示',
+                        content: '服务器正在维护中，请稍后，如果急需处理，请联系管理员'
+                    })
+                }
+            })
         }
         const onPageChange = (page, pageSize) => {
             pageParams.current = page
