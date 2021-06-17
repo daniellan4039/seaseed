@@ -70,7 +70,6 @@ export default {
 
     const columnsParsed = computed(() => {
       const tempCols = [indexCol, ...props.tableDef?.columns]
-      console.log(tempCols)
       if (columnKeys.length === 0) {
         return tempCols
       } else {

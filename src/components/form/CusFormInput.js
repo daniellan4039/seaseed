@@ -10,14 +10,15 @@ export default {
             type: Object,
             required: true
         },
-        value: {}
+        value: {},
+        modelValue: {}
     },
     components: {
         CusSelectCode
     },
-    emits: ['change'],
+    emits: ['change', 'update:modelValue'],
     render() {
-        const {item, value} = this
+        const {item, modelValue} = this
         let input
         switch (item.inputType) {
             case 'input:string':
@@ -25,8 +26,8 @@ export default {
                     resolveComponent('a-input'),
                     {
                         placeholder: item.placeholder,
-                        value: value,
-                        'onChange': nv => this.$emit('change', nv.target.value)
+                        value: modelValue,
+                        'onChange': nv => this.$emit('update:modelValue', nv.target.value)
                     }
                 )
                 break
@@ -35,8 +36,8 @@ export default {
                     resolveComponent('a-select'),
                     {
                         placeholder: item.placeholder,
-                        value: value,
-                        'onChange': nv => this.$emit('change', nv)
+                        value: modelValue,
+                        'onChange': nv => this.$emit('update:modelValue', nv)
                     },
                     {
                         default: () => {
@@ -61,8 +62,8 @@ export default {
                     CusSelectCode,
                     {
                         def: item,
-                        value: value,
-                        'onChange': val => this.$emit('change', val)
+                        value: modelValue,
+                        'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )
                 break
@@ -71,9 +72,9 @@ export default {
                     CusSelectSearch,
                     {
                         def: item,
-                        value: value,
+                        value: modelValue,
                         'onChange': val => {
-                            this.$emit('change', val)
+                            this.$emit('update:modelValue', val)
                         }
                     }
                 )
@@ -83,8 +84,8 @@ export default {
                     resolveComponent('a-input-password'),
                     {
                         placeholder: item.placeholder,
-                        value: value,
-                        'onChange': $event => this.$emit('change', $event.target.value)
+                        value: modelValue,
+                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
                     }
                 )
                 break

@@ -124,8 +124,8 @@ export default {
                             CusFormInput,
                             {
                                 item: i,
-                                value: formModel[i.key],
-                                'onChange': val => formModel[i.key] = val
+                                'modelValue': formModel[i.key],
+                                'onUpdate:modelValue': val => formModel[i.key] = val
                             }
                         )
                     }
