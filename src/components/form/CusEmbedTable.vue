@@ -21,148 +21,50 @@
       </a-form>
     </div>
     <div>
-      <a-table :columns="columnsParsed"
-               :data-source="dataSourceParsed"
-               :loading="loading"
-               :pagination="pagination"
-               :row-selection="{ selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'}"
-               bordered size="small"></a-table>
+      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef"/>
     </div>
   </a-modal>
 </template>
 
 <script>
-
-import CusFormInput from "@/components/form/CusFormInput";
-import {computed, reactive, ref, watch} from "vue";
-import _ from "lodash";
-
-const indexCol = {
-  key: 'index',
-  title: '序号',
-  dataIndex: 'index',
-  width: 60
-}
+import {ref,} from "vue";
+import CusTable from "@/components/table/CusTable";
 
 export default {
   name: "CusEmbedTable",
   props: ['searchDef', 'tableDef', 'visible'],
   emits: ['update', 'selected'],
   components: {
-    // eslint-disable-next-line vue/no-unused-components
-    CusFormInput
+    CusTable
   },
-  setup(props) {
-    let columnKeys = reactive([])
-    let dataSource = ref({records: [], total: 0})
-    let rowIndex = ref(0)
-    let loading = ref(true)
+  setup() {
     let selectedKeys = ref([])
     let selectedRows = ref([])
-    let pageParams = reactive({
-      current: 1,
-      extra: {},
-      model: {},
-      order: 'descending',
-      size: 10,
-      sort: 'id'
-    })
-
-    const columnsParsed = computed(() => {
-      const tempCols = [indexCol, ...props.tableDef?.columns]
-      if (columnKeys.length === 0) {
-        return tempCols
-      } else {
-        return _.pick(tempCols, columnKeys)
-      }
-    })
-
-    const tableWidth = computed(() => {
-      let width = 0
-      columnsParsed.value.forEach(i => {
-        width += i.width ?? 0
-      })
-      return width
-    })
-
-    const dataSourceParsed = computed(() => {
-      return dataSource.value.records.map((i) => {
-        const echoMap = i?.echoMap
-        let alterRecord = {}
-        _.assign(alterRecord, i)
-        if (echoMap) {
-          for (const echoMapKey in echoMap) {
-            alterRecord[echoMapKey] = echoMap[echoMapKey]
-          }
-        }
-        alterRecord.key = i.id
-        alterRecord['index'] = ++rowIndex.value
-        alterRecord.raw = i
-        return alterRecord
-      })
-    })
-
-    const searchPage = () => {
-      loading.value = true
-      props.tableDef.actions.page(pageParams).then(res => {
-        const {isSuccess, data} = res
-        isSuccess && (dataSource.value = data)
-        loading.value = false
-      })
-    }
-
-    const pagination = computed(() => {
-      return {
-        current: pageParams.current,
-        pageSize: pageParams.size,
-        total: dataSource.value.total ?? 0,
-        onChange: onPageChange
-      }
-    })
 
     const onSelectChange = (keys, rows) => {
       selectedKeys.value = keys
       selectedRows.value = rows
     }
 
-    watch(pageParams, () => {
-      searchPage()
-    })
-
-    const onPageChange = (page, pageSize) => {
-      pageParams.current = page
-      pageParams.size = pageSize
+    const tableConfig = {
+      rowSelection: {selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'}
     }
-
     return {
-      columnKeys,
-      columnsParsed,
-      tableWidth,
-      dataSourceParsed,
-      dataSource,
-      pageParams,
-      loading,
-      pagination,
       selectedKeys,
       selectedRows,
-      searchPage,
-      onPageChange,
-      onSelectChange
+      tableConfig
     }
   },
   methods: {
     onCancel() {
       this.$emit('update', false)
     },
-    onOk(){
+    onOk() {
       const row = this.selectedRows[0]
-      this.$emit('selected', { value: row.id, text: row[this.tableDef.text ?? 'id']} )
+      this.$emit('selected', {value: row.id, text: row[this.tableDef.text ?? 'id']})
       this.$emit('update', false)
     }
-  },
-  mounted() {
-    this.searchPage()
-  },
+  }
 }
 </script>
 

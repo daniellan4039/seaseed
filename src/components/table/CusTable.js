@@ -21,6 +21,10 @@ export default {
         opsBarVisible: {
             type: Boolean,
             default: true
+        },
+        config: {
+            type: Object,
+            default: null
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -151,6 +155,7 @@ export default {
                     onChange: self.onPageChange
                 },
                 loading: self.loading,
+                ...self.config,
                 ...self.tableDef?.config
             },
             {
