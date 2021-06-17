@@ -1,12 +1,12 @@
 <template>
   <a-modal :visible="visible" width="1000px" @cancel="onCancel" @ok="onOk">
     <div class="cus-embed-table-header">
-      <a-form>
+      <a-form ref="formRef" :model="formModel">
         <a-row :gutter="16">
           <a-col v-for="(formItem, formItemIndex) in searchDef.formItems" :key="formItemIndex" :span="6"
                  class='search-actions-block'>
-            <a-form-item :label="formItem.label" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <cus-base-input :item="formItem"/>
+            <a-form-item :name="formItem.key" :ref="formItem.key" :label="formItem.label" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+              <cus-base-input :item="formItem" v-model="formModel[formItem.key]"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {ref,} from "vue";
+import {reactive, ref,} from "vue";
 import CusTable from "@/components/table/CusTable";
 import CusBaseInput from "@/components/form/select/CusBaseInput";
 
@@ -38,22 +38,38 @@ export default {
   components: {
     CusTable, CusBaseInput
   },
-  setup() {
+  setup(props) {
     let selectedKeys = ref([])
     let selectedRows = ref([])
+    const formRef = ref()
 
     const onSelectChange = (keys, rows) => {
       selectedKeys.value = keys
       selectedRows.value = rows
     }
 
+    const parseFormModel = (formItems) => {
+      let formModel = {}
+      if (formItems instanceof Array) {
+        formItems.forEach(i => {
+          formModel[i.key] = i?.default
+        })
+      }
+      return formModel
+    }
+
     const tableConfig = {
       rowSelection: {selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'}
     }
+
+    let formModel = reactive(parseFormModel(props.searchDef.formItems))
     return {
       selectedKeys,
       selectedRows,
-      tableConfig
+      tableConfig,
+      formRef,
+      formModel,
+      parseFormModel
     }
   },
   methods: {
