@@ -13,23 +13,24 @@
         <a-row>
           <a-col offset="20" span="4" style="display: flex; justify-content: flex-end;margin-bottom: 3px;">
             <a-space>
-              <a-button type="primary">搜索</a-button>
-              <a-button>重置</a-button>
+              <a-button type="primary" @click="submitForm">搜索</a-button>
+              <a-button @click="resetForm">重置</a-button>
             </a-space>
           </a-col>
         </a-row>
       </a-form>
     </div>
     <div>
-      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef"/>
+      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef" :search-model="formModel" :refresh="refresh"/>
     </div>
   </a-modal>
 </template>
 
 <script>
-import {reactive, ref,} from "vue";
+import {reactive, ref} from "vue";
 import CusTable from "@/components/table/CusTable";
 import CusBaseInput from "@/components/form/select/CusBaseInput";
+import {Modal} from "ant-design-vue";
 
 export default {
   name: "CusEmbedTable",
@@ -41,6 +42,9 @@ export default {
   setup(props) {
     let selectedKeys = ref([])
     let selectedRows = ref([])
+    let searchModel = ref({})
+    let refresh = ref(0)
+
     const formRef = ref()
 
     const onSelectChange = (keys, rows) => {
@@ -62,6 +66,21 @@ export default {
       rowSelection: {selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'}
     }
 
+    const submitForm = () => {
+      formRef.value.validate().then(() => {
+        refresh.value += 1
+      }).catch(() => {
+        Modal.error({
+          title: '提示',
+          content: '请完善表格'
+        })
+      })
+    }
+
+    const resetForm = () => {
+      formRef.value.resetFields();
+    }
+
     let formModel = reactive(parseFormModel(props.searchDef.formItems))
     return {
       selectedKeys,
@@ -69,7 +88,11 @@ export default {
       tableConfig,
       formRef,
       formModel,
-      parseFormModel
+      searchModel,
+      parseFormModel,
+      submitForm,
+      resetForm,
+      refresh
     }
   },
   methods: {

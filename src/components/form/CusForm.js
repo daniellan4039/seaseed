@@ -71,7 +71,7 @@ export default {
             }
         }
 
-        const submiForm = () => {
+        const submitForm = () => {
             formRef.value.validate().then(() => {
                 if (!defaultModel.value) {
                     props.formDef?.actions?.save(formModel).then(res => handleResult(res))
@@ -103,13 +103,13 @@ export default {
             loadDefaultModel,
             getFormModel,
             getRules,
-            submiForm,
+            submitForm,
             resetForm,
         }
     },
     render() {
         const {formItems} = this.formDef
-        const {formModel, rules, formDef, submiForm, resetForm} = this
+        const {formModel, rules, formDef, submitForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
             return h(
                 resolveComponent('a-form-item'),
@@ -145,7 +145,7 @@ export default {
                             resolveComponent('a-button'),
                             {
                                 type: 'primary',
-                                onClick: submiForm
+                                onClick: submitForm
                             },
                             {
                                 default: () => '保存'

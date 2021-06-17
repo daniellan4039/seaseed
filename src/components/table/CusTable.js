@@ -25,6 +25,14 @@ export default {
         config: {
             type: Object,
             default: null
+        },
+        searchModel: {
+            type: Object,
+            default: {}
+        },
+        refresh: {
+            type: Number,
+            default: 0
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -39,7 +47,6 @@ export default {
         let pageParams = reactive({
             current: 1,
             extra: {},
-            model: {},
             order: 'descending',
             size: 10,
             sort: 'id'
@@ -79,7 +86,9 @@ export default {
 
         const searchPage = () => {
             loading.value = true
-            page(pageParams).then(res => {
+            let searchParams = {}
+            _.assign(searchParams, pageParams, { model: props.searchModel })
+            page(searchParams).then(res => {
                 const {isSuccess, data} = res
                 isSuccess && (dataSource.value = data)
                 loading.value = false
@@ -135,7 +144,11 @@ export default {
             addNewRecord
         }
     },
-    methods: {},
+    watch: {
+        refresh() {
+            this.searchPage()
+        }
+    },
     mounted() {
         this.searchPage()
     },
@@ -180,7 +193,7 @@ export default {
                 opsBar,
                 h(
                     table,
-                    null
+                    null,
                 )
             ]
         )
