@@ -287,5 +287,13 @@ export const formDef = {
                 submit: false
             }
         },
+        {
+            key: 'joinAt',
+            label: '加入日期',
+            placeholder: '',
+            inputType: 'date:date',
+            rules: [],
+            meta: {}
+        },
     ]
 }

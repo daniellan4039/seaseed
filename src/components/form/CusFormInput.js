@@ -2,6 +2,8 @@
 import {h, resolveComponent} from 'vue'
 import CusSelectCode from "@/components/form/select/CusSelectCode";
 import CusSelectSearch from "@/components/form/select/CusSelectSearch";
+import CusDatePicker from "@/components/form/date/CusDatePicker";
+import CusDateRange from "@/components/form/date/CusDateRange";
 
 export default {
     name: 'CusFormInput',
@@ -86,6 +88,24 @@ export default {
                         placeholder: item.placeholder,
                         value: modelValue,
                         'onChange': $event => this.$emit('update:modelValue', $event.target.value)
+                    }
+                )
+                break
+            case 'date:date':
+                input = h(
+                    CusDatePicker,
+                    {
+                        modelValue: modelValue,
+                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val)
+                    }
+                )
+                break
+            case 'date:range':
+                input = h(
+                    CusDateRange,
+                    {
+                        modelValue: modelValue,
+                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val)
                     }
                 )
                 break

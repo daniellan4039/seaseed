@@ -2,7 +2,7 @@ import {
     Breadcrumb,
     Button,
     Checkbox, Col,
-    ConfigProvider, Divider,
+    ConfigProvider, DatePicker, Divider,
     Dropdown, Form,
     Input,
     Layout,
@@ -33,5 +33,6 @@ export default {
         app.use(Col)
         app.use(Space)
         app.use(Divider)
+        app.use(DatePicker)
     }
 }
