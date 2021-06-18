@@ -173,9 +173,12 @@ export const formDef = {
                             key: 'departmentId',
                             label: '部门',
                             placeholder: '请输入职工姓名',
-                            inputType: 'input:string',
+                            inputType: 'select:list',
                             rules: [],
-                            meta: {}
+                            meta: {
+                                text: 'name',
+                                list: departmentApi.listCompaniesByUser,
+                            }
                         },
                     ]
                 },
