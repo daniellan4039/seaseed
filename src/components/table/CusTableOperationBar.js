@@ -37,7 +37,6 @@ export default {
             }
             ctx.emit('settingChange', columnKeyWrapper.value)
             ctx.emit('update:density', densityWrapper.value)
-            console.log(columnKeyWrapper.value)
         } catch (e) {
             localStorage.removeItem('HRMS_TABLE_SETTING')
             columnsWrapper.value.forEach(c => {

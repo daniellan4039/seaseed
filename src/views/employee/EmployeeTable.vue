@@ -1,7 +1,7 @@
 <template>
-  <cus-table-container :def="tableDef.searchParams">
+  <cus-table-container :def="tableDef.searchParams" @submit="onSubmit">
     <div class="table-block">
-      <cus-table :table-def="tableDef">
+      <cus-table :table-def="tableDef" :search-model="searchModel" :refresh="refresh">
       </cus-table>
     </div>
   </cus-table-container>
@@ -10,6 +10,7 @@
 <script>
 import {tableDef} from "@/definition/employee/employeeDef"
 import {CusTable, CusTableContainer} from '@/components'
+import {ref} from "vue";
 
 export default {
   name: "EmployeeInfo",
@@ -17,8 +18,17 @@ export default {
     CusTable, CusTableContainer
   },
   setup () {
+    let refresh = ref(0)
+    const searchModel = ref({})
+    const onSubmit = (model) => {
+      searchModel.value = model
+      refresh.value++
+    }
     return {
-      tableDef
+      tableDef,
+      refresh,
+      searchModel,
+      onSubmit
     }
   }
 }

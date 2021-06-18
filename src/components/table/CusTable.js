@@ -42,6 +42,10 @@ export default {
         refresh: {
             type: Number,
             default: 0
+        },
+        valve: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -206,6 +210,7 @@ export default {
     watch: {
         refresh() {
             this.searchPage()
+            console.log(this.searchModel)
         }
     },
     mounted() {
