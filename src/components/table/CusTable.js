@@ -62,6 +62,7 @@ export default {
             sort: 'id'
         })
         const {page, get, remove} = props.tableDef.actions
+        const tableSize = ref('small')
         const columnsParsed = computed(() => {
             const tempCols = props.tableDef?.columns
             const x = tempCols.filter(t => {
@@ -188,6 +189,7 @@ export default {
             dataSource,
             pageParams,
             loading,
+            tableSize,
             searchPage,
             onEditBtnClick,
             onDeleteBtnClick,
@@ -224,7 +226,8 @@ export default {
                 },
                 loading: self.loading,
                 ...self.config,
-                ...self.tableDef?.config
+                ...self.tableDef?.config,
+                size: self.tableSize
             },
             {
                 ...this.$slots,
@@ -248,7 +251,12 @@ export default {
             }
         )
         const opsBar = self.opsBarVisible ?
-            <cus-table-ops-bar onAdd={self.addNewRecord} columns={self.tableDef?.columns} onSettingChange={this.onSettingChange}/> :
+            <cus-table-ops-bar
+                onAdd={self.addNewRecord}
+                columns={self.tableDef?.columns}
+                onSettingChange={self.onSettingChange}
+                v-model={[self.tableSize, 'density']}
+            /> :
             null
         return h(
             'div',

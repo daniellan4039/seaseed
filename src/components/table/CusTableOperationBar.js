@@ -6,8 +6,8 @@ export default {
     components: {
         PlusOutlined, VerticalAlignTopOutlined, VerticalAlignBottomOutlined
     },
-    props: ['columns'],
-    emits: ['add', 'densityChange', 'settingChange'],
+    props: ['columns', 'density'],
+    emits: ['add', 'settingChange', 'update:density'],
     setup(props, ctx) {
         const columnsWrapper = reactive(props.columns)
         columnsWrapper.forEach(c => {
@@ -17,7 +17,7 @@ export default {
             ctx.emit('add')
         }
         const onDensityBtnClick = (arg) => {
-            ctx.emit('densityChange', arg)
+            ctx.emit('update:density', arg.key)
         }
         const settingState = reactive({
             visible: false,
