@@ -2,6 +2,7 @@ import axios from "axios";
 import * as employeeApi from './employeeApi'
 import * as dictionaryApi from './dictionaryApi'
 import * as userApi from './userApi'
+import * as departmentApi from './departmentApi'
 
 const $ = axios.create({
     baseURL: '/api',
@@ -30,5 +31,6 @@ export {
     axios,
     employeeApi,
     dictionaryApi,
-    userApi
+    userApi,
+    departmentApi
 }

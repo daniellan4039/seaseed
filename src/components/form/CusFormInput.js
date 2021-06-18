@@ -4,6 +4,7 @@ import CusSelectCode from "@/components/form/select/CusSelectCode";
 import CusSelectSearch from "@/components/form/select/CusSelectSearch";
 import CusDatePicker from "@/components/form/date/CusDatePicker";
 import CusDateRange from "@/components/form/date/CusDateRange";
+import CusSelectList from "@/components/form/select/CusSelectList";
 
 export default {
     name: 'CusFormInput',
@@ -78,6 +79,16 @@ export default {
                         'onChange': val => {
                             this.$emit('update:modelValue', val)
                         }
+                    }
+                )
+                break
+            case 'select:list':
+                input = h(
+                    CusSelectList,
+                    {
+                        def: item,
+                        value: modelValue,
+                        'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )
                 break

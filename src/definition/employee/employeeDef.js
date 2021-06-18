@@ -1,4 +1,4 @@
-import {employeeApi} from "@/service";
+import {employeeApi, departmentApi} from "@/service";
 
 export const tableDef = {
     key: 'EmployeeInfo',
@@ -274,9 +274,11 @@ export const formDef = {
             key: 'departmentId',
             label: '部门',
             placeholder: '请选择所属部门',
-            inputType: 'select:code',
+            inputType: 'select:list',
             rules: [],
             meta: {
+                text: 'name',
+                list: departmentApi.listCompaniesByUser,
                 scope: ['form', 'detail']
             }
         },
