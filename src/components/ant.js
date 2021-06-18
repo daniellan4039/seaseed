@@ -6,7 +6,7 @@ import {
     Dropdown, Form,
     Input,
     Layout,
-    Menu, Modal, Row, Select, Space,
+    Menu, Modal, Row, Select, Space, Spin,
     Table,
     Tabs, Tooltip,
     Typography
@@ -35,5 +35,6 @@ export default {
         app.use(Divider)
         app.use(DatePicker)
         app.use(Descriptions)
+        app.use(Spin)
     }
 }

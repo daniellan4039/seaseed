@@ -154,6 +154,10 @@ export const formDef = {
                 }
             ],
             meta: {
+                search: {
+                    action: employeeApi.list,
+                    keyword: 'realName'
+                },
                 searchDef: {
                     formItems: [
                         {

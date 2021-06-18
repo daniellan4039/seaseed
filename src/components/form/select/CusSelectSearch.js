@@ -10,17 +10,44 @@ export default {
     components: {
         SearchOutlined, CusEmbedTable
     },
-    // eslint-disable-next-line no-unused-vars
     setup(props) {
         const tableVisible = ref(false)
+        const openMenu = ref(false)
         const onMore = () => {
             tableVisible.value = !tableVisible.value
         }
         let options = ref([])
+        let fetching = ref(false)
+        const {action, keyword} = props.def.meta.search ?? {action: undefined, keyword: undefined}
+
+        const search = (arg) => {
+            const parameter = {}
+            parameter[keyword] = arg
+            fetching = true
+            openMenu.value = false
+            action(parameter).then(res => {
+                const {isSuccess, data} = res
+                if (isSuccess) {
+                    options.value = []
+                    data.forEach(i => {
+                        options.value.push({
+                            value: i.id,
+                            text: i[keyword]
+                        })
+                    })
+                }
+                fetching = false
+                openMenu.value = true
+            })
+        }
+
         return {
             onMore,
+            search,
             tableVisible,
-            options
+            options,
+            fetching,
+            openMenu
         }
     },
     render() {
@@ -38,7 +65,13 @@ export default {
                 placeholder: self.def.placeholder,
                 showSearch: true,
                 value: self.value,
-                'onChange':nv => this.$emit('change', nv)
+                'onChange': nv => this.$emit('change', nv),
+                'onFocus': () => {
+                    if (!self.options?.length > 0) {
+                        self.tableVisible = true
+                    }
+                },
+                notFoundContent: self.fetching ? undefined : null
             },
             {
                 suffixIcon: () => {
