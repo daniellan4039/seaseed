@@ -63,7 +63,8 @@ export default {
     }
 
     const tableConfig = {
-      rowSelection: {selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'}
+      rowSelection: {selectedRowKeys: selectedKeys, onChange: onSelectChange, type: 'radio'},
+      size: 'small'
     }
 
     const submitForm = () => {

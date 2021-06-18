@@ -71,8 +71,10 @@ export default {
                     return t
                 }
             })
-            x.splice(0,0,indexCol)
-            x.push(actionCol)
+            x.splice(0, 0, indexCol)
+            if (props.tableDef.defaultActions) {
+                x.push(actionCol)
+            }
             return x
         })
         const tableWidth = computed(() => {
@@ -238,10 +240,15 @@ export default {
                         null,
                         {
                             default: () => {
-                                const {update, detail, remove} = self.tableDef.defaultActions
+                                const {update, detail, remove} = self.tableDef?.defaultActions ?? {
+                                    update: false,
+                                    detail: false,
+                                    remove: false
+                                }
                                 const children = []
                                 update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
-                                detail && children.push(<a-divider type='vertical'/>) && children.push(<a onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
+                                detail && children.push(<a-divider type='vertical'/>) && children.push(<a
+                                    onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
                                 remove && children.push(<a onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
                                 return children
                             }
