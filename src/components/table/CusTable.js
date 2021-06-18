@@ -11,6 +11,13 @@ const indexCol = {
     dataIndex: 'index',
     width: 80
 }
+const actionCol = {
+    title: '操作',
+    dataIndex: 'action',
+    width: 160,
+    fixed: 'right',
+    slots: {customRender: 'action'}
+}
 
 export default {
     name: 'CusTable',
@@ -41,7 +48,10 @@ export default {
         CusTableOpsBar
     },
     setup(props, ctx) {
-        const columnKeys = reactive([])
+        const columnKeys = ref([])
+        props.tableDef.columns.forEach(c => {
+            columnKeys.value.push(c.dataIndex)
+        })
         let dataSource = ref({records: [], total: 0})
         let loading = ref(true)
         let pageParams = reactive({
@@ -53,12 +63,15 @@ export default {
         })
         const {page, get, remove} = props.tableDef.actions
         const columnsParsed = computed(() => {
-            const tempCols = [indexCol, ...props.tableDef?.columns]
-            if (columnKeys.length === 0) {
-                return tempCols
-            } else {
-                return _.pick(tempCols, columnKeys)
-            }
+            const tempCols = props.tableDef?.columns
+            const x = tempCols.filter(t => {
+                if (columnKeys.value.includes(t.dataIndex)) {
+                    return t
+                }
+            })
+            x.unshift(indexCol)
+            x.push(actionCol)
+            return x
         })
         const tableWidth = computed(() => {
             let width = 0
@@ -163,6 +176,9 @@ export default {
             store.dispatch(props.tableDef.store.set, null)
             navigateTo(props.tableDef.routes.add)
         }
+        const onSettingChange = (columns) => {
+            columnKeys.value = columns
+        }
 
         return {
             columnKeys,
@@ -178,7 +194,8 @@ export default {
             onDetailBtnClick,
             onPageChange,
             navigateTo,
-            addNewRecord
+            addNewRecord,
+            onSettingChange
         }
     },
     watch: {
@@ -230,7 +247,9 @@ export default {
                 }
             }
         )
-        const opsBar = self.opsBarVisible ? <cus-table-ops-bar onAdd={self.addNewRecord}/> : null
+        const opsBar = self.opsBarVisible ?
+            <cus-table-ops-bar onAdd={self.addNewRecord} columns={self.tableDef?.columns} onSettingChange={this.onSettingChange}/> :
+            null
         return h(
             'div',
             null,

@@ -119,13 +119,6 @@ export const tableDef = {
             width: 160,
             dataIndex: 'createTime',
             slots: {customRender: 'createTime'}
-        },
-        {
-            title: '操作',
-            dataIndex: 'action',
-            width: 160,
-            fixed: 'right',
-            slots: {customRender: 'action'}
         }
     ]
 }
