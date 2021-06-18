@@ -116,7 +116,7 @@ export const tableDef = {
         },
         {
             title: '创建时间',
-            width: 160,
+            width: 180,
             dataIndex: 'createTime',
             slots: {customRender: 'createTime'}
         }

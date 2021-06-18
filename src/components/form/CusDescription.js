@@ -38,7 +38,6 @@ export default {
     },
     render() {
         const {pageMap} = this
-        console.log(pageMap)
         const desPanes = []
         for (let pageMapKey in pageMap) {
             const desItems = pageMap[pageMapKey].map(i => {

@@ -5,6 +5,7 @@ import router from "@/router";
 import store from '@/store/index'
 import {Modal} from "ant-design-vue";
 
+// eslint-disable-next-line no-unused-vars
 const indexCol = {
     key: 'Index',
     title: '序号',
@@ -14,7 +15,7 @@ const indexCol = {
 const actionCol = {
     title: '操作',
     dataIndex: 'action',
-    width: 160,
+    width: 130,
     fixed: 'right',
     slots: {customRender: 'action'}
 }
@@ -62,7 +63,7 @@ export default {
             sort: 'id'
         })
         const {page, get, remove} = props.tableDef.actions
-        const tableSize = ref('small')
+        const tableSize = ref('default')
         const columnsParsed = computed(() => {
             const tempCols = props.tableDef?.columns
             const x = tempCols.filter(t => {
@@ -70,7 +71,7 @@ export default {
                     return t
                 }
             })
-            x.unshift(indexCol)
+            x.splice(0,0,indexCol)
             x.push(actionCol)
             return x
         })
@@ -138,8 +139,8 @@ export default {
                 content: '你确定要将这条记录从系统中删除吗？',
                 onOk() {
                     remove({id: record.id}).then(res => {
+                        // eslint-disable-next-line no-unused-vars
                         const {isSuccess, data} = res
-                        console.log(isSuccess, data)
                     })
                 },
                 onCancel() {
@@ -252,6 +253,7 @@ export default {
         )
         const opsBar = self.opsBarVisible ?
             <cus-table-ops-bar
+                tableKey={self.tableDef.key}
                 onAdd={self.addNewRecord}
                 columns={self.tableDef?.columns}
                 onSettingChange={self.onSettingChange}
