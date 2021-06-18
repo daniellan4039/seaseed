@@ -10,6 +10,12 @@ export const tableDef = {
         remove: employeeApi.remove,
         get: employeeApi.get
     },
+    defaultActions: {
+        add: true,
+        update: true,
+        remove: false,
+        detail: true
+    },
     routes: {
         add: '/employee/form',
         edit: '/employee/form',
@@ -40,15 +46,11 @@ export const tableDef = {
                 key: 'departmentId',
                 label: '所在部门',
                 placeholder: '请选择所在部门',
-                inputType: 'select',
+                inputType: 'select:list',
                 rules: [],
                 meta: {
-                    options: [
-                        {
-                            text: '软件部',
-                            value: '1'
-                        }
-                    ]
+                    list: departmentApi.listCompaniesByUser,
+                    text: 'name'
                 }
             },
         ]

@@ -51,7 +51,7 @@ export default {
             size: 10,
             sort: 'id'
         })
-        const {page, get} = props.tableDef.actions
+        const {page, get, remove} = props.tableDef.actions
         const columnsParsed = computed(() => {
             const tempCols = [indexCol, ...props.tableDef?.columns]
             if (columnKeys.length === 0) {
@@ -118,6 +118,19 @@ export default {
 
         }
         const onDeleteBtnClick = (arg) => {
+            const {record} = arg
+            Modal.confirm({
+                title: '提示',
+                content: '你确定要将这条记录从系统中删除吗？',
+                onOk() {
+                    remove({id: record.id}).then(res => {
+                        const {isSuccess, data} = res
+                        console.log(isSuccess, data)
+                    })
+                },
+                onCancel() {
+                }
+            })
             ctx.emit('delete', arg)
         }
         const onDetailBtnClick = (arg) => {
@@ -178,6 +191,7 @@ export default {
     },
     render() {
         const self = this
+
         const table = h(
             <a-table/>,
             {
@@ -198,13 +212,20 @@ export default {
             {
                 ...this.$slots,
                 action: (arg) => {
-                    const actionBar = <span>
-                        <a onClick={() => self.onEditBtnClick(arg)}>编辑</a>
-                        <a-divider type='vertical'/>
-                        <a onClick={() => self.onDetailBtnClick(arg)}>详情</a>
-                        <a-divider type='vertical'/>
-                        <a onClick={() => self.onDeleteBtnClick(arg)}>删除</a>
-                    </span>
+                    const actionBar = h(
+                        'span',
+                        null,
+                        {
+                            default: () => {
+                                const {update, detail, remove} = self.tableDef.defaultActions
+                                const children = []
+                                update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
+                                detail && children.push(<a-divider type='vertical'/>) && children.push(<a onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
+                                remove && children.push(<a onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
+                                return children
+                            }
+                        }
+                    )
                     return this.$slots.action ? this.$slots.action(arg) : actionBar
                 }
             }
