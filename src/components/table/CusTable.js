@@ -219,7 +219,12 @@ export default {
     render() {
         const self = this
         const height = document.getElementById('HRMS_TABLE_CONTAINER')?.clientHeight
-        const tableScroll = {x: self.tableWidth, y: (height - 120 - 32 - 32)}
+        const tableScroll = {x: self.tableWidth, y: (height - 120 - 32 - 24)}
+        if (self.tableSize === 'small') {
+            tableScroll.y += 28
+        } else if (self.tableSize === 'middle') {
+            tableScroll.y += 8
+        }
         const table = h(
             <a-table/>,
             {
@@ -290,6 +295,7 @@ export default {
                         onShowSizeChange={self.onPageChange}
                         showQuickJumper={true}
                         showSizeChanger={true}
+                        size={self.tableSize}
                     />
                 </div>
             ]
