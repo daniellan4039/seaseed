@@ -1,4 +1,5 @@
-import {computed, h, reactive, ref, watch} from "vue";
+// eslint-disable-next-line no-unused-vars
+import {computed, h, reactive, ref, toRef, toRefs, watch} from "vue";
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 import router from "@/router";
@@ -42,10 +43,6 @@ export default {
         refresh: {
             type: Number,
             default: 0
-        },
-        valve: {
-            type: Boolean,
-            default: false
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -53,6 +50,10 @@ export default {
         CusTableOpsBar
     },
     setup(props, ctx) {
+        // const tableDef = reactive(props.tableDef)
+        // const searchModel = reactive(props.searchModel)
+        // const refresh = reactive(props.refresh)
+
         const columnKeys = ref([])
         props.tableDef.columns.forEach(c => {
             columnKeys.value.push(c.dataIndex)
@@ -210,7 +211,6 @@ export default {
     watch: {
         refresh() {
             this.searchPage()
-            console.log(this.searchModel)
         }
     },
     mounted() {

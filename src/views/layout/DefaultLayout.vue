@@ -30,15 +30,15 @@
           </div>
         </div>
         <a-config-provider :locale="locale">
-<!--          <router-view #="{Component}">-->
-<!--            <keep-alive>-->
-<!--              <component :is="Component"></component>-->
-<!--            </keep-alive>-->
-<!--          </router-view>-->
-          <router-view></router-view>
+          <router-view #="{Component}">
+            <keep-alive>
+              <component :is="Component"></component>
+            </keep-alive>
+          </router-view>
+<!--          <router-view></router-view>-->
         </a-config-provider>
       </a-layout-content>
-      <a-layout-footer>Footer</a-layout-footer>
+<!--      <a-layout-footer>Footer</a-layout-footer>-->
     </a-layout>
   </a-layout>
 </template>

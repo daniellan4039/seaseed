@@ -5,7 +5,9 @@ import {
     VerticalAlignBottomOutlined,
     VerticalAlignTopOutlined
 } from "@ant-design/icons-vue";
-import {reactive, ref, toRefs, watch} from "vue";
+// eslint-disable-next-line no-unused-vars
+import {reactive, ref, toRef, toRefs, watch} from "vue";
+import {exchangeEleFromArray} from '@/funcLib/arrayFunc'
 
 export default {
     name: 'CusTableOpsBar',
@@ -15,108 +17,90 @@ export default {
     props: ['columns', 'density', 'tableKey'],
     emits: ['add', 'settingChange', 'update:density'],
     setup(props, ctx) {
-        const columnsWrapper = ref(props.columns)
-        const columnKeyWrapper = ref([])
-        const densityWrapper = ref(props.density)
-
-        try {
-            const tableSetting = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
-            if (tableSetting) {
-                const thisTable = tableSetting[props.tableKey]
-                if (thisTable) {
-                    columnsWrapper.value = thisTable.columns
-                    densityWrapper.value = thisTable.density
-                } else {
-                    columnsWrapper.value.forEach(c => {
-                        c.checked = true
-                    })
-                }
-                columnsWrapper.value.forEach(i => {
-                    i.checked && columnKeyWrapper.value.push(i.dataIndex)
-                })
-            }
-            ctx.emit('settingChange', columnKeyWrapper.value)
-            ctx.emit('update:density', densityWrapper.value)
-        } catch (e) {
-            localStorage.removeItem('HRMS_TABLE_SETTING')
-            columnsWrapper.value.forEach(c => {
-                c.checked = true
-            })
-        }
+        const refColumns = reactive(props.columns)
+        const refDensity = ref(props.density)
+        const refTableKey = toRef(props, 'tableKey')
+        const settingState = reactive({
+            visible: false,
+            indeterminate: false,
+            checkAll: true
+        })
 
         const onAddBtnClick = () => {
             ctx.emit('add')
         }
         const onDensityBtnClick = (arg) => {
             const {key} = arg
-            densityWrapper.value = key
+            refDensity.value = key
             onSettingConfirm()
         }
-        const settingState = reactive({
-            visible: false,
-            indeterminate: false,
-            checkAll: true
-        })
         const onSettingConfirm = () => {
+            // todo: add other actions here
+            const clmKeys = retriveColumnKeys(refColumns)
+            const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
+            if (!memery[refTableKey.value]) {
+                memery[refTableKey.value] = {}
+            }
+            memery[refTableKey.value]['columns'] = clmKeys
+            memery[refTableKey.value]['density'] = refDensity.value
+            localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(memery))
             settingState.visible = false
-            let setting
-            try {
-                setting = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
-            } catch (e) {
-                setting = {}
-            }
-            if (props.tableKey) {
-                setting[props.tableKey] = {
-                    columns: columnsWrapper.value,
-                    density: densityWrapper.value
-                }
-                localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(setting))
-            }
-            ctx.emit('update:density', densityWrapper.value)
-            ctx.emit('settingChange', columnKeyWrapper.value)
-
         }
         const onSettingCancel = () => {
-            columnsWrapper.value.forEach(c => {
+            refColumns.forEach(c => {
                 c.checked = true
             })
-            densityWrapper.value = 'default'
+            refDensity.value = 'default'
             settingState.visible = false
             onSettingConfirm()
         }
         const onSettingCheckAll = () => {
             const checked = settingState.checkAll
-            columnsWrapper.value.forEach(c => {
+            refColumns.forEach(c => {
                 c.checked = checked
             })
         }
-
-        const exchangeEle = (array, start, direction) => {
-            return array.splice(start, 1, ...array.splice(start + direction, 1, array[start]))
+        const onExchange = (index, upOrDown) => {
+            exchangeEleFromArray(refColumns, index, upOrDown)
         }
-
-        const onColumnWrapperChange = (nv) => {
-            let checked = 0
-            columnKeyWrapper.value = []
-            nv.forEach(c => {
-                c.checked && checked++ && columnKeyWrapper.value.push(c.dataIndex)
-            })
-            settingState.indeterminate = checked > 0 && checked < columnsWrapper.value.length
-            ctx.emit('settingChange', columnKeyWrapper.value)
-        }
-
-        watch(columnsWrapper.value, (nv) => {
-            let checked = 0
-            columnKeyWrapper.value = []
-            nv.forEach(c => {
-                c.checked && checked++
+        const retriveColumnKeys = (refColumns) => {
+            return refColumns.map(c => {
                 if (c.checked) {
-                    columnKeyWrapper.value.push(c.dataIndex)
+                    return c.dataIndex
                 }
             })
-            settingState.indeterminate = checked > 0 && checked < columnsWrapper.value.length
-            ctx.emit('settingChange', columnKeyWrapper.value)
+        }
+
+        watch(refColumns, (nv) => {
+            let allChecked = true
+            let checkedCount = 0
+            refColumns.forEach(c => {
+                allChecked = c.checked && allChecked
+                c.checked && checkedCount++
+            })
+            settingState.checkAll = allChecked
+            settingState.indeterminate = checkedCount > 0 && checkedCount < refColumns.length
+            const clmKeys = retriveColumnKeys(nv)
+            ctx.emit('settingChange', clmKeys)
         })
+        watch(refDensity, (nv) => {
+            ctx.emit('update:density', nv)
+        })
+
+        // 初始化
+        const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')?.[refTableKey.value]
+        if (memery) {
+            if(memery.columns) {
+                memery.columns.forEach(c => {
+                    c && (refColumns.find(i => i.dataIndex === c).checked = true)
+                })
+            }
+            refDensity.value = memery.density ?? 'default'
+        } else{
+            refColumns.forEach(c => {
+                c.checked = true
+            })
+        }
 
         return {
             onAddBtnClick,
@@ -124,16 +108,11 @@ export default {
             onSettingConfirm,
             onSettingCancel,
             onSettingCheckAll,
-            exchangeEle,
-            onColumnWrapperChange,
-            columnsWrapper,
-            columnKeyWrapper,
-            densityWrapper,
-            ...toRefs(settingState)
+            onExchange,
+            ...toRefs(settingState),
+            refColumns,
+            refDensity
         }
-    },
-    mounted() {
-        // this.init()
     },
     render: function () {
         const {onAddBtnClick, onDensityBtnClick} = this
@@ -150,15 +129,14 @@ export default {
                 <a-menu-item key='small'>紧凑</a-menu-item>
             </a-menu>
         }
-        const clms = this.columnsWrapper?.map((c, k) => {
+        const clms = this.refColumns?.map((c, k) => {
             return <a-menu-item key={c.key} class='flex-space-between'>
                 <a-checkbox v-model={[c.checked, 'checked']}>
                     {c.title}
                 </a-checkbox>
                 <span>
-                    <VerticalAlignTopOutlined onClick={() => this.exchangeEle(this.columnsWrapper, k, -1)}
-                                              class='holder-bright'/>
-                    <VerticalAlignBottomOutlined onClick={() => this.exchangeEle(this.columnsWrapper, k, 1)}/>
+                    <VerticalAlignTopOutlined onClick={() => this.onExchange(k, -1)}/>
+                    <VerticalAlignBottomOutlined onClick={() => this.onExchange(k, 1)}/>
                 </span>
             </a-menu-item>
         })
@@ -198,7 +176,6 @@ export default {
                         </span>
                     </a-tooltip>
                 </a-dropdown>
-
             </div>
         </div>
     }
