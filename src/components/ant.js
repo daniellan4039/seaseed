@@ -6,7 +6,7 @@ import {
     Dropdown, Form,
     Input,
     Layout,
-    Menu, Modal, Row, Select, Space, Spin,
+    Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
     Tabs, Tooltip,
     Typography
@@ -36,5 +36,6 @@ export default {
         app.use(DatePicker)
         app.use(Descriptions)
         app.use(Spin)
+        app.use(Pagination)
     }
 }

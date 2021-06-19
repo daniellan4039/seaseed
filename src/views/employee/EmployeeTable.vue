@@ -1,6 +1,6 @@
 <template>
   <cus-table-container :def="tableDef.searchParams" @submit="onSubmit">
-    <div class="table-block">
+    <div class="table-block" id='HRMS_TABLE_CONTAINER'>
       <cus-table :table-def="tableDef" :search-model="searchModel" :refresh="refresh">
       </cus-table>
     </div>

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {computed, h, reactive, ref, toRef, toRefs, watch} from "vue";
+import {computed, h, reactive, ref, watch} from "vue";
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 import router from "@/router";
@@ -64,7 +64,7 @@ export default {
             current: 1,
             extra: {},
             order: 'descending',
-            size: 10,
+            size: 20,
             sort: 'id'
         })
         const {page, get, remove} = props.tableDef.actions
@@ -218,20 +218,16 @@ export default {
     },
     render() {
         const self = this
-
+        const height = document.getElementById('HRMS_TABLE_CONTAINER')?.clientHeight
+        const tableScroll = {x: self.tableWidth, y: (height - 120 - 32 - 32)}
         const table = h(
             <a-table/>,
             {
                 columns: self.columnsParsed,
                 dataSource: self.dataSourceParsed,
                 rowClassName: (record, index) => (index % 2 === 1 ? 'table-striped' : null),
-                scroll: {x: self.tableWidth},
-                pagination: {
-                    current: self.pageParams.current,
-                    pageSize: self.pageParams.size,
-                    total: self.dataSource.total ?? 0,
-                    onChange: self.onPageChange
-                },
+                scroll: tableScroll,
+                pagination: false,
                 loading: self.loading,
                 ...self.config,
                 ...self.tableDef?.config,
@@ -274,13 +270,28 @@ export default {
             null
         return h(
             'div',
-            null,
+            {
+                id: 'HRMS_TABLE_CONTAINER',
+                style: {
+                    height: '100%',
+                    maxHeight: '100%',
+                    position: 'relative'
+                }
+            },
             [
                 opsBar,
-                h(
-                    table,
-                    null,
-                )
+                table,
+                <div class='bottom-right'>
+                    <a-pagination
+                        current={self.pageParams.current}
+                        pageSize={self.pageParams.size}
+                        total={self.dataSource.total ?? 0}
+                        onChange={self.onPageChange}
+                        onShowSizeChange={self.onPageChange}
+                        showQuickJumper={true}
+                        showSizeChanger={true}
+                    />
+                </div>
             ]
         )
     }
