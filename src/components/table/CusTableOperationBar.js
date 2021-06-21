@@ -92,7 +92,8 @@ export default {
         if (memery) {
             if(memery.columns) {
                 memery.columns.forEach(c => {
-                    c && (refColumns.find(i => i.dataIndex === c).checked = true)
+                    const matchedColumn = refColumns.find(i => i.dataIndex === c)
+                    c && matchedColumn && (matchedColumn.checked = true)
                 })
             }
             refDensity.value = memery.density ?? 'default'

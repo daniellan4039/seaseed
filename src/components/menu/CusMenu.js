@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import {h, watch, reactive, resolveComponent} from "vue";
 import {UserOutlined} from "@ant-design/icons-vue";
+import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 
 export default {
     name: 'CusMenu',
@@ -34,7 +35,10 @@ export default {
         /*
         用于控制是否永远只打开一个SubMenu
          */
-        openOne: Boolean
+        openOne: {
+            type: Boolean,
+            default: true
+        }
     },
     emits: ['change:select', 'update:selectedKeys'],
     components: {
@@ -158,7 +162,8 @@ export default {
          * @param arg
          */
         onSelect(arg) {
-            this.$emit('change:select', arg)
+            const sourceItem = retrieveSubItemByKey(this.dataSource.items, 'key', arg.key)
+            this.$emit('change:select',arg, sourceItem)
             this.$emit('update:selectedKeys', [arg.key])
         },
         findParentMenuItem(parentItem, itemKey, subItems) {
