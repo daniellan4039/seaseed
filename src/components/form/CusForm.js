@@ -129,7 +129,6 @@ export default {
                     continueByDp = continueByDp && !d.value.includes(formModel[d.key])
                 }
             })
-
             if (scope && continueByDp) {
                 return h(
                     resolveComponent('a-form-item'),

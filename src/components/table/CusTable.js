@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {computed, h, reactive, ref, watch} from "vue";
+import {computed, h, reactive, ref, resolveComponent, watch} from "vue";
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
 import router from "@/router";
@@ -47,7 +47,8 @@ export default {
         adaptHeight: {
             type: Boolean,
             default: true
-        }
+        },
+
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
     components: {
@@ -222,10 +223,9 @@ export default {
     },
     render() {
         const self = this
-
-        const height = document.getElementById('HRMS_TABLE_CONTAINER')?.clientHeight
-        const tableScroll = {x: self.tableWidth}
+        const tableScroll = {x: self.tableWidth, y: 500}
         if (self.adaptHeight) {
+            const height = document.getElementById('HRMS_TABLE_CONTAINER')?.clientHeight
             tableScroll.y = height - 120 - 32 - 24
             if (self.tableSize === 'small') {
                 tableScroll.y += 28
@@ -235,7 +235,7 @@ export default {
         }
 
         const table = h(
-            <a-table/>,
+            resolveComponent('a-table'),
             {
                 columns: self.columnsParsed,
                 dataSource: self.dataSourceParsed,

@@ -54,9 +54,15 @@ export default {
         const self = this
 
         const optionsDom = self.options.map(o => {
-            return <a-select-option value={o.value}>
-                {o.text}
-            </a-select-option>
+            return h(
+                resolveComponent('a-select-option'),
+                {
+                    value: o.value
+                },
+                {
+                    default: () => o.text
+                }
+            )
         })
 
         return h(

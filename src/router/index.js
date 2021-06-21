@@ -1,10 +1,13 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
+import store from '@/store/index'
 import DefaultLayout from "@/views/layout/DefaultLayout";
 import EmployeeInfo from "@/views/employee/EmployeeTable";
 import EmployeeForm from "@/views/employee/EmployeeForm";
 import EmployeeDetail from "@/views/employee/EmployeeDetail";
 import LoginForm from "@/views/user/LoginForm";
-import store from '@/store/index'
+import CertificationTable from '@/views/certification/certificationTable'
+import CertificationDetail from '@/views/certification/certificationDetail'
+import CertificationForm from '@/views/certification/certificationForm'
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -47,6 +50,33 @@ const routes = [
                     title: '职工详情',
                     key: 'employee_detail'
                 }
+            },
+            {
+              path: '/certification',
+              name: 'Certification',
+              component: CertificationTable,
+              meta: {
+                  title: '职工证书',
+                  key: 'certification'
+              }
+            },
+            {
+              path: '/certification/form',
+              name: 'CertificationForm',
+              component: CertificationForm,
+              meta: {
+                title: '职工证书表单',
+                key: 'certification_form'
+              }
+            },
+            {
+              path: '/certification/detail',
+              name: 'CertificationDetail',
+              component: CertificationDetail,
+              meta: {
+                title: '职工证书详情',
+                key: 'certification_detail'
+              }
             },
         ]
     },

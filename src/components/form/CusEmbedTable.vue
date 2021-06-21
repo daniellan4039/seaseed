@@ -5,8 +5,9 @@
         <a-row :gutter="16">
           <a-col v-for="(formItem, formItemIndex) in searchDef.formItems" :key="formItemIndex" :span="6"
                  class='search-actions-block'>
-            <a-form-item :name="formItem.key" :ref="formItem.key" :label="formItem.label" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <cus-base-input :item="formItem" v-model="formModel[formItem.key]"/>
+            <a-form-item :ref="formItem.key" :label="formItem.label" :label-col="{ span: 8 }" :name="formItem.key"
+                         :wrapper-col="{ span: 16 }">
+              <cus-base-input v-model="formModel[formItem.key]" :item="formItem"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -20,9 +21,9 @@
         </a-row>
       </a-form>
     </div>
-    <div>
-      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef" :search-model="formModel"
-                 :refresh="refresh" :adapt-height="false"/>
+    <div style="height: 600px;">
+      <cus-table :adapt-height="false" :config="tableConfig" :ops-bar-visible="false" :refresh="refresh"
+                 :search-model="formModel" :table-def="tableDef"/>
     </div>
   </a-modal>
 </template>
@@ -91,10 +92,10 @@ export default {
       formRef,
       formModel,
       searchModel,
+      refresh,
       parseFormModel,
       submitForm,
       resetForm,
-      refresh
     }
   },
   methods: {
@@ -103,8 +104,10 @@ export default {
     },
     onOk() {
       const row = this.selectedRows[0]
-      this.$emit('selected', {value: row.id, text: row[this.tableDef.text ?? 'id']})
-      this.$emit('update', false)
+      if (row) {
+        this.$emit('selected', { value: row.id, text: row[this.tableDef.text ?? 'id'] })
+        this.$emit('update', false)
+      }
     }
   }
 }
