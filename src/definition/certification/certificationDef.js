@@ -13,7 +13,7 @@ export const tableDef = {
     defaultActions: {
         add: true,
         update: true,
-        remove: false,
+        remove: true,
         detail: true
     },
     routes: {

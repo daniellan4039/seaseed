@@ -16,7 +16,7 @@ const indexCol = {
 const actionCol = {
     title: '操作',
     dataIndex: 'action',
-    width: 130,
+    width: 120,
     fixed: 'right',
     slots: {customRender: 'action'}
 }
@@ -58,6 +58,7 @@ export default {
         // const tableDef = reactive(props.tableDef)
         // const searchModel = reactive(props.searchModel)
         // const refresh = reactive(props.refresh)
+        const actionColWrapper = reactive(actionCol)
 
         const columnKeys = ref([])
         props.tableDef.columns.forEach(c => {
@@ -83,7 +84,7 @@ export default {
             })
             x.splice(0, 0, indexCol)
             if (props.tableDef.defaultActions) {
-                x.push(actionCol)
+                x.push(actionColWrapper)
             }
             return x
         })
@@ -124,6 +125,20 @@ export default {
 
         watch(pageParams, () => {
             searchPage()
+        })
+
+        watch(tableSize, (nv) => {
+            switch (nv) {
+                case 'default':
+                    actionColWrapper.width = 160
+                    break
+                case 'middle':
+                    actionColWrapper.width = 140
+                    break
+                case 'small':
+                    actionColWrapper.width = 140
+                    break
+            }
         })
 
         // event methods
@@ -203,6 +218,7 @@ export default {
             pageParams,
             loading,
             tableSize,
+            actionColWrapper,
             searchPage,
             onEditBtnClick,
             onDeleteBtnClick,
@@ -210,7 +226,7 @@ export default {
             onPageChange,
             navigateTo,
             addNewRecord,
-            onSettingChange
+            onSettingChange,
         }
     },
     watch: {
@@ -229,8 +245,12 @@ export default {
             tableScroll.y = height - 120 - 32 - 24
             if (self.tableSize === 'small') {
                 tableScroll.y += 28
+                self.actionColWrapper.width = 140
             } else if (self.tableSize === 'middle') {
                 tableScroll.y += 8
+                self.actionColWrapper.width = 140
+            } else {
+                self.actionColWrapper.width = 160
             }
         }
 
@@ -264,7 +284,8 @@ export default {
                                 update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
                                 detail && children.push(<a-divider type='vertical'/>) && children.push(<a
                                     onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
-                                remove && children.push(<a onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
+                                remove && children.push(<a-divider type='vertical'/>) && children.push(<a
+                                    onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
                                 return children
                             }
                         }
