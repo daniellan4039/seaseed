@@ -44,12 +44,16 @@ export function list(params) {
 
 export function listCompaniesByUser() {
     const currentUser = JSON.parse(localStorage.getItem('HRMS_USER'))
-    return $.get(
-        api.listUrl,
-        {
-            params: { companyId: currentUser.companyId}
-        }
-    )
+    if (currentUser) {
+        return $.get(
+            api.listUrl,
+            {
+                params: {companyId: currentUser.companyId}
+            }
+        )
+    }else {
+        return Promise.reject('HRMS: Cannot get user login info, please try login before')
+    }
 }
 
 export function remove(data) {

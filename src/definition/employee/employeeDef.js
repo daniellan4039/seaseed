@@ -249,7 +249,16 @@ export const formDef = {
             rules: [],
             meta: {
                 scope: ['form', 'detail']
-            }
+            },
+            dependency: [
+                {
+                    key: 'sex',
+                    value: [
+                        '1'
+                    ],
+                    condition: 'include'
+                }
+            ]
         },
         {
             key: 'telNum',

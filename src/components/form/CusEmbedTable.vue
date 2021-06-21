@@ -21,7 +21,8 @@
       </a-form>
     </div>
     <div>
-      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef" :search-model="formModel" :refresh="refresh"/>
+      <cus-table :config="tableConfig" :ops-bar-visible="false" :table-def="tableDef" :search-model="formModel"
+                 :refresh="refresh" :adapt-height="false"/>
     </div>
   </a-modal>
 </template>

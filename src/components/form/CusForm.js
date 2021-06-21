@@ -120,7 +120,17 @@ export default {
         const {formModel, rules, formDef, submitForm, resetForm} = this
         const formItemsDOM = formItems.map(i => {
             const scope = i.meta?.scope?.includes('form')
-            if (scope) {
+            const dependency = i.dependency
+            let continueByDp = true
+            dependency && dependency.forEach(d => {
+                if (d.condition === 'include') {
+                    continueByDp = continueByDp && d.value.includes(formModel[d.key])
+                } else {
+                    continueByDp = continueByDp && !d.value.includes(formModel[d.key])
+                }
+            })
+
+            if (scope && continueByDp) {
                 return h(
                     resolveComponent('a-form-item'),
                     {
@@ -142,6 +152,8 @@ export default {
                         }
                     }
                 )
+            } else {
+                return null
             }
 
         })

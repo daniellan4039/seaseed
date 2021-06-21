@@ -43,6 +43,10 @@ export default {
         refresh: {
             type: Number,
             default: 0
+        },
+        adaptHeight: {
+            type: Boolean,
+            default: true
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -218,13 +222,18 @@ export default {
     },
     render() {
         const self = this
+
         const height = document.getElementById('HRMS_TABLE_CONTAINER')?.clientHeight
-        const tableScroll = {x: self.tableWidth, y: (height - 120 - 32 - 24)}
-        if (self.tableSize === 'small') {
-            tableScroll.y += 28
-        } else if (self.tableSize === 'middle') {
-            tableScroll.y += 8
+        const tableScroll = {x: self.tableWidth}
+        if (self.adaptHeight) {
+            tableScroll.y = height - 120 - 32 - 24
+            if (self.tableSize === 'small') {
+                tableScroll.y += 28
+            } else if (self.tableSize === 'middle') {
+                tableScroll.y += 8
+            }
         }
+
         const table = h(
             <a-table/>,
             {
