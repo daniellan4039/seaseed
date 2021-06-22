@@ -13,8 +13,7 @@ export default {
     emits: ['edit', 'update:activeKey', 'update:tabs'],
     computed: {
         doTabClosable() {
-            const result = this.tabs.length !== 1
-            return result
+            return this.tabs.length !== 1
         }
     },
     methods: {

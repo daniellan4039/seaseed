@@ -7,7 +7,7 @@
           :data-source="menu"
           :open-one="true"
           v-on:change:select="onMenuItemSelect"
-      ></cus-menu>
+      />
     </a-layout-sider>
     <a-layout>
       <a-layout-header class="cus-header">
@@ -21,8 +21,7 @@
       </a-layout-header>
       <a-layout-content class="cus-content-container">
         <div class="cus-tabs-container">
-          <cus-tabs v-model:activeKey="activeTabKey" v-model:tabs="openTabs" @edit="onTabsEdit">
-          </cus-tabs>
+          <cus-tabs v-model:activeKey="activeTabKey" v-model:tabs="openTabs" @edit="onTabsEdit"/>
           <div class="navigation-bar">
             <a-breadcrumb>
               <a-breadcrumb-item v-for="(i, k) in matchedRoutes" :key="k">{{ i?.meta?.title }}</a-breadcrumb-item>
@@ -58,7 +57,6 @@ const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
 export default {
   name: "DefaultLayout",
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     CusMenu, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
     CusTabs
   },
@@ -100,9 +98,9 @@ export default {
       },
       set(value) {
         this.menuSelectedKeys = [value]
-        const choosedMenu = retrieveSubItemByKey(this.menu.items, 'key', value)
-        this.$router.push({
-          path: choosedMenu.path
+        const chooseTab = retrieveSubItemByKey(this.openTabs, 'key', value)
+        chooseTab && this.$router.push({
+          path: chooseTab.path
         })
       }
     },
@@ -122,8 +120,10 @@ export default {
       if (index < 0) {
         this.openTabs.push({
           key: nv.meta.key,
-          title: nv.meta.title
+          title: nv.meta.title,
+          path: nv.path
         })
+        this.menuSelectedKeys = [nv.meta.key]
       }
     }
   },

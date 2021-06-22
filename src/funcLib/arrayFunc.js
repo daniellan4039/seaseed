@@ -3,16 +3,14 @@ export function exchangeEleFromArray(array, startIndex, direction) {
 }
 
 export function retrieveSubItemByKey(array, keyName, keyValue){
-    let meetResult = {}
-    array.find(a => {
+    let meetResult = null
+    array.forEach(a => {
         if (a[keyName] === keyValue) {
             meetResult = a
-            return true
         } else {
             const result = a.children && retrieveSubItemByKey(a.children, keyName, keyValue)
             if (result) {
                 meetResult = result
-                return true
             }
         }
     })
