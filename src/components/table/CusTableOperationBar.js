@@ -5,7 +5,6 @@ import {
     VerticalAlignBottomOutlined,
     VerticalAlignTopOutlined
 } from "@ant-design/icons-vue";
-// eslint-disable-next-line no-unused-vars
 import {reactive, ref, toRef, toRefs, watch} from "vue";
 import {exchangeEleFromArray} from '@/funcLib/arrayFunc'
 
@@ -30,21 +29,20 @@ export default {
         const onAddBtnClick = () => {
             ctx.emit('add')
         }
-        // eslint-disable-next-line no-unused-vars
         const onDensityBtnClick = (arg) => {
-            // const {key} = arg
-            // refDensity.value = key
-            // onSettingConfirm()
+            const {key} = arg
+            refDensity.value = key
+            onSettingConfirm()
         }
         const onSettingConfirm = () => {
-            // const clmKeys = retriveColumnKeys(refColumns)
-            // const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
-            // if (!memery[refTableKey.value]) {
-            //     memery[refTableKey.value] = {}
-            // }
-            // memery[refTableKey.value]['columns'] = clmKeys
-            // memery[refTableKey.value]['density'] = refDensity.value
-            // localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(memery))
+            const clmKeys = retriveColumnKeys(refColumns)
+            const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
+            if (!memery[refTableKey.value]) {
+                memery[refTableKey.value] = {}
+            }
+            memery[refTableKey.value]['columns'] = clmKeys
+            memery[refTableKey.value]['density'] = refDensity.value
+            localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(memery))
             settingState.visible = false
         }
         const onSettingCancel = () => {
@@ -89,23 +87,23 @@ export default {
         })
 
         // 初始化
-        // const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')?.[refTableKey.value]
-        // if (memery) {
-        //     if(memery.columns) {
-        //         memery.columns.forEach(c => {
-        //             const matchedColumn = refColumns.find(i => i.dataIndex === c)
-        //             c && matchedColumn && (matchedColumn.checked = true)
-        //         })
-        //     }
-        //     refDensity.value = memery.density ?? 'default'
-        // } else{
-        //     refColumns.forEach(c => {
-        //         c.checked = true
-        //     })
-        //     if (!props.density) {
-        //         refDensity.value = 'default'
-        //     }
-        // }
+        const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')?.[refTableKey.value]
+        if (memery) {
+            if(memery.columns) {
+                memery.columns.forEach(c => {
+                    const matchedColumn = refColumns.find(i => i.dataIndex === c)
+                    c && matchedColumn && (matchedColumn.checked = true)
+                })
+            }
+            refDensity.value = memery.density ?? 'default'
+        } else{
+            refColumns.forEach(c => {
+                c.checked = true
+            })
+            if (!props.density) {
+                refDensity.value = 'default'
+            }
+        }
 
         return {
             onAddBtnClick,

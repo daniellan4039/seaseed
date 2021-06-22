@@ -15,7 +15,7 @@ const indexCol = {
 const actionCol = {
     title: '操作',
     dataIndex: 'action',
-    width: 120,
+    width: 160,
     fixed: 'right',
     slots: {customRender: 'action'}
 }
@@ -123,20 +123,6 @@ export default {
             searchPage()
         })
 
-        watch(tableSize, (nv) => {
-            switch (nv) {
-                case 'default':
-                    actionColWrapper.width = 160
-                    break
-                case 'middle':
-                    actionColWrapper.width = 140
-                    break
-                case 'small':
-                    actionColWrapper.width = 140
-                    break
-            }
-        })
-
         // event methods
         const onEditBtnClick = (arg) => {
             const {record} = arg
@@ -241,12 +227,8 @@ export default {
             tableScroll.y = height - 120 - 32 - 24
             if (self.tableSize === 'small') {
                 tableScroll.y += 28
-                self.actionColWrapper.width = 140
             } else if (self.tableSize === 'middle') {
                 tableScroll.y += 8
-                self.actionColWrapper.width = 140
-            } else {
-                self.actionColWrapper.width = 160
             }
         }
 
