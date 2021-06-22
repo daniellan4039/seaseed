@@ -30,7 +30,7 @@
         </div>
         <a-config-provider :locale="locale">
           <router-view #="{Component}">
-            <keep-alive>
+            <keep-alive :exclude="/(Form|Detail)$/">
               <component :is="Component"></component>
             </keep-alive>
           </router-view>
@@ -80,7 +80,13 @@ export default {
                 type: 'menuItem',
                 key: 'employee',
                 path: '/employee'
-              }
+              },
+              {
+                title: '职工证书',
+                type: 'menuItem',
+                key: 'certification',
+                path: '/certification'
+              },
             ]
           }
         ]
@@ -123,8 +129,9 @@ export default {
           title: nv.meta.title,
           path: nv.path
         })
-        this.menuSelectedKeys = [nv.meta.key]
+
       }
+      this.menuSelectedKeys = [nv.meta.key]
     }
   },
   methods: {
