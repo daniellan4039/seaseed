@@ -19,6 +19,7 @@ export default {
     setup(props, ctx) {
         const refColumns = reactive(props.columns)
         const refDensity = ref(props.density)
+        // eslint-disable-next-line no-unused-vars
         const refTableKey = toRef(props, 'tableKey')
         const settingState = reactive({
             visible: false,
@@ -29,21 +30,21 @@ export default {
         const onAddBtnClick = () => {
             ctx.emit('add')
         }
+        // eslint-disable-next-line no-unused-vars
         const onDensityBtnClick = (arg) => {
-            const {key} = arg
-            refDensity.value = key
-            onSettingConfirm()
+            // const {key} = arg
+            // refDensity.value = key
+            // onSettingConfirm()
         }
         const onSettingConfirm = () => {
-            // todo: add other actions here
-            const clmKeys = retriveColumnKeys(refColumns)
-            const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
-            if (!memery[refTableKey.value]) {
-                memery[refTableKey.value] = {}
-            }
-            memery[refTableKey.value]['columns'] = clmKeys
-            memery[refTableKey.value]['density'] = refDensity.value
-            localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(memery))
+            // const clmKeys = retriveColumnKeys(refColumns)
+            // const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')
+            // if (!memery[refTableKey.value]) {
+            //     memery[refTableKey.value] = {}
+            // }
+            // memery[refTableKey.value]['columns'] = clmKeys
+            // memery[refTableKey.value]['density'] = refDensity.value
+            // localStorage.setItem('HRMS_TABLE_SETTING', JSON.stringify(memery))
             settingState.visible = false
         }
         const onSettingCancel = () => {
@@ -52,7 +53,7 @@ export default {
             })
             refDensity.value = 'default'
             settingState.visible = false
-            onSettingConfirm()
+            // onSettingConfirm()
         }
         const onSettingCheckAll = () => {
             const checked = settingState.checkAll
@@ -88,20 +89,23 @@ export default {
         })
 
         // 初始化
-        const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')?.[refTableKey.value]
-        if (memery) {
-            if(memery.columns) {
-                memery.columns.forEach(c => {
-                    const matchedColumn = refColumns.find(i => i.dataIndex === c)
-                    c && matchedColumn && (matchedColumn.checked = true)
-                })
-            }
-            refDensity.value = memery.density ?? 'default'
-        } else{
-            refColumns.forEach(c => {
-                c.checked = true
-            })
-        }
+        // const memery = JSON.parse(localStorage.getItem('HRMS_TABLE_SETTING') ?? '{}')?.[refTableKey.value]
+        // if (memery) {
+        //     if(memery.columns) {
+        //         memery.columns.forEach(c => {
+        //             const matchedColumn = refColumns.find(i => i.dataIndex === c)
+        //             c && matchedColumn && (matchedColumn.checked = true)
+        //         })
+        //     }
+        //     refDensity.value = memery.density ?? 'default'
+        // } else{
+        //     refColumns.forEach(c => {
+        //         c.checked = true
+        //     })
+        //     if (!props.density) {
+        //         refDensity.value = 'default'
+        //     }
+        // }
 
         return {
             onAddBtnClick,
@@ -116,7 +120,7 @@ export default {
         }
     },
     render: function () {
-        const {onAddBtnClick, onDensityBtnClick} = this
+        let self = this
         const shrinkTitle = {
             title: () => '密度'
         }
@@ -124,7 +128,7 @@ export default {
             title: () => '设置'
         }
         const shrinkMenuSlot = {
-            overlay: () => <a-menu onClick={onDensityBtnClick}>
+            overlay: () => <a-menu onClick={self.onDensityBtnClick}>
                 <a-menu-item key='default'>默认</a-menu-item>
                 <a-menu-item key='middle'>中等</a-menu-item>
                 <a-menu-item key='small'>紧凑</a-menu-item>
@@ -158,7 +162,7 @@ export default {
         }
 
         return <div className='table-ops-bar-container'>
-            <a-button type='primary' onClick={onAddBtnClick}>
+            <a-button type='primary' onClick={self.onAddBtnClick}>
                 <PlusOutlined/>
                 新增
             </a-button>

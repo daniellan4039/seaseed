@@ -1,4 +1,4 @@
-import {h} from "vue";
+import {h, resolveComponent} from "vue";
 import {MoreOutlined} from '@ant-design/icons-vue'
 
 export default {
@@ -35,11 +35,14 @@ export default {
     },
     render() {
         return h(
-            <a-tabs type='editable-card' hide-add tabBarStyle={{paddingLeft: '16px'}}/>,
+            resolveComponent('a-tabs'),
             {
                 onEdit: this.onTabEdit,
                 activeKey: this.activeKey,
-                onChange: this.onChange
+                onChange: this.onChange,
+                type: 'editable-card',
+                hideAdd: true,
+                tabBarStyle: {paddingLeft: '16px'}
             },
             {
                 default: () => {

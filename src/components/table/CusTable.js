@@ -1,12 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import {computed, h, reactive, ref, resolveComponent, watch} from "vue";
+import {computed, h, reactive, ref, resolveComponent, watch} from "vue"
 import CusTableOpsBar from '@/components/table/CusTableOperationBar'
 import _ from 'lodash'
-import router from "@/router";
+import router from "@/router"
 import store from '@/store/index'
-import {Modal} from "ant-design-vue";
+import {Modal} from "ant-design-vue"
 
-// eslint-disable-next-line no-unused-vars
 const indexCol = {
     key: 'Index',
     title: '序号',
@@ -55,9 +54,6 @@ export default {
         CusTableOpsBar
     },
     setup(props, ctx) {
-        // const tableDef = reactive(props.tableDef)
-        // const searchModel = reactive(props.searchModel)
-        // const refresh = reactive(props.refresh)
         const actionColWrapper = reactive(actionCol)
 
         const columnKeys = ref([])
