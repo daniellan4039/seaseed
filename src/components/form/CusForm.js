@@ -116,17 +116,17 @@ export default {
         }
     },
     render() {
-        const {formItems} = this.formDef
-        const {formModel, rules, formDef, submitForm, resetForm} = this
-        const formItemsDOM = formItems.map(i => {
+        // const {formItems} = this.formDef
+        // const {formModel, rules, formDef, submitForm, resetForm} = this
+        const formItemsDOM = this.formDef.formItems.map(i => {
             const scope = i.meta?.scope?.includes('form')
             const dependency = i.dependency
             let continueByDp = true
             dependency && dependency.forEach(d => {
                 if (d.condition === 'include') {
-                    continueByDp = continueByDp && d.value.includes(formModel[d.key])
+                    continueByDp = continueByDp && d.value.includes(this.formModel[d.key])
                 } else {
-                    continueByDp = continueByDp && !d.value.includes(formModel[d.key])
+                    continueByDp = continueByDp && !d.value.includes(this.formModel[d.key])
                 }
             })
             if (scope && continueByDp) {
@@ -139,13 +139,12 @@ export default {
                     },
                     {
                         default: () => {
-
                             return h(
                                 CusFormInput,
                                 {
                                     item: i,
-                                    'modelValue': formModel[i.key],
-                                    'onUpdate:modelValue': val => formModel[i.key] = val
+                                    'modelValue': this.formModel[i.key],
+                                    'onUpdate:modelValue': val => this.formModel[i.key] = val
                                 }
                             )
                         }
@@ -160,7 +159,7 @@ export default {
         const submitButton = h(
             resolveComponent('a-form-item'),
             {
-                wrapperCol: {span: formDef.wrapperCol, offset: formDef.labelCol}
+                wrapperCol: {span: this.formDef.wrapperCol, offset: this.formDef.labelCol}
             },
             {
                 default: () => {
@@ -169,7 +168,7 @@ export default {
                             resolveComponent('a-button'),
                             {
                                 type: 'primary',
-                                onClick: submitForm
+                                onClick: this.submitForm
                             },
                             {
                                 default: () => '保存'
@@ -179,7 +178,7 @@ export default {
                             resolveComponent('a-button'),
                             {
                                 style: 'margin-left: 10px;',
-                                onClick: resetForm
+                                onClick: this.resetForm
                             },
                             {
                                 default: () => '重置'
@@ -194,11 +193,11 @@ export default {
             resolveComponent('a-form'),
             {
                 ref: 'formRef',
-                model: formModel,
-                rules: rules,
-                labelCol: {span: formDef.labelCol ?? 4},
-                wrapperCol: {span: formDef.wrapperCol ?? 14},
-                ...formDef.config
+                model: this.formModel,
+                rules: this.rules,
+                labelCol: {span: this.formDef.labelCol ?? 4},
+                wrapperCol: {span: this.formDef.wrapperCol ?? 14},
+                ...this.formDef.config
             },
             {
                 default: () => {

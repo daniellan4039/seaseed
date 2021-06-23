@@ -5,6 +5,7 @@ import CusSelectSearch from "@/components/form/select/CusSelectSearch";
 import CusDatePicker from "@/components/form/date/CusDatePicker";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import CusSelectList from "@/components/form/select/CusSelectList";
+import CusUploadText from "@/components/form/upload/CusUploadText";
 
 export default {
     name: 'CusFormInput',
@@ -13,7 +14,6 @@ export default {
             type: Object,
             required: true
         },
-        value: {},
         modelValue: {}
     },
     components: {
@@ -120,7 +120,14 @@ export default {
                     }
                 )
                 break
-
+            case 'upload:text':
+                input = h(
+                    CusUploadText,
+                    {
+                        fileList: this.modelValue,
+                        'onUpdate:fileList': val => this.$emit('update:modelValue', val)
+                    }
+                )
         }
         return input
     }

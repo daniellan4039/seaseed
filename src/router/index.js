@@ -32,7 +32,7 @@ const routes = [
                 name: 'EmployeeTable',
                 component: EmployeeInfo,
                 meta: {
-                    title: '职工中心',
+                    title: '职工信息',
                     key: 'employee'
                 }
             },

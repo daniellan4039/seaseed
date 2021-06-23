@@ -9,7 +9,7 @@ import {
     Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
     Tabs, Tooltip,
-    Typography
+    Typography, Upload
 } from "ant-design-vue";
 
 export default {
@@ -37,5 +37,6 @@ export default {
         app.use(Descriptions)
         app.use(Spin)
         app.use(Pagination)
+        app.use(Upload)
     }
 }

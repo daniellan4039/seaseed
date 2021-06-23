@@ -64,7 +64,7 @@ export const tableDef = {
     },
     columns: [
         {
-            title: '职工',
+            title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
             scopedSlots: {customRender: 'employeeId'}
@@ -330,6 +330,18 @@ export const formDef = {
             label: '变更状况',
             placeholder: '请输入变更状况',
             inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'attachmentList',
+            label: '附件',
+            placeholder: '',
+            inputType: 'upload:text',
             rules: [],
             meta: {
                 submit: true,

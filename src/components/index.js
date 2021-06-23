@@ -7,6 +7,7 @@ import CusFormContainer from "@/components/form/CusFormContainer";
 import CusMenu from "@/components/menu/CusMenu"
 import CusTableOpsBar from "@/components/table/CusTableOperationBar"
 import CusTabs from "@/components/menu/CusTabs"
+import CusUploadText from '@/components/form/upload/CusUploadText'
 
 export {
     CusForm,
@@ -17,5 +18,6 @@ export {
     CusTable,
     CusTableContainer,
     CusTableOpsBar,
-    CusTabs
+    CusTabs,
+    CusUploadText
 }
