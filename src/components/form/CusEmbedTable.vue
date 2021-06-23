@@ -115,7 +115,7 @@ export default {
 
 <style lang="less" scoped>
 .ant-form-item {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .cus-embed-table-header {

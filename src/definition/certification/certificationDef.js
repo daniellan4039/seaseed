@@ -90,7 +90,7 @@ export const tableDef = {
         {
             title: '证书编号',
             dataIndex: 'certNum',
-            width: 120,
+            width: 170,
             scopedSlots: {customRender: 'certNum'}
         },
         {
@@ -102,7 +102,7 @@ export const tableDef = {
         {
             title: '创建时间',
             dataIndex: 'createTime',
-            width: 120,
+            width: 140,
             scopedSlots: {customRender: 'createTime'}
         }
     ]
