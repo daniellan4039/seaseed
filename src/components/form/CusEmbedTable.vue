@@ -1,5 +1,5 @@
 <template>
-  <a-modal :visible="visible" width="1000px" @cancel="onCancel" @ok="onOk">
+  <a-modal :visible="visible" width="1000px" @cancel="onCancel" @ok="onOk" :maskClosable="false" :confirm-loading="confirmLoading">
     <div class="cus-embed-table-header">
       <a-form ref="formRef" :model="formModel">
         <a-row :gutter="16">
@@ -41,12 +41,12 @@ export default {
   components: {
     CusTable, CusBaseInput
   },
-  setup(props) {
-    let selectedKeys = ref([])
-    let selectedRows = ref([])
-    let searchModel = ref({})
-    let refresh = ref(0)
-
+  setup(props, ctx) {
+    const selectedKeys = ref([])
+    const selectedRows = ref([])
+    const searchModel = ref({})
+    const refresh = ref(0)
+    const confirmLoading = ref(false)
     const formRef = ref()
 
     const onSelectChange = (keys, rows) => {
@@ -83,8 +83,24 @@ export default {
     const resetForm = () => {
       formRef.value.resetFields();
     }
+    const formModel = reactive(parseFormModel(props.searchDef.formItems))
 
-    let formModel = reactive(parseFormModel(props.searchDef.formItems))
+    const onOk = () => {
+      const row = selectedRows.value[0]
+      if (row) {
+        confirmLoading.value = true
+        setTimeout(() => {
+          ctx.emit('selected', { value: row.id, text: row[props.tableDef.text ?? 'id'] })
+          ctx.emit('update', false)
+          confirmLoading.value = false
+        }, 1000)
+      }
+    }
+    const onCancel = () => {
+      setTimeout(() => {
+        ctx.emit('update', false)
+      }, 500)
+    }
     return {
       selectedKeys,
       selectedRows,
@@ -93,22 +109,15 @@ export default {
       formModel,
       searchModel,
       refresh,
+      confirmLoading,
       parseFormModel,
       submitForm,
       resetForm,
+      onOk,
+      onCancel
     }
   },
   methods: {
-    onCancel() {
-      this.$emit('update', false)
-    },
-    onOk() {
-      const row = this.selectedRows[0]
-      if (row) {
-        this.$emit('selected', { value: row.id, text: row[this.tableDef.text ?? 'id'] })
-        this.$emit('update', false)
-      }
-    }
   }
 }
 </script>
