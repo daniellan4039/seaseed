@@ -11,7 +11,7 @@ export const api = {
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,
-    removeUrl: `${prefix}${module}/remove`,
+    removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/get`
 }
 

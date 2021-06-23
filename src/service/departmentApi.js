@@ -8,7 +8,7 @@ export const api = {
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/listCompanyDepartment`,
-    removeUrl: `${prefix}${module}/remove`,
+    removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/get`
 }
 
@@ -59,7 +59,7 @@ export function listCompaniesByUser() {
 export function remove(data) {
     return $.post(
         api.removeUrl,
-        data
+        [data]
     )
 }
 

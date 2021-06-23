@@ -147,9 +147,17 @@ export default {
                 title: '提示',
                 content: '你确定要将这条记录从系统中删除吗？',
                 onOk() {
-                    remove({id: record.id}).then(res => {
+                    remove(record.id).then(res => {
                         // eslint-disable-next-line no-unused-vars
                         const {isSuccess, data} = res
+                        if (isSuccess) {
+                            searchPage()
+                        } else {
+                            Modal.warn({
+                                title: '提示',
+                                content: '系统删除功能正在维护中，请稍后再试试'
+                            })
+                        }
                     })
                 },
                 onCancel() {
@@ -272,6 +280,7 @@ export default {
                 }
             }
         )
+        const { add } = self.tableDef?.defaultActions ?? { add: false }
         const opsBar = self.opsBarVisible ?
             <cus-table-ops-bar
                 tableKey={self.tableDef.key}
@@ -279,6 +288,7 @@ export default {
                 columns={self.tableDef?.columns}
                 onSettingChange={self.onSettingChange}
                 v-model={[self.tableSize, 'density']}
+                enableAdd={add}
             /> :
             null
         return h(

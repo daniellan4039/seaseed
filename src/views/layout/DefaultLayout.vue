@@ -34,10 +34,8 @@
               <component :is="Component"></component>
             </keep-alive>
           </router-view>
-          <!--          <router-view></router-view>-->
         </a-config-provider>
       </a-layout-content>
-      <!--      <a-layout-footer>Footer</a-layout-footer>-->
     </a-layout>
   </a-layout>
 </template>
@@ -86,6 +84,12 @@ export default {
                 type: 'menuItem',
                 key: 'certification',
                 path: '/certification'
+              },
+              {
+                title: '职工职称',
+                type: 'menuItem',
+                key: 'professional',
+                path: '/professional'
               },
             ]
           }

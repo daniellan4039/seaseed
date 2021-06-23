@@ -8,7 +8,7 @@ export const api = {
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,
-    removeUrl: `${prefix}${module}/remove`,
+    removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/get`,
     findByCode: `${prefix}${module}/findByCodes`,
 }
@@ -44,7 +44,7 @@ export function list(data) {
 export function remove(data) {
     return $.post(
         api.removeUrl,
-        data
+        [data]
     )
 }
 

@@ -13,12 +13,11 @@ export default {
     components: {
         PlusOutlined, VerticalAlignTopOutlined, VerticalAlignBottomOutlined
     },
-    props: ['columns', 'density', 'tableKey'],
+    props: ['columns', 'density', 'tableKey', 'enableAdd'],
     emits: ['add', 'settingChange', 'update:density'],
     setup(props, ctx) {
         const refColumns = reactive(props.columns)
         const refDensity = ref(props.density)
-        // eslint-disable-next-line no-unused-vars
         const refTableKey = toRef(props, 'tableKey')
         const settingState = reactive({
             visible: false,
@@ -159,11 +158,13 @@ export default {
             </a-menu>
         }
 
+        const add = self.enableAdd && <a-button type='primary' onClick={self.onAddBtnClick}>
+            <PlusOutlined/>
+            新增
+        </a-button> || !self.enableAdd && <span></span>
+
         return <div className='table-ops-bar-container'>
-            <a-button type='primary' onClick={self.onAddBtnClick}>
-                <PlusOutlined/>
-                新增
-            </a-button>
+            {add}
             <div class='table-setting-block'>
                 <a-dropdown v-slots={shrinkMenuSlot} trigger={['click']}>
                     <a-tooltip v-slots={shrinkTitle}>
