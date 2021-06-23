@@ -4,6 +4,25 @@ import * as dictionaryApi from './dictionaryApi'
 import * as userApi from './userApi'
 import * as departmentApi from './departmentApi'
 import * as certificationApi from './certificationApi'
+import * as professionalApi from './professionalApi'
+import * as familyApi from './familyApi'
+import * as educationApi from './educationApi'
+import * as resumeApi from './resumeApi'
+import * as archiveApi from './archiveApi'
+import * as soldierApi from './soldierApi'
+import * as thesisApi from './thesisApi'
+import * as researchApi from './researchApi'
+import * as trainApi from './trainApi'
+import * as rewardApi from './rewardApi'
+import * as contractApi from './contractApi'
+import * as languageApi from './languageApi'
+import * as patentApi from './patentApi'
+import * as positionApi from './positionApi'
+import * as archiveRoomApi from './archiveRoomApi'
+import * as archiveBorrowApi from './archiveBorrowApi'
+import * as archiveTransferApi from './archiveTransferApi'
+
+
 
 const $ = axios.create({
     baseURL: '/api',
@@ -34,5 +53,22 @@ export {
     dictionaryApi,
     userApi,
     departmentApi,
-    certificationApi
+    certificationApi,
+    professionalApi,
+    familyApi,
+    educationApi,
+    resumeApi,
+    archiveApi,
+    soldierApi,
+    thesisApi,
+    researchApi,
+    trainApi,
+    rewardApi,
+    contractApi,
+    languageApi,
+    patentApi,
+    positionApi,
+    archiveRoomApi,
+    archiveBorrowApi,
+    archiveTransferApi
 }

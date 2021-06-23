@@ -8,6 +8,9 @@ import LoginForm from "@/views/user/LoginForm";
 import CertificationTable from '@/views/certification/certificationTable'
 import CertificationDetail from '@/views/certification/certificationDetail'
 import CertificationForm from '@/views/certification/certificationForm'
+import ProfessionalTable from "@/views/professional/ProfessionalTable";
+import ProfessionalForm from "@/views/professional/ProfessionalForm";
+import ProfessionalDetail from "@/views/professional/ProfessionalDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -78,6 +81,33 @@ const routes = [
                 key: 'certification_detail'
               }
             },
+            {
+              path: '/professional',
+              name: 'Professional',
+              component: ProfessionalTable,
+              meta: {
+                title: '职工职称',
+                key: 'professional'
+              }
+            },
+            {
+              path: '/professional/form',
+              name: 'ProfessionalForm',
+              component: ProfessionalForm,
+              meta: {
+                title: '职工职称表单',
+                key: 'professional_form'
+              }
+            },
+            {
+              path: '/professional/detail',
+              name: 'ProfessionalDetail',
+              component: ProfessionalDetail,
+              meta: {
+                title: '职称详情',
+                key: 'professional_detail'
+              }
+            }
         ]
     },
     {
