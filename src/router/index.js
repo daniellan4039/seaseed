@@ -11,6 +11,9 @@ import CertificationForm from '@/views/certification/certificationForm'
 import ProfessionalTable from "@/views/professional/ProfessionalTable";
 import ProfessionalForm from "@/views/professional/ProfessionalForm";
 import ProfessionalDetail from "@/views/professional/ProfessionalDetail";
+import Family from "@/views/family/Family";
+import FamilyForm from "@/views/family/FamilyForm";
+import FamilyDetail from "@/views/family/FamilyDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -112,6 +115,35 @@ export const routes = [
                 meta: {
                     title: '职称详情',
                     key: 'professional_detail',
+                    visible: false
+                }
+            },
+            {
+                path: '/family',
+                name: 'Family',
+                component: Family,
+                meta: {
+                    title: '职工家人',
+                    key: 'family'
+                }
+            },
+            {
+                path: '/family/form',
+                name: 'FamilyForm',
+                component: FamilyForm,
+                meta: {
+                    title: '职工家人',
+                    key: 'family_form',
+                    visible: false
+                }
+            },
+            {
+                path: '/family/detail',
+                name: 'FamilyDetail',
+                component: FamilyDetail,
+                meta: {
+                    title: '职工家人详情',
+                    key: 'family_detail',
                     visible: false
                 }
             }
