@@ -20,6 +20,9 @@ import ResumeDetail from "@/views/resume/ResumeDetail";
 import Archive from "@/views/archive/Archive";
 import ArchiveForm from "@/views/archive/ArchiveForm";
 import ArchiveDetail from "@/views/archive/ArchiveDetail";
+import Reward from "@/views/reward/Reward";
+import RewardForm from "@/views/reward/RewardForm";
+import RewardDetail from "@/views/reward/RewardDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -210,7 +213,36 @@ export const routes = [
                     key: 'archive_detail',
                     visible: false
                 }
-            }
+            },
+            {
+                path: '/reward',
+                name: 'Reward',
+                component: Reward,
+                meta: {
+                    title: '奖惩信息',
+                    key: 'reward'
+                }
+            },
+            {
+                path: '/reward/form',
+                name: 'RewardForm',
+                component: RewardForm,
+                meta: {
+                    title: '奖惩信息表单',
+                    key: 'reward_form',
+                    visible: false
+                }
+            },
+            {
+                path: '/reward/detail',
+                name: 'RewardDetail',
+                component: RewardDetail,
+                meta: {
+                    title: '奖惩详情',
+                    key: 'reward_detail',
+                    visible: false
+                }
+            },
         ]
     },
     {

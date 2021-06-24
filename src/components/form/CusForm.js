@@ -19,7 +19,6 @@ export default {
         const formRef = ref()
         const defaultModel = ref({})
         const formKeys = []
-        //set defaultModel from vuex
         if (props.formDef.store) {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
@@ -191,7 +190,6 @@ export default {
                 }
             }
         )
-
         return h(
             resolveComponent('a-form'),
             {
