@@ -17,6 +17,9 @@ import FamilyDetail from "@/views/family/FamilyDetail";
 import Resume from "@/views/resume/Resume";
 import ResumeForm from "@/views/resume/ResumeForm";
 import ResumeDetail from "@/views/resume/ResumeDetail";
+import Archive from "@/views/archive/Archive";
+import ArchiveForm from "@/views/archive/ArchiveForm";
+import ArchiveDetail from "@/views/archive/ArchiveDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -179,6 +182,35 @@ export const routes = [
                     visible: false
                 }
             },
+            {
+                path: '/archive',
+                name: 'Archive',
+                component: Archive,
+                meta: {
+                    title: '职工档案',
+                    key: 'archive'
+                }
+            },
+            {
+                path: '/archive/form',
+                name: 'ArchiveForm',
+                component: ArchiveForm,
+                meta: {
+                    title: '职工档案表单',
+                    key: 'archive_form',
+                    visible: false
+                }
+            },
+            {
+                path: '/archive/detail',
+                name: 'ArchiveDetail',
+                component: ArchiveDetail,
+                meta: {
+                    title: '职工档案详情',
+                    key: 'archive_detail',
+                    visible: false
+                }
+            }
         ]
     },
     {
