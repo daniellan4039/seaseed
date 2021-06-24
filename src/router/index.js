@@ -17,14 +17,15 @@ import ProfessionalDetail from "@/views/professional/ProfessionalDetail";
  *
  * @type {[{path: string, component: (function(): Promise<*>), name: string}]}
  */
-const routes = [
+export const routes = [
     {
         path: '/',
         name: 'Home',
         component: DefaultLayout,
         meta: {
             title: '首页',
-            key: 'home'
+            key: 'home',
+            type: 'subMenu'
         },
         children: [
             {
@@ -42,7 +43,8 @@ const routes = [
                 component: EmployeeForm,
                 meta: {
                     title: '职工信息表单',
-                    key: 'employee_form'
+                    key: 'employee_form',
+                    visible: false
                 }
             },
             {
@@ -51,62 +53,67 @@ const routes = [
                 component: EmployeeDetail,
                 meta: {
                     title: '职工详情',
-                    key: 'employee_detail'
+                    key: 'employee_detail',
+                    visible: false
                 }
             },
             {
-              path: '/certification',
-              name: 'Certification',
-              component: CertificationTable,
-              meta: {
-                  title: '职工证书',
-                  key: 'certification'
-              }
+                path: '/certification',
+                name: 'Certification',
+                component: CertificationTable,
+                meta: {
+                    title: '职工证书',
+                    key: 'certification'
+                }
             },
             {
-              path: '/certification/form',
-              name: 'CertificationForm',
-              component: CertificationForm,
-              meta: {
-                title: '职工证书表单',
-                key: 'certification_form'
-              }
+                path: '/certification/form',
+                name: 'CertificationForm',
+                component: CertificationForm,
+                meta: {
+                    title: '职工证书表单',
+                    key: 'certification_form',
+                    visible: false
+                }
             },
             {
-              path: '/certification/detail',
-              name: 'CertificationDetail',
-              component: CertificationDetail,
-              meta: {
-                title: '职工证书详情',
-                key: 'certification_detail'
-              }
+                path: '/certification/detail',
+                name: 'CertificationDetail',
+                component: CertificationDetail,
+                meta: {
+                    title: '职工证书详情',
+                    key: 'certification_detail',
+                    visible: false
+                }
             },
             {
-              path: '/professional',
-              name: 'Professional',
-              component: ProfessionalTable,
-              meta: {
-                title: '职工职称',
-                key: 'professional'
-              }
+                path: '/professional',
+                name: 'Professional',
+                component: ProfessionalTable,
+                meta: {
+                    title: '职工职称',
+                    key: 'professional'
+                }
             },
             {
-              path: '/professional/form',
-              name: 'ProfessionalForm',
-              component: ProfessionalForm,
-              meta: {
-                title: '职工职称表单',
-                key: 'professional_form'
-              }
+                path: '/professional/form',
+                name: 'ProfessionalForm',
+                component: ProfessionalForm,
+                meta: {
+                    title: '职工职称表单',
+                    key: 'professional_form',
+                    visible: false
+                }
             },
             {
-              path: '/professional/detail',
-              name: 'ProfessionalDetail',
-              component: ProfessionalDetail,
-              meta: {
-                title: '职称详情',
-                key: 'professional_detail'
-              }
+                path: '/professional/detail',
+                name: 'ProfessionalDetail',
+                component: ProfessionalDetail,
+                meta: {
+                    title: '职称详情',
+                    key: 'professional_detail',
+                    visible: false
+                }
             }
         ]
     },
@@ -116,16 +123,19 @@ const routes = [
         component: DefaultLayout,
         meta: {
             title: '开发系统',
-            key: 'dev'
+            key: 'dev',
+            visible: false,
+            type: 'subMenu'
         },
         children: [
             {
-                path: '/login',
+                path: '/dev/login',
                 name: 'Login',
                 component: LoginForm,
                 meta: {
                     title: '登陆表单',
-                    key: 'dev_login'
+                    key: 'dev_login',
+                    visible: false
                 }
             }
         ]

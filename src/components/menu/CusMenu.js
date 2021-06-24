@@ -112,6 +112,9 @@ export default {
             let subMenuTree
             if (menuItemsTree instanceof Array) {
                 subMenuTree = menuItemsTree.map(i => {
+                    if (!i) {
+                        return undefined
+                    }
                     if (i.type === 'menuItem') {
                         return h(resolveComponent('a-menu-item'), {key: i?.key, title: i?.title}, {
                             default: () => {
@@ -168,25 +171,24 @@ export default {
         },
         findParentMenuItem(parentItem, itemKey, subItems) {
             return subItems.find(i => {
-                if (i.type === 'menuItem' && i.key === itemKey) {
+                if (i?.type === 'menuItem' && i?.key === itemKey) {
                     return parentItem
-                } else if (i.type === 'subMenu') {
+                } else if (i?.type === 'subMenu') {
                     return this.findParentMenuItem(i, itemKey, i.children)
                 }
             })
         },
     },
     render() {
-        const {setSubMenu, onMenuOpenChange, menuOpenKey, onSelect, collapsed} = this
-        const subMenus = setSubMenu(this.dataSource.items)
+        const subMenus = this.setSubMenu(this.dataSource.items)
         return h(resolveComponent('a-menu'),
             {
                 mode: 'inline',
                 theme: 'dark',
-                onOpenChange: onMenuOpenChange,
-                openKeys: menuOpenKey,
-                onSelect: onSelect,
-                inlineCollapsed: collapsed,
+                onOpenChange: this.onMenuOpenChange,
+                openKeys: this.menuOpenKey,
+                onSelect: this.onSelect,
+                inlineCollapsed: this.collapsed,
                 selectedKeys: this.selectedKeys
             },
             {

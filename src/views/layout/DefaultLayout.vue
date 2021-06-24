@@ -48,6 +48,8 @@ import {reactive, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
+import {routes} from '@/router/index'
+import {generateMenu} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -58,43 +60,15 @@ export default {
     CusMenu, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
     CusTabs
   },
+  setup () {
+    const menuItems = generateMenu(routes)
+    const menu = { items: menuItems }
+    return {
+      menu
+    }
+  },
   data() {
     return {
-      menu: {
-        items: [
-          {
-            title: '首页',
-            type: 'menuItem',
-            key: 'home',
-            path: '/'
-          },
-          {
-            title: '职工中心',
-            type: 'subMenu',
-            key: 'nav03',
-            children: [
-              {
-                title: '职工信息',
-                type: 'menuItem',
-                key: 'employee',
-                path: '/employee'
-              },
-              {
-                title: '职工证书',
-                type: 'menuItem',
-                key: 'certification',
-                path: '/certification'
-              },
-              {
-                title: '职工职称',
-                type: 'menuItem',
-                key: 'professional',
-                path: '/professional'
-              },
-            ]
-          }
-        ]
-      },
       collapsed: false,
       openTabs: [],
       menuSelectedKeys: null,

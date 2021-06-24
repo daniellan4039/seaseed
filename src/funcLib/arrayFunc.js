@@ -5,10 +5,10 @@ export function exchangeEleFromArray(array, startIndex, direction) {
 export function retrieveSubItemByKey(array, keyName, keyValue){
     let meetResult = null
     array.forEach(a => {
-        if (a[keyName] === keyValue) {
+        if (keyValue === a?.[keyName]) {
             meetResult = a
         } else {
-            const result = a.children && retrieveSubItemByKey(a.children, keyName, keyValue)
+            const result = a?.children && retrieveSubItemByKey(a.children, keyName, keyValue)
             if (result) {
                 meetResult = result
             }
