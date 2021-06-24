@@ -43,7 +43,6 @@ export default {
         const loadDefaultModel = (formModel, defaultModel) => {
             return _.assign(formModel, defaultModel)
         }
-
         const parseFormRules = (formItems) => {
             let rules = {}
             if (formItems instanceof Array) {
@@ -53,12 +52,10 @@ export default {
             }
             return rules
         }
-
         const getFormModel = () => {
             const parsedModel = parseFormModel(props.formDef?.formItems)
             return loadDefaultModel(parsedModel ?? {}, defaultModel.value ?? {})
         }
-
         const getRules = () => {
             return parseFormRules(props.formDef?.formItems)
         }
@@ -77,7 +74,6 @@ export default {
                 })
             }
         }
-
         const submitForm = () => {
             formRef.value.validate().then(() => {
                 let pickedModel = _.pick(formModel, formKeys)
@@ -93,7 +89,6 @@ export default {
                 })
             })
         }
-
         const resetForm = () => {
             formRef.value.resetFields();
         }
@@ -116,12 +111,12 @@ export default {
         }
     },
     render() {
-        // const {formItems} = this.formDef
-        // const {formModel, rules, formDef, submitForm, resetForm} = this
+        const submitSlot = this.$slots['submit']
         const formItemsDOM = this.formDef.formItems.map(i => {
             const scope = i.meta?.scope?.includes('form')
             const dependency = i.dependency
             let continueByDp = true
+            const slot = this.$slots[i.key]
             dependency && dependency.forEach(d => {
                 if (d.condition === 'include') {
                     continueByDp = continueByDp && d.value.includes(this.formModel[d.key])
@@ -139,14 +134,18 @@ export default {
                     },
                     {
                         default: () => {
-                            return h(
-                                CusFormInput,
-                                {
-                                    item: i,
-                                    'modelValue': this.formModel[i.key],
-                                    'onUpdate:modelValue': val => this.formModel[i.key] = val
-                                }
-                            )
+                            if (slot) {
+                                return slot(i)
+                            } else {
+                                return h(
+                                    CusFormInput,
+                                    {
+                                        item: i,
+                                        'modelValue': this.formModel[i.key],
+                                        'onUpdate:modelValue': val => this.formModel[i.key] = val
+                                    }
+                                )
+                            }
                         }
                     }
                 )
@@ -163,28 +162,32 @@ export default {
             },
             {
                 default: () => {
-                    return [
-                        h(
-                            resolveComponent('a-button'),
-                            {
-                                type: 'primary',
-                                onClick: this.submitForm
-                            },
-                            {
-                                default: () => '保存'
-                            }
-                        ),
-                        h(
-                            resolveComponent('a-button'),
-                            {
-                                style: 'margin-left: 10px;',
-                                onClick: this.resetForm
-                            },
-                            {
-                                default: () => '重置'
-                            }
-                        )
-                    ]
+                    if (submitSlot) {
+                        return submitSlot(this.formRef)
+                    } else {
+                        return [
+                            h(
+                                resolveComponent('a-button'),
+                                {
+                                    type: 'primary',
+                                    onClick: this.submitForm
+                                },
+                                {
+                                    default: () => '保存'
+                                }
+                            ),
+                            h(
+                                resolveComponent('a-button'),
+                                {
+                                    style: 'margin-left: 10px;',
+                                    onClick: this.resetForm
+                                },
+                                {
+                                    default: () => '重置'
+                                }
+                            )
+                        ]
+                    }
                 }
             }
         )
