@@ -14,6 +14,9 @@ import ProfessionalDetail from "@/views/professional/ProfessionalDetail";
 import Family from "@/views/family/Family";
 import FamilyForm from "@/views/family/FamilyForm";
 import FamilyDetail from "@/views/family/FamilyDetail";
+import Resume from "@/views/resume/Resume";
+import ResumeForm from "@/views/resume/ResumeForm";
+import ResumeDetail from "@/views/resume/ResumeDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -146,7 +149,36 @@ export const routes = [
                     key: 'family_detail',
                     visible: false
                 }
-            }
+            },
+            {
+                path: '/resume',
+                name: 'Resume',
+                component: Resume,
+                meta: {
+                    title: '职工履历',
+                    key: 'resume'
+                }
+            },
+            {
+                path: '/resume/form',
+                name: 'ResumeForm',
+                component: ResumeForm,
+                meta: {
+                    title: '职工履历',
+                    key: 'resume_form',
+                    visible: false
+                }
+            },
+            {
+                path: '/resume/detail',
+                name: 'ResumeDetail',
+                component: ResumeDetail,
+                meta: {
+                    title: '职工履历',
+                    key: 'resume_detail',
+                    visible: false
+                }
+            },
         ]
     },
     {
