@@ -98,7 +98,11 @@ export default {
                 _.assign(alterRecord, i)
                 if (echoMap) {
                     for (const echoMapKey in echoMap) {
-                        alterRecord[echoMapKey] = echoMap[echoMapKey]
+                        if (echoMapKey === 'employeeId') {
+                            alterRecord[echoMapKey] = echoMap[echoMapKey].realName
+                        } else {
+                            alterRecord[echoMapKey] = echoMap[echoMapKey]
+                        }
                     }
                 }
                 alterRecord.key = i.id

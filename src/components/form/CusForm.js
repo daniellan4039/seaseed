@@ -3,7 +3,6 @@ import _ from 'lodash'
 import {Modal} from "ant-design-vue";
 import CusFormInput from "@/components/form/CusFormInput";
 import store from '@/store/index'
-// eslint-disable-next-line no-unused-vars
 import {validateWithFullPath} from "@/service/validatorApi";
 
 export default {
