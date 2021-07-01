@@ -107,7 +107,8 @@ export default {
                     CusDatePicker,
                     {
                         modelValue: modelValue,
-                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val)
+                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val),
+                        style: { width: '100%'}
                     }
                 )
                 break
@@ -116,7 +117,8 @@ export default {
                     CusDateRange,
                     {
                         modelValue: modelValue,
-                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val)
+                        'onUpdate:modelValue': val => this.$emit('update:modelValue', val),
+                        style: { width: '100%'}
                     }
                 )
                 break

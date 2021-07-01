@@ -3,6 +3,8 @@ import _ from 'lodash'
 import {Modal} from "ant-design-vue";
 import CusFormInput from "@/components/form/CusFormInput";
 import store from '@/store/index'
+// eslint-disable-next-line no-unused-vars
+import {validateWithFullPath} from "@/service/validatorApi";
 
 export default {
     name: 'CusForm',
@@ -19,6 +21,8 @@ export default {
         const formRef = ref()
         const defaultModel = ref({})
         const formKeys = []
+        const rules = ref({})
+
         if (props.formDef.store) {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
@@ -55,8 +59,11 @@ export default {
             const parsedModel = parseFormModel(props.formDef?.formItems)
             return loadDefaultModel(parsedModel ?? {}, defaultModel.value ?? {})
         }
-        const getRules = () => {
-            return parseFormRules(props.formDef?.formItems)
+        const getRules = async () => {
+            const backRules = await validateWithFullPath(props.formDef.api.saveUrl)
+            rules.value = _.assignInWith(parseFormRules(props.formDef?.formItems), backRules, (obj, src) => {
+                return [...obj ?? [], ...src]
+            })
         }
 
         const handleResult = (res) => {
@@ -93,8 +100,7 @@ export default {
         }
 
         let formModel = reactive(getFormModel())
-        const rules = reactive(getRules())
-
+        getRules()
         return {
             formRef,
             formModel,

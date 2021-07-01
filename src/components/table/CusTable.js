@@ -149,15 +149,20 @@ export default {
                 onOk() {
                     remove(record.id).then(res => {
                         // eslint-disable-next-line no-unused-vars
-                        const {isSuccess, data} = res
+                        const {isSuccess, data, msg} = res
                         if (isSuccess) {
                             searchPage()
                         } else {
                             Modal.warn({
                                 title: '提示',
-                                content: '系统删除功能正在维护中，请稍后再试试'
+                                content: msg
                             })
                         }
+                    }).catch(() => {
+                        Modal.warn({
+                            title: '提示',
+                            content: '系统删除功能正在维护中，请稍后再试试'
+                        })
                     })
                 },
                 onCancel() {
@@ -239,7 +244,6 @@ export default {
                 tableScroll.y += 8
             }
         }
-
         const table = h(
             resolveComponent('a-table'),
             {

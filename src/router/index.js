@@ -35,7 +35,7 @@ export const routes = [
         name: 'Home',
         component: DefaultLayout,
         meta: {
-            title: '首页',
+            title: '职工信息查询',
             key: 'home',
             type: 'subMenu'
         },

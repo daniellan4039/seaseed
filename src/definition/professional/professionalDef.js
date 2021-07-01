@@ -227,6 +227,7 @@ export const tableDef = {
 export const formDef = {
     key: 'professionalForm',
     formType: 'normal',
+    api: professionalApi.api,
     actions: {
         save: professionalApi.save,
         update: professionalApi.update,

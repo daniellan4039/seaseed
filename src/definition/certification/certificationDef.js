@@ -111,6 +111,7 @@ export const tableDef = {
 export const formDef = {
     key: 'certificationForm',
     formType: 'normal',
+    api: certificationApi.api,
     actions: {
         save: certificationApi.save,
         update: certificationApi.update,

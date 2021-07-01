@@ -3,6 +3,7 @@ import { userApi } from "@/service";
 export const formDef = {
     key: 'loginForm',
     formType: 'normal',
+    api: userApi.api,
     actions: {
         save: userApi.login,
         update: userApi.login

@@ -190,7 +190,8 @@ export const tableDef = {
         {
             title: '管理单位',
             dataIndex: 'manageCompanyId',
-            width: 150,
+            width: 200,
+            ellipsis:true,
             scopedSlots: {customRender: 'manageCompanyId'}
         },
         {
@@ -238,7 +239,7 @@ export const tableDef = {
         {
             title: '创建时间',
             dataIndex: 'createTime',
-            width: 160,
+            width: 180,
             scopedSlots: {customRender: 'createTime'}
         }
     ]
@@ -247,6 +248,7 @@ export const tableDef = {
 export const formDef = {
     key: '',
     formType: 'normal',
+    api: archiveApi.api,
     actions: {
         save: archiveApi.save,
         update: archiveApi.update,

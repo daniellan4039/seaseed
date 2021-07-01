@@ -141,7 +141,7 @@ export const tableDef = {
             },
             {
                 key: 'workUnit',
-                label: '家人所在单位',
+                label: '所在单位',
                 placeholder: '请输入家人所在单位',
                 inputType: 'input:string',
                 rules: [],
@@ -220,6 +220,7 @@ export const tableDef = {
             title: '工作单位',
             dataIndex: 'workUnit',
             width: 140,
+            ellipsis: true,
             scopedSlots: {customRender: 'workUnit'}
         },
         {
@@ -231,7 +232,7 @@ export const tableDef = {
         {
             title: '创建时间',
             dataIndex: 'createTime',
-            width: 120,
+            width: 160,
             scopedSlots: {customRender: 'createTime'}
         }
     ]
@@ -239,6 +240,7 @@ export const tableDef = {
 
 export const formDef = {
     key: '',
+    api: familyApi.api,
     formType: 'normal',
     actions: {
         save: familyApi.save,

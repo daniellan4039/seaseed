@@ -24,7 +24,7 @@ export const tableDef = {
     store: {
         module: 'employeeStore',
         key: 'reward',
-        set: ''
+        set: 'setReward'
     },
     config: {
         bordered: true,
@@ -124,7 +124,7 @@ export const tableDef = {
                     submit: true,
                     scope: ['form', 'detail'],
                     group: '基本信息',
-                    code: 'apType'
+                    code: 'ap_type'
                 }
             },
             {
@@ -196,6 +196,7 @@ export const tableDef = {
 export const formDef = {
     key: 'rewardForm',
     formType: 'normal',
+    api: rewardApi.api,
     actions: {
         save: rewardApi.save,
         update: rewardApi.update,

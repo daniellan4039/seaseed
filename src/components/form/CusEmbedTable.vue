@@ -88,18 +88,13 @@ export default {
     const onOk = () => {
       const row = selectedRows.value[0]
       if (row) {
-        confirmLoading.value = true
-        setTimeout(() => {
-          ctx.emit('selected', { value: row.id, text: row[props.tableDef.text ?? 'id'] })
-          ctx.emit('update', false)
-          confirmLoading.value = false
-        }, 1000)
+        ctx.emit('selected', { value: row.id, text: row[props.tableDef.text ?? 'id'] })
+        ctx.emit('update', false)
+        confirmLoading.value = false
       }
     }
     const onCancel = () => {
-      setTimeout(() => {
-        ctx.emit('update', false)
-      }, 500)
+      ctx.emit('update', false)
     }
     return {
       selectedKeys,

@@ -138,7 +138,8 @@ export const tableDef = {
         {
             title: '工作单位',
             dataIndex: 'workUnit',
-            width: 150,
+            width: 220,
+            ellipsis: true,
             scopedSlots: {customRender: 'workUnit'}
         },
         {
@@ -163,6 +164,7 @@ export const tableDef = {
             title: '职务',
             dataIndex: 'duty',
             width: 120,
+            ellipsis: true,
             scopedSlots: {customRender: 'duty'}
         },
         {
@@ -177,6 +179,7 @@ export const tableDef = {
 export const formDef = {
     key: '',
     formType: 'normal',
+    api: resumeApi.api,
     actions: {
         save: resumeApi.save,
         update: resumeApi.update,

@@ -88,7 +88,8 @@ export const tableDef = {
             title: '所属组织',
             dataIndex: 'companyId',
             slots: {customRender: 'companyId'},
-            width: 280
+            width: 250,
+            ellipsis: true
         },
         {
             title: '所属部门',
@@ -106,6 +107,7 @@ export const tableDef = {
             title: '联系电话',
             dataIndex: 'telNum',
             width: 120,
+            ellipsis: true,
             slots: {customRender: 'telNum'}
         },
         {
@@ -126,6 +128,7 @@ export const tableDef = {
 export const formDef = {
     key: 'employeeForm',
     formType: 'normal',
+    api: employeeApi.api,
     actions: {
         save: employeeApi.save,
         update: employeeApi.update,
