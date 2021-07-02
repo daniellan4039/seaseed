@@ -22,6 +22,7 @@ import * as archiveRoomApi from './archiveRoomApi'
 import * as archiveBorrowApi from './archiveBorrowApi'
 import * as archiveTransferApi from './archiveTransferApi'
 import * as companyApi from './companyApi'
+import * as anyoneApi from './anyoneApi'
 
 const $ = axios.create({
     baseURL: '/api',
@@ -70,5 +71,6 @@ export {
     archiveRoomApi,
     archiveBorrowApi,
     archiveTransferApi,
-    companyApi
+    companyApi,
+    anyoneApi
 }

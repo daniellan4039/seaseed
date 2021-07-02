@@ -1,3 +1,5 @@
+import {getRouter} from "@/service/anyoneApi";
+
 export function generateMenu(routes) {
     return routes.map((r, k) => {
         if (false === r.meta.visible ?? false) {
@@ -13,4 +15,11 @@ export function generateMenu(routes) {
         children.length > 0 && (menu.children = children)
         return menu
     })
+}
+
+export async function getFromBasePlatform() {
+    const {isSuccess, data, msg} = await getRouter()
+    if (isSuccess) {
+        console.log(data, msg)
+    }
 }

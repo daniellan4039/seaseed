@@ -49,7 +49,7 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 import {routes} from '@/router/index'
-import {generateMenu} from "@/funcLib/menuParse";
+import {generateMenu, getFromBasePlatform} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -62,9 +62,12 @@ export default {
   },
   setup () {
     const menuItems = generateMenu(routes)
+    const routers = getFromBasePlatform()
+    console.log(routers)
     const menu = { items: menuItems }
     return {
-      menu
+      menu,
+      routers
     }
   },
   data() {
@@ -102,12 +105,13 @@ export default {
     currentPath(nv) {
       const index = this.openTabs.findIndex(i => i.key === nv.meta.key)
       if (index < 0) {
-        this.openTabs.push({
-          key: nv.meta.key,
-          title: nv.meta.title,
-          path: nv.path
-        })
-
+        if (nv.meta.key && nv.meta.title) {
+          this.openTabs.push({
+            key: nv.meta.key,
+            title: nv.meta.title,
+            path: nv.path
+          })
+        }
       }
       this.menuSelectedKeys = [nv.meta.key]
     }
