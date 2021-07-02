@@ -87,8 +87,10 @@ export default {
 
     const onOk = () => {
       const row = selectedRows.value[0]
-      ctx.emit('selected', { value: row?.id, text: row?.[props.tableDef.text ?? 'id'] })
-      ctx.emit('update:visible', false)
+      if (row) {
+        ctx.emit('selected', { value: row?.id, text: row?.[props.tableDef.text ?? 'id'] })
+        ctx.emit('update:visible', false)
+      }
       confirmLoading.value = false
     }
     const onCancel = () => {

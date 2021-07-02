@@ -6,27 +6,36 @@ export default {
     props: ['formDef'],
     emits: [],
     setup(props) {
-        //get model from store
         const defaultModel = ref({})
+        const pageMap = ref({})
+
         if (props.formDef.store) {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
             module && key && (defaultModel.value = store.state[module][key])
             const echoMap = defaultModel.value?.echoMap
             for (let echoMapKey in echoMap) {
-                defaultModel.value[echoMapKey] = echoMap[echoMapKey]
+                if(echoMapKey === 'employeeId') {
+                    defaultModel.value[echoMapKey] = echoMap[echoMapKey].realName
+                } else {
+                    defaultModel.value[echoMapKey] = echoMap[echoMapKey]
+                }
             }
         }
-        const pageMap = ref({})
-        props.formDef.formItems?.map(fi => {
+
+        props.formDef.formItems?.forEach(fi => {
             if (fi.meta?.scope.includes('detail')) {
                 const groupName = fi.meta?.group ?? '基本信息'
                 if (groupName) {
                     const length = pageMap.value[groupName]?.length
                     !length && (pageMap.value[groupName] = [])
+                    let label = defaultModel?.value?.[fi.key] ?? '未知'
+                    if (typeof label === 'boolean') {
+                        label  = label ? '是' : '否'
+                    }
                     pageMap.value[groupName].push({
                         label: fi.label,
-                        value: defaultModel?.value?.[fi.key] ?? '未知'
+                        value: label
                     })
                 }
             }

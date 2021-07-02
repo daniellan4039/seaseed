@@ -46,8 +46,6 @@ export default {
       }
     }
 
-
-
     const search = (arg) => {
       const parameter = {}
       parameter[keyword] = arg
@@ -73,7 +71,7 @@ export default {
 
     const onMoreSelect = (val) => {
       options.value.push(val)
-      modelValue.value = val
+      modelValue.value = val.value
       ctx.emit('change', val.value)
     }
 
