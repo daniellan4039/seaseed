@@ -14,22 +14,22 @@ export default {
             type: Object,
             required: true
         },
-        modelValue: {}
+        modelValue: {},
+        text: {}
     },
     components: {
         CusSelectCode
     },
     emits: ['change', 'update:modelValue'],
     render() {
-        const {item, modelValue} = this
         let input
-        switch (item.inputType) {
+        switch (this.item.inputType) {
             case 'input:string':
                 input = h(
                     resolveComponent('a-input'),
                     {
-                        placeholder: item.placeholder,
-                        value: modelValue,
+                        placeholder: this.item.placeholder,
+                        value: this.modelValue,
                         'onChange': nv => this.$emit('update:modelValue', nv.target.value)
                     }
                 )
@@ -38,8 +38,8 @@ export default {
                 input = h(
                     resolveComponent('a-input-password'),
                     {
-                        placeholder: item.placeholder,
-                        value: modelValue,
+                        placeholder: this.item.placeholder,
+                        value: this.modelValue,
                         'onChange': $event => this.$emit('update:modelValue', $event.target.value)
                     }
                 )
@@ -48,13 +48,13 @@ export default {
                 input = h(
                     resolveComponent('a-select'),
                     {
-                        placeholder: item.placeholder,
-                        value: modelValue,
+                        placeholder: this.item.placeholder,
+                        value: this.modelValue,
                         'onChange': nv => this.$emit('update:modelValue', nv)
                     },
                     {
                         default: () => {
-                            return item?.meta.options?.map(o => {
+                            return this.item?.meta.options?.map(o => {
                                 return h(
                                     // <a-select-option>{o.text}</a-select-option>,
                                     resolveComponent('a-select-option'),
@@ -74,8 +74,8 @@ export default {
                 input = h(
                     CusSelectCode,
                     {
-                        def: item,
-                        value: modelValue,
+                        def: this.item,
+                        value: this.modelValue,
                         'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )
@@ -84,8 +84,9 @@ export default {
                 input = h(
                     CusSelectSearch,
                     {
-                        def: item,
-                        value: modelValue,
+                        def: this.item,
+                        value: this.modelValue,
+                        text: this.text,
                         'onChange': val => {
                             this.$emit('update:modelValue', val)
                         }
@@ -96,8 +97,8 @@ export default {
                 input = h(
                     CusSelectList,
                     {
-                        def: item,
-                        value: modelValue,
+                        def: this.item,
+                        value: this.modelValue,
                         'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )
@@ -106,7 +107,7 @@ export default {
                 input = h(
                     CusDatePicker,
                     {
-                        modelValue: modelValue,
+                        modelValue: this.modelValue,
                         'onUpdate:modelValue': val => this.$emit('update:modelValue', val),
                         style: { width: '100%'}
                     }
@@ -116,7 +117,7 @@ export default {
                 input = h(
                     CusDateRange,
                     {
-                        modelValue: modelValue,
+                        modelValue: this.modelValue,
                         'onUpdate:modelValue': val => this.$emit('update:modelValue', val),
                         style: { width: '100%'}
                     }

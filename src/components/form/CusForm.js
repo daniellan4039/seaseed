@@ -146,6 +146,7 @@ export default {
                                     {
                                         item: i,
                                         'modelValue': this.formModel[i.key],
+                                        'text': this.formModel?.echoMap?.[i.key],
                                         'onUpdate:modelValue': val => this.formModel[i.key] = val
                                     }
                                 )

@@ -1,5 +1,5 @@
 <template>
-  <a-select label-in-value v-model:value="modelValue" :placeholder="def.placeholder" style="width: 100%;"
+  <a-select v-model:value="modelValue" :placeholder="def.placeholder" style="width: 100%;"
             :filter-option="false" :not-found-content="fetching ? undefined : null" show-search
             @search="search">
     <template v-if="fetching" #notFoundContent>
@@ -22,15 +22,31 @@ import CusEmbedTable from "@/components/form/CusEmbedTable";
 
 export default {
   name: "CusSelectSearch",
-  props: ['value', 'def'],
+  props: ['value', 'def', 'text'],
   emits: ['change'],
   components: {SearchOutlined, CusEmbedTable},
   setup(props, ctx) {
-    const modelValue = ref()
+    const modelValue = ref(props.value)
     const fetching = ref(false)
     const {action, keyword} = props.def.meta.search ?? {action: undefined, keyword: undefined}
     const options = ref([])
     const tableVisible = ref(false)
+
+    if(props.text && props.value) {
+      if(props.def.key === 'employeeId'){
+        options.value.push({
+          value: props.value,
+          text: props.text?.realName
+        })
+      } else {
+        options.value.push({
+          value: props.value,
+          text: props.text
+        })
+      }
+    }
+
+
 
     const search = (arg) => {
       const parameter = {}
