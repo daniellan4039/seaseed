@@ -33,6 +33,16 @@ export default {
                     }
                 )
                 break
+            case 'input:psw':
+                input = h(
+                    resolveComponent('a-input-password'),
+                    {
+                        placeholder: item.placeholder,
+                        value: modelValue,
+                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
+                    }
+                )
+                break
             case 'select':
                 input = h(
                     resolveComponent('a-select'),
@@ -76,16 +86,6 @@ export default {
                         def: item,
                         value: modelValue,
                         'onChange': val => this.$emit('update:modelValue', val)
-                    }
-                )
-                break
-            case 'input:psw':
-                input = h(
-                    resolveComponent('a-input-password'),
-                    {
-                        placeholder: item.placeholder,
-                        value: modelValue,
-                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
                     }
                 )
                 break

@@ -9,7 +9,7 @@ export const api = {
 
 export function validateWithFullPath(url) {
     return new Promise((resolve, reject) => {
-        const saveUrl = url.substring(url.indexOf('/', 2))
+        const saveUrl = url?.substring(url?.indexOf('/', 2))
         $.post(
             `${api.validUrl}/${saveUrl}`,
         ).then(res => {

@@ -37,7 +37,7 @@ import {Modal} from "ant-design-vue";
 export default {
   name: "CusEmbedTable",
   props: ['searchDef', 'tableDef', 'visible'],
-  emits: ['update', 'selected'],
+  emits: [ 'selected', 'update:visible'],
   components: {
     CusTable, CusBaseInput
   },
@@ -87,14 +87,13 @@ export default {
 
     const onOk = () => {
       const row = selectedRows.value[0]
-      if (row) {
-        ctx.emit('selected', { value: row.id, text: row[props.tableDef.text ?? 'id'] })
-        ctx.emit('update', false)
-        confirmLoading.value = false
-      }
+      ctx.emit('selected', { value: row?.id, text: row?.[props.tableDef.text ?? 'id'] })
+      ctx.emit('update:visible', false)
+      confirmLoading.value = false
     }
     const onCancel = () => {
-      ctx.emit('update', false)
+      ctx.emit('update:visible', false)
+      confirmLoading.value = false
     }
     return {
       selectedKeys,
