@@ -23,6 +23,8 @@ import ArchiveDetail from "@/views/archive/ArchiveDetail";
 import Reward from "@/views/reward/Reward";
 import RewardForm from "@/views/reward/RewardForm";
 import RewardDetail from "@/views/reward/RewardDetail";
+import ArchiveBorrow from "@/views/archiveBorrow/ArchiveBorrow";
+import ArchiveBorrowDetail from "@/views/archiveBorrow/ArchiveBorrowDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -242,6 +244,25 @@ export const routes = [
                     key: 'reward_detail',
                     visible: false
                 }
+            },
+            {
+              path: '/archiveBorrow',
+              name: 'ArchiveBorrow',
+              component: ArchiveBorrow,
+              meta: {
+                title: '档案借阅',
+                key: 'archive_borrow'
+              }
+            },
+            {
+              path: '/archiveBorrow/detail',
+              name: 'ArchiveBorrowDetail',
+              component: ArchiveBorrowDetail,
+              meta: {
+                title: '档案借阅详情',
+                key: 'archive_borrow_detail',
+                  visible: false
+              }
             },
         ]
     },
