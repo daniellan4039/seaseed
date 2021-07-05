@@ -1,7 +1,7 @@
 import {$} from '@/service/index'
 
 const prefix = '/hrms'
-const module = '/archiveTransfer'
+const module = '/hrArchiveTransferRecord'
 
 export const api = {
     saveUrl: `${prefix}${module}/save`,

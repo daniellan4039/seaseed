@@ -27,6 +27,9 @@ import ArchiveBorrow from "@/views/archiveBorrow/ArchiveBorrow";
 import ArchiveBorrowDetail from "@/views/archiveBorrow/ArchiveBorrowDetail";
 import ArchiveRoom from "@/views/archiveRoom/ArchiveRoom";
 import ArchiveRoomDetail from "@/views/archiveRoom/ArchiveRoomDetail";
+import ArchiveTransfer from "@/views/archiveTransfer/ArchiveTransfer";
+import ArchiveTransferForm from "@/views/archiveTransfer/ArchiveTransferForm";
+import ArchiveTransferDetail from "@/views/archiveTransfer/ArchiveTransferDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -284,7 +287,37 @@ export const routes = [
                 key: 'archiveRoomDetail',
                 visible: false
               }
-            }
+            },
+            {
+              path: '/archiveTransfer',
+              name: 'ArchiveTransfer',
+              component: ArchiveTransfer,
+              meta: {
+                title: '档案转移',
+                key: 'archiveTransfer',
+                visible: true
+              }
+            },
+            {
+              path: '/archiveTransfer/form',
+              name: 'ArchiveTransferForm',
+              component: ArchiveTransferForm,
+              meta: {
+                title: '档案转移表单',
+                key: 'archiveTransferForm',
+                visible: false
+              }
+            },
+            {
+                path: '/archiveTransfer/detail',
+                name: 'ArchiveTransferDetail',
+                component: ArchiveTransferDetail,
+                meta: {
+                    title: '档案转移详情',
+                    key: 'archiveTransferDetail',
+                    visible: false
+                }
+            },
         ]
     },
     {

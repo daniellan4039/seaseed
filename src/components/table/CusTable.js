@@ -99,7 +99,7 @@ export default {
                 if (echoMap) {
                     for (const echoMapKey in echoMap) {
                         if (echoMapKey === 'employeeId') {
-                            alterRecord[echoMapKey] = echoMap[echoMapKey].realName
+                            alterRecord[echoMapKey] = echoMap[echoMapKey].realName??echoMap[echoMapKey]??'未知'
                         } else {
                             alterRecord[echoMapKey] = echoMap[echoMapKey]
                         }
