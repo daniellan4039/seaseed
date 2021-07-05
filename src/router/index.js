@@ -36,6 +36,9 @@ import ContractDetail from "@/views/contract/ContractDetail";
 import Education from "@/views/education/education";
 import EducationForm from "@/views/education/educationForm"
 import EducationDetail from "@/views/education/educationDetail"
+import Language from "@/views/language/Language";
+import LanguageForm from "@/views/language/LanguageForm";
+import LanguageDetail from "@/views/language/LanguageDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -384,6 +387,36 @@ export const routes = [
                     visible: false
                 }
             },
+            {
+              path: '/language',
+              name: 'Language',
+              component: Language,
+              meta: {
+                title: '语言',
+                key: 'language',
+                visible: true
+              }
+            },
+            {
+              path: '/language/form',
+              name: 'LanguageForm',
+              component: LanguageForm,
+              meta: {
+                title: '职工语言',
+                key: 'languageForm',
+                visible: false
+              }
+            },
+            {
+              path: '/language/detail',
+              name: 'LanguageDetail',
+              component: LanguageDetail,
+              meta: {
+                title: '语言详情',
+                key: 'language_detail',
+                visible: false
+              }
+            }
         ]
     },
     {

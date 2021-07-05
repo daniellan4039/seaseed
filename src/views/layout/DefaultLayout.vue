@@ -63,7 +63,6 @@ export default {
   setup () {
     const menuItems = generateMenu(routes)
     const routers = getFromBasePlatform()
-    console.log(routers)
     const menu = { items: menuItems }
     return {
       menu,
