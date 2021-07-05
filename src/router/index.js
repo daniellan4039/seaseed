@@ -33,6 +33,9 @@ import ArchiveTransferDetail from "@/views/archiveTransfer/ArchiveTransferDetail
 import Contract from "@/views/contract/Contract";
 import ContractForm from "@/views/contract/ContractForm";
 import ContractDetail from "@/views/contract/ContractDetail";
+import Education from "@/views/education/education";
+import EducationForm from "@/views/education/educationForm"
+import EducationDetail from "@/views/education/educationDetail"
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -350,6 +353,36 @@ export const routes = [
                 key: 'contract_detail',
                 visible: false
               }
+            },
+            {
+                path: '/education',
+                name: 'Education',
+                component: Education,
+                meta: {
+                    title: '教育',
+                    key: 'education',
+                    visible: true
+                }
+            },
+            {
+                path: '/education/form',
+                name: 'ContractForm',
+                component: EducationForm,
+                meta: {
+                    title: '教育表单',
+                    key: 'education_form',
+                    visible: false
+                }
+            },
+            {
+                path: '/education/detail',
+                name: 'EducationDetail',
+                component: EducationDetail,
+                meta: {
+                    title: '教育详情',
+                    key: 'education_detail',
+                    visible: false
+                }
             },
         ]
     },
