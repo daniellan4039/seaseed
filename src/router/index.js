@@ -30,6 +30,9 @@ import ArchiveRoomDetail from "@/views/archiveRoom/ArchiveRoomDetail";
 import ArchiveTransfer from "@/views/archiveTransfer/ArchiveTransfer";
 import ArchiveTransferForm from "@/views/archiveTransfer/ArchiveTransferForm";
 import ArchiveTransferDetail from "@/views/archiveTransfer/ArchiveTransferDetail";
+import Contract from "@/views/contract/Contract";
+import ContractForm from "@/views/contract/ContractForm";
+import ContractDetail from "@/views/contract/ContractDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -317,6 +320,36 @@ export const routes = [
                     key: 'archiveTransferDetail',
                     visible: false
                 }
+            },
+            {
+              path: '/contract',
+              name: 'Contract',
+              component: Contract,
+              meta: {
+                title: '合同',
+                key: 'contract',
+                visible: true
+              }
+            },
+            {
+              path: '/contract/form',
+              name: 'ContractForm',
+              component: ContractForm,
+              meta: {
+                title: '合同表单',
+                key: 'contract_form',
+                visible: false
+              }
+            },
+            {
+              path: '/contract/detail',
+              name: 'ContractDetail',
+              component: ContractDetail,
+              meta: {
+                title: '合同详情',
+                key: 'contract_detail',
+                visible: false
+              }
             },
         ]
     },

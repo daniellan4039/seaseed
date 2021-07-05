@@ -6,6 +6,7 @@ import CusDatePicker from "@/components/form/date/CusDatePicker";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import CusSelectList from "@/components/form/select/CusSelectList";
 import CusUploadText from "@/components/form/upload/CusUploadText";
+import CusSelectTree from "@/components/form/select/CusSelectTree";
 
 export default {
     name: 'CusFormInput',
@@ -100,6 +101,17 @@ export default {
                         def: this.item,
                         value: this.modelValue,
                         'onChange': val => this.$emit('update:modelValue', val)
+                    }
+                )
+                break
+            case 'select:tree':
+                input = h(
+                    CusSelectTree,
+                    {
+                        def: this.item,
+                        value: this.modelValue,
+                        'onChange': val => this.$emit('update:modelValue', val),
+                        list: this.item.meta.list
                     }
                 )
                 break

@@ -8,7 +8,7 @@ import {
     Layout,
     Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
-    Tabs, Tooltip,
+    Tabs, Tooltip, TreeSelect,
     Typography, Upload
 } from "ant-design-vue";
 
@@ -38,5 +38,6 @@ export default {
         app.use(Spin)
         app.use(Pagination)
         app.use(Upload)
+        app.use(TreeSelect)
     }
 }

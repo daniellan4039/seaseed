@@ -8,6 +8,7 @@ import CusMenu from "@/components/menu/CusMenu"
 import CusTableOpsBar from "@/components/table/CusTableOperationBar"
 import CusTabs from "@/components/menu/CusTabs"
 import CusUploadText from '@/components/form/upload/CusUploadText'
+import CusSelectTree from "@/components/form/select/CusSelectTree";
 
 export {
     CusForm,
@@ -19,5 +20,6 @@ export {
     CusTableContainer,
     CusTableOpsBar,
     CusTabs,
-    CusUploadText
+    CusUploadText,
+    CusSelectTree
 }
