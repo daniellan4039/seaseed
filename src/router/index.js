@@ -48,6 +48,9 @@ import PositionDetail from "@/views/position/PositionDetail";
 import Soldier from "@/views/soldier/Soldier";
 import SoldierForm from "@/views/soldier/SoldierForm";
 import SoldierDetail from "@/views/soldier/SoldierDetail";
+import Thesis from "@/views/thesis/Thesis";
+import ThesisForm from "@/views/thesis/ThesisForm";
+import ThesisDetail from "@/views/thesis/ThesisDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -513,6 +516,36 @@ export const routes = [
               meta: {
                 title: '复转军人详细',
                 key: 'Soldier_detail',
+                visible: false
+              }
+            },
+            {
+              path: '/thesis',
+              name: 'Thesis',
+              component: Thesis,
+              meta: {
+                title: '学术论文',
+                key: 'thesis',
+                visible: true
+              }
+            },
+            {
+              path: '/thesis/form',
+              name: 'ThesisForm',
+              component: ThesisForm,
+              meta: {
+                title: '学术论文表单',
+                key: 'thesis_form',
+                visible: false
+              }
+            },
+            {
+              path: '/thesis/detail',
+              name: 'ThesisDetail',
+              component: ThesisDetail,
+              meta: {
+                title: '学术论文详情信息',
+                key: 'thesis_detail',
                 visible: false
               }
             },
