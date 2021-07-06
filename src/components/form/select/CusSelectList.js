@@ -1,22 +1,34 @@
-import {h, ref, resolveComponent} from "vue";
+import {h, ref, resolveComponent, watch} from "vue";
 
 export default {
     name: 'CusSelectList',
-    props: ['def', 'value'],
+    props: ['def', 'value', 'dependentKey'],
     emits: ['change'],
     setup(props) {
         const list = props.def.meta.list
         const options = ref([])
-        if (list) {
-            list().then(res => {
-                const {isSuccess, data} = res
-                if (isSuccess) {
-                    options.value = data
-                }
-            })
+        const refDependentKey = ref(props.dependentKey)
+
+        watch(refDependentKey, nv => {
+            init(nv)
+        })
+
+        const init = (value) => {
+            if (list) {
+                list(value).then(res => {
+                    const {isSuccess, data} = res
+                    if (isSuccess) {
+                        options.value = data
+                    }
+                })
+            }
         }
+
+        init(null)
+
         return {
-            options
+            options,
+            init
         }
     },
     render() {

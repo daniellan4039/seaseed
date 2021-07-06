@@ -37,78 +37,13 @@ export const tableDef = {
         },
         formItems: [
             {
-                key: 'employeeId',
+                key: 'employee',
                 label: '职工姓名',
                 placeholder: '请输入职工姓名',
-                inputType: 'select:search',
-                rules: [],
+                inputType: 'input:string',
+                rules: [
+                ],
                 meta: {
-                    search: {
-                        action: employeeApi.list,
-                        keyword: 'realName'
-                    },
-                    searchDef: {
-                        formItems: [
-                            {
-                                key: 'realName',
-                                label: '姓名',
-                                placeholder: '请输入职工姓名',
-                                inputType: 'input:string',
-                                rules: [],
-                                meta: {}
-                            },
-                            {
-                                key: 'departmentId',
-                                label: '部门',
-                                placeholder: '请输入职工姓名',
-                                inputType: 'select:list',
-                                rules: [],
-                                meta: {
-                                    text: 'name',
-                                    list: departmentApi.listCompaniesByUser,
-                                }
-                            },
-                        ]
-                    },
-                    tableDef: {
-                        actions: {
-                            page: employeeApi.page
-                        },
-                        text: 'realName',
-                        columns: [
-                            {
-                                title: '职工编号',
-                                dataIndex: 'empNum',
-                                width: 80,
-                                slots: {customRender: 'empNum'}
-                            },
-                            {
-                                title: '职工姓名',
-                                dataIndex: 'realName',
-                                width: 100,
-                                slots: {customRender: 'realName'},
-                                ellipsis: true
-                            },
-                            {
-                                title: '所属部门',
-                                dataIndex: 'departmentId',
-                                slots: {customRender: 'departmentId'},
-                                width: 170
-                            },
-                            {
-                                title: '职位',
-                                dataIndex: 'positionId',
-                                slots: {customRender: 'positionId'},
-                                width: 120
-                            },
-                            {
-                                title: '联系电话',
-                                dataIndex: 'telNum',
-                                width: 120,
-                                slots: {customRender: 'telNum'}
-                            }
-                        ]
-                    },
                     submit: true,
                     scope: ['form', 'detail'],
                     group: '基本信息'

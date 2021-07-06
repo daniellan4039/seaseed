@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {h, resolveComponent} from 'vue'
+import {h, ref, resolveComponent, watch} from 'vue'
 import CusSelectCode from "@/components/form/select/CusSelectCode";
 import CusSelectSearch from "@/components/form/select/CusSelectSearch";
 import CusDatePicker from "@/components/form/date/CusDatePicker";
@@ -16,12 +16,19 @@ export default {
             required: true
         },
         modelValue: {},
-        text: {}
+        text: {},
+        changedKey: {}
     },
     components: {
         CusSelectCode
     },
     emits: ['change', 'update:modelValue'],
+    setup(props) {
+        const refChangeKey = ref(props.changedKey)
+        return {
+            refChangeKey
+        }
+    },
     render() {
         let input
         switch (this.item.inputType) {
@@ -110,6 +117,7 @@ export default {
                     {
                         def: this.item,
                         value: this.modelValue,
+                        dependentKey: this.refChangeKey,
                         'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )

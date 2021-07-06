@@ -11,12 +11,29 @@ export default {
         formDef: {
             type: Object,
             required: true
+        },
+        thresholdCols: {
+            type: Number,
+            default: 8
+        },
+        maxCols: {
+            type: Number,
+            default: 3
+        },
+        showGroupTitle: {
+            type: Boolean,
+            default: true
+        },
+        submitText: {
+            type: String,
+            default: '提交'
         }
     },
+    emits: ['submit'],
     components: {
         CusFormInput
     },
-    setup(props) {
+    setup(props, ctx) {
         const formRef = ref()
         const defaultModel = ref({})
         const formKeys = []
@@ -60,12 +77,14 @@ export default {
             return loadDefaultModel(parsedModel ?? {}, defaultModel.value ?? {})
         }
         const getRules = async () => {
-            const backRules = await validateWithFullPath(props.formDef.api.saveUrl)
+            let backRules = []
+            if (props.formDef?.api?.saveUrl) {
+                backRules = await validateWithFullPath(props.formDef.api.saveUrl)
+            }
             rules.value = _.assignInWith(parseFormRules(props.formDef?.formItems), backRules, (obj, src) => {
                 return [...obj ?? [], ...src]
             })
         }
-
         const handleResult = (res) => {
             const {isSuccess, msg} = res
             if (isSuccess) {
@@ -81,18 +100,20 @@ export default {
             }
         }
         const submitForm = () => {
-            formRef.value.validate().then(() => {
+            formRef.value?.validate().then(() => {
                 let pickedModel = _.pick(formModel, formKeys)
                 if (!defaultModel.value) {
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
                     props.formDef?.actions?.update(pickedModel).then(res => handleResult(res))
                 }
-            }).catch(() => {
+                ctx.emit('submit', pickedModel)
+            }).catch((e) => {
                 Modal.error({
                     title: '提示',
                     content: '请完善表格'
                 })
+                console.warn(e)
             })
         }
         const resetForm = () => {
@@ -100,7 +121,6 @@ export default {
         }
 
         let formModel = reactive(getFormModel())
-        getRules()
 
         props.formDef.formItems.forEach(i => {
             const groupName = i.meta.group
@@ -109,6 +129,8 @@ export default {
             }
             groupedFormItems.value[groupName].push(i)
         })
+
+        getRules()
 
         return {
             formRef,
@@ -128,12 +150,12 @@ export default {
     render() {
         const submitSlot = this.$slots['submit']
         const formItemCount = this.formDef.formItems.length
-        const singleColumn = formItemCount <= 8
+        const singleColumn = formItemCount <= this.thresholdCols
         let labelSpan = 8
         let wrapperSpan = 16
         let formItemsDOM = []
         for (const key in this.groupedFormItems) {
-            formItemsDOM.push(
+            this.showGroupTitle && formItemsDOM.push(
                 <a-row>
                     <a-col span={singleColumn ? 0 : 24}>
                         <a-divider type='horizontal' orientation='left'>
@@ -164,8 +186,8 @@ export default {
                             sm: {span: 24},
                             md: {span: 24},
                             lg: {span: 24},
-                            xl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : 12},
-                            xxl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : 8},
+                            xl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24/(this.maxCols-1))},
+                            xxl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24/this.maxCols)},
                         },
                         () => h(
                             resolveComponent('a-form-item'),
@@ -184,9 +206,10 @@ export default {
                                         return h(
                                             CusFormInput,
                                             {
-                                                item: i,
+                                                'item': i,
                                                 'modelValue': this.formModel[i.key],
                                                 'text': this.formModel?.echoMap?.[i.key],
+                                                'changedKey': this.formModel[i.changeBy],
                                                 'onUpdate:modelValue': val => this.formModel[i.key] = val
                                             }
                                         )
@@ -242,7 +265,7 @@ export default {
                                             onClick: this.submitForm
                                         },
                                         {
-                                            default: () => '保存'
+                                            default: () => this.submitText
                                         }
                                     ),
                                     h(

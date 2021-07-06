@@ -427,10 +427,7 @@ export const formDef = {
             meta: {
                 submit: true,
                 scope: ['form'],
-                group: '基本信息',
-                span: 24,
-                labelSpan: 2,
-                wrapperSpan: 22
+                group: '基本信息'
             }
         },
         {
@@ -442,10 +439,7 @@ export const formDef = {
             meta: {
                 submit: true,
                 scope: ['form'],
-                group: '基本信息',
-                span: 24,
-                labelSpan: 2,
-                wrapperSpan: 22
+                group: '基本信息'
             }
         }
     ]
