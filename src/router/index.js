@@ -51,6 +51,9 @@ import SoldierDetail from "@/views/soldier/SoldierDetail";
 import Thesis from "@/views/thesis/Thesis";
 import ThesisForm from "@/views/thesis/ThesisForm";
 import ThesisDetail from "@/views/thesis/ThesisDetail";
+import Train from "@/views/train/Train";
+import TrainForm from "@/views/train/TrainForm";
+import TrainDetail from "@/views/train/TrainDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -549,6 +552,36 @@ export const routes = [
                 visible: false
               }
             },
+            {
+              path: '/train',
+              name: 'Train',
+              component: Train,
+              meta: {
+                title: '培训经历',
+                key: 'train',
+                visible: true
+              }
+            },
+            {
+              path: '/train/form',
+              name: 'TrainForm',
+              component: TrainForm,
+              meta: {
+                title: '培训表单',
+                key: 'train_form',
+                visible: false
+              }
+            },
+            {
+              path: '/train/detail',
+              name: 'TrainDetail',
+              component: TrainDetail,
+              meta: {
+                title: '培训详情',
+                key: 'train_detail',
+                visible: false
+              }
+            }
         ]
     },
     {
