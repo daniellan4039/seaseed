@@ -45,6 +45,9 @@ import PatentDetail from "@/views/patent/PatentDetail";
 import Position from "@/views/position/Position";
 import PositionForm from "@/views/position/PositionForm";
 import PositionDetail from "@/views/position/PositionDetail";
+import Soldier from "@/views/soldier/Soldier";
+import SoldierForm from "@/views/soldier/SoldierForm";
+import SoldierDetail from "@/views/soldier/SoldierDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -482,7 +485,37 @@ export const routes = [
                 key: 'position_detail',
                 visible: false
               }
-            }
+            },
+            {
+              path: '/soldier',
+              name: 'Soldier',
+              component: Soldier,
+              meta: {
+                title: '复转军人',
+                key: 'soldier',
+                visible: true
+              }
+            },
+            {
+              path: '/soldier/form',
+              name: 'SoldierForm',
+              component: SoldierForm,
+              meta: {
+                title: '复转军人表单',
+                key: 'soldier_form',
+                visible: false
+              }
+            },
+            {
+              path: '/Soldier/detail',
+              name: 'SoldierDetail',
+              component: SoldierDetail,
+              meta: {
+                title: '复转军人详细',
+                key: 'Soldier_detail',
+                visible: false
+              }
+            },
         ]
     },
     {

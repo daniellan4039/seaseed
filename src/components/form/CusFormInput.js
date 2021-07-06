@@ -45,6 +45,16 @@ export default {
                     }
                 )
                 break
+            case 'input:area':
+                input = h(
+                    resolveComponent('a-textarea'),
+                    {
+                        placeholder: this.item.placeholder,
+                        value: this.modelValue,
+                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
+                    }
+                )
+                break
             case 'select':
                 input = h(
                     resolveComponent('a-select'),

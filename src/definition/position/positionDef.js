@@ -383,7 +383,7 @@ export const formDef = {
             key: 'cooperationInner',
             label: '内部',
             placeholder: '请输入',
-            inputType: 'input:string',
+            inputType: 'input:area',
             rules: [],
             meta: {
                 submit: true,
@@ -395,7 +395,7 @@ export const formDef = {
             key: 'cooperationOuter',
             label: '外部',
             placeholder: '请输入',
-            inputType: 'input:string',
+            inputType: 'input:area',
             rules: [],
             meta: {
                 submit: true,
@@ -493,12 +493,12 @@ export const formDef = {
             key: 'qualificationRemark',
             label: '其他',
             placeholder: '请输入',
-            inputType: 'input:string',
+            inputType: 'input:area',
             rules: [],
             meta: {
                 submit: true,
                 scope: ['form', 'detail'],
-                group: '任职资格'
+                group: '任职资格',
             }
         },
     ]
