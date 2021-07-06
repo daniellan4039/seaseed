@@ -113,6 +113,9 @@ export default {
         }
       }
       this.menuSelectedKeys = [nv.meta.key]
+    },
+    openTabs(nv) {
+      this.closeOther(nv)
     }
   },
   methods: {
@@ -136,6 +139,9 @@ export default {
           this.loadLastOpenTab()
         }
       }
+    },
+    closeOther(keys){
+      keys?.[0] && this.saveScene(keys[0].key)
     },
     saveScene(menuItemKey) {
       const rawOpenTabs = toRaw(this.openTabs)
