@@ -150,8 +150,8 @@ export const formDef = {
         module: 'employeeStore',
         key: 'language'
     },
-    labelCol: 8,
-    wrapperCol: 7,
+    labelCol: 6,
+    wrapperCol: 18,
     config: {},
     formItems: [
         {

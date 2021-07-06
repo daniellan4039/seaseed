@@ -118,8 +118,8 @@ export const formDef = {
         module: 'employeeStore',
         key: 'contract'
     },
-    labelCol: 8,
-    wrapperCol: 7,
+    labelCol: 6,
+    wrapperCol: 18,
     config: {},
     formItems: [
         {

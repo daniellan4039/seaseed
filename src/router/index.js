@@ -42,6 +42,9 @@ import LanguageDetail from "@/views/language/LanguageDetail";
 import Patent from "@/views/patent/Patent";
 import PatentForm from "@/views/patent/PatentForm";
 import PatentDetail from "@/views/patent/PatentDetail";
+import Position from "@/views/position/Position";
+import PositionForm from "@/views/position/PositionForm";
+import PositionDetail from "@/views/position/PositionDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -447,6 +450,36 @@ export const routes = [
               meta: {
                 title: '专利详细',
                 key: 'patent_detail',
+                visible: false
+              }
+            },
+            {
+              path: '/position',
+              name: 'Position',
+              component: Position,
+              meta: {
+                title: '职位',
+                key: 'position',
+                visible: true
+              }
+            },
+            {
+              path: '/position/form',
+              name: 'PositionForm',
+              component: PositionForm,
+              meta: {
+                title: '职位表单',
+                key: 'position_form',
+                visible: false
+              }
+            },
+            {
+              path: '/position/detail',
+              name: 'PositionDetail',
+              component: PositionDetail,
+              meta: {
+                title: '职位详情',
+                key: 'position_detail',
                 visible: false
               }
             }

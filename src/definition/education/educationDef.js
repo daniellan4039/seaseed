@@ -192,8 +192,8 @@ export const formDef = {
         module: 'employeeStore',
         key: 'education'
     },
-    labelCol: 8,
-    wrapperCol: 7,
+    labelCol: 6,
+    wrapperCol: 18,
     config: {},
     formItems: [
         {
@@ -427,7 +427,10 @@ export const formDef = {
             meta: {
                 submit: true,
                 scope: ['form'],
-                group: '基本信息'
+                group: '基本信息',
+                span: 24,
+                labelSpan: 2,
+                wrapperSpan: 22
             }
         },
         {
@@ -439,7 +442,10 @@ export const formDef = {
             meta: {
                 submit: true,
                 scope: ['form'],
-                group: '基本信息'
+                group: '基本信息',
+                span: 24,
+                labelSpan: 2,
+                wrapperSpan: 22
             }
         }
     ]

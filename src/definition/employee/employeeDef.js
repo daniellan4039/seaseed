@@ -138,8 +138,8 @@ export const formDef = {
         module: 'employeeStore',
         key: 'employee'
     },
-    labelCol: 8,
-    wrapperCol: 7,
+    labelCol: 6,
+    wrapperCol: 18,
     config: {},
     formRef: 'employeeFormRef',
     formItems: [
@@ -223,7 +223,8 @@ export const formDef = {
                         }
                     ]
                 },
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             }
         },
         {
@@ -241,7 +242,8 @@ export const formDef = {
             ],
             meta: {
                 code: 'sex',
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             },
         },
         {
@@ -251,7 +253,8 @@ export const formDef = {
             inputType: 'input:string',
             rules: [],
             meta: {
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             },
             dependency: [
                 {
@@ -270,7 +273,8 @@ export const formDef = {
             inputType: 'input:string',
             rules: [],
             meta: {
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             }
         },
         {
@@ -281,7 +285,8 @@ export const formDef = {
             rules: [],
             meta: {
                 code: 'hr_employee_status',
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             }
         },
         {
@@ -293,7 +298,8 @@ export const formDef = {
             meta: {
                 text: 'name',
                 list: departmentApi.listCompaniesByUser,
-                scope: ['form', 'detail']
+                scope: ['form', 'detail'],
+                group: '基本信息'
             }
         },
         {
@@ -303,7 +309,8 @@ export const formDef = {
             inputType: 'input:psw',
             rules: [],
             meta: {
-                scope: ['form']
+                scope: ['form'],
+                group: '基本信息'
             }
         },
         {
@@ -315,7 +322,7 @@ export const formDef = {
             meta: {
                 submit: false,
                 scope: ['form'],
-                group: 'default'
+                group: '基本信息'
             }
         },
         {
@@ -326,7 +333,7 @@ export const formDef = {
             rules: [],
             meta: {
                 submit: false,
-                scope: ['detail']
+                group: '基本信息'
             }
         },
     ]

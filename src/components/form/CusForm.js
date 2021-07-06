@@ -21,6 +21,7 @@ export default {
         const defaultModel = ref({})
         const formKeys = []
         const rules = ref({})
+        const groupedFormItems = ref({})
 
         if (props.formDef.store) {
             const module = props.formDef.store?.module
@@ -100,101 +101,170 @@ export default {
 
         let formModel = reactive(getFormModel())
         getRules()
+
+        props.formDef.formItems.forEach(i => {
+            const groupName = i.meta.group
+            if (!groupedFormItems.value[groupName]?.length) {
+                groupedFormItems.value[groupName] = []
+            }
+            groupedFormItems.value[groupName].push(i)
+        })
+
         return {
             formRef,
             formModel,
             rules,
             defaultModel,
+            groupedFormItems,
             parseFormModel,
             parseFormRules,
             loadDefaultModel,
             getFormModel,
             getRules,
             submitForm,
-            resetForm,
+            resetForm
         }
     },
     render() {
         const submitSlot = this.$slots['submit']
-        const formItemsDOM = this.formDef.formItems.map(i => {
-            const scope = i.meta?.scope?.includes('form')
-            const dependency = i.dependency
-            let continueByDp = true
-            const slot = this.$slots[i.key]
-            dependency && dependency.forEach(d => {
-                if (d.condition === 'include') {
-                    continueByDp = continueByDp && d.value.includes(this.formModel[d.key])
+        const formItemCount = this.formDef.formItems.length
+        const singleColumn = formItemCount <= 8
+        let labelSpan = 8
+        let wrapperSpan = 16
+        let formItemsDOM = []
+        for (const key in this.groupedFormItems) {
+            formItemsDOM.push(
+                <a-row>
+                    <a-col span={singleColumn ? 0 : 24}>
+                        <a-divider type='horizontal' orientation='left'>
+                            {key}
+                        </a-divider>
+                    </a-col>
+                </a-row>
+            )
+            const groupDom = this.groupedFormItems[key]?.map(i => {
+                const scope = i.meta?.scope?.includes('form')
+                const dependency = i.dependency
+                let continueByDp = true
+                const slot = this.$slots[i.key]
+                dependency && dependency.forEach(d => {
+                    if (d.condition === 'include') {
+                        continueByDp = continueByDp && d.value.includes(this.formModel[d.key])
+                    } else {
+                        continueByDp = continueByDp && !d.value.includes(this.formModel[d.key])
+                    }
+                })
+                if (scope && continueByDp) {
+                    labelSpan = i?.meta?.labelSpan ? i.meta.labelSpan : singleColumn ? 9 : this.formDef.labelCol??8
+                    wrapperSpan = i?.meta?.wrapperSpan ? i.meta.wrapperSpan : singleColumn ? 4 : this.formDef.wrapperCol??16
+                    return h(
+                        resolveComponent('a-col'),
+                        {
+                            xs: {span: 24},
+                            sm: {span: 24},
+                            md: {span: 24},
+                            lg: {span: 24},
+                            xl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : 12},
+                            xxl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : 8},
+                        },
+                        () => h(
+                            resolveComponent('a-form-item'),
+                            {
+                                ref: i.key,
+                                name: i.key,
+                                label: i.label,
+                                labelCol: { span : labelSpan },
+                                wrapperCol: { span: wrapperSpan},
+                            },
+                            {
+                                default: () => {
+                                    if (slot) {
+                                        return slot(i)
+                                    } else {
+                                        return h(
+                                            CusFormInput,
+                                            {
+                                                item: i,
+                                                'modelValue': this.formModel[i.key],
+                                                'text': this.formModel?.echoMap?.[i.key],
+                                                'onUpdate:modelValue': val => this.formModel[i.key] = val
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        )
+                    )
                 } else {
-                    continueByDp = continueByDp && !d.value.includes(this.formModel[d.key])
+                    return null
                 }
             })
-            if (scope && continueByDp) {
-                return h(
-                    resolveComponent('a-form-item'),
+            formItemsDOM.push(
+                h(
+                    resolveComponent('a-row'),
+                    {},
                     {
-                        ref: i.key,
-                        name: i.key,
-                        label: i.label
-                    },
-                    {
-                        default: () => {
-                            if (slot) {
-                                return slot(i)
-                            } else {
-                                return h(
-                                    CusFormInput,
-                                    {
-                                        item: i,
-                                        'modelValue': this.formModel[i.key],
-                                        'text': this.formModel?.echoMap?.[i.key],
-                                        'onUpdate:modelValue': val => this.formModel[i.key] = val
-                                    }
-                                )
-                            }
-                        }
+                        default: () => groupDom
                     }
                 )
-            } else {
-                return null
-            }
-
-        })
+            )
+        }
 
         const submitButton = h(
-            resolveComponent('a-form-item'),
+            resolveComponent('a-row'),
             {
-                wrapperCol: {span: this.formDef.wrapperCol, offset: this.formDef.labelCol}
+                class: 'cus-form-submit-bar'
             },
-            {
-                default: () => {
-                    if (submitSlot) {
-                        return submitSlot(this.formRef)
-                    } else {
-                        return [
-                            h(
-                                resolveComponent('a-button'),
-                                {
-                                    type: 'primary',
-                                    onClick: this.submitForm
-                                },
-                                {
-                                    default: () => '保存'
-                                }
-                            ),
-                            h(
-                                resolveComponent('a-button'),
-                                {
-                                    style: 'margin-left: 10px;',
-                                    onClick: this.resetForm
-                                },
-                                {
-                                    default: () => '重置'
-                                }
-                            )
-                        ]
-                    }
+            () => h(
+                resolveComponent('a-col'),
+                {
+                    span: 24
+                },
+                {
+                    default: () => h(
+                        resolveComponent('a-form-item'),
+                        {
+                            wrapperCol: {
+                                span: wrapperSpan,
+                                offset: labelSpan
+                            },
+                            style: {textAlign: 'right'}
+                        },
+                        () => {
+                            if (submitSlot) {
+                                return submitSlot(this.formRef)
+                            } else {
+                                return [
+                                    h(
+                                        resolveComponent('a-button'),
+                                        {
+                                            type: 'primary',
+                                            onClick: this.submitForm
+                                        },
+                                        {
+                                            default: () => '保存'
+                                        }
+                                    ),
+                                    h(
+                                        resolveComponent('a-button'),
+                                        {
+                                            style: 'margin-left: 10px;',
+                                            onClick: this.resetForm
+                                        },
+                                        {
+                                            default: () => '重置'
+                                        }
+                                    )
+                                ]
+                            }
+                        }
+                    )
                 }
-            }
+            )
+        )
+
+        formItemsDOM.push(
+            submitButton
         )
         return h(
             resolveComponent('a-form'),
@@ -202,17 +272,11 @@ export default {
                 ref: 'formRef',
                 model: this.formModel,
                 rules: this.rules,
-                labelCol: {span: this.formDef.labelCol ?? 4},
-                wrapperCol: {span: this.formDef.wrapperCol ?? 14},
-                ...this.formDef.config
+                ...this.formDef.config,
+                className: 'cus-form'
             },
             {
-                default: () => {
-                    return [
-                        formItemsDOM,
-                        submitButton
-                    ]
-                }
+                default: () => formItemsDOM
             }
         )
     }

@@ -18,17 +18,18 @@ export function generateRules(data = []) {
                     break
                 }
                 case 'Min': {
-                    constrain['validator'] = this.validateMinValue
-                    for (const attr in c.attrs) {
-                        constrain[attr] = c.attrs[attr]
-                    }
+                    // constrain['validator'] = this.validateMinValue
+                    // for (const attr in c.attrs) {
+                    //     constrain[attr] = c.attrs[attr]
+                    // }
                     break
                 }
                 case 'Max': {
-                    constrain['validator'] = this.validateMaxValue
-                    for (const attr in c.attrs) {
-                        constrain[attr] = c.attrs[attr]
-                    }
+                    // constrain['validator'] = this.validateMaxValue
+                    // for (const attr in c.attrs) {
+                    //     constrain[attr] = c.attrs[attr]
+                    // }
+                    break
                 }
             }
             rules[r.fieldName].push(constrain)

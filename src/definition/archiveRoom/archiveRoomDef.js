@@ -112,8 +112,8 @@ export const formDef = {
         module: 'employeeStore',
         key: 'archiveRoom'
     },
-    labelCol: 8,
-    wrapperCol: 7,
+    labelCol: 6,
+    wrapperCol: 18,
     config: {},
     formItems: [
         {
