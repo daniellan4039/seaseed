@@ -160,7 +160,7 @@ export const formDef = {
                 scope: ['form', 'detail'],
                 group: '基本信息',
                 text: 'name',
-                list: departmentApi.listCompaniesByUser,
+                list: departmentApi.listDepartsOfCompany,
             }
         },
         {
@@ -204,7 +204,7 @@ export const formDef = {
                             rules: [],
                             meta: {
                                 text: 'name',
-                                list: departmentApi.listCompaniesByUser,
+                                list: departmentApi.listDepartsOfCompany,
                             }
                         },
                     ]
@@ -282,7 +282,7 @@ export const formDef = {
                             rules: [],
                             meta: {
                                 text: 'name',
-                                list: departmentApi.listCompaniesByUser,
+                                list: departmentApi.listDepartsOfCompany,
                             }
                         },
                     ]

@@ -65,7 +65,7 @@ export const tableDef = {
                                 rules: [],
                                 meta: {
                                     text: 'name',
-                                    list: departmentApi.listCompaniesByUser,
+                                    list: departmentApi.listDepartsOfCompany,
                                 }
                             },
                         ]
@@ -239,7 +239,7 @@ export const formDef = {
                             rules: [],
                             meta: {
                                 text: 'name',
-                                list: departmentApi.listCompaniesByUser,
+                                list: departmentApi.listDepartsOfCompany,
                             }
                         },
                     ]

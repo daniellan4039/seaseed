@@ -31,7 +31,6 @@ import ArchiveTransfer from "@/views/archiveTransfer/ArchiveTransfer";
 import ArchiveTransferForm from "@/views/archiveTransfer/ArchiveTransferForm";
 import ArchiveTransferDetail from "@/views/archiveTransfer/ArchiveTransferDetail";
 import Contract from "@/views/contract/Contract";
-import ContractForm from "@/views/contract/ContractForm";
 import ContractDetail from "@/views/contract/ContractDetail";
 import Education from "@/views/education/education";
 import EducationForm from "@/views/education/educationForm"
@@ -54,6 +53,10 @@ import ThesisDetail from "@/views/thesis/ThesisDetail";
 import Train from "@/views/train/Train";
 import TrainForm from "@/views/train/TrainForm";
 import TrainDetail from "@/views/train/TrainDetail";
+import DistributeTable from "@/views/distribute/DistributeTable";
+import DistributeForm from "@/views/distribute/DistributeForm";
+import DistributeDetail from "@/views/distribute/DistributeDetail";
+import ContractForm from "@/views/contract/ContractForm";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -384,7 +387,7 @@ export const routes = [
             },
             {
                 path: '/education/form',
-                name: 'ContractForm',
+                name: 'EducationForm',
                 component: EducationForm,
                 meta: {
                     title: '教育表单',
@@ -581,7 +584,37 @@ export const routes = [
                 key: 'train_detail',
                 visible: false
               }
-            }
+            },
+            {
+              path: '/distribute',
+              name: 'Distribute',
+              component: DistributeTable,
+              meta: {
+                title: '职工分配',
+                key: 'distribute',
+                visible: true
+              }
+            },
+            {
+              path: '/distribute/form',
+              name: 'DistributeForm',
+              component: DistributeForm,
+              meta: {
+                title: '职工分配表单',
+                key: 'distribute_form',
+                visible: false
+              }
+            },
+            {
+              path: '/distribute/detail',
+              name: 'DistributeDetail',
+              component: DistributeDetail,
+              meta: {
+                title: '职工分配详细',
+                key: 'distribute_detail',
+                visible: false
+              }
+            },
         ]
     },
     {

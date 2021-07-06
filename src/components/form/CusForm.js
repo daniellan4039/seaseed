@@ -1,4 +1,4 @@
-import {h, reactive, ref, resolveComponent} from "vue"
+import {h, provide, reactive, ref, resolveComponent} from "vue"
 import _ from 'lodash'
 import {Modal} from "ant-design-vue";
 import CusFormInput from "@/components/form/CusFormInput";
@@ -120,10 +120,10 @@ export default {
             formRef.value.resetFields();
         }
 
-        let formModel = reactive(getFormModel())
+        const formModel = reactive(getFormModel())
 
         props.formDef.formItems.forEach(i => {
-            const groupName = i.meta.group
+            const groupName = (i.meta?.group)??'基本信息'
             if (!groupedFormItems.value[groupName]?.length) {
                 groupedFormItems.value[groupName] = []
             }
@@ -131,6 +131,8 @@ export default {
         })
 
         getRules()
+
+        provide('formModel', formModel)
 
         return {
             formRef,
@@ -209,7 +211,8 @@ export default {
                                                 'item': i,
                                                 'modelValue': this.formModel[i.key],
                                                 'text': this.formModel?.echoMap?.[i.key],
-                                                'changedKey': this.formModel[i.changeBy],
+                                                'formModel': this.formModel,
+                                                'changeBy': i.changeBy,
                                                 'onUpdate:modelValue': val => this.formModel[i.key] = val
                                             }
                                         )

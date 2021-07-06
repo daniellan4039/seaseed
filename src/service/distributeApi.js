@@ -1,13 +1,13 @@
 import {$} from '@/service/index'
 
-const prefix = '/base'
-const module = '/baseDepartment'
+const prefix = '/hrms'
+const module = '/hrEmpDistribution'
 
 export const api = {
     saveUrl: `${prefix}${module}/save`,
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
-    listUrl: `${prefix}${module}/listCompanyDepartment`,
+    listUrl: `${prefix}${module}/list`,
     removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/get`
 }
@@ -33,33 +33,17 @@ export function page(data) {
     )
 }
 
-export function list(params) {
-    return $.get(
+export function list(data) {
+    return $.post(
         api.listUrl,
-        {
-            params: params
-        }
+        data
     )
-}
-
-export function listDepartsOfCompany(value) {
-    const currentUser = JSON.parse(localStorage.getItem('HRMS_USER'))
-    if (currentUser) {
-        return $.get(
-            api.listUrl,
-            {
-                params: value ? value : {companyId: currentUser.companyId}
-            }
-        )
-    } else {
-        return Promise.reject('HRMS: Cannot get user login info, please try login before')
-    }
 }
 
 export function remove(data) {
     return $.post(
         api.removeUrl,
-        [data]
+        data
     )
 }
 

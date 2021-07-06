@@ -17,16 +17,24 @@ export default {
         },
         modelValue: {},
         text: {},
-        changedKey: {}
+        formModel: {},
+        changeBy: {}
     },
     components: {
         CusSelectCode
     },
     emits: ['change', 'update:modelValue'],
     setup(props) {
-        const refChangeKey = ref(props.changedKey)
+        const refFormModel = ref(props.formModel)
+        const changedModel = ref({})
+        watch(refFormModel, nv => {
+            changedModel.value = nv
+        }, {
+            deep: true,
+            immediate: true
+        })
         return {
-            refChangeKey
+            changedModel
         }
     },
     render() {
@@ -115,9 +123,9 @@ export default {
                 input = h(
                     CusSelectList,
                     {
-                        def: this.item,
-                        value: this.modelValue,
-                        dependentKey: this.refChangeKey,
+                        'def': this.item,
+                        'value': this.modelValue,
+                        'changeBy': this.changeBy,
                         'onChange': val => this.$emit('update:modelValue', val)
                     }
                 )

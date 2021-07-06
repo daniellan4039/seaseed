@@ -40,7 +40,12 @@ export const tableDef = {
                 key: 'realName',
                 label: '职工姓名',
                 inputType: 'input:string',
-                placeholder: '请输入职工姓名'
+                placeholder: '请输入职工姓名',
+                meta: {
+                    submit: true,
+                    scope: ['form', 'detail'],
+                    group: '基本信息'
+                }
             },
             {
                 key: 'departmentId',
@@ -49,10 +54,12 @@ export const tableDef = {
                 inputType: 'select:list',
                 rules: [],
                 meta: {
-                    list: departmentApi.listCompaniesByUser,
-                    text: 'name'
+                    list: departmentApi.listDepartsOfCompany,
+                    text: 'name',
+                    scope: ['form', 'detail'],
+                    group: '基本信息'
                 }
-            },
+            }
         ]
     },
     columns: [
@@ -179,7 +186,7 @@ export const formDef = {
                             rules: [],
                             meta: {
                                 text: 'name',
-                                list: departmentApi.listCompaniesByUser,
+                                list: departmentApi.listDepartsOfCompany,
                             }
                         },
                     ]
@@ -297,7 +304,7 @@ export const formDef = {
             rules: [],
             meta: {
                 text: 'name',
-                list: departmentApi.listCompaniesByUser,
+                list: departmentApi.listDepartsOfCompany,
                 scope: ['form', 'detail'],
                 group: '基本信息'
             }

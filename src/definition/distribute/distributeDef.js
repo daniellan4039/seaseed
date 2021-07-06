@@ -1,15 +1,15 @@
-import {contractApi, departmentApi, employeeApi} from "@/service";
+import {departmentApi, distributeApi, employeeApi, positionApi} from "@/service";
 import {getCompanyTree} from "@/service/anyoneApi";
 
 export const tableDef = {
-    key: 'contract',
-    title: '职工合同',
+    key: 'distribute',
+    title: '职工分配',
     actions: {
-        page: contractApi.page,
-        add: contractApi.save,
-        update: contractApi.update,
-        remove: contractApi.remove,
-        get: contractApi.get
+        page: distributeApi.page,
+        add: distributeApi.save,
+        update: distributeApi.update,
+        remove: distributeApi.remove,
+        get: distributeApi.get
     },
     defaultActions: {
         add: true,
@@ -18,14 +18,14 @@ export const tableDef = {
         detail: true
     },
     routes: {
-        add: '/contract/form',
-        edit: '/contract/form',
-        detail: '/contract/detail'
+        add: '/distribute/form',
+        edit: '/distribute/form',
+        detail: '/distribute/detail'
     },
     store: {
         module: 'employeeStore',
-        key: 'contract',
-        set: 'setContract'
+        key: 'distribute',
+        set: 'setDistribute'
     },
     config: {
         bordered: true,
@@ -39,8 +39,8 @@ export const tableDef = {
         formItems: [
             {
                 key: 'employee',
-                label: '职工姓名',
-                placeholder: '请输入职工姓名',
+                label: '职工',
+                placeholder: '请输入',
                 inputType: 'input:string',
                 rules: [],
                 meta: {
@@ -50,15 +50,78 @@ export const tableDef = {
                 }
             },
             {
-                key: 'contractType',
-                label: '合同类型',
-                placeholder: '请输入',
-                inputType: 'input:string',
+                key: 'distributeCompanyId',
+                label: '分配组织',
+                placeholder: '请选择',
+                inputType: 'select:tree',
                 rules: [],
                 meta: {
                     submit: true,
                     scope: ['form', 'detail'],
-                    group: '基本信息'
+                    group: '基本信息',
+                    list: getCompanyTree,
+                    text: 'name'
+                }
+            },
+            {
+                key: 'distributeDepartId',
+                label: '分配部门',
+                placeholder: '请选择',
+                inputType: 'select:list',
+                rules: [],
+                changeBy: {
+                    key: 'distributeCompanyId',
+                    param: 'companyId'
+                },
+                meta: {
+                    submit: true,
+                    scope: ['form', 'detail'],
+                    group: '基本信息',
+                    list: departmentApi.listDepartsOfCompany,
+                    text: 'name'
+                }
+            },
+            {
+                key: 'positionId',
+                label: '分配职位',
+                placeholder: '请输入',
+                inputType: 'select:list',
+                rules: [],
+                changeBy: {
+                    key: 'distributeDepartId',
+                    param: 'departmentId'
+                },
+                meta: {
+                    submit: true,
+                    scope: ['form', 'detail'],
+                    group: '基本信息',
+                    list: positionApi.list
+                }
+            },
+            {
+                key: 'distributeType',
+                label: '分配类型',
+                placeholder: '请选择',
+                inputType: 'select:code',
+                rules: [],
+                meta: {
+                    submit: true,
+                    scope: ['form', 'detail'],
+                    group: '基本信息',
+                    code: 'hr_distribute_type'
+                }
+            },
+            {
+                key: 'distributeStatus',
+                label: '分配状态',
+                placeholder: '请选择',
+                inputType: 'select:code',
+                rules: [],
+                meta: {
+                    submit: true,
+                    scope: ['form', 'detail'],
+                    group: '基本信息',
+                    code: 'hr_distribute_status'
                 }
             },
         ]
@@ -72,62 +135,76 @@ export const tableDef = {
             scopedSlots: {customRender: 'employeeId'}
         },
         {
-            title: '合同类别',
-            dataIndex: 'contractClass',
+            title: '分配类型',
+            dataIndex: 'distributeType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'contractClass'}
+            scopedSlots: {customRender: 'distributeType'}
         },
         {
-            title: '合同类型',
-            dataIndex: 'contractType',
+            title: '分配组织',
+            dataIndex: 'distributeCompanyId',
+            width: 160,
+            ellipsis: true,
+            scopedSlots: {customRender: 'distributeCompanyId'}
+        },
+        {
+            title: '分配部门',
+            dataIndex: 'departId',
+            width: 140,
+            ellipsis: true,
+            scopedSlots: {customRender: 'departId'}
+        },
+        {
+            title: '分配职位',
+            dataIndex: 'positionId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'contractType'}
+            scopedSlots: {customRender: 'positionId'}
         },
         {
-            title: '合同有效期起',
-            dataIndex: 'periodFrom',
+            title: '任职开始时间',
+            dataIndex: 'startTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'periodFrom'}
+            scopedSlots: {customRender: 'startTime'}
         },
         {
-            title: '合同有效期止',
-            dataIndex: 'periodTo',
+            title: '任职结束时间',
+            dataIndex: 'endTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'periodTo'}
+            scopedSlots: {customRender: 'endTime'}
         },
         {
-            title: '试用期止',
-            dataIndex: 'trialEnd',
-            width: 140,
-            ellipsis: true,
-            scopedSlots: {customRender: 'trialEnd'}
-        },
-        {
-            title: '状态',
-            dataIndex: 'status',
+            title: '分配状态',
+            dataIndex: 'distributeStatus',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'status'}
+            scopedSlots: {customRender: 'distributeStatus'}
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createTime',
+            width: 140,
+            ellipsis: true,
+            scopedSlots: {customRender: 'createTime'}
         }
     ]
 }
 
 export const formDef = {
-    key: 'contractForm',
+    key: 'distributeForm',
     formType: 'normal',
-    api: contractApi.api,
+    api: distributeApi.api,
     actions: {
-        save: contractApi.save,
-        update: contractApi.update,
-        get: contractApi.get
+        save: distributeApi.save,
+        update: distributeApi.update,
+        get: distributeApi.get
     },
     store: {
         module: 'employeeStore',
-        key: 'contract'
+        key: 'distribute'
     },
     labelCol: 6,
     wrapperCol: 18,
@@ -212,20 +289,8 @@ export const formDef = {
             }
         },
         {
-            key: 'contractNum',
-            label: '合同编号',
-            placeholder: '请输入合同编号',
-            inputType: 'input:string',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'contractClass',
-            label: '合同类别',
+            key: 'distributeType',
+            label: '分配类型',
             placeholder: '请选择',
             inputType: 'select:code',
             rules: [],
@@ -233,12 +298,12 @@ export const formDef = {
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '基本信息',
-                code: 'hr_contract_class'
+                code: 'hr_distribute_type'
             }
         },
         {
-            key: 'contractType',
-            label: '合同类型',
+            key: 'distributeStatus',
+            label: '分配状态',
             placeholder: '请选择',
             inputType: 'select:code',
             rules: [],
@@ -246,13 +311,61 @@ export const formDef = {
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '基本信息',
-                code: 'hr_contract_type'
+                code: 'hr_distribute_status'
             }
         },
         {
-            key: 'periodFrom',
-            label: '合同有效期起',
+            key: 'distributeCompanyId',
+            label: '分配组织',
             placeholder: '请选择',
+            inputType: 'select:list',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                list: getCompanyTree,
+                text: 'name'
+            }
+        },
+        {
+            key: 'distributeDepartId',
+            label: '分配部门',
+            placeholder: '请选择',
+            inputType: 'select:list',
+            rules: [],
+            changeBy: {
+                key: 'distributeCompanyId',
+                param: 'companyId'
+            },
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                list: departmentApi.listDepartsOfCompany,
+            }
+        },
+        {
+            key: 'positionId',
+            label: '分配职位',
+            placeholder: '请输入',
+            inputType: 'select:list',
+            rules: [],
+            changeBy: {
+                key: 'distributeDepartId',
+                param: 'departmentId'
+            },
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                list: positionApi.list
+            }
+        },
+        {
+            key: 'startTime',
+            label: '任职开始时间',
+            placeholder: '请选择时间',
             inputType: 'date:date',
             rules: [],
             meta: {
@@ -262,9 +375,9 @@ export const formDef = {
             }
         },
         {
-            key: 'periodTo',
-            label: '合同有效期止',
-            placeholder: '请选择',
+            key: 'endTime',
+            label: '任职结束时间',
+            placeholder: '请选择时间',
             inputType: 'date:date',
             rules: [],
             meta: {
@@ -272,57 +385,6 @@ export const formDef = {
                 scope: ['form', 'detail'],
                 group: '基本信息'
             }
-        },
-        {
-            key: 'trialEnd',
-            label: '试用期止',
-            placeholder: '请选择',
-            inputType: 'date:date',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'status',
-            label: '合同状态',
-            placeholder: '请选择',
-            inputType: 'select:code',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息',
-                code: 'hr_contract_status'
-            }
-        },
-        {
-            key: 'signUnit',
-            label: '签发单位',
-            placeholder: '请选择',
-            inputType: 'select:tree',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息',
-                list: getCompanyTree
-            }
-        },
-        {
-            key: 'manageUnit',
-            label: '管理单位',
-            placeholder: '请选择',
-            inputType: 'select:tree',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息',
-                list: getCompanyTree
-            }
-        },
+        }
     ]
 }

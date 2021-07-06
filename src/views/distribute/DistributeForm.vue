@@ -1,5 +1,5 @@
 <template>
-  <cus-form-container title="合同表单" description="请在此输入职工合同相关信息">
+  <cus-form-container title="职工分配" description="请完善职工分配信息">
     <div class="form-block">
       <cus-form :form-def="formDef"></cus-form>
     </div>
@@ -9,10 +9,10 @@
 <script>
 import CusFormContainer from "@/components/form/CusFormContainer";
 import CusForm from "@/components/form/CusForm";
-import {formDef} from "@/definition/contract/contractDef";
+import {formDef} from "@/definition/distribute/distributeDef";
 
 export default {
-  name: "ContractForm",
+  name: "DistributeForm",
   components: {
     CusFormContainer, CusForm
   },

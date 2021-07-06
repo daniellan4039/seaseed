@@ -1,18 +1,19 @@
-import {h, ref, resolveComponent, watch} from "vue";
+import {h, inject, ref, resolveComponent, watch} from "vue";
 
 export default {
     name: 'CusSelectList',
-    props: ['def', 'value', 'dependentKey'],
+    props: ['def', 'value', 'changeBy'],
     emits: ['change'],
     setup(props) {
         const list = props.def.meta.list
         const options = ref([])
-        const refDependentKey = ref(props.dependentKey)
-
-        watch(refDependentKey, nv => {
-            init(nv)
+        const formModel = inject('formModel', {})
+        const paramName = props.changeBy?.param
+        watch(formModel, nv => {
+            let param = {}
+            paramName && (param[paramName] = nv[props.changeBy.key])
+            param[paramName] && init(param)
         })
-
         const init = (value) => {
             if (list) {
                 list(value).then(res => {
@@ -28,6 +29,7 @@ export default {
 
         return {
             options,
+            formModel,
             init
         }
     },
@@ -44,10 +46,12 @@ export default {
                 placeholder: self.def.placeholder,
                 showSearch: true,
                 value: self.value,
-                'onChange':nv => this.$emit('change', nv)
+                'onChange': nv => this.$emit('change', nv)
             },
             {
-                default: () => optionDom
+                default: () => [
+                    optionDom
+                ]
             }
         )
     }
