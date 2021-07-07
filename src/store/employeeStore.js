@@ -19,7 +19,8 @@ export default {
         position: null,
         archiveRoom: null,
         archiveBorrow: null,
-        archiveTransfer: null
+        archiveTransfer: null,
+        dictionary: null
     },
     mutations: {
         setEmployee (state, info) {
@@ -81,6 +82,9 @@ export default {
         },
         setArchiveTransfer(state, info) {
             state.archiveTransfer = info
+        },
+        setDictionary(state, info) {
+            state.dictionary = info
         }
     },
     actions: {
@@ -143,6 +147,9 @@ export default {
         },
         setArchiveTransfer(context, info) {
             context.commit('setArchiveTransfer', info)
+        },
+        setDictionary(context, info) {
+            context.commit('setDictionary', info)
         }
     }
 }

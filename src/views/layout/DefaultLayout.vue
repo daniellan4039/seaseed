@@ -49,6 +49,7 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 import {routes} from '@/router/index'
+// eslint-disable-next-line no-unused-vars
 import {generateMenu, getFromBasePlatform} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
@@ -62,11 +63,11 @@ export default {
   },
   setup () {
     const menuItems = generateMenu(routes)
-    const routers = getFromBasePlatform()
+    // const routers = getFromBasePlatform()
     const menu = { items: menuItems }
     return {
       menu,
-      routers
+      // routers
     }
   },
   data() {

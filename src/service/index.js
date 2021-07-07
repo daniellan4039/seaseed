@@ -27,7 +27,7 @@ import * as distributeApi from './distributeApi'
 
 const $ = axios.create({
     baseURL: '/api',
-    timeout: 1000
+    timeout: 10000
 })
 
 $.interceptors.request.use((config) => {
@@ -42,6 +42,11 @@ $.interceptors.request.use((config) => {
 })
 
 $.interceptors.response.use((response) => {
+    const {code} = response
+    switch (code) {
+        case 100000027:
+            break;
+    }
     return response.data
 }, (error => {
     return Promise.reject(error)

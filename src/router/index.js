@@ -57,6 +57,9 @@ import DistributeTable from "@/views/distribute/DistributeTable";
 import DistributeForm from "@/views/distribute/DistributeForm";
 import DistributeDetail from "@/views/distribute/DistributeDetail";
 import ContractForm from "@/views/contract/ContractForm";
+import Dictionary from "@/views/dictionary/Dictionary";
+import DictionaryForm from "@/views/dictionary/DictionaryForm";
+import DictionaryDetail from "@/views/dictionary/DictionaryDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -615,6 +618,36 @@ export const routes = [
                 visible: false
               }
             },
+            {
+              path: '/dictionary',
+              name: 'Dictionary',
+              component: Dictionary,
+              meta: {
+                title: '基础数据',
+                key: 'dictionary',
+                visible: true
+              }
+            },
+            {
+              path: '/dictionary/form',
+              name: 'DictionaryForm',
+              component: DictionaryForm,
+              meta: {
+                title: '基础数据表单',
+                key: 'dictionary_form',
+                visible: false
+              }
+            },
+            {
+              path: '/dictionary/detail',
+              name: 'DictionaryDetail',
+              component: DictionaryDetail,
+              meta: {
+                title: '基础数据详细',
+                key: 'dictionary_detail',
+                visible: false
+              }
+            }
         ]
     },
     {

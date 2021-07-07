@@ -70,6 +70,16 @@ export default {
                     }
                 )
                 break
+            case 'input:num':
+                input = h(
+                    resolveComponent('a-input-number'),
+                    {
+                        placeholder: this.item.placeholder,
+                        value: this.modelValue,
+                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
+                    }
+                )
+                break
             case 'select':
                 input = h(
                     resolveComponent('a-select'),

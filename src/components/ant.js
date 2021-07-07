@@ -4,7 +4,7 @@ import {
     Checkbox, Col,
     ConfigProvider, DatePicker, Descriptions, Divider,
     Dropdown, Form,
-    Input,
+    Input, InputNumber,
     Layout,
     Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
@@ -39,5 +39,6 @@ export default {
         app.use(Pagination)
         app.use(Upload)
         app.use(TreeSelect)
+        app.use(InputNumber)
     }
 }

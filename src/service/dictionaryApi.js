@@ -1,8 +1,8 @@
 import {$} from '@/service/index'
 
 const prefix = '/base'
-const module = '/anyone'
-
+const moduleAnyone = '/anyone'
+const module = '/baseDict'
 export const api = {
     saveUrl: `${prefix}${module}/save`,
     updateUrl: `${prefix}${module}/update`,
@@ -10,7 +10,7 @@ export const api = {
     listUrl: `${prefix}${module}/list`,
     removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/get`,
-    findByCode: `${prefix}${module}/findByCodes`,
+    findByCode: `${prefix}${moduleAnyone}/findByCodes`,
 }
 
 export function save(data) {
