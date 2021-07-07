@@ -31,6 +31,7 @@ import ArchiveTransfer from "@/views/archiveTransfer/ArchiveTransfer";
 import ArchiveTransferForm from "@/views/archiveTransfer/ArchiveTransferForm";
 import ArchiveTransferDetail from "@/views/archiveTransfer/ArchiveTransferDetail";
 import Contract from "@/views/contract/Contract";
+import ContractForm from '@/views/contract/ContractForm'
 import ContractDetail from "@/views/contract/ContractDetail";
 import Education from "@/views/education/education";
 import EducationForm from "@/views/education/educationForm"
@@ -56,10 +57,13 @@ import TrainDetail from "@/views/train/TrainDetail";
 import DistributeTable from "@/views/distribute/DistributeTable";
 import DistributeForm from "@/views/distribute/DistributeForm";
 import DistributeDetail from "@/views/distribute/DistributeDetail";
-import ContractForm from "@/views/contract/ContractForm";
 import Dictionary from "@/views/dictionary/Dictionary";
 import DictionaryForm from "@/views/dictionary/DictionaryForm";
 import DictionaryDetail from "@/views/dictionary/DictionaryDetail";
+import AcademicTable from "@/views/academic/AcademicTable";
+import AcademicForm from "@/views/academic/AcademicForm";
+import AcademicDetail from "@/views/academic/AcademicDetail";
+import ArchiveRoomForm from "@/views/archiveRoom/ArchiveRoomForm";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -83,7 +87,7 @@ export const routes = [
                 component: EmployeeInfo,
                 meta: {
                     title: '职工信息',
-                    key: 'employee'
+                    key: 'hrms:employee:center'
                 }
             },
             {
@@ -92,7 +96,7 @@ export const routes = [
                 component: EmployeeForm,
                 meta: {
                     title: '职工信息表单',
-                    key: 'employee_form',
+                    key: 'hrms:employee:center:add',
                     visible: false
                 }
             },
@@ -102,7 +106,7 @@ export const routes = [
                 component: EmployeeDetail,
                 meta: {
                     title: '职工详情',
-                    key: 'employee_detail',
+                    key: 'hrms:employee:center:detail',
                     visible: false
                 }
             },
@@ -112,7 +116,7 @@ export const routes = [
                 component: CertificationTable,
                 meta: {
                     title: '职工证书',
-                    key: 'certification'
+                    key: 'hrms:employee:certification'
                 }
             },
             {
@@ -121,7 +125,7 @@ export const routes = [
                 component: CertificationForm,
                 meta: {
                     title: '职工证书表单',
-                    key: 'certification_form',
+                    key: 'hrms:employee:certification:add',
                     visible: false
                 }
             },
@@ -131,7 +135,7 @@ export const routes = [
                 component: CertificationDetail,
                 meta: {
                     title: '职工证书详情',
-                    key: 'certification_detail',
+                    key: 'hrms:employee:certification:detail',
                     visible: false
                 }
             },
@@ -141,7 +145,7 @@ export const routes = [
                 component: ProfessionalTable,
                 meta: {
                     title: '职工职称',
-                    key: 'professional'
+                    key: 'hrms:employee:profession'
                 }
             },
             {
@@ -150,7 +154,7 @@ export const routes = [
                 component: ProfessionalForm,
                 meta: {
                     title: '职工职称表单',
-                    key: 'professional_form',
+                    key: 'hrms:employee:professional:add',
                     visible: false
                 }
             },
@@ -160,7 +164,7 @@ export const routes = [
                 component: ProfessionalDetail,
                 meta: {
                     title: '职称详情',
-                    key: 'professional_detail',
+                    key: 'hrms:employee:professional:get',
                     visible: false
                 }
             },
@@ -170,7 +174,7 @@ export const routes = [
                 component: Family,
                 meta: {
                     title: '职工家人',
-                    key: 'family'
+                    key: 'hrms:employee:family'
                 }
             },
             {
@@ -179,7 +183,7 @@ export const routes = [
                 component: FamilyForm,
                 meta: {
                     title: '职工家人',
-                    key: 'family_form',
+                    key: 'hrms:employee:family:add',
                     visible: false
                 }
             },
@@ -189,7 +193,7 @@ export const routes = [
                 component: FamilyDetail,
                 meta: {
                     title: '职工家人详情',
-                    key: 'family_detail',
+                    key: 'hrms:employee:family:get',
                     visible: false
                 }
             },
@@ -199,7 +203,7 @@ export const routes = [
                 component: Resume,
                 meta: {
                     title: '职工履历',
-                    key: 'resume'
+                    key: 'hrms:employee:resume'
                 }
             },
             {
@@ -207,8 +211,8 @@ export const routes = [
                 name: 'ResumeForm',
                 component: ResumeForm,
                 meta: {
-                    title: '职工履历',
-                    key: 'resume_form',
+                    title: '职工履历表单',
+                    key: 'hrms:employee:resume:add',
                     visible: false
                 }
             },
@@ -218,7 +222,7 @@ export const routes = [
                 component: ResumeDetail,
                 meta: {
                     title: '职工履历',
-                    key: 'resume_detail',
+                    key: 'hrms:employee:resume:get',
                     visible: false
                 }
             },
@@ -228,7 +232,7 @@ export const routes = [
                 component: Archive,
                 meta: {
                     title: '职工档案',
-                    key: 'archive'
+                    key: 'hrms:employee:archive'
                 }
             },
             {
@@ -237,7 +241,7 @@ export const routes = [
                 component: ArchiveForm,
                 meta: {
                     title: '职工档案表单',
-                    key: 'archive_form',
+                    key: 'hrms:employee:archive:add',
                     visible: false
                 }
             },
@@ -247,7 +251,7 @@ export const routes = [
                 component: ArchiveDetail,
                 meta: {
                     title: '职工档案详情',
-                    key: 'archive_detail',
+                    key: 'hrms:employee:archive:detail',
                     visible: false
                 }
             },
@@ -257,7 +261,7 @@ export const routes = [
                 component: Reward,
                 meta: {
                     title: '奖惩信息',
-                    key: 'reward'
+                    key: 'hrms:employee:reward'
                 }
             },
             {
@@ -266,7 +270,7 @@ export const routes = [
                 component: RewardForm,
                 meta: {
                     title: '奖惩信息表单',
-                    key: 'reward_form',
+                    key: 'hrms:employee:reward:add',
                     visible: false
                 }
             },
@@ -276,7 +280,7 @@ export const routes = [
                 component: RewardDetail,
                 meta: {
                     title: '奖惩详情',
-                    key: 'reward_detail',
+                    key: 'hrms:employee:award:get',
                     visible: false
                 }
             },
@@ -286,7 +290,7 @@ export const routes = [
               component: ArchiveBorrow,
               meta: {
                 title: '档案借阅',
-                key: 'archive_borrow'
+                key: 'hrms:basemanage:archive_borrow'
               }
             },
             {
@@ -295,7 +299,7 @@ export const routes = [
               component: ArchiveBorrowDetail,
               meta: {
                 title: '档案借阅详情',
-                key: 'archive_borrow_detail',
+                key: 'hrms:basemanage:archive_borrow:get',
                   visible: false
               }
             },
@@ -305,7 +309,17 @@ export const routes = [
               component: ArchiveRoom,
               meta: {
                 title: '档案室',
-                key: 'archive_room',
+                key: 'hrms:basemanage:archive_room',
+              }
+            },
+            {
+              path: '/archiveRoomForm',
+              name: 'ArchiveRoomForm',
+              component: ArchiveRoomForm,
+              meta: {
+                title: '档案室',
+                key: 'hrms:basemanage:archive_room:add',
+                visible: true
               }
             },
             {
@@ -314,7 +328,7 @@ export const routes = [
               component: ArchiveRoomDetail,
               meta: {
                 title: '档案室详情',
-                key: 'archiveRoomDetail',
+                key: 'hrms:basemanage:archive_room:get',
                 visible: false
               }
             },
@@ -324,7 +338,7 @@ export const routes = [
               component: ArchiveTransfer,
               meta: {
                 title: '档案转移',
-                key: 'archiveTransfer',
+                key: 'hrms:basemanage:archive_transfer',
                 visible: true
               }
             },
@@ -334,7 +348,7 @@ export const routes = [
               component: ArchiveTransferForm,
               meta: {
                 title: '档案转移表单',
-                key: 'archiveTransferForm',
+                key: 'hrms:basemanage:archive_transfer:add',
                 visible: false
               }
             },
@@ -344,7 +358,7 @@ export const routes = [
                 component: ArchiveTransferDetail,
                 meta: {
                     title: '档案转移详情',
-                    key: 'archiveTransferDetail',
+                    key: 'hrms:basemanage:archive_transfer:get',
                     visible: false
                 }
             },
@@ -354,7 +368,7 @@ export const routes = [
               component: Contract,
               meta: {
                 title: '合同',
-                key: 'contract',
+                key: 'hrms:employee:contract',
                 visible: true
               }
             },
@@ -364,7 +378,7 @@ export const routes = [
               component: ContractForm,
               meta: {
                 title: '合同表单',
-                key: 'contract_form',
+                key: 'hrms:employee:contract:add',
                 visible: false
               }
             },
@@ -374,7 +388,7 @@ export const routes = [
               component: ContractDetail,
               meta: {
                 title: '合同详情',
-                key: 'contract_detail',
+                key: 'hrms:employee:contract:get',
                 visible: false
               }
             },
@@ -384,7 +398,7 @@ export const routes = [
                 component: Education,
                 meta: {
                     title: '教育',
-                    key: 'education',
+                    key: 'hrms:employee:education',
                     visible: true
                 }
             },
@@ -394,7 +408,7 @@ export const routes = [
                 component: EducationForm,
                 meta: {
                     title: '教育表单',
-                    key: 'education_form',
+                    key: 'hrms:employee:education:add',
                     visible: false
                 }
             },
@@ -404,7 +418,7 @@ export const routes = [
                 component: EducationDetail,
                 meta: {
                     title: '教育详情',
-                    key: 'education_detail',
+                    key: 'hrms:employee:education:get',
                     visible: false
                 }
             },
@@ -414,7 +428,7 @@ export const routes = [
               component: Language,
               meta: {
                 title: '语言',
-                key: 'language',
+                key: 'hrms:employee:language',
                 visible: true
               }
             },
@@ -424,7 +438,7 @@ export const routes = [
               component: LanguageForm,
               meta: {
                 title: '职工语言',
-                key: 'languageForm',
+                key: 'hrms:employee:language:add',
                 visible: false
               }
             },
@@ -434,7 +448,7 @@ export const routes = [
               component: LanguageDetail,
               meta: {
                 title: '语言详情',
-                key: 'language_detail',
+                key: 'hrms:employee:language:get',
                 visible: false
               }
             },
@@ -444,7 +458,7 @@ export const routes = [
               component: Patent,
               meta: {
                 title: '专利',
-                key: 'patent',
+                key: 'hrms:employee:patent',
                 visible: true
               }
             },
@@ -454,7 +468,7 @@ export const routes = [
               component: PatentForm,
               meta: {
                 title: '专利表单',
-                key: 'patent_form',
+                key: 'hrms:employee:patent:add',
                 visible: false
               }
             },
@@ -464,7 +478,7 @@ export const routes = [
               component: PatentDetail,
               meta: {
                 title: '专利详细',
-                key: 'patent_detail',
+                key: 'hrms:employee:patent:get',
                 visible: false
               }
             },
@@ -474,7 +488,7 @@ export const routes = [
               component: Position,
               meta: {
                 title: '职位',
-                key: 'position',
+                key: 'hrms:basemanage:position',
                 visible: true
               }
             },
@@ -484,7 +498,7 @@ export const routes = [
               component: PositionForm,
               meta: {
                 title: '职位表单',
-                key: 'position_form',
+                key: 'hrms:basemanage:position:add',
                 visible: false
               }
             },
@@ -494,7 +508,7 @@ export const routes = [
               component: PositionDetail,
               meta: {
                 title: '职位详情',
-                key: 'position_detail',
+                key: 'hrms:basemanage:position:get',
                 visible: false
               }
             },
@@ -504,7 +518,7 @@ export const routes = [
               component: Soldier,
               meta: {
                 title: '复转军人',
-                key: 'soldier',
+                key: 'hrms:employee:soldier',
                 visible: true
               }
             },
@@ -514,7 +528,7 @@ export const routes = [
               component: SoldierForm,
               meta: {
                 title: '复转军人表单',
-                key: 'soldier_form',
+                key: 'hrms:employee:soldier:view:save',
                 visible: false
               }
             },
@@ -524,7 +538,7 @@ export const routes = [
               component: SoldierDetail,
               meta: {
                 title: '复转军人详细',
-                key: 'Soldier_detail',
+                key: 'hrms:employee:soldier:get',
                 visible: false
               }
             },
@@ -534,7 +548,7 @@ export const routes = [
               component: Thesis,
               meta: {
                 title: '学术论文',
-                key: 'thesis',
+                key: 'hrms:employee:thesis',
                 visible: true
               }
             },
@@ -544,7 +558,7 @@ export const routes = [
               component: ThesisForm,
               meta: {
                 title: '学术论文表单',
-                key: 'thesis_form',
+                key: 'hrms:employee:thesis:view:save',
                 visible: false
               }
             },
@@ -554,7 +568,7 @@ export const routes = [
               component: ThesisDetail,
               meta: {
                 title: '学术论文详情信息',
-                key: 'thesis_detail',
+                key: 'hrms:employee:thesis:get',
                 visible: false
               }
             },
@@ -564,7 +578,7 @@ export const routes = [
               component: Train,
               meta: {
                 title: '培训经历',
-                key: 'train',
+                key: 'hrms:employee:train',
                 visible: true
               }
             },
@@ -574,7 +588,7 @@ export const routes = [
               component: TrainForm,
               meta: {
                 title: '培训表单',
-                key: 'train_form',
+                key: 'hrms:employee:train:add',
                 visible: false
               }
             },
@@ -584,7 +598,7 @@ export const routes = [
               component: TrainDetail,
               meta: {
                 title: '培训详情',
-                key: 'train_detail',
+                key: 'hrms:employee:train:get',
                 visible: false
               }
             },
@@ -594,7 +608,7 @@ export const routes = [
               component: DistributeTable,
               meta: {
                 title: '职工分配',
-                key: 'distribute',
+                key: 'hrms:employee:distribution',
                 visible: true
               }
             },
@@ -604,7 +618,7 @@ export const routes = [
               component: DistributeForm,
               meta: {
                 title: '职工分配表单',
-                key: 'distribute_form',
+                key: 'hrms:employee:distribution:add',
                 visible: false
               }
             },
@@ -614,7 +628,7 @@ export const routes = [
               component: DistributeDetail,
               meta: {
                 title: '职工分配详细',
-                key: 'distribute_detail',
+                key: 'hrms:employee:distribution:get',
                 visible: false
               }
             },
@@ -624,7 +638,7 @@ export const routes = [
               component: Dictionary,
               meta: {
                 title: '基础数据',
-                key: 'dictionary',
+                key: 'hrms:basemanage:basedata',
                 visible: true
               }
             },
@@ -634,7 +648,7 @@ export const routes = [
               component: DictionaryForm,
               meta: {
                 title: '基础数据表单',
-                key: 'dictionary_form',
+                key: 'hrms:basemanage:basedata:add',
                 visible: false
               }
             },
@@ -644,10 +658,40 @@ export const routes = [
               component: DictionaryDetail,
               meta: {
                 title: '基础数据详细',
-                key: 'dictionary_detail',
+                key: 'hrms:basemanage:basedata:get',
                 visible: false
               }
-            }
+            },
+            {
+              path: '/academic',
+              name: 'Academic',
+              component: AcademicTable,
+              meta: {
+                title: '科研成果',
+                key: 'hrms:employee:academic',
+                visible: true
+              }
+            },
+            {
+              path: '/academic/form',
+              name: 'AcademicForm',
+              component: AcademicForm,
+              meta: {
+                title: '科研成果表单',
+                key: 'hrms:employee:academic:view:save',
+                visible: true
+              }
+            },
+            {
+              path: '/academic/detail',
+              name: 'AcademicDetail',
+              component: AcademicDetail,
+              meta: {
+                title: '科研成果详细',
+                key: 'hrms:employee:science:get',
+                visible: true
+              }
+            },
         ]
     },
     {

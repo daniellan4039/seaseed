@@ -1,7 +1,6 @@
 <template>
   <cus-table-container :def="tableDef.searchParams" @submit="onSubmit">
     <div class="table-block" id='HRMS_TABLE_CONTAINER'>
-      <a-tree></a-tree>
       <cus-table :table-def="tableDef" :search-model="searchModel" :refresh="refresh">
       </cus-table>
     </div>
@@ -9,12 +8,12 @@
 </template>
 
 <script>
-import {tableDef} from "@/definition/dictionary/dictionaryDef"
+import {tableDef} from "@/definition/academic/academicDef"
 import {CusTable, CusTableContainer} from '@/components'
 import {ref} from "vue";
 
 export default {
-  name: "Dictionary",
+  name: "AcademicTable",
   components: {
     CusTable, CusTableContainer
   },
@@ -36,4 +35,5 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 </style>

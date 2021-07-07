@@ -170,7 +170,7 @@ export default {
             this.$emit('update:selectedKeys', [arg.key])
         },
         findParentMenuItem(parentItem, itemKey, subItems) {
-            return subItems.find(i => {
+            return subItems?.find(i => {
                 if (i?.type === 'menuItem' && i?.key === itemKey) {
                     return parentItem
                 } else if (i?.type === 'subMenu') {

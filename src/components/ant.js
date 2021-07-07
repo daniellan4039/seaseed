@@ -8,7 +8,7 @@ import {
     Layout,
     Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
-    Tabs, Tooltip, TreeSelect,
+    Tabs, Tooltip, Tree, TreeSelect,
     Typography, Upload
 } from "ant-design-vue";
 
@@ -40,5 +40,6 @@ export default {
         app.use(Upload)
         app.use(TreeSelect)
         app.use(InputNumber)
+        app.use(Tree)
     }
 }

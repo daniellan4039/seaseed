@@ -4,7 +4,7 @@
       <cus-menu
           v-model:selectedKeys="menuSelectedKeys"
           :collapsed="collapsed"
-          :data-source="menu"
+          :data-source="routers"
           :open-one="true"
           v-on:change:select="onMenuItemSelect"
       />
@@ -44,13 +44,12 @@
 import CusMenu from '@/components/menu/CusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
 import CusTabs from '@/components/menu/CusTabs'
-import {reactive, toRaw} from "vue";
+import {reactive, ref, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 import {routes} from '@/router/index'
-// eslint-disable-next-line no-unused-vars
-import {generateMenu, getFromBasePlatform} from "@/funcLib/menuParse";
+import {generateMenuByRoutes, getFromBasePlatform} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -61,13 +60,18 @@ export default {
     CusMenu, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
     CusTabs
   },
-  setup () {
-    const menuItems = generateMenu(routes)
-    // const routers = getFromBasePlatform()
-    const menu = { items: menuItems }
+  setup() {
+    const menuItems = generateMenuByRoutes(routes)
+    const routers = ref({})
+    getFromBasePlatform().then(res => {
+      routers.value = {
+        items: res
+      }
+    })
+    const menu = {items: menuItems}
     return {
       menu,
-      // routers
+      routers
     }
   },
   data() {
@@ -141,7 +145,7 @@ export default {
         }
       }
     },
-    closeOther(keys){
+    closeOther(keys) {
       keys?.[0] && this.saveScene(keys[0].key)
     },
     saveScene(menuItemKey) {
