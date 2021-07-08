@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {SearchOutlined} from "@ant-design/icons-vue";
 import CusEmbedTable from "@/components/form/CusEmbedTable";
 
@@ -74,6 +74,10 @@ export default {
       modelValue.value = val.value
       ctx.emit('change', val.value)
     }
+
+    watch(modelValue, val => {
+      ctx.emit('change', val)
+    })
 
     return{
       modelValue,
