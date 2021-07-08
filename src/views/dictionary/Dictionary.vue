@@ -28,7 +28,10 @@ export default {
   setup() {
     let refresh = ref(0)
     let maxHeight = ref(200)
-    const searchModel = ref({})
+    const searchModel = ref({
+      dictCodeEqual: true,
+      ignoreParent: true
+    })
     const keywords = ref('')
     const treeSelectedKeys = ref([])
 
