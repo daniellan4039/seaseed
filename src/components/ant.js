@@ -5,7 +5,7 @@ import {
     ConfigProvider, DatePicker, Descriptions, Divider,
     Dropdown, Form,
     Input, InputNumber,
-    Layout,
+    Layout, List,
     Menu, Modal, Pagination, Row, Select, Space, Spin,
     Table,
     Tabs, Tooltip, Tree, TreeSelect,
@@ -41,5 +41,6 @@ export default {
         app.use(TreeSelect)
         app.use(InputNumber)
         app.use(Tree)
+        app.use(List)
     }
 }

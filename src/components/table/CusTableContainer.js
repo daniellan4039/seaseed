@@ -10,7 +10,11 @@ export default {
             type: Object,
             required: true
         },
-        modelValue: {}
+        modelValue: {},
+        showSearchBlock: {
+            type: Boolean,
+            default: true
+        }
     },
     emits: ['submit'],
     components: {
@@ -34,7 +38,7 @@ export default {
             null,
             {
                 default: () => {
-                    const header = <cus-search-bar formDef={self.def} onSubmit={self.submit} />
+                    const header = this.showSearchBlock ? <cus-search-bar formDef={self.def} onSubmit={self.submit} /> : null
                     return [
                         header,
                         this.$slots.default()

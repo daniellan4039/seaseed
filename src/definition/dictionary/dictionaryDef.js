@@ -40,17 +40,17 @@ export const tableDef = {
     columns: [
         {
             title: '编码值',
-            dataIndex: 'dictCode',
+            dataIndex: 'dictValue',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'dictCode'}
+            scopedSlots: {customRender: 'dictValue'}
         },
         {
             title: '名称',
-            dataIndex: 'dictName',
+            dataIndex: 'dictTxt',
             width: 160,
             ellipsis: true,
-            scopedSlots: {customRender: 'dictText'}
+            scopedSlots: {customRender: 'dictTxt'}
         },
         {
             title: '备注',

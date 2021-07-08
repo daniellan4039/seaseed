@@ -48,8 +48,7 @@ import {reactive, ref, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
-import {routes} from '@/router/index'
-import {generateMenuByRoutes, getFromBasePlatform} from "@/funcLib/menuParse";
+import {getFromBasePlatform} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -61,16 +60,13 @@ export default {
     CusTabs
   },
   setup() {
-    const menuItems = generateMenuByRoutes(routes)
     const routers = ref({})
     getFromBasePlatform().then(res => {
       routers.value = {
         items: res
       }
     })
-    const menu = {items: menuItems}
     return {
-      menu,
       routers
     }
   },
