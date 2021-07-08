@@ -280,7 +280,7 @@ export const formDef = {
             key: 'attachmentList',
             label: '附件列表',
             placeholder: '',
-            inputType: 'upload:text',
+            inputType: 'upload',
             rules: [],
             meta: {
                 submit: true,

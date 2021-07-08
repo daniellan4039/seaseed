@@ -1,9 +1,9 @@
 import {api, get} from '@/service/uploadApi'
-import {inject, reactive, ref} from "vue";
-import {UploadOutlined} from "@ant-design/icons-vue";
+import {reactive, ref} from "vue";
+import {UploadOutlined, PlusOutlined} from "@ant-design/icons-vue";
 
 export default {
-    name: 'CusUploadText',
+    name: 'CusUpload',
     props: {
         fileList: Array,
         action: {
@@ -13,17 +13,20 @@ export default {
         multiple: {
             type: Boolean,
             default: true
+        },
+        listType: {
+            type: String,
+            default: 'text'
         }
     },
     emits: [
         'update:fileList'
     ],
     components: {
-        UploadOutlined
+        UploadOutlined, PlusOutlined
     },
     setup(props, ctx) {
         const fileList = ref([])
-        const formModel = inject('formModel', {})
         props?.fileList?.forEach(i => {
             let requestData = new FormData()
             requestData.set('paths', i.attachment)
@@ -57,13 +60,13 @@ export default {
             if (doneFiles && doneFiles.length > 0) {
                 const attachmentList = info.fileList.map(i => {
                     const {data} = i.response ?? {isSuccess: false, data: null}
+                    i.url = data?.url
                     return {
-                        attachmentType: data?.contentType??i.contentType,
-                        attachment: data?.path??i.path,
+                        attachmentType: data?.contentType ?? i.contentType,
+                        attachment: data?.path ?? i.path,
                         title: i.name,
                         fileSize: i.size,
-                        fileType: i.type,
-                        id: formModel?.id
+                        fileType: i.type
                     }
                 })
                 ctx.emit('update:fileList', attachmentList)
@@ -78,6 +81,18 @@ export default {
         }
     },
     render() {
+        let ops = <a-button>
+            <UploadOutlined />
+            上传
+        </a-button>
+
+        if (this.listType === 'picture-card') {
+            ops = <div>
+                <plus-outlined />
+                <div className="ant-upload-text">上传</div>
+            </div>
+        }
+
         return <a-upload
             action={this.api.uploadUrl}
             multiple={this.multiple}
@@ -85,11 +100,9 @@ export default {
             onChange={this.onChange}
             headers={this.headers}
             data={this.data}
+            listType={this.listType}
         >
-            <a-button>
-                <UploadOutlined/>
-                上传
-            </a-button>
+            {ops}
         </a-upload>
     }
 }

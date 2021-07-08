@@ -422,7 +422,7 @@ export const formDef = {
             key: 'degreeCertFileList',
             label: '毕业证书',
             placeholder: '',
-            inputType: 'upload:text',
+            inputType: 'upload',
             rules: [],
             meta: {
                 submit: true,
@@ -434,7 +434,7 @@ export const formDef = {
             key: 'degreeVerifiFileList',
             label: '学位证书',
             placeholder: '',
-            inputType: 'upload:text',
+            inputType: 'upload',
             rules: [],
             meta: {
                 submit: true,

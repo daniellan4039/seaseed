@@ -14,7 +14,7 @@ export default {
         },
         thresholdCols: {
             type: Number,
-            default: 10
+            default: 15
         },
         maxCols: {
             type: Number,

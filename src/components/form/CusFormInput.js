@@ -6,7 +6,7 @@ import CusDatePicker from "@/components/form/date/CusDatePicker";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import CusSelectList from "@/components/form/select/CusSelectList";
 // eslint-disable-next-line no-unused-vars
-import CusUploadText from "@/components/form/upload/CusUploadText";
+import CusUploadText from "@/components/form/upload/CusUpload";
 import CusSelectTree from "@/components/form/select/CusSelectTree";
 
 export default {
@@ -172,12 +172,13 @@ export default {
                     }
                 )
                 break
-            case 'upload:text':
+            case 'upload':
                 input = h(
                     CusUploadText,
                     {
                         fileList: this.modelValue,
-                        'onUpdate:fileList': val => this.$emit('update:modelValue', val)
+                        'onUpdate:fileList': val => this.$emit('update:modelValue', val),
+                        listType: (this.item?.meta?.listType)??'text'
                     }
                 )
                 break

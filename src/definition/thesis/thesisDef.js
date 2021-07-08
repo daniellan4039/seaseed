@@ -413,7 +413,7 @@ export const formDef = {
             key: 'attachmentList',
             label: '附件列表',
             placeholder: '请选择',
-            inputType: 'upload:text',
+            inputType: 'upload',
             rules: [],
             meta: {
                 submit: true,
