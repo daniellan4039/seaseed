@@ -5,6 +5,7 @@ import CusSelectSearch from "@/components/form/select/CusSelectSearch";
 import CusDatePicker from "@/components/form/date/CusDatePicker";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import CusSelectList from "@/components/form/select/CusSelectList";
+// eslint-disable-next-line no-unused-vars
 import CusUploadText from "@/components/form/upload/CusUploadText";
 import CusSelectTree from "@/components/form/select/CusSelectTree";
 
@@ -179,6 +180,7 @@ export default {
                         'onUpdate:fileList': val => this.$emit('update:modelValue', val)
                     }
                 )
+                break
         }
         return input
     }

@@ -1,10 +1,10 @@
 import {$} from '@/service/index'
 
-const prefix = '/api/base'
+const prefix = '/base'
 const module = '/attachment'
 
 export const api = {
-    uploadUrl: `${prefix}${module}/anyone/upload`,
+    uploadUrl: `api/${prefix}${module}/anyone/upload`,
     removeUrl: `${prefix}${module}/delete`,
     getUrl: `${prefix}${module}/anyone/getUrls`
 }
@@ -29,11 +29,9 @@ export function remove(data) {
     )
 }
 
-export function get(params) {
-    return $.get(
+export function get(data) {
+    return $.post(
         api.getUrl,
-        {
-            params: params
-        }
+        data
     )
 }

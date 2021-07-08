@@ -14,7 +14,7 @@ export default {
         },
         thresholdCols: {
             type: Number,
-            default: 8
+            default: 10
         },
         maxCols: {
             type: Number,
@@ -288,7 +288,6 @@ export default {
                 }
             )
         )
-
         formItemsDOM.push(
             submitButton
         )

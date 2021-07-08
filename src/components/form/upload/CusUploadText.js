@@ -1,7 +1,7 @@
-import { api } from '@/service/uploadApi'
-// eslint-disable-next-line no-unused-vars
-import {reactive, ref, toRef, toRefs} from "vue";
+import {api, get} from '@/service/uploadApi'
+import {inject, reactive, ref} from "vue";
 import {UploadOutlined} from "@ant-design/icons-vue";
+
 export default {
     name: 'CusUploadText',
     props: {
@@ -22,9 +22,28 @@ export default {
         UploadOutlined
     },
     setup(props, ctx) {
-        const fileList = toRef(props, 'fileList')
-        const newFileList = ref([])
-        fileList.value && (newFileList.value = [...fileList])
+        const fileList = ref([])
+        const formModel = inject('formModel', {})
+        props?.fileList?.forEach(i => {
+            let requestData = new FormData()
+            requestData.set('paths', i.attachment)
+            get(requestData).then(res => {
+                const {isSuccess, data} = res
+                isSuccess && fileList.value.push(
+                    {
+                        uid: i.id,
+                        name: i.title,
+                        status: 'done',
+                        url: data[0],
+                        contentType: i.fileType,
+                        path: i.attachment,
+                        size: i.fileSize,
+                        type: i.fileType
+                    }
+                )
+            })
+        })
+
         const data = reactive({
             functionPoint: 'hrms'
         })
@@ -32,19 +51,19 @@ export default {
             token: `Bearer ${localStorage.getItem('HRMS_USER_TOKEN')}`,
             app_id: '68816749155319814',
         })
-        const onChange = ({file}) => {
-            if(file && file.status === 'done') {
-                newFileList.value.push(
-                    file
-                )
-                const attachmentList = newFileList.value.map(i => {
+        const onChange = info => {
+            fileList.value = info.fileList
+            const doneFiles = info.fileList.filter(file => file.status === 'done')
+            if (doneFiles && doneFiles.length > 0) {
+                const attachmentList = info.fileList.map(i => {
+                    const {data} = i.response ?? {isSuccess: false, data: null}
                     return {
-                        attachmentType: '',
-                        objectId: 0,
-                        attachment: '',
+                        attachmentType: data?.contentType??i.contentType,
+                        attachment: data?.path??i.path,
                         title: i.name,
                         fileSize: i.size,
-                        fileType: i.type
+                        fileType: i.type,
+                        id: formModel?.id
                     }
                 })
                 ctx.emit('update:fileList', attachmentList)
@@ -52,7 +71,7 @@ export default {
         }
         return {
             api,
-            newFileList,
+            fileList,
             data,
             headers,
             onChange
@@ -62,13 +81,13 @@ export default {
         return <a-upload
             action={this.api.uploadUrl}
             multiple={this.multiple}
-            // fileList={this.newFileList}
+            fileList={this.fileList}
             onChange={this.onChange}
             headers={this.headers}
             data={this.data}
         >
             <a-button>
-                <UploadOutlined />
+                <UploadOutlined/>
                 上传
             </a-button>
         </a-upload>

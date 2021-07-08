@@ -24,7 +24,7 @@ export default {
         }
 
         props.formDef.formItems?.forEach(fi => {
-            if (fi.meta?.scope.includes('detail')) {
+            if (fi.meta?.scope?.includes('detail')) {
                 const groupName = fi.meta?.group ?? '基本信息'
                 if (groupName) {
                     const length = pageMap.value[groupName]?.length
@@ -63,7 +63,9 @@ export default {
             const desBlock = h(
                 resolveComponent('a-descriptions'),
                 {
-                    title: pageMapKey
+                    title: pageMapKey,
+                    column: 3,
+                    size: 'small'
                 },
                 {
                     default: () => desItems
