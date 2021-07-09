@@ -248,6 +248,12 @@ export default {
                 tableScroll.y += 8
             }
         }
+        let otherOpsSlot = {
+            otherOps: () => this.$slots.otherOps ? this.$slots.otherOps() : null
+        }
+        if (tableScroll.y < 400) {
+            (tableScroll.y = 400)
+        }
         const table = h(
             resolveComponent('a-table'),
             {
@@ -297,8 +303,8 @@ export default {
                 onSettingChange={self.onSettingChange}
                 v-model={[self.tableSize, 'density']}
                 enableAdd={add}
-            /> :
-            null
+                v-slots={otherOpsSlot}
+            /> : null
         return h(
             'div',
             {

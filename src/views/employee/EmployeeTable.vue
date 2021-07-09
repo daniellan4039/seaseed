@@ -2,6 +2,9 @@
   <cus-table-container :def="tableDef.searchParams" @submit="onSubmit">
     <div class="table-block" id='HRMS_TABLE_CONTAINER'>
       <cus-table :table-def="tableDef" :search-model="searchModel" :refresh="refresh">
+        <template #otherOps>
+          <a-button type="default" style="margin-left: 8px;">批量导入</a-button>
+        </template>
       </cus-table>
     </div>
   </cus-table-container>

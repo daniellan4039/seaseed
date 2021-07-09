@@ -161,10 +161,17 @@ export default {
         const add = self.enableAdd && <a-button type='primary' onClick={self.onAddBtnClick}>
             <PlusOutlined/>
             新增
-        </a-button> || !self.enableAdd && <span></span>
+        </a-button> || <span></span>
+
+        const otherOps = <span>
+            {this.$slots.otherOps ? this.$slots.otherOps() : ''}
+        </span>
 
         return <div className='table-ops-bar-container'>
-            {add}
+            <span>
+                {add}
+                {otherOps}
+            </span>
             <div class='table-setting-block'>
                 <a-dropdown v-slots={shrinkMenuSlot} trigger={['click']}>
                     <a-tooltip v-slots={shrinkTitle}>

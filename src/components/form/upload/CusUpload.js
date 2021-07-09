@@ -17,6 +17,10 @@ export default {
         listType: {
             type: String,
             default: 'text'
+        },
+        enableUpload: {
+            type: Boolean,
+            default: true
         }
     },
     emits: [
