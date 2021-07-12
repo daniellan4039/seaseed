@@ -21,6 +21,19 @@ export default {
         enableUpload: {
             type: Boolean,
             default: true
+        },
+        text: {
+            type: String,
+            default: '上传'
+        },
+        style: {},
+        showUploadList: {
+            type: Boolean,
+            default: true
+        },
+        customRequest: {
+            type: Function,
+            default: null
         }
     },
     emits: [
@@ -85,26 +98,32 @@ export default {
         }
     },
     render() {
+        const action = this.enableUpload ? this.api.uploadUrl : null
         let ops = <a-button>
             <UploadOutlined />
-            上传
+            {this.text}
         </a-button>
 
         if (this.listType === 'picture-card') {
             ops = <div>
                 <plus-outlined />
-                <div className="ant-upload-text">上传</div>
+                <div className="ant-upload-text">
+                    {this.text}
+                </div>
             </div>
         }
 
         return <a-upload
-            action={this.api.uploadUrl}
+            action={action}
+            customRequest={this.customRequest}
             multiple={this.multiple}
             fileList={this.fileList}
             onChange={this.onChange}
             headers={this.headers}
             data={this.data}
             listType={this.listType}
+            style={this.style}
+            showUploadList={this.showUploadList}
         >
             {ops}
         </a-upload>
