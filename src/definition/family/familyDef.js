@@ -119,56 +119,56 @@ export const tableDef = {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '家人姓名',
             dataIndex: 'name',
             width: 120,
-            scopedSlots: {customRender: 'name'}
+            slots: {customRender: 'name'}
         },
         {
             title: '家人关系',
             dataIndex: 'relation',
             width: 120,
-            scopedSlots: {customRender: 'relation'}
+            slots: {customRender: 'relation'}
         },
         {
             title: '性别',
             dataIndex: 'sex',
             width: 80,
-            scopedSlots: {customRender: 'sex'}
+            slots: {customRender: 'sex'}
         },
         {
             title: '出生日期',
             dataIndex: 'birthday',
             width: 140,
-            scopedSlots: {customRender: 'birthday'}
+            slots: {customRender: 'birthday'}
         },
         {
             title: '职务',
             dataIndex: 'duty',
             width: 120,
-            scopedSlots: {customRender: 'duty'}
+            slots: {customRender: 'duty'}
         },
         {
             title: '工作单位',
             dataIndex: 'workUnit',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'workUnit'}
+            slots: {customRender: 'workUnit'}
         },
         {
             title: '政治面貌',
             dataIndex: 'politics_status',
             width: 120,
-            scopedSlots: {customRender: 'politics_status'}
+            slots: {customRender: 'politics_status'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 160,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

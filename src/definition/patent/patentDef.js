@@ -93,42 +93,42 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '专利号',
             dataIndex: 'patentNum',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: ''}
+            slots: {customRender: ''}
         },
         {
             title: '专利名称',
             dataIndex: 'patentTitle',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'patentTitle'}
+            slots: {customRender: 'patentTitle'}
         },
         {
             title: '国别',
             dataIndex: 'patentCountry',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'patentCountry'}
+            slots: {customRender: 'patentCountry'}
         },
         {
             title: '获取日期',
             dataIndex: 'awardOn',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'awardOn'}
+            slots: {customRender: 'awardOn'}
         },
         {
             title: '创建日期',
             dataIndex: 'createTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

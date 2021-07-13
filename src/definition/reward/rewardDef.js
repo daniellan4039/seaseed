@@ -146,49 +146,49 @@ export const tableDef = {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 130,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '标题',
             dataIndex: 'apTitle',
             width: 120,
-            scopedSlots: {customRender: 'apTitle'}
+            slots: {customRender: 'apTitle'}
         },
         {
             title: '奖惩类型',
             dataIndex: 'apType',
             width: 120,
-            scopedSlots: {customRender: 'apType'}
+            slots: {customRender: 'apType'}
         },
         {
             title: '惩罚等级',
             dataIndex: 'apLevel',
             width: 120,
-            scopedSlots: {customRender: 'apLevel'}
+            slots: {customRender: 'apLevel'}
         },
         {
             title: '奖惩金额',
             dataIndex: 'apAmount',
             width: 120,
-            scopedSlots: {customRender: 'apAmount'}
+            slots: {customRender: 'apAmount'}
         },
         {
             title: '奖惩日期',
             dataIndex: 'apTime',
             width: 140,
-            scopedSlots: {customRender: 'apTime'}
+            slots: {customRender: 'apTime'}
         },
         {
             title: '奖惩单位',
             dataIndex: 'awardUnit',
             width: 140,
-            scopedSlots: {customRender: 'awardUnit'}
+            slots: {customRender: 'awardUnit'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

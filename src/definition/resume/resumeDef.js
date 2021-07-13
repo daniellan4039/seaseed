@@ -133,45 +133,45 @@ export const tableDef = {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '工作单位',
             dataIndex: 'workUnit',
             width: 220,
             ellipsis: true,
-            scopedSlots: {customRender: 'workUnit'}
+            slots: {customRender: 'workUnit'}
         },
         {
             title: '工作性质',
             dataIndex: 'fullPartJob',
             width: 120,
-            scopedSlots: {customRender: 'fullPartJob'}
+            slots: {customRender: 'fullPartJob'}
         },
         {
             title: '工作日期起',
             dataIndex: 'workFrom',
             width: 140,
-            scopedSlots: {customRender: 'workFrom'}
+            slots: {customRender: 'workFrom'}
         },
         {
             title: '工作日期止',
             dataIndex: 'workTo',
             width: 120,
-            scopedSlots: {customRender: 'workTo'}
+            slots: {customRender: 'workTo'}
         },
         {
             title: '职务',
             dataIndex: 'duty',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'duty'}
+            slots: {customRender: 'duty'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 150,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

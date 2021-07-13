@@ -196,35 +196,35 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '类型',
             dataIndex: 'soldierType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'soldierType'}
+            slots: {customRender: 'soldierType'}
         },
         {
             title: '军人级别',
             dataIndex: 'soldierLevel',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'soldierLevel'}
+            slots: {customRender: 'soldierLevel'}
         },
         {
             title: '入伍时间',
             dataIndex: 'joinAt',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'joinAt'}
+            slots: {customRender: 'joinAt'}
         },
         {
             title: '退伍时间',
             dataIndex: 'leaveAt',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'leaveAt'}
+            slots: {customRender: 'leaveAt'}
         }
     ]
 }

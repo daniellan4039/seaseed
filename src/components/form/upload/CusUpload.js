@@ -34,6 +34,10 @@ export default {
         customRequest: {
             type: Function,
             default: null
+        },
+        beforeUpload: {
+            type: Function,
+            default: null
         }
     },
     emits: [
@@ -116,6 +120,7 @@ export default {
         return <a-upload
             action={action}
             customRequest={this.customRequest}
+            beforeUpload={this.beforeUpload}
             multiple={this.multiple}
             fileList={this.fileList}
             onChange={this.onChange}

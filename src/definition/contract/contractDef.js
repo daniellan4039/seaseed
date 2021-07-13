@@ -69,49 +69,49 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '合同类别',
             dataIndex: 'contractClass',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'contractClass'}
+            slots: {customRender: 'contractClass'}
         },
         {
             title: '合同类型',
             dataIndex: 'contractType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'contractType'}
+            slots: {customRender: 'contractType'}
         },
         {
             title: '合同有效期起',
             dataIndex: 'periodFrom',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'periodFrom'}
+            slots: {customRender: 'periodFrom'}
         },
         {
             title: '合同有效期止',
             dataIndex: 'periodTo',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'periodTo'}
+            slots: {customRender: 'periodTo'}
         },
         {
             title: '试用期止',
             dataIndex: 'trialEnd',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'trialEnd'}
+            slots: {customRender: 'trialEnd'}
         },
         {
             title: '状态',
             dataIndex: 'status',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'status'}
+            slots: {customRender: 'status'}
         }
     ]
 }

@@ -183,43 +183,43 @@ export const tableDef = {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '职称名称',
             dataIndex: 'title',
             width: 120,
-            scopedSlots: {customRender: 'title'}
+            slots: {customRender: 'title'}
         },
         {
             title: '职称类型',
             dataIndex: 'majorType',
             width: 120,
-            scopedSlots: {customRender: 'majorType'}
+            slots: {customRender: 'majorType'}
         },
         {
             title: '职称等级',
             dataIndex: 'professionalLevel',
             width: 120,
-            scopedSlots: {customRender: 'professionalLevel'}
+            slots: {customRender: 'professionalLevel'}
         },
         {
             title: '授予日期',
             dataIndex: 'awardOn',
             width: 140,
-            scopedSlots: {customRender: 'awardOn'}
+            slots: {customRender: 'awardOn'}
         },
         {
             title: '授予机构',
             dataIndex: 'awardUnit',
             width: 120,
-            scopedSlots: {customRender: 'awardUnit'}
+            slots: {customRender: 'awardUnit'}
         },
         {
             title: '创建时间',
             dataIndex: 'createdAt',
             width: 150,
-            scopedSlots: {customRender: 'createdAt'}
+            slots: {customRender: 'createdAt'}
         }
     ]
 }

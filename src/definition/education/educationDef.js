@@ -118,63 +118,63 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '学校',
             dataIndex: 'schoole',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'schoole'}
+            slots: {customRender: 'schoole'}
         },
         {
             title: '入校时间',
             dataIndex: 'enteredOn',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'enteredOn'}
+            slots: {customRender: 'enteredOn'}
         },
         {
             title: '毕业时间',
             dataIndex: 'graduatedOn',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: ''}
+            slots: {customRender: ''}
         },
         {
             title: '学历',
             dataIndex: 'education',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'education'}
+            slots: {customRender: 'education'}
         },
         {
             title: '专业',
             dataIndex: 'major',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'major'}
+            slots: {customRender: 'major'}
         },
         {
             title: '学习形式',
             dataIndex: 'studyType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'studyType'}
+            slots: {customRender: 'studyType'}
         },
         {
             title: '学校性质',
             dataIndex: 'schoolTag',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'schoolTag'}
+            slots: {customRender: 'schoolTag'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

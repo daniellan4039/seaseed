@@ -80,21 +80,21 @@ export const tableDef = {
             dataIndex: 'archiveCode',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'archiveCode'}
+            slots: {customRender: 'archiveCode'}
         },
         {
             title: '档案室名称',
             dataIndex: 'roomName',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: ''}
+            slots: {customRender: ''}
         },
         {
             title: '管理单位',
             dataIndex: 'manageCompanyId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'manageCompanyId'}
+            slots: {customRender: 'manageCompanyId'}
         }
     ]
 }

@@ -67,43 +67,43 @@ export const tableDef = {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '证书类型',
             dataIndex: 'certType',
             width: 180,
-            scopedSlots: {customRender: 'certType'}
+            slots: {customRender: 'certType'}
         },
         {
             title: '证书名称',
             dataIndex: 'certName',
             width: 180,
-            scopedSlots: {customRender: 'certName'}
+            slots: {customRender: 'certName'}
         },
         {
             title: '证书等级',
             dataIndex: 'certLevel',
             width: 120,
-            scopedSlots: {customRender: 'certLevel'}
+            slots: {customRender: 'certLevel'}
         },
         {
             title: '证书编号',
             dataIndex: 'certNum',
             width: 170,
-            scopedSlots: {customRender: 'certNum'}
+            slots: {customRender: 'certNum'}
         },
         {
             title: '签发日期',
             dataIndex: 'signOn',
             width: 100,
-            scopedSlots: {customRender: 'signOn'}
+            slots: {customRender: 'signOn'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

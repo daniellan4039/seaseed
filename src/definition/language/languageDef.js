@@ -104,35 +104,35 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '语言',
             dataIndex: 'language',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'language'}
+            slots: {customRender: 'language'}
         },
         {
             title: '等级',
             dataIndex: 'level',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'level'}
+            slots: {customRender: 'level'}
         },
         {
             title: '授予日期',
             dataIndex: 'awardOn',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'awardOn'}
+            slots: {customRender: 'awardOn'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

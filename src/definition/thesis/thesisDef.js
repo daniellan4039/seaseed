@@ -195,49 +195,49 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '论文标题',
             dataIndex: 'title',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'title'}
+            slots: {customRender: 'title'}
         },
         {
             title: '论文排名',
             dataIndex: 'ranking',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'ranking'}
+            slots: {customRender: 'ranking'}
         },
         {
             title: '刊物名称',
             dataIndex: 'publicationName',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'publicationName'}
+            slots: {customRender: 'publicationName'}
         },
         {
             title: '期刊号',
             dataIndex: 'publicationPeriods',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'publicationPeriods'}
+            slots: {customRender: 'publicationPeriods'}
         },
         {
             title: '发表时间',
             dataIndex: 'publishOn',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'publishOn'}
+            slots: {customRender: 'publishOn'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         },
     ]
 }

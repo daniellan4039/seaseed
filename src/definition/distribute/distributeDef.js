@@ -132,63 +132,63 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '分配类型',
             dataIndex: 'distributeType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'distributeType'}
+            slots: {customRender: 'distributeType'}
         },
         {
             title: '分配组织',
             dataIndex: 'distributeCompanyId',
             width: 160,
             ellipsis: true,
-            scopedSlots: {customRender: 'distributeCompanyId'}
+            slots: {customRender: 'distributeCompanyId'}
         },
         {
             title: '分配部门',
             dataIndex: 'departId',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'departId'}
+            slots: {customRender: 'departId'}
         },
         {
             title: '分配职位',
             dataIndex: 'positionId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'positionId'}
+            slots: {customRender: 'positionId'}
         },
         {
             title: '任职开始时间',
             dataIndex: 'startTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'startTime'}
+            slots: {customRender: 'startTime'}
         },
         {
             title: '任职结束时间',
             dataIndex: 'endTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'endTime'}
+            slots: {customRender: 'endTime'}
         },
         {
             title: '分配状态',
             dataIndex: 'distributeStatus',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'distributeStatus'}
+            slots: {customRender: 'distributeStatus'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

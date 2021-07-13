@@ -173,74 +173,74 @@ export const tableDef = {
             title: '档案编号',
             dataIndex: 'archiveNo',
             width: 120,
-            scopedSlots: {customRender: 'archiveNo'}
+            slots: {customRender: 'archiveNo'}
         },
         {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '托管地',
             dataIndex: 'manageLocation',
             width: 120,
-            scopedSlots: {customRender: 'manageLocation'}
+            slots: {customRender: 'manageLocation'}
         },
         {
             title: '管理单位',
             dataIndex: 'manageCompanyId',
             width: 200,
             ellipsis:true,
-            scopedSlots: {customRender: 'manageCompanyId'}
+            slots: {customRender: 'manageCompanyId'}
         },
         {
             title: '档案室',
             dataIndex: 'archiveRoomId',
             width: 120,
-            scopedSlots: {customRender: 'archiveRoomId'}
+            slots: {customRender: 'archiveRoomId'}
         },
         {
             title: '档案学历',
             dataIndex: 'archiveEducation',
             width: 120,
-            scopedSlots: {customRender: 'archiveEducation'}
+            slots: {customRender: 'archiveEducation'}
         },
         {
             title: '档案出生地',
             dataIndex: 'archiveBorn',
             width: 120,
-            scopedSlots: {customRender: 'archiveBorn'}
+            slots: {customRender: 'archiveBorn'}
         },
         {
             title: '档案入党日期',
             dataIndex: 'archivePartyDate',
             width: 140,
-            scopedSlots: {customRender: 'archivePartyDate'}
+            slots: {customRender: 'archivePartyDate'}
         },
         {
             title: '档案工作日期',
             dataIndex: 'archiveJobDate',
             width: 140,
-            scopedSlots: {customRender: 'archiveJobDate'}
+            slots: {customRender: 'archiveJobDate'}
         },
         {
             title: '转移状态',
             dataIndex: 'transState',
             width: 120,
-            scopedSlots: {customRender: 'transState'}
+            slots: {customRender: 'transState'}
         },
         {
             title: '借阅状态',
             dataIndex: 'borrowState',
             width: 120,
-            scopedSlots: {customRender: 'borrowState'}
+            slots: {customRender: 'borrowState'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 180,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

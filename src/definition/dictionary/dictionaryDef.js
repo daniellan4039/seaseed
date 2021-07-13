@@ -43,42 +43,42 @@ export const tableDef = {
             dataIndex: 'dictValue',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'dictValue'}
+            slots: {customRender: 'dictValue'}
         },
         {
             title: '名称',
             dataIndex: 'dictTxt',
             width: 160,
             ellipsis: true,
-            scopedSlots: {customRender: 'dictTxt'}
+            slots: {customRender: 'dictTxt'}
         },
         {
             title: '备注',
             dataIndex: 'remark',
             width: 180,
             ellipsis: true,
-            scopedSlots: {customRender: 'remark'}
+            slots: {customRender: 'remark'}
         },
         {
             title: '排序',
             dataIndex: 'dictSort',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'dictSort'}
+            slots: {customRender: 'dictSort'}
         },
         {
             title: '只读',
             dataIndex: 'readonly',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: ''}
+            slots: {customRender: ''}
         },
         {
             title: '启动',
             dataIndex: 'enable',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'enable'}
+            slots: {customRender: 'enable'}
         }
     ]
 }

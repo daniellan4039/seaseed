@@ -206,70 +206,70 @@ export const tableDef = {
             dataIndex: 'employee',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employee'}
+            slots: {customRender: 'employee'}
         },
         {
             title: '培训机构',
             dataIndex: 'trainInstitution',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'trainInstitution'}
+            slots: {customRender: 'trainInstitution'}
         },
         {
             title: '培训内容',
             dataIndex: 'trainClass',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'trainClass'}
+            slots: {customRender: 'trainClass'}
         },
         {
             title: '培训开始时间',
             dataIndex: 'trainStart',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'trainStart'}
+            slots: {customRender: 'trainStart'}
         },
         {
             title: '培训结束时间',
             dataIndex: 'trainTo',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'trainTo'}
+            slots: {customRender: 'trainTo'}
         },
         {
             title: '培训结果',
             dataIndex: 'trainResult',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'trainResult'}
+            slots: {customRender: 'trainResult'}
         },
         {
             title: '分数',
             dataIndex: 'score',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: 'score'}
+            slots: {customRender: 'score'}
         },
         {
             title: '等级',
             dataIndex: 'level',
             width: 80,
             ellipsis: true,
-            scopedSlots: {customRender: '120'}
+            slots: {customRender: '120'}
         },
         {
             title: '证书名称',
             dataIndex: 'certification',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'certification'}
+            slots: {customRender: 'certification'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

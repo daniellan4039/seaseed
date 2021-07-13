@@ -93,42 +93,42 @@ export const tableDef = {
             dataIndex: 'hrArchiveId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'hrArchiveId'}
+            slots: {customRender: 'hrArchiveId'}
         },
         {
             title: '职工姓名',
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '调档类型',
             dataIndex: 'transferType',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'transferType'}
+            slots: {customRender: 'transferType'}
         },
         {
             title: '调出单位',
             dataIndex: 'fromUnit',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'fromUnit'}
+            slots: {customRender: 'fromUnit'}
         },
         {
             title: '掉入单位',
             dataIndex: 'toUnit',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'toUnit'}
+            slots: {customRender: 'toUnit'}
         },
         {
             title: '调动时间',
             dataIndex: 'transferTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'transferTime'}
+            slots: {customRender: 'transferTime'}
         }
     ]
 }

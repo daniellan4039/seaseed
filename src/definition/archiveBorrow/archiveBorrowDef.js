@@ -68,63 +68,63 @@ export const tableDef = {
             dataIndex: 'archiveId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'archiveId'}
+            slots: {customRender: 'archiveId'}
         },
         {
             title: '借阅人',
             dataIndex: 'borrowEmployeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'borrowEmployeeId'}
+            slots: {customRender: 'borrowEmployeeId'}
         },
         {
             title: '借阅日期',
             dataIndex: 'borrowTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'borrowTime'}
+            slots: {customRender: 'borrowTime'}
         },
         {
             title: '计划归还日期',
             dataIndex: 'planReturnTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'returnTime'}
+            slots: {customRender: 'returnTime'}
         },
         {
             title: '实际归还日期',
             dataIndex: 'returnTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'returnTime'}
+            slots: {customRender: 'returnTime'}
         },
         {
             title: '审核人',
             dataIndex: 'auditEmployeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'auditEmployeeId'}
+            slots: {customRender: 'auditEmployeeId'}
         },
         {
             title: '审核状态',
             dataIndex: 'auditStatus',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'auditStatus'}
+            slots: {customRender: 'auditStatus'}
         },
         {
             title: '审核时间',
             dataIndex: 'auditTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'auditTime'}
+            slots: {customRender: 'auditTime'}
         },
         {
             title: '借阅原因',
             dataIndex: 'borrowReason',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'borrowReason'}
+            slots: {customRender: 'borrowReason'}
         }
     ]
 }

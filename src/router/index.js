@@ -64,6 +64,7 @@ import AcademicTable from "@/views/academic/AcademicTable";
 import AcademicForm from "@/views/academic/AcademicForm";
 import AcademicDetail from "@/views/academic/AcademicDetail";
 import ArchiveRoomForm from "@/views/archiveRoom/ArchiveRoomForm";
+import EmployeeBatchImport from "@/views/employee/EmployeeBatchImport";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -285,72 +286,72 @@ export const routes = [
                 }
             },
             {
-              path: '/archiveBorrow',
-              name: 'ArchiveBorrow',
-              component: ArchiveBorrow,
-              meta: {
-                title: '档案借阅',
-                key: 'hrms:basemanage:archive_borrow'
-              }
+                path: '/archiveBorrow',
+                name: 'ArchiveBorrow',
+                component: ArchiveBorrow,
+                meta: {
+                    title: '档案借阅',
+                    key: 'hrms:basemanage:archive_borrow'
+                }
             },
             {
-              path: '/archiveBorrow/detail',
-              name: 'ArchiveBorrowDetail',
-              component: ArchiveBorrowDetail,
-              meta: {
-                title: '档案借阅详情',
-                key: 'hrms:basemanage:archive_borrow:get',
-                  visible: false
-              }
+                path: '/archiveBorrow/detail',
+                name: 'ArchiveBorrowDetail',
+                component: ArchiveBorrowDetail,
+                meta: {
+                    title: '档案借阅详情',
+                    key: 'hrms:basemanage:archive_borrow:get',
+                    visible: false
+                }
             },
             {
-              path: '/archiveRoom',
-              name: 'ArchiveRoom',
-              component: ArchiveRoom,
-              meta: {
-                title: '档案室',
-                key: 'hrms:basemanage:archive_room',
-              }
+                path: '/archiveRoom',
+                name: 'ArchiveRoom',
+                component: ArchiveRoom,
+                meta: {
+                    title: '档案室',
+                    key: 'hrms:basemanage:archive_room',
+                }
             },
             {
-              path: '/archiveRoomForm',
-              name: 'ArchiveRoomForm',
-              component: ArchiveRoomForm,
-              meta: {
-                title: '档案室',
-                key: 'hrms:basemanage:archive_room:add',
-                visible: true
-              }
+                path: '/archiveRoomForm',
+                name: 'ArchiveRoomForm',
+                component: ArchiveRoomForm,
+                meta: {
+                    title: '档案室',
+                    key: 'hrms:basemanage:archive_room:add',
+                    visible: true
+                }
             },
             {
-              path: '/archiveRoom/detail',
-              name: 'ArchiveRoomDetail',
-              component: ArchiveRoomDetail,
-              meta: {
-                title: '档案室详情',
-                key: 'hrms:basemanage:archive_room:get',
-                visible: false
-              }
+                path: '/archiveRoom/detail',
+                name: 'ArchiveRoomDetail',
+                component: ArchiveRoomDetail,
+                meta: {
+                    title: '档案室详情',
+                    key: 'hrms:basemanage:archive_room:get',
+                    visible: false
+                }
             },
             {
-              path: '/archiveTransfer',
-              name: 'ArchiveTransfer',
-              component: ArchiveTransfer,
-              meta: {
-                title: '档案转移',
-                key: 'hrms:basemanage:archive_transfer',
-                visible: true
-              }
+                path: '/archiveTransfer',
+                name: 'ArchiveTransfer',
+                component: ArchiveTransfer,
+                meta: {
+                    title: '档案转移',
+                    key: 'hrms:basemanage:archive_transfer',
+                    visible: true
+                }
             },
             {
-              path: '/archiveTransfer/form',
-              name: 'ArchiveTransferForm',
-              component: ArchiveTransferForm,
-              meta: {
-                title: '档案转移表单',
-                key: 'hrms:basemanage:archive_transfer:add',
-                visible: false
-              }
+                path: '/archiveTransfer/form',
+                name: 'ArchiveTransferForm',
+                component: ArchiveTransferForm,
+                meta: {
+                    title: '档案转移表单',
+                    key: 'hrms:basemanage:archive_transfer:add',
+                    visible: false
+                }
             },
             {
                 path: '/archiveTransfer/detail',
@@ -363,34 +364,34 @@ export const routes = [
                 }
             },
             {
-              path: '/contract',
-              name: 'Contract',
-              component: Contract,
-              meta: {
-                title: '合同',
-                key: 'hrms:employee:contract',
-                visible: true
-              }
+                path: '/contract',
+                name: 'Contract',
+                component: Contract,
+                meta: {
+                    title: '合同',
+                    key: 'hrms:employee:contract',
+                    visible: true
+                }
             },
             {
-              path: '/contract/form',
-              name: 'ContractForm',
-              component: ContractForm,
-              meta: {
-                title: '合同表单',
-                key: 'hrms:employee:contract:add',
-                visible: false
-              }
+                path: '/contract/form',
+                name: 'ContractForm',
+                component: ContractForm,
+                meta: {
+                    title: '合同表单',
+                    key: 'hrms:employee:contract:add',
+                    visible: false
+                }
             },
             {
-              path: '/contract/detail',
-              name: 'ContractDetail',
-              component: ContractDetail,
-              meta: {
-                title: '合同详情',
-                key: 'hrms:employee:contract:get',
-                visible: false
-              }
+                path: '/contract/detail',
+                name: 'ContractDetail',
+                component: ContractDetail,
+                meta: {
+                    title: '合同详情',
+                    key: 'hrms:employee:contract:get',
+                    visible: false
+                }
             },
             {
                 path: '/education',
@@ -423,272 +424,282 @@ export const routes = [
                 }
             },
             {
-              path: '/language',
-              name: 'Language',
-              component: Language,
-              meta: {
-                title: '语言',
-                key: 'hrms:employee:language',
-                visible: true
-              }
+                path: '/language',
+                name: 'Language',
+                component: Language,
+                meta: {
+                    title: '语言',
+                    key: 'hrms:employee:language',
+                    visible: true
+                }
             },
             {
-              path: '/language/form',
-              name: 'LanguageForm',
-              component: LanguageForm,
-              meta: {
-                title: '职工语言',
-                key: 'hrms:employee:language:add',
-                visible: false
-              }
+                path: '/language/form',
+                name: 'LanguageForm',
+                component: LanguageForm,
+                meta: {
+                    title: '职工语言',
+                    key: 'hrms:employee:language:add',
+                    visible: false
+                }
             },
             {
-              path: '/language/detail',
-              name: 'LanguageDetail',
-              component: LanguageDetail,
-              meta: {
-                title: '语言详情',
-                key: 'hrms:employee:language:get',
-                visible: false
-              }
+                path: '/language/detail',
+                name: 'LanguageDetail',
+                component: LanguageDetail,
+                meta: {
+                    title: '语言详情',
+                    key: 'hrms:employee:language:get',
+                    visible: false
+                }
             },
             {
-              path: '/patent',
-              name: 'Patent',
-              component: Patent,
-              meta: {
-                title: '专利',
-                key: 'hrms:employee:patent',
-                visible: true
-              }
+                path: '/patent',
+                name: 'Patent',
+                component: Patent,
+                meta: {
+                    title: '专利',
+                    key: 'hrms:employee:patent',
+                    visible: true
+                }
             },
             {
-              path: '/patent/form',
-              name: 'PatentForm',
-              component: PatentForm,
-              meta: {
-                title: '专利表单',
-                key: 'hrms:employee:patent:add',
-                visible: false
-              }
+                path: '/patent/form',
+                name: 'PatentForm',
+                component: PatentForm,
+                meta: {
+                    title: '专利表单',
+                    key: 'hrms:employee:patent:add',
+                    visible: false
+                }
             },
             {
-              path: '/patent/detail',
-              name: 'PatentDetail',
-              component: PatentDetail,
-              meta: {
-                title: '专利详细',
-                key: 'hrms:employee:patent:get',
-                visible: false
-              }
+                path: '/patent/detail',
+                name: 'PatentDetail',
+                component: PatentDetail,
+                meta: {
+                    title: '专利详细',
+                    key: 'hrms:employee:patent:get',
+                    visible: false
+                }
             },
             {
-              path: '/position',
-              name: 'Position',
-              component: Position,
-              meta: {
-                title: '职位',
-                key: 'hrms:basemanage:position',
-                visible: true
-              }
+                path: '/position',
+                name: 'Position',
+                component: Position,
+                meta: {
+                    title: '职位',
+                    key: 'hrms:basemanage:position',
+                    visible: true
+                }
             },
             {
-              path: '/position/form',
-              name: 'PositionForm',
-              component: PositionForm,
-              meta: {
-                title: '职位表单',
-                key: 'hrms:basemanage:position:add',
-                visible: false
-              }
+                path: '/position/form',
+                name: 'PositionForm',
+                component: PositionForm,
+                meta: {
+                    title: '职位表单',
+                    key: 'hrms:basemanage:position:add',
+                    visible: false
+                }
             },
             {
-              path: '/position/detail',
-              name: 'PositionDetail',
-              component: PositionDetail,
-              meta: {
-                title: '职位详情',
-                key: 'hrms:basemanage:position:get',
-                visible: false
-              }
+                path: '/position/detail',
+                name: 'PositionDetail',
+                component: PositionDetail,
+                meta: {
+                    title: '职位详情',
+                    key: 'hrms:basemanage:position:get',
+                    visible: false
+                }
             },
             {
-              path: '/soldier',
-              name: 'Soldier',
-              component: Soldier,
-              meta: {
-                title: '复转军人',
-                key: 'hrms:employee:soldier',
-                visible: true
-              }
+                path: '/soldier',
+                name: 'Soldier',
+                component: Soldier,
+                meta: {
+                    title: '复转军人',
+                    key: 'hrms:employee:soldier',
+                    visible: true
+                }
             },
             {
-              path: '/soldier/form',
-              name: 'SoldierForm',
-              component: SoldierForm,
-              meta: {
-                title: '复转军人表单',
-                key: 'hrms:employee:soldier:view:save',
-                visible: false
-              }
+                path: '/soldier/form',
+                name: 'SoldierForm',
+                component: SoldierForm,
+                meta: {
+                    title: '复转军人表单',
+                    key: 'hrms:employee:soldier:view:save',
+                    visible: false
+                }
             },
             {
-              path: '/Soldier/detail',
-              name: 'SoldierDetail',
-              component: SoldierDetail,
-              meta: {
-                title: '复转军人详细',
-                key: 'hrms:employee:soldier:get',
-                visible: false
-              }
+                path: '/Soldier/detail',
+                name: 'SoldierDetail',
+                component: SoldierDetail,
+                meta: {
+                    title: '复转军人详细',
+                    key: 'hrms:employee:soldier:get',
+                    visible: false
+                }
             },
             {
-              path: '/thesis',
-              name: 'Thesis',
-              component: Thesis,
-              meta: {
-                title: '学术论文',
-                key: 'hrms:employee:thesis',
-                visible: true
-              }
+                path: '/thesis',
+                name: 'Thesis',
+                component: Thesis,
+                meta: {
+                    title: '学术论文',
+                    key: 'hrms:employee:thesis',
+                    visible: true
+                }
             },
             {
-              path: '/thesis/form',
-              name: 'ThesisForm',
-              component: ThesisForm,
-              meta: {
-                title: '学术论文表单',
-                key: 'hrms:employee:thesis:view:save',
-                visible: false
-              }
+                path: '/thesis/form',
+                name: 'ThesisForm',
+                component: ThesisForm,
+                meta: {
+                    title: '学术论文表单',
+                    key: 'hrms:employee:thesis:view:save',
+                    visible: false
+                }
             },
             {
-              path: '/thesis/detail',
-              name: 'ThesisDetail',
-              component: ThesisDetail,
-              meta: {
-                title: '学术论文详情信息',
-                key: 'hrms:employee:thesis:get',
-                visible: false
-              }
+                path: '/thesis/detail',
+                name: 'ThesisDetail',
+                component: ThesisDetail,
+                meta: {
+                    title: '学术论文详情信息',
+                    key: 'hrms:employee:thesis:get',
+                    visible: false
+                }
             },
             {
-              path: '/train',
-              name: 'Train',
-              component: Train,
-              meta: {
-                title: '培训经历',
-                key: 'hrms:employee:train',
-                visible: true
-              }
+                path: '/train',
+                name: 'Train',
+                component: Train,
+                meta: {
+                    title: '培训经历',
+                    key: 'hrms:employee:train',
+                    visible: true
+                }
             },
             {
-              path: '/train/form',
-              name: 'TrainForm',
-              component: TrainForm,
-              meta: {
-                title: '培训表单',
-                key: 'hrms:employee:train:add',
-                visible: false
-              }
+                path: '/train/form',
+                name: 'TrainForm',
+                component: TrainForm,
+                meta: {
+                    title: '培训表单',
+                    key: 'hrms:employee:train:add',
+                    visible: false
+                }
             },
             {
-              path: '/train/detail',
-              name: 'TrainDetail',
-              component: TrainDetail,
-              meta: {
-                title: '培训详情',
-                key: 'hrms:employee:train:get',
-                visible: false
-              }
+                path: '/train/detail',
+                name: 'TrainDetail',
+                component: TrainDetail,
+                meta: {
+                    title: '培训详情',
+                    key: 'hrms:employee:train:get',
+                    visible: false
+                }
             },
             {
-              path: '/distribute',
-              name: 'Distribute',
-              component: DistributeTable,
-              meta: {
-                title: '职工分配',
-                key: 'hrms:employee:distribution',
-                visible: true
-              }
+                path: '/distribute',
+                name: 'Distribute',
+                component: DistributeTable,
+                meta: {
+                    title: '职工分配',
+                    key: 'hrms:employee:distribution',
+                    visible: true
+                }
             },
             {
-              path: '/distribute/form',
-              name: 'DistributeForm',
-              component: DistributeForm,
-              meta: {
-                title: '职工分配表单',
-                key: 'hrms:employee:distribution:add',
-                visible: false
-              }
+                path: '/distribute/form',
+                name: 'DistributeForm',
+                component: DistributeForm,
+                meta: {
+                    title: '职工分配表单',
+                    key: 'hrms:employee:distribution:add',
+                    visible: false
+                }
             },
             {
-              path: '/distribute/detail',
-              name: 'DistributeDetail',
-              component: DistributeDetail,
-              meta: {
-                title: '职工分配详细',
-                key: 'hrms:employee:distribution:get',
-                visible: false
-              }
+                path: '/distribute/detail',
+                name: 'DistributeDetail',
+                component: DistributeDetail,
+                meta: {
+                    title: '职工分配详细',
+                    key: 'hrms:employee:distribution:get',
+                    visible: false
+                }
             },
             {
-              path: '/dictionary',
-              name: 'Dictionary',
-              component: Dictionary,
-              meta: {
-                title: '基础数据',
-                key: 'hrms:basemanage:basedata',
-                visible: true
-              }
+                path: '/dictionary',
+                name: 'Dictionary',
+                component: Dictionary,
+                meta: {
+                    title: '基础数据',
+                    key: 'hrms:basemanage:basedata',
+                    visible: true
+                }
             },
             {
-              path: '/dictionary/form',
-              name: 'DictionaryForm',
-              component: DictionaryForm,
-              meta: {
-                title: '基础数据表单',
-                key: 'hrms:basemanage:basedata:add',
-                visible: false
-              }
+                path: '/dictionary/form',
+                name: 'DictionaryForm',
+                component: DictionaryForm,
+                meta: {
+                    title: '基础数据表单',
+                    key: 'hrms:basemanage:basedata:add',
+                    visible: false
+                }
             },
             {
-              path: '/dictionary/detail',
-              name: 'DictionaryDetail',
-              component: DictionaryDetail,
-              meta: {
-                title: '基础数据详细',
-                key: 'hrms:basemanage:basedata:get',
-                visible: false
-              }
+                path: '/dictionary/detail',
+                name: 'DictionaryDetail',
+                component: DictionaryDetail,
+                meta: {
+                    title: '基础数据详细',
+                    key: 'hrms:basemanage:basedata:get',
+                    visible: false
+                }
             },
             {
-              path: '/academic',
-              name: 'Academic',
-              component: AcademicTable,
-              meta: {
-                title: '科研成果',
-                key: 'hrms:employee:academic',
-                visible: true
-              }
+                path: '/academic',
+                name: 'Academic',
+                component: AcademicTable,
+                meta: {
+                    title: '科研成果',
+                    key: 'hrms:employee:academic',
+                    visible: true
+                }
             },
             {
-              path: '/academic/form',
-              name: 'AcademicForm',
-              component: AcademicForm,
-              meta: {
-                title: '科研成果表单',
-                key: 'hrms:employee:academic:view:save',
-                visible: true
-              }
+                path: '/academic/form',
+                name: 'AcademicForm',
+                component: AcademicForm,
+                meta: {
+                    title: '科研成果表单',
+                    key: 'hrms:employee:academic:view:save',
+                    visible: true
+                }
             },
             {
-              path: '/academic/detail',
-              name: 'AcademicDetail',
-              component: AcademicDetail,
+                path: '/academic/detail',
+                name: 'AcademicDetail',
+                component: AcademicDetail,
+                meta: {
+                    title: '科研成果详细',
+                    key: 'hrms:employee:science:get',
+                    visible: true
+                }
+            },
+            {
+              path: '/employee/import',
+              name: 'EmployeImport',
+              component: EmployeeBatchImport,
               meta: {
-                title: '科研成果详细',
-                key: 'hrms:employee:science:get',
+                title: '职工导入',
+                key: 'hrms:employee:import',
                 visible: true
               }
             },

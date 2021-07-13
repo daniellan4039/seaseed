@@ -10,6 +10,7 @@ export default {
         description: String
     },
     render() {
+
         return h(
             <div/>,
             {

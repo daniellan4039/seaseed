@@ -92,28 +92,28 @@ export const tableDef = {
             dataIndex: 'employeeId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'employeeId'}
+            slots: {customRender: 'employeeId'}
         },
         {
             title: '成果名称',
             dataIndex: 'title',
             width: 250,
             ellipsis: true,
-            scopedSlots: {customRender: 'title'}
+            slots: {customRender: 'title'}
         },
         {
             title: '获取时间',
             dataIndex: 'achieveTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'achieveTime'}
+            slots: {customRender: 'achieveTime'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 140,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

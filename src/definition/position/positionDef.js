@@ -68,42 +68,42 @@ export const tableDef = {
             dataIndex: 'code',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'code'}
+            slots: {customRender: 'code'}
         },
         {
             title: '职位名称',
             dataIndex: 'name',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'name'}
+            slots: {customRender: 'name'}
         },
         {
             title: '所属组织',
             dataIndex: 'companyId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'companyId'}
+            slots: {customRender: 'companyId'}
         },
         {
             title: '所属部门',
             dataIndex: 'departmentId',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'departmentId'}
+            slots: {customRender: 'departmentId'}
         },
         {
             title: '职位定员',
             dataIndex: 'positionCount',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'positionCount'}
+            slots: {customRender: 'positionCount'}
         },
         {
             title: '创建时间',
             dataIndex: 'createTime',
             width: 120,
             ellipsis: true,
-            scopedSlots: {customRender: 'createTime'}
+            slots: {customRender: 'createTime'}
         }
     ]
 }

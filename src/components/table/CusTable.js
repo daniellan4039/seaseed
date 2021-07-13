@@ -57,7 +57,7 @@ export default {
         const actionColWrapper = reactive(actionCol)
 
         const columnKeys = ref([])
-        props.tableDef.columns.forEach(c => {
+        props.tableDef?.columns?.forEach(c => {
             columnKeys.value.push(c.dataIndex)
         })
         let dataSource = ref({records: [], total: 0})
@@ -69,7 +69,7 @@ export default {
             size: 20,
             sort: 'id'
         })
-        const {page, get, remove} = props.tableDef.actions
+        const {page, get, remove} = props.tableDef?.actions ?? { page: null, get: null, remove: null}
         const tableSize = ref('default')
         const columnsParsed = computed(() => {
             const tempCols = props.tableDef?.columns
