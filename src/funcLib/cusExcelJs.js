@@ -1,5 +1,3 @@
-
-// eslint-disable-next-line no-unused-vars
 import xlsx from "xlsx";
 
 const requiredCol = [
@@ -11,8 +9,8 @@ const requiredCol = [
 export function readExcel(file){
     let workbook = xlsx.read(file, { type: 'array'})
     let sheets = workbook.Sheets
-    const colReg = /3$/
-    const initValRowIndex = 4
+    const colReg = /4$/
+    const initValRowIndex = 5
     const colRequiredMap = {}
     const columns = []
     let valWrapper = {}
@@ -35,7 +33,7 @@ export function readExcel(file){
             const trailNum = parseTrailNum(subKey)
             if(trailNum && trailNum >= initValRowIndex) {
                 const preCellName = parsePreCellName(subKey)
-                const cellTitle = sheets[sheetsKey][preCellName.concat('3')]?.v
+                const cellTitle = sheets[sheetsKey][preCellName.concat('4')]?.v
                 const cellName = preCellName.concat(trailNum)
                 const cellValue = sheets[sheetsKey][cellName]?.v
 
@@ -60,7 +58,6 @@ export function readExcel(file){
         row.key=valWrapperKey + 1
         valArray.push(row)
     }
-
     return { columns: columns, data: valArray, colRequired: colRequiredMap}
 }
 

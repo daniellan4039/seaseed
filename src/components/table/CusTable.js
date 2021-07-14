@@ -251,8 +251,8 @@ export default {
         let otherOpsSlot = {
             otherOps: () => this.$slots.otherOps ? this.$slots.otherOps() : null
         }
-        if (tableScroll.y < 400) {
-            (tableScroll.y = 400)
+        if (tableScroll.y < 200) {
+            (tableScroll.y = 200)
         }
         const table = h(
             resolveComponent('a-table'),

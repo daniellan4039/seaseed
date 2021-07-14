@@ -23,10 +23,15 @@ export default {
                         {
                             class: 'form-header'
                         },
-                        [
-                            <a-typography-title level={4} content={this.title}/>,
-                            <a-typography-paragraph content={this.description} />
-                        ]
+                        {
+                            default: () => {
+                                const defaultContent = [
+                                    <a-typography-title level={4} content={this.title}/>,
+                                    <a-typography-paragraph content={this.description} />
+                                ]
+                                return this.$slots.title ? this.$slots.title() : defaultContent
+                            }
+                        }
                     )
                     return [
                         header,
