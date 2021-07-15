@@ -148,21 +148,13 @@ export const formDef = {
     labelCol: 6,
     wrapperCol: 18,
     config: {},
-    formRef: 'employeeFormRef',
     formItems: [
         {
             key: 'realName',
             label: '职工姓名',
-            inputType: 'select:search',
             placeholder: '请输入职工姓名',
-            rules: [
-                {
-                    required: true,
-                    message: '职工姓名必填',
-                    trigger: 'blur',
-                    type: 'string'
-                }
-            ],
+            inputType: 'select:search',
+            rules: [],
             meta: {
                 search: {
                     action: employeeApi.list,
@@ -230,9 +222,9 @@ export const formDef = {
                         }
                     ]
                 },
+                submit: true,
                 scope: ['form', 'detail'],
-                group: '基本信息',
-                span: 1
+                group: '基本信息'
             }
         },
         {

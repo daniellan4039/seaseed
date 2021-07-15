@@ -151,7 +151,7 @@ export default {
     },
     render() {
         const submitSlot = this.$slots['submit']
-        const formItemCount = this.formDef.formItems.length
+        const formItemCount = this.formDef.formItems.filter(fi => fi?.meta.scope.includes('form'))?.length
         const singleColumn = formItemCount <= this.thresholdCols
         let labelSpan = 8
         let wrapperSpan = 16

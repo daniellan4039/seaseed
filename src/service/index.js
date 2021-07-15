@@ -25,6 +25,7 @@ import * as companyApi from './companyApi'
 import * as anyoneApi from './anyoneApi'
 import * as distributeApi from './distributeApi'
 import * as academicApi from './academicApi'
+import * as transferRecordApi from './transferRecordApi'
 
 const $ = axios.create({
     baseURL: '/api',
@@ -81,5 +82,6 @@ export {
     companyApi,
     anyoneApi,
     distributeApi,
-    academicApi
+    academicApi,
+    transferRecordApi
 }

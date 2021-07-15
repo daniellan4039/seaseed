@@ -21,7 +21,8 @@ export default {
         archiveBorrow: null,
         archiveTransfer: null,
         dictionary: null,
-        academic: null
+        academic: null,
+        transferRecord: null
     },
     mutations: {
         setEmployee (state, info) {
@@ -89,6 +90,9 @@ export default {
         },
         setAcademic(state, info) {
             state.academic = info
+        },
+        setTransferRecord(state, info) {
+            state.transferRecord = info
         }
     },
     actions: {
@@ -157,6 +161,9 @@ export default {
         },
         setAcademic(context, info) {
             context.commit('setAcademic', info)
+        },
+        setTransferRecord(context, info) {
+            context.commit('setTransferRecord', info)
         }
     }
 }
