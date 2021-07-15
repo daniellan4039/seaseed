@@ -3,7 +3,7 @@ import {
     Button,
     Checkbox, Col,
     ConfigProvider, DatePicker, Descriptions, Divider,
-    Dropdown, Form,
+    Dropdown, Form, Image,
     Input, InputNumber,
     Layout, List,
     Menu, Modal, Pagination, Row, Select, Space, Spin,
@@ -42,5 +42,6 @@ export default {
         app.use(InputNumber)
         app.use(Tree)
         app.use(List)
+        app.use(Image)
     }
 }

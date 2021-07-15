@@ -26,18 +26,17 @@ export default {
         props.formDef.formItems?.forEach(fi => {
             if (fi.meta?.scope?.includes('detail')) {
                 const groupName = fi.meta?.group ?? '基本信息'
-                if (groupName) {
-                    const length = pageMap.value[groupName]?.length
-                    !length && (pageMap.value[groupName] = [])
-                    let label = defaultModel?.value?.[fi.key] ?? '未知'
-                    if (typeof label === 'boolean') {
-                        label  = label ? '是' : '否'
-                    }
-                    pageMap.value[groupName].push({
-                        label: fi.label,
-                        value: label
-                    })
+                const length = pageMap.value[groupName]?.length
+                !length && (pageMap.value[groupName] = [])
+                let label = defaultModel?.value?.[fi.key] ?? '未知'
+                if (typeof label === 'boolean') {
+                    label  = label ? '是' : '否'
                 }
+                pageMap.value[groupName].push({
+                    label: fi.label,
+                    value: label,
+                    span: fi.meta?.span ?? 1
+                })
             }
         })
         return {
@@ -51,9 +50,10 @@ export default {
         for (let pageMapKey in pageMap) {
             const desItems = pageMap[pageMapKey].map(i => {
                 return h(
-                    <a-descriptions-item/>,
+                    resolveComponent('a-descriptions-item'),
                     {
-                        label: i.label
+                        label: i.label,
+                        span: i.span
                     },
                     {
                         default: () => i.value
@@ -64,8 +64,8 @@ export default {
                 resolveComponent('a-descriptions'),
                 {
                     title: pageMapKey,
-                    column: 3,
-                    size: 'small'
+                    size: 'small',
+                    column: this.formDef?.meta?.columns??3
                 },
                 {
                     default: () => desItems

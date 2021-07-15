@@ -19,8 +19,8 @@
           <cus-upload :custom-request="uploadFile" :enable-upload="false" :show-upload-list="false" text="导入Excel"/>
         </span>
         <span>
-          <a-button type="primary" style="margin-left: 8px;">上传</a-button>
           <a-button type="default" style="margin-left: 8px;">导出Excel</a-button>
+          <a-button type="primary" style="margin-left: 8px;">上传</a-button>
         </span>
       </div>
       <div class="table-container">
@@ -101,7 +101,6 @@ export default {
 
 .import-result {
   margin: 20px 0;
-  color: yellow;
 }
 .table-container{
   margin-top: 8px;

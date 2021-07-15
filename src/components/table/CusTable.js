@@ -47,7 +47,10 @@ export default {
             type: Boolean,
             default: true
         },
-
+        useDefaultPagination: {
+            type: Boolean,
+            default: false
+        }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
     components: {
@@ -261,7 +264,7 @@ export default {
                 dataSource: self.dataSourceParsed,
                 rowClassName: (record, index) => (index % 2 === 1 ? 'table-striped' : null),
                 scroll: tableScroll,
-                pagination: false,
+                pagination: this.useDefaultPagination,
                 loading: self.loading,
                 ...self.config,
                 ...self.tableDef?.config,
@@ -305,6 +308,18 @@ export default {
                 enableAdd={add}
                 v-slots={otherOpsSlot}
             /> : null
+        const pagination = !this.useDefaultPagination ? <div className='bottom-right'>
+            <a-pagination
+                current={self.pageParams.current}
+                pageSize={self.pageParams.size}
+                total={self.dataSource.total ?? 0}
+                onChange={self.onPageChange}
+                onShowSizeChange={self.onPageChange}
+                showQuickJumper={true}
+                showSizeChanger={true}
+                size={self.tableSize}
+            />
+        </div> : null
         return h(
             'div',
             {
@@ -318,18 +333,7 @@ export default {
             [
                 opsBar,
                 table,
-                <div class='bottom-right'>
-                    <a-pagination
-                        current={self.pageParams.current}
-                        pageSize={self.pageParams.size}
-                        total={self.dataSource.total ?? 0}
-                        onChange={self.onPageChange}
-                        onShowSizeChange={self.onPageChange}
-                        showQuickJumper={true}
-                        showSizeChanger={true}
-                        size={self.tableSize}
-                    />
-                </div>
+                pagination
             ]
         )
     }

@@ -4,8 +4,7 @@ export default {
     name: 'CusFormContainer',
     props: {
         title: {
-            type: String,
-            required: true
+            type: String
         },
         description: String
     },
@@ -18,7 +17,7 @@ export default {
             },
             {
                 default: () => {
-                    const header = h(
+                    const header = this.title && this.description ? h(
                         'div',
                         {
                             class: 'form-header'
@@ -32,7 +31,7 @@ export default {
                                 return this.$slots.title ? this.$slots.title() : defaultContent
                             }
                         }
-                    )
+                    ): null
                     return [
                         header,
                         this.$slots.default()
