@@ -35,7 +35,7 @@ export default {
                 pageMap.value[groupName].push({
                     label: fi.label,
                     value: label,
-                    span: fi.meta?.span ?? 1
+                    span: fi.meta?.detailSpan ?? 1
                 })
             }
         })

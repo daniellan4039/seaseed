@@ -38,6 +38,10 @@ export default {
         beforeUpload: {
             type: Function,
             default: null
+        },
+        limitCount: {
+            type: Number,
+            default: 10
         }
     },
     emits: [
@@ -116,6 +120,8 @@ export default {
                 </div>
             </div>
         }
+
+        this.fileList.length >= this.limitCount && (ops = null)
 
         return <a-upload
             action={action}

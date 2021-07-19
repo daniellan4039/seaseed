@@ -8,6 +8,12 @@ export const api = {
 }
 
 export function list(data) {
+    if(!data) {
+        data = {
+            authState: 1,
+            isEnable: 1
+        }
+    }
     return $.post(
         api.listUrl,
         data

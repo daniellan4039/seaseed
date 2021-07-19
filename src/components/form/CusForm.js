@@ -27,6 +27,9 @@ export default {
         submitText: {
             type: String,
             default: '提交'
+        },
+        beforeSubmit: {
+            type: Function
         }
     },
     emits: ['submit'],
@@ -50,7 +53,7 @@ export default {
             if (formItems instanceof Array) {
                 formKeys.length = 0
                 formItems.forEach(i => {
-                    const submit = i.meta?.submit
+                    const submit = i.meta?.submit??true
                     const scope = i.meta?.scope?.includes('form')
                     if (submit && scope) {
                         formModel[i.key] = i?.default
@@ -102,6 +105,7 @@ export default {
         const submitForm = () => {
             formRef.value?.validate().then(() => {
                 let pickedModel = _.pick(formModel, formKeys)
+                props.beforeSubmit && props.beforeSubmit(pickedModel)
                 if (!defaultModel.value) {
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {

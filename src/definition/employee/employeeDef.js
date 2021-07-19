@@ -17,8 +17,8 @@ export const tableDef = {
         detail: true
     },
     routes: {
-        add: '/employee/form',
-        edit: '/employee/form',
+        add: '/employee/formNew',
+        edit: '/employee/formEdit',
         detail: '/employee/detail'
     },
     store: {
@@ -152,76 +152,10 @@ export const formDef = {
         {
             key: 'realName',
             label: '职工姓名',
-            placeholder: '请输入职工姓名',
-            inputType: 'select:search',
+            placeholder: '请输入',
+            inputType: 'input:string',
             rules: [],
             meta: {
-                search: {
-                    action: employeeApi.list,
-                    keyword: 'realName'
-                },
-                searchDef: {
-                    formItems: [
-                        {
-                            key: 'realName',
-                            label: '姓名',
-                            placeholder: '请输入职工姓名',
-                            inputType: 'input:string',
-                            rules: [],
-                            meta: {}
-                        },
-                        {
-                            key: 'departmentId',
-                            label: '部门',
-                            placeholder: '请输入职工姓名',
-                            inputType: 'select:list',
-                            rules: [],
-                            meta: {
-                                text: 'name',
-                                list: departmentApi.listDepartsOfCompany,
-                            }
-                        },
-                    ]
-                },
-                tableDef: {
-                    actions: {
-                        page: employeeApi.page
-                    },
-                    text: 'realName',
-                    columns: [
-                        {
-                            title: '职工编号',
-                            dataIndex: 'empNum',
-                            width: 80,
-                            slots: {customRender: 'empNum'}
-                        },
-                        {
-                            title: '职工姓名',
-                            dataIndex: 'realName',
-                            width: 100,
-                            slots: {customRender: 'realName'},
-                            ellipsis: true
-                        },
-                        {
-                            title: '所属部门',
-                            dataIndex: 'departmentId',
-                            slots: {customRender: 'departmentId'},
-                            width: 170
-                        },
-                        {
-                            title: '职位',
-                            dataIndex: 'positionId',
-                            slots: {customRender: 'positionId'},
-                            width: 120
-                        },
-                        {
-                            title: '联系电话',
-                            dataIndex: 'telNum',
-                            width: 120,
-                            slots: {customRender: 'telNum'}
-                        }
-                    ]
-                },
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '基本信息'
@@ -247,24 +181,455 @@ export const formDef = {
             },
         },
         {
-            key: 'identityCard',
-            label: '身份证',
-            placeholder: '请输入身份证号码',
+            key: 'telNum',
+            label: '联系号码',
+            placeholder: '请输入手机号或者电话号码',
             inputType: 'input:string',
             rules: [],
             meta: {
                 scope: ['form', 'detail'],
                 group: '基本信息'
-            },
-            dependency: [
+            }
+        },
+        {
+            key: 'status',
+            label: '状态',
+            placeholder: '请选择状态',
+            inputType: 'select:code',
+            rules: [],
+            meta: {
+                code: 'hr_employee_status',
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'departmentId',
+            label: '部门',
+            placeholder: '请选择所属部门',
+            inputType: 'select:list',
+            rules: [],
+            meta: {
+                text: 'name',
+                list: departmentApi.listDepartsOfCompany,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'polistics',
+            label: '政治面貌',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            rules: [],
+            meta: {
+                submit: false,
+                group: '基本信息',
+                scope: ['form', 'detail'],
+                code: 'politics_status'
+            }
+        },
+        {
+            key: 'nickName',
+            label: '昵称',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'employeeNo',
+            label: '职工编号',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'certificationType',
+            label: '证件类型',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'certification_type'
+            }
+        },
+        {
+            key: 'certificationId',
+            label: '证件号码',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'birthday',
+            label: '出生日期',
+            placeholder: '请选择',
+            inputType: 'date:date',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'age',
+            label: '年龄',
+            placeholder: '请输入',
+            inputType: 'input:num',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'birthplace',
+            label: '出生地',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'oneChildCert',
+            label: '是否独生子女',
+            placeholder: '请选择',
+            inputType: 'select',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                options: [
+                    {
+                        value: 1,
+                        text: '是'
+                    },
+                    {
+                        value: 0,
+                        text: '否'
+                    }
+                ]
+            }
+        },
+        {
+            key: 'bloodType',
+            label: '血型',
+            placeholder: '请输入',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'blood_type'
+            }
+        },
+        {
+            key: 'residenceType',
+            label: '户口类型',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'residence_type'
+            }
+        },
+        {
+            key: 'healthStatus',
+            label: '健康状况',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'entryChannel',
+            label: '入职渠道',
+            placeholder: '请输入',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '工作状况',
+                code: 'hr_entry_channel'
+            }
+        },
+        {
+            key: 'isAssignable',
+            label: '是否可调配',
+            placeholder: '请输入',
+            inputType: 'select',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '工作状况',
+                options: [
+                    {
+                        text: '可调配',
+                        value: 1
+                    },
+                    {
+                        text: '不可调配',
+                        value: 0
+                    }
+                ]
+            }
+        },
+        {
+            key: 'nation',
+            label: '民族',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'nation'
+            }
+        },
+        {
+            key: 'nativePlace',
+            label: '籍贯',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'education',
+            label: '学历',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'education'
+            }
+        },
+
+        {
+            key: 'marriageStatus',
+            label: '婚姻状况',
+            placeholder: '请输入',
+            inputType: 'select:code',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'marriage_status'
+            }
+        },
+        {
+            key: 'toHereDate',
+            label: '到本单位日期',
+            placeholder: '请选择',
+            inputType: 'date:date',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '工作状况'
+            }
+        },
+        {
+            key: 'nativeLocation',
+            label: '户口所在地',
+            placeholder: '请输入',
+            inputType: 'input:area',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                detailSpan: 2
+            }
+        },
+        {
+            key: 'contactAddress',
+            label: '通讯地址',
+            placeholder: '请输入',
+            inputType: 'input:area',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                detailSpan: 2
+            }
+        },
+        {
+            key: 'email',
+            label: '邮箱',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'nativeAddress',
+            label: '户口所在地详细地址',
+            placeholder: '请输入',
+            inputType: 'input:area',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                detailSpan: 2
+            }
+        },
+        {
+            key: 'hobbit',
+            label: '爱好',
+            placeholder: '请输入',
+            inputType: 'input:area',
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                detailSpan: 2
+            }
+        },
+        {
+            key: 'accumulationFundNo',
+            label: '公积金账号',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '账号信息'
+            }
+        },
+        {
+            key: 'socialSecurityNo',
+            label: '社保账号',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '账号信息'
+            }
+        },
+        {
+            key: 'medicalInsuranceNo',
+            label: '医保账号',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '账号信息'
+            }
+        },
+        {
+            key: 'firstWorkDate',
+            label: '参加工作时间',
+            placeholder: '请选择时间',
+            inputType: 'date:date',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '工作状况'
+            }
+        },
+        {
+            key: 'fileList',
+            label: '头像',
+            placeholder: '',
+            inputType: 'upload',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                listType: 'picture-card',
+                limitCount: 1
+            }
+        },
+    ],
+    meta: {
+        columns: 5
+    }
+}
+
+export const formDefForNew = {
+    key: 'employeeForm',
+    formType: 'normal',
+    api: employeeApi.api,
+    actions: {
+        save: employeeApi.save,
+        update: employeeApi.update,
+        get: employeeApi.get
+    },
+    store: {
+        module: 'employeeStore',
+        key: 'employee'
+    },
+    labelCol: 6,
+    wrapperCol: 18,
+    config: {},
+    formItems: [
+        {
+            key: 'realName',
+            label: '职工姓名',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'sex',
+            label: '性别',
+            inputType: 'select:code',
+            placeholder: '请选择性别',
+            rules: [
                 {
-                    key: 'sex',
-                    value: [
-                        '1'
-                    ],
-                    condition: 'include'
+                    required: true,
+                    message: '性别必填',
+                    trigger: 'blur',
+                    type: 'string'
                 }
-            ]
+            ],
+            meta: {
+                code: 'sex',
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            },
         },
         {
             key: 'telNum',
@@ -323,241 +688,6 @@ export const formDef = {
                 submit: false,
                 scope: ['form'],
                 group: '基本信息'
-            }
-        },
-        {
-            key: 'polistics',
-            label: '政治面貌',
-            placeholder: '',
-            inputType: '',
-            rules: [],
-            meta: {
-                submit: false,
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'nickName',
-            label: '昵称',
-            placeholder: '',
-            inputType: '',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'employeeNo',
-            label: '职工编号',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'certificationType',
-            label: '证件类型',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'certificationId',
-            label: '证件号码',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'birthday',
-            label: '出生日期',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'age',
-            label: '年龄',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'birthplace',
-            label: '出生地',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'oneChildCert',
-            label: '是否独生子女',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'bloodType',
-            label: '血型',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'residenceType',
-            label: '户口类型',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'healthStatus',
-            label: '健康状况',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'entryChannel',
-            label: '入职渠道',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'isAssignable',
-            label: '是否可调配',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'nation',
-            label: '民族',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'nativePlace',
-            label: '籍贯',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'education',
-            label: '学历',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-
-        {
-            key: 'marriageStatus',
-            label: '婚姻状况',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'toHereDate',
-            label: '到本单位日期',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'telNum',
-            label: '联系电话',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'nativeLocation',
-            label: '户口所在地',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息',
-                span: 2
-            }
-        },
-        {
-            key: 'contactAddress',
-            label: '通讯地址',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息',
-                span: 2
-            }
-        },
-        {
-            key: 'email',
-            label: '邮箱',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
-            key: 'nativeAddress',
-            label: '户口所在地详细地址',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息',
-                span: 2
-            }
-        },
-        {
-            key: 'hobbit',
-            label: '爱好',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息',
-                span: 2
             }
         }
     ],

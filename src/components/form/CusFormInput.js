@@ -178,7 +178,8 @@ export default {
                     {
                         fileList: this.modelValue,
                         'onUpdate:fileList': val => this.$emit('update:modelValue', val),
-                        listType: (this.item?.meta?.listType)??'text'
+                        listType: (this.item?.meta?.listType)??'text',
+                        limitCount: this.item?.meta.limitCount??10
                     }
                 )
                 break

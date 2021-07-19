@@ -68,6 +68,7 @@ import EmployeeBatchImport from "@/views/employee/EmployeeBatchImport";
 import TransferRecordTable from "@/views/transferRecord/TransferRecordTable";
 import TransferRecordForm from "@/views/transferRecord/TransferRecordForm";
 import TransferRecordDetail from "@/views/transferRecord/TransferRecordDetail";
+import EmployeeAddForm from "@/views/employee/EmployeeAddForm";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -95,12 +96,22 @@ export const routes = [
                 }
             },
             {
-                path: '/employee/form',
+                path: '/employee/formEdit',
                 name: 'EmployeeForm',
                 component: EmployeeForm,
                 meta: {
                     title: '职工信息表单',
-                    key: 'hrms:employee:center:add',
+                    key: 'hrms:employee:center:update',
+                    visible: false
+                }
+            },
+            {
+                path: '/employee/formNew',
+                name: 'EmployeeFormNew',
+                component: EmployeeAddForm,
+                meta: {
+                    title: '职工信息表单',
+                    key: 'hrms:employee:center:addNew',
                     visible: false
                 }
             },
