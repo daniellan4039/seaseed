@@ -2,6 +2,12 @@
 import {h, watch, reactive, resolveComponent} from "vue";
 import {UserOutlined} from "@ant-design/icons-vue";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
+import { createFromIconfontCN } from "@ant-design/icons-vue";
+
+const IconFont = createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/font_2501011_cut7wm6am1w.js',
+    extraCommonProps: { class: 'cus-menu-icon'}
+})
 
 export default {
     name: 'CusMenu',
@@ -42,7 +48,7 @@ export default {
     },
     emits: ['change:select', 'update:selectedKeys'],
     components: {
-        UserOutlined,
+        UserOutlined, IconFont
     },
     data() {
         return {
@@ -119,7 +125,7 @@ export default {
                         return h(resolveComponent('a-menu-item'), {key: i?.key, title: i?.title}, {
                             default: () => {
                                 return [
-                                    <UserOutlined/>,
+                                    <IconFont type={i.meta.icon} />,
                                     <span>{i.title}</span>]
                             }
                         })
@@ -131,7 +137,7 @@ export default {
                             },
                             title: () => {
                                 return [
-                                    <UserOutlined/>,
+                                    <IconFont type={i.meta.icon} />,
                                     <span>{i.title}</span>]
                             }
                         })
