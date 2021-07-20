@@ -1,5 +1,5 @@
 <template>
-  <cus-form-container title="职工导入">
+  <cus-form-container title="职工导入" description="职工信息在此导入">
     <template #title>
       <div>
         <h3>上传Excel文档注意以下要点：</h3>

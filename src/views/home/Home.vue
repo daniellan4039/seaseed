@@ -21,7 +21,7 @@
           <span><bulb-filled class="title-icon"/>业务警报</span>
         </div>
         <div class="content">
-          <a-list item-layout="horizontal" :data-source="warningList" :pagination="true" >
+          <a-list item-layout="horizontal" :data-source="warningList" :pagination="warningList.length>0?true:false">
             <template #renderItem="{item}" >
               <a-list-item-meta>
                 <template #title>
@@ -40,7 +40,7 @@
           <span><bulb-filled class="title-icon"/>审批流程</span>
         </div>
         <div class="content">
-          <a-list item-layout="horizontal" :data-source="warningList">
+          <a-list item-layout="horizontal" :data-source="warningList" :pagination="warningList.length>0?true:false">
             <template #renderItem="{item}" >
               <a-list-item-meta>
                 <template #title>
@@ -78,11 +78,8 @@ export default {
   name: "Home",
   components: { CusMenuIcon, SettingOutlined, BulbFilled } ,
   setup() {
-    const warningList = ref([
-      {
-        title: '职工王大成的合同将于6月18日到期，请及时关注跟进'
-      }
-    ])
+    // 每个项里面填入title
+    const warningList = ref([])
     const showMenuSetting = ref(false)
     const menus = ref([])
     const confirmedMenus = ref([])

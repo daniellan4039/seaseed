@@ -86,6 +86,7 @@ export const routes = [
             key: 'home',
             type: 'subMenu'
         },
+        redirect: '/home',
         children: [
             {
                 path: '/home',
@@ -339,7 +340,7 @@ export const routes = [
                 }
             },
             {
-                path: '/archiveRoomForm',
+                path: '/archiveRoom/form',
                 name: 'ArchiveRoomForm',
                 component: ArchiveRoomForm,
                 meta: {
@@ -765,6 +766,16 @@ export const routes = [
               meta: {
                 title: '菜单设置',
                 key: 'hrms:menuset',
+                visible: true
+              }
+            },
+            {
+              path: '/employee/self',
+              name: 'EmployeeSelf',
+              component: EmployeeDetail,
+              meta: {
+                title: '职工自助',
+                key: 'hrms:employee:self-service',
                 visible: true
               }
             },

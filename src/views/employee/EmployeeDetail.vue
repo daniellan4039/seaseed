@@ -14,7 +14,8 @@
       <div class="other-block">
         <a-tabs tab-position="left">
           <a-tab-pane key="distribute" tab="职工分配">
-            <cus-table :search-model="searchModel" :use-default-pagination="true" :table-def="distributeTableDef"></cus-table>
+            <cus-table :search-model="searchModel" :use-default-pagination="true" :table-def="distributeTableDef">
+            </cus-table>
           </a-tab-pane>
           <a-tab-pane key="certification" tab="职工证书">
             <cus-table :search-model="searchModel" :use-default-pagination="true" :table-def="certTableDef"></cus-table>
@@ -82,6 +83,7 @@ import {tableDef as patentTableDef} from '@/definition/patent/patentDef'
 import CusTable from "@/components/table/CusTable";
 import {ref} from "vue";
 import store from "@/store";
+import {employeeApi} from "@/service";
 
 export default {
   name: "EmployeeDetail",
@@ -91,8 +93,14 @@ export default {
   },
   setup() {
     const searchModel = ref({})
-    const employee = store.state.employeeStore.employee
-    searchModel.value.employeeId = employee?.id??0
+    let employee = ref(store.state.employeeStore.employee)
+    if (!employee.value) {
+      const currentUsr = JSON.parse(localStorage.getItem('HRMS_USER'))
+      employeeApi.get({id: currentUsr.userId}).then(res => {
+        employee.value = res.data
+      })
+    }
+    searchModel.value.employeeId = employee.value?.id??0
 
     return {
       empFormDef,

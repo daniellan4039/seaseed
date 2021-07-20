@@ -137,7 +137,7 @@ export const formDef = {
     formType: 'normal',
     api: employeeApi.api,
     actions: {
-        save: employeeApi.save,
+        save: employeeApi.update,
         update: employeeApi.update,
         get: employeeApi.get
     },

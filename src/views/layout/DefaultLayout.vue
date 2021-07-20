@@ -30,7 +30,7 @@
         </div>
         <a-config-provider :locale="locale">
           <router-view #="{Component}">
-            <keep-alive :exclude="/(Form|Detail)$/">
+            <keep-alive :exclude="/(Form|Detail|Self)$/">
               <component :is="Component"></component>
             </keep-alive>
           </router-view>

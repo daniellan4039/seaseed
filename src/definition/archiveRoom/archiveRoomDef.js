@@ -11,7 +11,7 @@ export const tableDef = {
         get: archiveRoomApi.get
     },
     defaultActions: {
-        add: false,
+        add: true,
         update: false,
         remove: false,
         detail: true
@@ -127,6 +127,7 @@ export const formDef = {
                 scope: ['form', 'detail'],
                 group: '基本信息',
                 list: companyApi.list,
+                text: 'name'
             }
         },
         {

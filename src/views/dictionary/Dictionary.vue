@@ -59,7 +59,6 @@ export default {
         ignoreParent: true
       }
       refresh.value++
-      console.log(searchModel.value)
     }
 
     return {
