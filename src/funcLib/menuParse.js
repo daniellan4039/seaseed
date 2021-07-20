@@ -35,11 +35,12 @@ function generateMenuFromBase(routes) {
         menu.title = r.name
         menu.key = r.code
         menu.path = r.path
+        menu.meta = { checked: false, icon: r.meta.icon }
         return menu
     })
 }
 
-export async function getFromBasePlatform() {
+export async function getMenuFromBasePlatform() {
     const {isSuccess, data} = await getRouter()
     if (isSuccess) {
         return generateMenuFromBase(data)

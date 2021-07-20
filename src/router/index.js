@@ -69,6 +69,8 @@ import TransferRecordTable from "@/views/transferRecord/TransferRecordTable";
 import TransferRecordForm from "@/views/transferRecord/TransferRecordForm";
 import TransferRecordDetail from "@/views/transferRecord/TransferRecordDetail";
 import EmployeeAddForm from "@/views/employee/EmployeeAddForm";
+import Home from "@/views/home/Home";
+import MenuSetting from "@/views/home/MenuSetting";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -78,7 +80,6 @@ import EmployeeAddForm from "@/views/employee/EmployeeAddForm";
 export const routes = [
     {
         path: '/',
-        name: 'Home',
         component: DefaultLayout,
         meta: {
             title: '职工信息查询',
@@ -86,6 +87,16 @@ export const routes = [
             type: 'subMenu'
         },
         children: [
+            {
+                path: '/home',
+                name: 'Home',
+                component: Home,
+                meta: {
+                    title: '首页',
+                    key: 'hrms:home',
+                    visible: true
+                }
+            },
             {
                 path: '/employee',
                 name: 'EmployeeTable',
@@ -708,43 +719,53 @@ export const routes = [
                 }
             },
             {
-              path: '/employee/import',
-              name: 'EmployeeImport',
-              component: EmployeeBatchImport,
+                path: '/employee/import',
+                name: 'EmployeeImport',
+                component: EmployeeBatchImport,
+                meta: {
+                    title: '职工导入',
+                    key: 'hrms:employee:import',
+                    visible: true
+                }
+            },
+            {
+                path: '/transferRecord',
+                name: 'TransferRecord',
+                component: TransferRecordTable,
+                meta: {
+                    title: '职工调度',
+                    key: 'hrms:employee:transfer',
+                    visible: true
+                }
+            },
+            {
+                path: '/transferRecord/Form',
+                name: 'EmployeeTransferRecordForm',
+                component: TransferRecordForm,
+                meta: {
+                    title: '职工调度表单',
+                    key: 'hrms:employee:transfer:form',
+                    visible: false
+                }
+            },
+            {
+                path: '/transferRecord/detail',
+                name: 'TransferRecordDetail',
+                component: TransferRecordDetail,
+                meta: {
+                    title: '职工调度详情',
+                    key: 'hrms:employee:transfer:detail',
+                    visible: false
+                }
+            },
+            {
+              path: '/menuSet',
+              name: 'MenuSet',
+              component: MenuSetting,
               meta: {
-                title: '职工导入',
-                key: 'hrms:employee:import',
+                title: '菜单设置',
+                key: 'hrms:menuset',
                 visible: true
-              }
-            },
-            {
-              path: '/transferRecord',
-              name: 'TransferRecord',
-              component: TransferRecordTable,
-              meta: {
-                title: '职工调度',
-                key: 'hrms:employee:transfer',
-                visible: true
-              }
-            },
-            {
-              path: '/transferRecord/Form',
-              name: 'EmployeeTransferRecordForm',
-              component: TransferRecordForm,
-              meta: {
-                title: '职工调度表单',
-                key: 'hrms:employee:transfer:form',
-                visible: false
-              }
-            },
-            {
-              path: '/transferRecord/detail',
-              name: 'TransferRecordDetail',
-              component: TransferRecordDetail,
-              meta: {
-                title: '职工调度详情',
-                key: 'hrms:employee:transfer:detail',
-                visible: false
               }
             },
         ]

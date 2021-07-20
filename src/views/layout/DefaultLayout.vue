@@ -48,7 +48,7 @@ import {reactive, ref, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState} from "vuex";
 import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
-import {getFromBasePlatform} from "@/funcLib/menuParse";
+import {getMenuFromBasePlatform} from "@/funcLib/menuParse";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -61,7 +61,7 @@ export default {
   },
   setup() {
     const routers = ref({})
-    getFromBasePlatform().then(res => {
+    getMenuFromBasePlatform().then(res => {
       routers.value = {
         items: res
       }
