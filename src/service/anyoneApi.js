@@ -14,15 +14,15 @@ export function getRouter () {
     )
 }
 
-export function getCompanyTree () {
+export function getCompanyTree (companyId, type = '1') {
     const user = JSON.parse(localStorage.getItem('HRMS_USER')??'{}')
     return new Promise((resolve, reject) => {
         $.get(
             api.companyTreeUrl,
             {
                 params: {
-                    id: user.userId,
-                    type: 1
+                    id: companyId??user.companyId,
+                    type: type
                 }
             }
         ).then(res => {

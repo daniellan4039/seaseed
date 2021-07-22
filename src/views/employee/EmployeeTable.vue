@@ -2,6 +2,9 @@
   <cus-table-container :def="tableDef.searchParams" @submit="onSubmit">
     <div class="table-block" id='HRMS_TABLE_CONTAINER'>
       <cus-table :table-def="tableDef" :search-model="searchModel" :refresh="refresh">
+        <template #otherOps>
+          <a-button type="default" style="margin-left: 8px;" @click="uploadFile">批量导入</a-button>
+        </template>
       </cus-table>
     </div>
   </cus-table-container>
@@ -11,6 +14,7 @@
 import {tableDef} from "@/definition/employee/employeeDef"
 import {CusTable, CusTableContainer} from '@/components'
 import {ref} from "vue";
+import router from "@/router";
 
 export default {
   name: "EmployeeInfo",
@@ -25,8 +29,10 @@ export default {
       refresh.value++
     }
 
-    const uploadFile = ({file}) => {
-      console.log(file)
+    const uploadFile = () => {
+      router.push({
+        path: '/employee/import'
+      })
     }
 
     return {

@@ -48,7 +48,7 @@ export function listDepartsOfCompany(value) {
         return $.get(
             api.listUrl,
             {
-                params: value ? value : {companyId: currentUser.companyId}
+                params: value ? value : { companyId: currentUser.companyId }
             }
         )
     } else {

@@ -71,6 +71,8 @@ import TransferRecordDetail from "@/views/transferRecord/TransferRecordDetail";
 import EmployeeAddForm from "@/views/employee/EmployeeAddForm";
 import Home from "@/views/home/Home";
 import MenuSetting from "@/views/home/MenuSetting";
+import DashboardLayout from "@/views/layout/DashboardLayout";
+import Statistic from "@/views/statistic/Statistic";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -760,22 +762,44 @@ export const routes = [
                 }
             },
             {
-              path: '/menuSet',
-              name: 'MenuSet',
-              component: MenuSetting,
-              meta: {
-                title: '菜单设置',
-                key: 'hrms:menuset',
-                visible: true
-              }
+                path: '/menuSet',
+                name: 'MenuSet',
+                component: MenuSetting,
+                meta: {
+                    title: '菜单设置',
+                    key: 'hrms:menuset',
+                    visible: true
+                }
             },
             {
-              path: '/employee/self',
-              name: 'EmployeeSelf',
-              component: EmployeeDetail,
+                path: '/employee/self',
+                name: 'EmployeeSelf',
+                component: EmployeeDetail,
+                meta: {
+                    title: '职工自助',
+                    key: 'hrms:employee:self-service',
+                    visible: true
+                }
+            },
+        ]
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: DashboardLayout,
+        meta: {
+            title: '工作信息',
+            key: 'dashboard',
+            visible: true
+        },
+        children: [
+            {
+              path: '/dashboard/statistic',
+              name: 'DashboardStatistic',
+              component: Statistic,
               meta: {
-                title: '职工自助',
-                key: 'hrms:employee:self-service',
+                title: '统计看板',
+                key: 'dashboard_statistic',
                 visible: true
               }
             },

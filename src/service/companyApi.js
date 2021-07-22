@@ -9,9 +9,9 @@ export const api = {
 
 export function list(data) {
     if(!data) {
+        const user = JSON.parse(localStorage.getItem('HRMS_USER')??'{}')
         data = {
-            authState: 1,
-            isEnable: 1
+            parentId: user.companyId
         }
     }
     return $.post(
