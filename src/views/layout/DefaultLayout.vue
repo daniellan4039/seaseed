@@ -28,13 +28,11 @@
             </a-breadcrumb>
           </div>
         </div>
-        <a-config-provider :locale="locale">
-          <router-view #="{Component}">
-            <keep-alive :exclude="/(Form|Detail|Self)$/">
-              <component :is="Component"></component>
-            </keep-alive>
-          </router-view>
-        </a-config-provider>
+        <router-view #="{Component}">
+          <keep-alive :exclude="/(Form|Detail|Self)$/">
+            <component :is="Component"></component>
+          </keep-alive>
+        </router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>

@@ -71,7 +71,6 @@ import TransferRecordDetail from "@/views/transferRecord/TransferRecordDetail";
 import EmployeeAddForm from "@/views/employee/EmployeeAddForm";
 import Home from "@/views/home/Home";
 import MenuSetting from "@/views/home/MenuSetting";
-import DashboardLayout from "@/views/layout/DashboardLayout";
 import Statistic from "@/views/statistic/Statistic";
 
 /**
@@ -784,9 +783,9 @@ export const routes = [
         ]
     },
     {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: DashboardLayout,
+        path: '/statistic',
+        name: 'Statistic',
+        component: Statistic,
         meta: {
             title: '工作信息',
             key: 'dashboard',

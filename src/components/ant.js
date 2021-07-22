@@ -1,6 +1,6 @@
 import {
     Breadcrumb,
-    Button,
+    Button, Card,
     Checkbox, Col,
     ConfigProvider, DatePicker, Descriptions, Divider,
     Dropdown, Form, Image,
@@ -43,5 +43,6 @@ export default {
         app.use(Tree)
         app.use(List)
         app.use(Image)
+        app.use(Card)
     }
 }
