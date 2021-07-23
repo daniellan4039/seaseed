@@ -1,6 +1,6 @@
 <template>
   <a-layout class="root-container">
-    <a-layout-sider class="cus-sider" theme="light" width="430">
+    <a-layout-sider class="cus-sider" theme="light" width="400">
       <div class="back">
         <span><CaretLeftOutlined/>返回</span>
       </div>
@@ -16,7 +16,8 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-content class="content-container">
-        <a-tabs class="tabs" type="card" :tab-bar-style="{marginBottom: 0, paddingLeft: '20px', paddingTop: '20px'}">
+        <a-tabs class="tabs" type="card"
+                :tab-bar-style="{ paddingLeft: '20px', paddingTop: '20px', paddingBottom: '20px', background: 'white'}">
           <a-tab-pane key="new" class="tabs-pane" tab="变动统计">
             <div class="ops-block">
               <span>查询范围：<cus-date-range /></span>
@@ -96,8 +97,91 @@
             </div>
           </a-tab-pane>
           <a-tab-pane key="employee" tab="职工统计">
+            <div class="item-block">
+              <a-card title="人员统计">
+                <div class="card"></div>
+              </a-card>
+            </div>
+            <div class="item-block">
+              <a-row :gutter="16">
+                <a-col :span="8">
+                  <a-tabs type="card" :tab-bar-style="{margin:0}">
+                    <a-tab-pane tab="年龄分布" key="age">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="性别占比" key="sex">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="学历分布" key="edu">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                  </a-tabs>
+                </a-col>
+                <a-col :span="8">
+                  <a-tabs type="card" :tab-bar-style="{margin:0}">
+                    <a-tab-pane tab="政治面貌" key="politic">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="职工职称" key="professional">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="工龄" key="workingAge">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="本企业工龄" key="workingAgeLocal">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                  </a-tabs>
+                </a-col>
+                <a-col :span="8">
+                  <a-tabs type="card" :tab-bar-style="{margin:0}">
+                    <a-tab-pane tab="职工类型" key="empType">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="职工来源" key="empSource">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="职工状态" key="empStatus">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane tab="职工合同类型" key="empContractType">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                  </a-tabs>
+                </a-col>
+              </a-row>
+            </div>
           </a-tab-pane>
-          <a-tab-pane key="company" tab="企业信息"></a-tab-pane>
+          <a-tab-pane key="company" class="company" tab="全部人员">
+            <div class="ops-bar item-block">
+              <a-input-search placeholder="请输入职工姓名" style="width: 200px"/>
+            </div>
+            <div class="table-block item-block">
+              <a-table size="small" :data-source="empOfCompanySource" :columns="empTableColumns"></a-table>
+            </div>
+          </a-tab-pane>
         </a-tabs>
       </a-layout-content>
     </a-layout>
@@ -127,29 +211,58 @@ export default {
     const departData = ref([])
     const expandedComKeys = ref([])
     const keywords = ref()
-    const departColumns = [
-      {
-        title: '部门',
-        dataIndex: 'departmentId',
-        width: 20,
-        ellipsis: true,
-        slots: {customRender: 'departmentId'}
-      },
-      {
-        title: '增加人数',
-        dataIndex: 'increment',
-        width: 20,
-        ellipsis: true,
-        slots: {customRender: 'increment'}
-      },
-      {
-        title: '减少人数',
-        dataIndex: 'reducement',
-        width: 20,
-        ellipsis: true,
-        slots: {customRender: 'reducement'}
-      },
-    ]
+    const empOfCompanySource = ref([])
+    const empTableColumns = ref([
+        {
+            title: '职工姓名',
+            dataIndex: 'employeeId',
+            width: 80,
+            ellipsis: true,
+            slots: {customRender: 'employeeId'}
+        },
+        {
+            title: '性别',
+            dataIndex: 'sex',
+            width: 80,
+            ellipsis: true,
+            slots: {customRender: 'sex'}
+        },
+        {
+            title: '年龄',
+            dataIndex: 'age',
+            width: 40,
+            ellipsis: true,
+            slots: {customRender: 'age'}
+        },
+        {
+            title: '部门',
+            dataIndex: 'department',
+            width: 80,
+            ellipsis: true,
+            slots: {customRender: 'department'}
+        },
+        {
+            title: '职位',
+            dataIndex: 'position',
+            width: 80,
+            ellipsis: true,
+            slots: {customRender: '80'}
+        },
+        {
+            title: '联系电话',
+            dataIndex: 'phoneNumber',
+            width: 100,
+            ellipsis: true,
+            slots: {customRender: 'phoneNumber'}
+        },
+        {
+            title: '操作',
+            dataIndex: 'action',
+            width: 80,
+            ellipsis: true,
+            slots: {customRender: 'action'}
+        }
+    ])
     const showEmpHis = ref(false)
 
     // arg是包含点击节点的key的数组
@@ -257,7 +370,8 @@ export default {
       departData,
       expandedComKeys,
       keywords,
-      departColumns,
+      empOfCompanySource,
+      empTableColumns,
       showEmpHis,
       onCompanySelect,
       setCompany,
@@ -307,6 +421,8 @@ export default {
 .content-container {
   max-height: 100%;
   .tabs {
+    height: 100%;
+    margin-left: 2px;
     .tabs-pane {
       padding: 0 20px 20px 20px;
     }
@@ -346,8 +462,28 @@ export default {
     }
   }
 }
+.company{
+
+  .ops-bar{
+    background: white;
+    padding: 20px;
+  }
+  .table-block{
+    background: white;
+    padding: 20px;
+
+  }
+}
 
 .layout-center{
   text-align: center;
+}
+.card{
+  width: 100%;
+  height: 400px;
+  background: white;
+}
+.item-block{
+  margin: 0 20px 20px 20px;
 }
 </style>
