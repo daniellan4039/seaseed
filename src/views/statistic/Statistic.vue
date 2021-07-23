@@ -419,10 +419,12 @@ export default {
 }
 
 .content-container {
-  max-height: 100%;
+  //max-height: 100%;
+  overflow: auto;
   .tabs {
     height: 100%;
     margin-left: 2px;
+    overflow: auto;
     .tabs-pane {
       padding: 0 20px 20px 20px;
     }
