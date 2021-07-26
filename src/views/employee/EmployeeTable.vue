@@ -41,7 +41,8 @@ export default {
 
     const onDistribute = (record) => {
       const emp = {
-        employeeId: record.id
+        employeeId: record.id,
+        _edit: 0
       }
       store.dispatch('setTransferRecord', emp)
       router.push({

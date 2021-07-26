@@ -47,6 +47,9 @@ export default {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
             module && key && (defaultModel.value = store.state[module][key])
+            if (defaultModel.value && (defaultModel.value?._edit === undefined || defaultModel.value?._edit === null)) {
+                defaultModel.value._edit = 1 //1 为编辑，0为新增
+            }
         }
         const parseFormModel = (formItems) => {
             let formModel = {}
@@ -106,7 +109,7 @@ export default {
             formRef.value?.validate().then(() => {
                 let pickedModel = _.pick(formModel, formKeys)
                 props.beforeSubmit && props.beforeSubmit(pickedModel)
-                if (!defaultModel.value) {
+                if (!defaultModel.value._edit) {
                     delete pickedModel.id
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
@@ -127,7 +130,6 @@ export default {
         }
 
         const formModel = reactive(getFormModel())
-
         props.formDef.formItems.forEach(i => {
             const groupName = (i.meta?.group)??'基本信息'
             if (!groupedFormItems.value[groupName]?.length) {
@@ -135,9 +137,7 @@ export default {
             }
             groupedFormItems.value[groupName].push(i)
         })
-
         getRules()
-
         provide('formModel', formModel)
 
         return {
