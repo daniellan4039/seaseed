@@ -217,13 +217,13 @@ export const formDef = {
             }
         },
         {
-            key: 'polistics',
+            key: 'politicsStatus',
             label: '政治面貌',
             placeholder: '请选择',
             inputType: 'select:code',
             rules: [],
             meta: {
-                submit: false,
+                submit: true,
                 group: '基本信息',
                 scope: ['form', 'detail'],
                 code: 'politics_status'
@@ -561,6 +561,43 @@ export const formDef = {
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '工作状况'
+            }
+        },
+        {
+            key: 'employeeType',
+            label: '人员类型',
+            placeholder: '请选择',
+            inputType: 'select:code',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息',
+                code: 'hr_employee_type'
+            }
+        },
+        {
+            key: 'partyBranch',
+            label: '所在党支部',
+            placeholder: '请输入',
+            inputType: 'input:string',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'joinPartyDate',
+            label: '入党日期',
+            placeholder: '',
+            inputType: 'date:date',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
             }
         },
         {

@@ -5,7 +5,7 @@
         <cus-description :formDef="empFormDef"></cus-description>
       </div>
       <div class="user-pic">
-        <a-image :height="160" :width="117" src="https://pic.3gbizhi.com/2019/1006/20191006010634141.jpg"/>
+        <a-image :height="160" :width="117" :src="avatorUrl"/>
       </div>
       <div class="info">
         <img src="@/assets/已调出.png">
@@ -84,6 +84,7 @@ import CusTable from "@/components/table/CusTable";
 import {ref} from "vue";
 import store from "@/store";
 import {employeeApi} from "@/service";
+import {get} from "@/service/uploadApi";
 
 export default {
   name: "EmployeeDetail",
@@ -93,6 +94,7 @@ export default {
   },
   setup() {
     const searchModel = ref({})
+    const avatorUrl = ref('')
     let employee = ref(store.state.employeeStore.employee)
     if (!employee.value) {
       const currentUsr = JSON.parse(localStorage.getItem('HRMS_USER'))
@@ -100,6 +102,9 @@ export default {
         employee.value = res.data
       })
     }
+    employee.value.avatar && get(employee.value.avatar).then(res => {
+      avatorUrl.value = res.data[0]
+    })
     searchModel.value.employeeId = employee.value?.id??0
 
     return {
@@ -118,6 +123,7 @@ export default {
       contractTableDef,
       langTableDef,
       patentTableDef,
+      avatorUrl,
       searchModel
     }
   }

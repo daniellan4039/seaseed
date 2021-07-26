@@ -1,6 +1,7 @@
 <template>
-  <a-layout style="min-height: 100vh;">
-    <a-layout-sider v-model:collapsed="collapsed" :style="{minHeight: '100%'}" :trigger="null" collapsible>
+  <a-layout style="min-height: 100vh; max-height: 100vh;">
+    <a-layout-sider v-model:collapsed="collapsed" :style="{minHeight: '100%', maxHeight: '100%', overflow: 'auto'}" :trigger="null"
+                    collapsible>
       <cus-menu
           v-model:selectedKeys="menuSelectedKeys"
           :collapsed="collapsed"
@@ -9,7 +10,7 @@
           v-on:change:select="onMenuItemSelect"
       />
     </a-layout-sider>
-    <a-layout>
+    <a-layout style="max-height: 100%;">
       <a-layout-header class="cus-header">
         <div class="menu">
           <MenuUnfoldOutlined v-if="collapsed" @click="toggleCollapsed"/>

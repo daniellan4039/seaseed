@@ -30,8 +30,10 @@ export function remove(data) {
 }
 
 export function get(data) {
+    const formData = new FormData()
+    formData.append('paths', data)
     return $.post(
         api.getUrl,
-        data
+        formData
     )
 }

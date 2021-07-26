@@ -35,7 +35,7 @@ function generateMenuFromBase(routes) {
         menu.title = r.name
         menu.key = r.code
         menu.path = r.path
-        menu.meta = { checked: false, icon: r.meta.icon }
+        menu.meta = { checked: false, icon: r.meta.icon, color: r.meta?.color??'#7D79F6' }
         return menu
     })
 }

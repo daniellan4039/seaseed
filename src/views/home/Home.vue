@@ -10,7 +10,8 @@
       <div class="menu">
         <template v-for="(m,k) in confirmedMenus" :key="k">
           <template v-for="(sm,smk) in m.children??[]" :key="smk">
-            <cus-menu-icon :title="sm.title" :icon-type="sm.meta.icon" v-if="sm.meta.checked" :route="sm.path" @click="onCusMenuClick"/>
+            <cus-menu-icon :title="sm.title" :icon-type="sm.meta.icon" v-if="sm.meta.checked" :route="sm.path" @click="onCusMenuClick"
+                           :icon-font-style="{color: sm.meta?.color??'#7D79F6'}"/>
           </template>
         </template>
       </div>
@@ -59,7 +60,8 @@
           <a-typography-title :level="3">{{ m.title}}</a-typography-title>
           <div class="menu-items">
             <cus-menu-icon v-for="(sm,smk) in m.children" :key="smk" :title="sm.title" :show-check-box="true"
-                           v-model:checked="sm.meta.checked" :icon-type="sm.meta.icon"></cus-menu-icon>
+                           v-model:checked="sm.meta.checked" :icon-type="sm.meta.icon"
+                           :icon-font-style="{color: sm.meta?.color??'#7D79F6'}"></cus-menu-icon>
           </div>
         </div>
       </a-modal>

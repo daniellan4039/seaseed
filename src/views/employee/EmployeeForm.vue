@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     beforeSubmit(model) {
+      model.avatar = model.fileList?.[0].attachment
       console.log(model)
     }
   }

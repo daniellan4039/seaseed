@@ -107,8 +107,10 @@ export default {
                 let pickedModel = _.pick(formModel, formKeys)
                 props.beforeSubmit && props.beforeSubmit(pickedModel)
                 if (!defaultModel.value) {
+                    delete pickedModel.id
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
+                    pickedModel.id = defaultModel.value?.id
                     props.formDef?.actions?.update(pickedModel).then(res => handleResult(res))
                 }
                 ctx.emit('submit', pickedModel)

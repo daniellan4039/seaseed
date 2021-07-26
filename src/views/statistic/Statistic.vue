@@ -1,9 +1,6 @@
 <template>
   <a-layout class="root-container">
     <a-layout-sider class="cus-sider" theme="light" width="400">
-      <div class="back">
-        <span><CaretLeftOutlined/>返回</span>
-      </div>
       <div class="sticky-block">
         <a-input-search v-model:value="keywords" placeholder="搜索组织" @search="onSearch"/>
       </div>
@@ -16,38 +13,38 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-content class="content-container">
-        <a-tabs class="tabs" type="card"
-                :tab-bar-style="{ paddingLeft: '20px', paddingTop: '20px', paddingBottom: '20px', background: 'white'}">
+        <a-tabs :tab-bar-style="{ paddingLeft: '20px', paddingTop: '20px', paddingBottom: '20px', background: 'white'}" class="tabs"
+                type="card">
           <a-tab-pane key="new" class="tabs-pane" tab="变动统计">
             <div class="ops-block">
-              <span>查询范围：<cus-date-range /></span>
+              <span>查询范围：<cus-date-range/></span>
             </div>
             <div>
               <a-card title="人员变动">
                 <div class="emp-change-block layout-center">
-                  <div style="display: inline-block; padding-right: 50px;">
-                    <icon-card icon-type="iconneibutiaoru" count="3" icon-background="#488bf8" title="人员调动"/>
-                    <icon-card icon-type="iconshehuizhaopin" count="3" icon-background="#73deb3" title="社会招聘"/>
-                    <icon-card icon-type="iconxuexiaozhaopin" count="3" icon-background="#f7c739" title="学校招聘"/>
-                    <icon-card icon-type="iconjunrenanzhi" count="3" icon-background="#488bf8" title="军人安置"/>
+                  <div style="display: inline-block;">
+                    <icon-card count="3" icon-background="#488bf8" icon-type="iconneibutiaoru" title="人员调动"/>
+                    <icon-card count="3" icon-background="#73deb3" icon-type="iconshehuizhaopin" title="社会招聘"/>
+                    <icon-card count="3" icon-background="#f7c739" icon-type="iconxuexiaozhaopin" title="学校招聘"/>
+                    <icon-card count="3" icon-background="#488bf8" icon-type="iconjunrenanzhi" title="军人安置"/>
                   </div>
-                  <div style="display: inline-block; padding-left: 50px; border-left: solid 1px #dbdbdb">
-                    <icon-card icon-type="iconjiechuhetong" count="3" icon-background="#488bf8" title="解除合同"/>
-                    <icon-card icon-type="icontiaozou" count="3" icon-background="#73deb3" title="调走"/>
-                    <icon-card icon-type="icontuixiu" count="3" icon-background="#f7c739" title="退休"/>
-                    <icon-card icon-type="iconsiwang" count="3" icon-background="#7585a2" title="死亡"/>
+                  <div style="display: inline-block;">
+                    <icon-card count="3" icon-background="#488bf8" icon-type="iconjiechuhetong" title="解除合同"/>
+                    <icon-card count="3" icon-background="#73deb3" icon-type="icontiaozou" title="调走"/>
+                    <icon-card count="3" icon-background="#f7c739" icon-type="icontuixiu" title="退休"/>
+                    <icon-card count="3" icon-background="#7585a2" icon-type="iconsiwang" title="死亡"/>
                   </div>
                 </div>
                 <div class="layout-center check-history-block">
-                  <span class="ops" @click="onCheckHis" v-show="!showEmpHis">
-                    <CaretDownOutlined />
+                  <span v-show="!showEmpHis" class="ops" @click="onCheckHis">
+                    <CaretDownOutlined/>
                     <span>查看历史变化趋势</span>
                   </span>
-                  <span class="ops" @click="onCheckHis" v-show="showEmpHis">
-                    <CaretUpOutlined />
+                  <span v-show="showEmpHis" class="ops" @click="onCheckHis">
+                    <CaretUpOutlined/>
                     <span>收起</span>
                   </span>
-                  <div class="graph" v-show="showEmpHis"></div>
+                  <div v-show="showEmpHis" class="graph"></div>
                 </div>
               </a-card>
             </div>
@@ -66,25 +63,25 @@
                 <a-col :span="8">
                   <a-card title="科研成果统计" width="200">
                     <div class="science">
-                      <cus-menu-icon icon-type="iconzhigongzhuanli" :icon-font-style="{fontSize: '110px', color: '#FDBE05'}">
+                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#FDBE05'}" icon-type="iconzhigongzhuanli">
                         <template #title>
                           <div>新增专利数</div>
                           <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
                         </template>
                       </cus-menu-icon>
-                      <cus-menu-icon icon-type="iconkeyanchengguo" :icon-font-style="{fontSize: '110px', color: '#66BBEA'}">
+                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#66BBEA'}" icon-type="iconkeyanchengguo">
                         <template #title>
                           <div>新增科研成果</div>
                           <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
                         </template>
                       </cus-menu-icon>
-                      <cus-menu-icon icon-type="iconzhigongzhicheng" :icon-font-style="{fontSize: '110px', color: '#F15478'}">
+                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#F15478'}" icon-type="iconzhigongzhicheng">
                         <template #title>
                           <div>新增职称评定</div>
                           <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
                         </template>
                       </cus-menu-icon>
-                      <cus-menu-icon icon-type="iconxueshulunwen" :icon-font-style="{fontSize: '110px', color: '#14CDBD'}">
+                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#14CDBD'}" icon-type="iconxueshulunwen">
                         <template #title>
                           <div>新增论文</div>
                           <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
@@ -105,42 +102,18 @@
             <div class="item-block">
               <a-row :gutter="16">
                 <a-col :span="8">
-                  <a-tabs type="card" :tab-bar-style="{margin:0}">
-                    <a-tab-pane tab="年龄分布" key="age">
+                  <a-tabs :tab-bar-style="{margin:0}" type="card">
+                    <a-tab-pane key="age" tab="年龄分布">
                       <div class="cus-box-shadow card">
 
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="性别占比" key="sex">
+                    <a-tab-pane key="sex" tab="性别占比">
                       <div class="cus-box-shadow card">
 
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="学历分布" key="edu">
-                      <div class="cus-box-shadow card">
-
-                      </div>
-                    </a-tab-pane>
-                  </a-tabs>
-                </a-col>
-                <a-col :span="8">
-                  <a-tabs type="card" :tab-bar-style="{margin:0}">
-                    <a-tab-pane tab="政治面貌" key="politic">
-                      <div class="cus-box-shadow card">
-
-                      </div>
-                    </a-tab-pane>
-                    <a-tab-pane tab="职工职称" key="professional">
-                      <div class="cus-box-shadow card">
-
-                      </div>
-                    </a-tab-pane>
-                    <a-tab-pane tab="工龄" key="workingAge">
-                      <div class="cus-box-shadow card">
-
-                      </div>
-                    </a-tab-pane>
-                    <a-tab-pane tab="本企业工龄" key="workingAgeLocal">
+                    <a-tab-pane key="edu" tab="学历分布">
                       <div class="cus-box-shadow card">
 
                       </div>
@@ -148,23 +121,47 @@
                   </a-tabs>
                 </a-col>
                 <a-col :span="8">
-                  <a-tabs type="card" :tab-bar-style="{margin:0}">
-                    <a-tab-pane tab="职工类型" key="empType">
+                  <a-tabs :tab-bar-style="{margin:0}" type="card">
+                    <a-tab-pane key="politic" tab="政治面貌">
                       <div class="cus-box-shadow card">
 
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="职工来源" key="empSource">
+                    <a-tab-pane key="professional" tab="职工职称">
                       <div class="cus-box-shadow card">
 
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="职工状态" key="empStatus">
+                    <a-tab-pane key="workingAge" tab="工龄">
                       <div class="cus-box-shadow card">
 
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="职工合同类型" key="empContractType">
+                    <a-tab-pane key="workingAgeLocal" tab="本企业工龄">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                  </a-tabs>
+                </a-col>
+                <a-col :span="8">
+                  <a-tabs :tab-bar-style="{margin:0}" type="card">
+                    <a-tab-pane key="empType" tab="职工类型">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane key="empSource" tab="职工来源">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane key="empStatus" tab="职工状态">
+                      <div class="cus-box-shadow card">
+
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane key="empContractType" tab="职工合同类型">
                       <div class="cus-box-shadow card">
 
                       </div>
@@ -179,7 +176,7 @@
               <a-input-search placeholder="请输入职工姓名" style="width: 200px"/>
             </div>
             <div class="table-block item-block">
-              <a-table size="small" :data-source="empOfCompanySource" :columns="empTableColumns"></a-table>
+              <a-table :columns="empTableColumns" :data-source="empOfCompanySource" size="small"></a-table>
             </div>
           </a-tab-pane>
         </a-tabs>
@@ -213,55 +210,55 @@ export default {
     const keywords = ref()
     const empOfCompanySource = ref([])
     const empTableColumns = ref([
-        {
-            title: '职工姓名',
-            dataIndex: 'employeeId',
-            width: 80,
-            ellipsis: true,
-            slots: {customRender: 'employeeId'}
-        },
-        {
-            title: '性别',
-            dataIndex: 'sex',
-            width: 80,
-            ellipsis: true,
-            slots: {customRender: 'sex'}
-        },
-        {
-            title: '年龄',
-            dataIndex: 'age',
-            width: 40,
-            ellipsis: true,
-            slots: {customRender: 'age'}
-        },
-        {
-            title: '部门',
-            dataIndex: 'department',
-            width: 80,
-            ellipsis: true,
-            slots: {customRender: 'department'}
-        },
-        {
-            title: '职位',
-            dataIndex: 'position',
-            width: 80,
-            ellipsis: true,
-            slots: {customRender: '80'}
-        },
-        {
-            title: '联系电话',
-            dataIndex: 'phoneNumber',
-            width: 100,
-            ellipsis: true,
-            slots: {customRender: 'phoneNumber'}
-        },
-        {
-            title: '操作',
-            dataIndex: 'action',
-            width: 80,
-            ellipsis: true,
-            slots: {customRender: 'action'}
-        }
+      {
+        title: '职工姓名',
+        dataIndex: 'employeeId',
+        width: 80,
+        ellipsis: true,
+        slots: {customRender: 'employeeId'}
+      },
+      {
+        title: '性别',
+        dataIndex: 'sex',
+        width: 80,
+        ellipsis: true,
+        slots: {customRender: 'sex'}
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        width: 40,
+        ellipsis: true,
+        slots: {customRender: 'age'}
+      },
+      {
+        title: '部门',
+        dataIndex: 'department',
+        width: 80,
+        ellipsis: true,
+        slots: {customRender: 'department'}
+      },
+      {
+        title: '职位',
+        dataIndex: 'position',
+        width: 80,
+        ellipsis: true,
+        slots: {customRender: '80'}
+      },
+      {
+        title: '联系电话',
+        dataIndex: 'phoneNumber',
+        width: 100,
+        ellipsis: true,
+        slots: {customRender: 'phoneNumber'}
+      },
+      {
+        title: '操作',
+        dataIndex: 'action',
+        width: 80,
+        ellipsis: true,
+        slots: {customRender: 'action'}
+      }
     ])
     const showEmpHis = ref(false)
 
@@ -318,6 +315,14 @@ export default {
         if (parent && child) {
           const subComIndex = parent?.children.findIndex(c => c.id === 'sub_com'.concat(parent.id))
           const subDepartIndex = parent?.children.findIndex(c => c.id === 'sub_depart'.concat(parent.id))
+          if (subDepartIndex === -1) {
+            parent.children.push({
+              name: '本公司部门',
+              id: 'sub_depart'.concat(parent.id),
+              type: 'subDepart',
+              children: []
+            })
+          }
           if (subComIndex === -1) {
             parent.children.push({
               name: '分子公司',
@@ -328,14 +333,6 @@ export default {
           } else {
             const subComs = parent.children[subComIndex]
             subComs.children.push(child)
-          }
-          if (subDepartIndex === -1) {
-            parent.children.push({
-              name: '本公司部门',
-              id: 'sub_depart'.concat(parent.id),
-              type: 'subDepart',
-              children: []
-            })
           }
         }
       })
@@ -391,71 +388,68 @@ export default {
 }
 
 .cus-sider {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-
-  .back {
-    padding: 0 8px;
-    margin: 8px 0;
-    cursor: pointer;
-    color: #2c6da5;
-  }
-
+  max-height: 100%;
   .sticky-block {
     position: sticky;
-    top: 0px;
+    top: 0;
     left: 2px;
-    padding: 0 8px;
+    padding: 8px;
     background: white;
     z-index: 100;
   }
-
   .tree-block {
-    flex-grow: 8;
-    flex-shrink: 2;
+
   }
 }
 
 .content-container {
   //max-height: 100%;
   overflow: auto;
+
   .tabs {
     height: 100%;
     margin-left: 2px;
     overflow: auto;
+
     .tabs-pane {
       padding: 0 20px 20px 20px;
     }
-    .ops-block{
+
+    .ops-block {
       background: white;
       text-align: right;
       padding: 20px;
     }
-    .emp-change-block{
+
+    .emp-change-block {
 
     }
-    .check-history-block{
+
+    .check-history-block {
       cursor: pointer;
-      .ops{
+
+      .ops {
         display: inline-block;
         color: #2c6da5;
         margin: 20px 0;
       }
-      .graph{
+
+      .graph {
         width: 100%;
         height: 400px;
         background: aliceblue;
       }
     }
-    .bottom-block{
+
+    .bottom-block {
       margin-top: 8px;
-      .graph{
+
+      .graph {
         height: 400px;
         background: aliceblue;
       }
-      .science{
+
+      .science {
         display: grid;
         height: 400px;
         grid-template-columns: 1fr 1fr;
@@ -464,28 +458,32 @@ export default {
     }
   }
 }
-.company{
 
-  .ops-bar{
+.company {
+
+  .ops-bar {
     background: white;
     padding: 20px;
   }
-  .table-block{
+
+  .table-block {
     background: white;
     padding: 20px;
 
   }
 }
 
-.layout-center{
+.layout-center {
   text-align: center;
 }
-.card{
+
+.card {
   width: 100%;
   height: 400px;
   background: white;
 }
-.item-block{
+
+.item-block {
   margin: 0 20px 20px 20px;
 }
 </style>

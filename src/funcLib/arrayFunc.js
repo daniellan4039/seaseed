@@ -66,7 +66,7 @@ export function convertTreeToTree(tree, callBack) {
  * @param configCurrentNodeCallback 当前组装父子关系的回调函数，如果为空，则使用默认的父子级关系进行组合，否则由用户自定义组合
  * @returns {{}|*[]}
  */
-export function convertArrayToTree(list, configCurrentNodeCallback, parentKey='parentId', currentKey='id', childrenKey='children') {
+export function convertArrayToTree(list, configCurrentNodeCallback, parentKey = 'parentId', currentKey = 'id', childrenKey = 'children') {
     let map = {};
     let node;
     let roots = [];
@@ -84,7 +84,7 @@ export function convertArrayToTree(list, configCurrentNodeCallback, parentKey='p
         node = list[i];
         if (node[parentKey] !== '0') {
             // if you have dangling branches check that map[node.parentId] exists
-            if(configCurrentNodeCallback) {
+            if (configCurrentNodeCallback) {
                 configCurrentNodeCallback(list[map[node[parentKey]]], node)
             } else {
                 list[map[node[parentKey]]][childrenKey].push(node)
@@ -94,4 +94,8 @@ export function convertArrayToTree(list, configCurrentNodeCallback, parentKey='p
         }
     }
     return roots;
+}
+
+export function generateRandomFrom(n, m) {
+    return parseInt(Math.random() * (m - n) + n)
 }

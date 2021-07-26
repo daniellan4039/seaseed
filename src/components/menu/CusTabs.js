@@ -62,7 +62,6 @@ export default {
                                 return h(
                                     <a-menu>
                                         <a-menu-item key='close'>关闭其他页面</a-menu-item>
-                                        <a-menu-item key='fresh'>刷新当前页面</a-menu-item>
                                     </a-menu>,
                                     {
                                         onClick: this.onExtraMenuSelect
