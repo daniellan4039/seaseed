@@ -22,13 +22,13 @@
             <div>
               <a-card title="人员变动">
                 <div class="emp-change-block layout-center">
-                  <div style="display: inline-block;">
+                  <div>
                     <icon-card count="3" icon-background="#488bf8" icon-type="iconneibutiaoru" title="人员调动"/>
                     <icon-card count="3" icon-background="#73deb3" icon-type="iconshehuizhaopin" title="社会招聘"/>
                     <icon-card count="3" icon-background="#f7c739" icon-type="iconxuexiaozhaopin" title="学校招聘"/>
                     <icon-card count="3" icon-background="#488bf8" icon-type="iconjunrenanzhi" title="军人安置"/>
                   </div>
-                  <div style="display: inline-block;">
+                  <div>
                     <icon-card count="3" icon-background="#488bf8" icon-type="iconjiechuhetong" title="解除合同"/>
                     <icon-card count="3" icon-background="#73deb3" icon-type="icontiaozou" title="调走"/>
                     <icon-card count="3" icon-background="#f7c739" icon-type="icontuixiu" title="退休"/>
@@ -422,7 +422,8 @@ export default {
     }
 
     .emp-change-block {
-
+      display: flex;
+      justify-content: space-around;
     }
 
     .check-history-block {

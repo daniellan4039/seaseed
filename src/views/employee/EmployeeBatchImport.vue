@@ -19,7 +19,7 @@
           <cus-upload :custom-request="uploadFile" :enable-upload="false" :show-upload-list="false" text="导入Excel"/>
         </span>
         <span>
-          <a-button type="default" style="margin-left: 8px;">导出Excel</a-button>
+          <a-button type="default" style="margin-left: 8px;" @click="onExport">导出Excel</a-button>
           <a-button type="primary" style="margin-left: 8px;">上传</a-button>
         </span>
       </div>
@@ -37,7 +37,7 @@
 <script>
 import {CusFormContainer, CusUpload} from "@/components";
 import {computed, ref} from "vue";
-import {readExcel} from "@/funcLib/cusExcelJs";
+import {readExcel, saveFile} from "@/funcLib/cusExcelJs";
 
 export default {
   name: "EmployeeBatchImport",
@@ -79,13 +79,19 @@ export default {
       return message
     })
 
+    const onExport = () => {
+      const re = saveFile()
+      console.log(re)
+    }
+
     return {
       uploadFile,
       warningColor,
       nullWarning,
       columns,
       data,
-      requiredConstraints
+      requiredConstraints,
+      onExport
     }
   },
   data: () => ({
