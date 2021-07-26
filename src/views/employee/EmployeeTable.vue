@@ -5,6 +5,9 @@
         <template #otherOps>
           <a-button type="default" style="margin-left: 8px;" @click="uploadFile">批量导入</a-button>
         </template>
+        <template #actionExt="{record}">
+          <a @click="onDistribute(record)">调出</a>
+        </template>
       </cus-table>
     </div>
   </cus-table-container>
@@ -15,6 +18,7 @@ import {tableDef} from "@/definition/employee/employeeDef"
 import {CusTable, CusTableContainer} from '@/components'
 import {ref} from "vue";
 import router from "@/router";
+import store from '@/store/index'
 
 export default {
   name: "EmployeeInfo",
@@ -35,12 +39,23 @@ export default {
       })
     }
 
+    const onDistribute = (record) => {
+      const emp = {
+        employeeId: record.id
+      }
+      store.dispatch('setTransferRecord', emp)
+      router.push({
+        path: '/transferRecord/Form'
+      })
+    }
+
     return {
       tableDef,
       refresh,
       searchModel,
       onSubmit,
-      uploadFile
+      uploadFile,
+      onDistribute
     }
   }
 }

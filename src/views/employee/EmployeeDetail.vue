@@ -8,7 +8,7 @@
         <a-image :height="160" :width="117" :src="avatorUrl"/>
       </div>
       <div class="info">
-        <img src="@/assets/已调出.png">
+        <img v-if="employee?.transferRecordList?.length > 0" src="@/assets/已调出.png">
       </div>
       <a-divider type="horizontal" />
       <div class="other-block">
@@ -102,7 +102,7 @@ export default {
         employee.value = res.data
       })
     }
-    employee.value.avatar && get(employee.value.avatar).then(res => {
+    employee.value?.avatar && get(employee.value.avatar).then(res => {
       avatorUrl.value = res.data[0]
     })
     searchModel.value.employeeId = employee.value?.id??0
@@ -123,6 +123,7 @@ export default {
       contractTableDef,
       langTableDef,
       patentTableDef,
+      employee,
       avatorUrl,
       searchModel
     }

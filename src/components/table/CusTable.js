@@ -288,6 +288,7 @@ export default {
                                     onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
                                 remove && children.push(<a-divider type='vertical'/>) && children.push(<a
                                     onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
+                                this.$slots.actionExt && children.push(<a-divider type='vertical'/>) && children.push(this.$slots.actionExt(arg))
                                 return children
                             }
                         }
