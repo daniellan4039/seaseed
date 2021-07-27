@@ -100,12 +100,14 @@ export default {
       router.push({path: route})
     }
 
-    getMenuFromBasePlatform().then(res => {
-      let savedMenuSetting = JSON.parse(localStorage.getItem('HRMS_CUSTOM_MENUS')??'[]')
-      savedMenuSetting.length === 0 && (savedMenuSetting = res.filter(r => r.type === 'subMenu'))
-      menus.value = savedMenuSetting
-      confirmedMenus.value = savedMenuSetting
-    })
+    let savedMenuSetting = JSON.parse(localStorage.getItem('HRMS_CUSTOM_MENUS')??'[]')
+    if (savedMenuSetting.length === 0) {
+      getMenuFromBasePlatform().then(res => {
+        savedMenuSetting = res.filter(r => r.type === 'subMenu')
+      })
+    }
+    menus.value = savedMenuSetting
+    confirmedMenus.value = savedMenuSetting
 
     return {
       warningList,

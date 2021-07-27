@@ -1,4 +1,5 @@
 import {getRouter} from "@/service/anyoneApi";
+import store from '@/store/index'
 
 export function generateMenuByRoutes(routes) {
     return routes.map((r, k) => {
@@ -17,7 +18,7 @@ export function generateMenuByRoutes(routes) {
     })
 }
 
-function generateMenuFromBase(routes) {
+export function generateMenuFromBase(routes) {
     return routes.map(r => {
         let menu = {}
         const children = r?.children?.find(ri => {
@@ -43,7 +44,8 @@ function generateMenuFromBase(routes) {
 export async function getMenuFromBasePlatform() {
     const {isSuccess, data} = await getRouter()
     if (isSuccess) {
-        return generateMenuFromBase(data)
+        await store.dispatch('setRoute', data)
+        return data
     } else {
         return []
     }

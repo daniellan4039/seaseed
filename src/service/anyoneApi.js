@@ -11,6 +11,11 @@ export const api = {
 export function getRouter () {
     return $.get(
         api.routerUrl,
+        {
+            params: {
+                buildTree: false
+            }
+        }
     )
 }
 
