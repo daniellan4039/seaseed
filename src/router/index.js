@@ -74,6 +74,7 @@ import MenuSetting from "@/views/home/MenuSetting";
 import Statistic from "@/views/statistic/Statistic";
 import {authorite} from "@/funcLib/authorite";
 import {Modal} from "ant-design-vue";
+import ArchiveBorrowForm from "@/views/archiveBorrow/ArchiveBorrowForm";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -348,6 +349,17 @@ export const routes = [
                     title: '档案借阅',
                     key: 'hrms:basemanage:archive_borrow'
                 }
+            },
+            {
+              path: '/archiveBorrow/form',
+              name: 'ArchiveBorrowForm',
+              component: ArchiveBorrowForm,
+              meta: {
+                title: '档案借阅表单',
+                key: 'hrms:basemanage:archive_borrow:form',
+                visible: false,
+                auth: false
+              }
             },
             {
                 path: '/archiveBorrow/detail',

@@ -148,7 +148,7 @@ export const formDef = {
     formItems: [
         {
             key: 'borrowEmployeeId',
-            label: '职工姓名',
+            label: '借阅职工',
             placeholder: '请输入职工姓名',
             inputType: 'select:search',
             rules: [],
@@ -225,22 +225,10 @@ export const formDef = {
             }
         },
         {
-            key: 'borrowReason',
-            label: '借阅原因',
-            placeholder: '请输入原因',
-            inputType: 'input:string',
-            rules: [],
-            meta: {
-                submit: true,
-                scope: ['form', 'detail'],
-                group: '基本信息'
-            }
-        },
-        {
             key: 'borrowTime',
             label: '借阅时间',
             placeholder: '请输入借阅水岸',
-            inputType: 'input:string',
+            inputType: 'date:date',
             rules: [],
             meta: {
                 submit: true,
@@ -265,6 +253,18 @@ export const formDef = {
             label: '实际归还时间',
             placeholder: '请选择日期',
             inputType: 'date:date',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: [ 'detail'],
+                group: '基本信息'
+            }
+        },
+        {
+            key: 'borrowReason',
+            label: '借阅原因',
+            placeholder: '请输入原因',
+            inputType: 'input:area',
             rules: [],
             meta: {
                 submit: true,

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import router from "@/router"
 import store from '@/store/index'
 import {Modal} from "ant-design-vue"
+import CusTableAction from "@/components/table/CusTableAction";
 
 const indexCol = {
     key: 'Index',
@@ -53,7 +54,7 @@ export default {
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
     components: {
-        CusTableOpsBar
+        CusTableOpsBar, CusTableAction
     },
     setup(props, ctx) {
         const actionColWrapper = reactive(actionCol)
@@ -283,13 +284,35 @@ export default {
                                     remove: false
                                 }
                                 const children = []
-                                update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
-                                detail && children.push(<a-divider type='vertical'/>) && children.push(<a
-                                    onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
-                                remove && children.push(<a-divider type='vertical'/>) && children.push(<a
-                                    onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
-                                this.$slots.actionExt && children.push(<a-divider type='vertical'/>) && children.push(this.$slots.actionExt(arg))
-                                return children
+                                // update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
+                                // detail && children.push(<a-divider type='vertical'/>) && children.push(<a
+                                //     onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
+                                // remove && children.push(<a-divider type='vertical'/>) && children.push(<a
+                                //     onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
+                                //
+                                // this.$slots.actionExt && children.push(<a-divider type='vertical'/>) && children.push(this.$slots.actionExt(arg))
+                                // return children
+                                update && children.push({
+                                    name: '编辑',
+                                    onClick: () => self.onEditBtnClick(arg)
+                                })
+                                detail && children.push({
+                                    name: '详细',
+                                    onClick: () => self.onDetailBtnClick(arg)
+                                })
+                                remove && children.push({
+                                    name: '删除',
+                                    onClick: () => self.onDeleteBtnClick(arg)
+                                })
+                                const actionBarSlot = {
+                                    default: () => this.$slots.actionExt(arg)
+                                }
+                                const actionsBar = <cus-table-action actions={children} v-slots={actionBarSlot}>
+
+                                </cus-table-action>
+                                return [
+                                    actionsBar
+                                ]
                             }
                         }
                     )

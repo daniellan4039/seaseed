@@ -161,7 +161,7 @@ export default {
         const add = self.enableAdd && <a-button type='primary' onClick={self.onAddBtnClick}>
             <PlusOutlined/>
             新增
-        </a-button> || <span></span>
+        </a-button> || <span/>
 
         const otherOps = <span>
             {this.$slots.otherOps ? this.$slots.otherOps() : ''}

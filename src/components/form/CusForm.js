@@ -109,7 +109,7 @@ export default {
             formRef.value?.validate().then(() => {
                 let pickedModel = _.pick(formModel, formKeys)
                 props.beforeSubmit && props.beforeSubmit(pickedModel)
-                if (!defaultModel.value._edit) {
+                if (!defaultModel.value?._edit) {
                     delete pickedModel.id
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {

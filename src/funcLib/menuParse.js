@@ -46,7 +46,7 @@ export async function getMenuFromBasePlatform() {
     if (isSuccess) {
         let routeMap = {}
         data.forEach(d => {
-            routeMap[d.code] = d
+            routeMap[d.code] = d.name
         })
         await store.dispatch('setRouteMap', routeMap)
         await store.dispatch('setRoute', data)
