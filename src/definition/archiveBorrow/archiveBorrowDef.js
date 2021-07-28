@@ -1,4 +1,4 @@
-import {archiveBorrowApi, departmentApi, employeeApi} from "@/service";
+import {archiveApi, archiveBorrowApi, departmentApi, employeeApi} from "@/service";
 
 export const tableDef = {
     key: 'archiveBorrow',
@@ -265,6 +265,38 @@ export const formDef = {
             label: '借阅原因',
             placeholder: '请输入原因',
             inputType: 'input:area',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        }
+    ]
+}
+
+export const returnFormDef = {
+    key: 'archiveReturn',
+    formType: 'normal',
+    api: archiveApi,
+    actions: {
+        save: archiveBorrowApi.save,
+        update: archiveBorrowApi.update,
+        get: archiveBorrowApi.get,
+    },
+    store: {
+        module: 'employeeStore',
+        key: 'archive'
+    },
+    labelCol: 3,
+    wrapperCol: 18,
+    config: {},
+    formItems: [
+        {
+            key: 'returnTime',
+            label: '归还日期',
+            placeholder: '请选择时间',
+            inputType: 'date:date',
             rules: [],
             meta: {
                 submit: true,

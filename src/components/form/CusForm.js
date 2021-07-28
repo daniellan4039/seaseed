@@ -36,10 +36,10 @@ export default {
     components: {
         CusFormInput
     },
-    setup(props, ctx) {
+    setup(props) {
         const formRef = ref()
         const defaultModel = ref({})
-        const formKeys = []
+        const formKeys = ref([])
         const rules = ref({})
         const groupedFormItems = ref({})
 
@@ -56,7 +56,7 @@ export default {
             if (formItems instanceof Array) {
                 formKeys.length = 0
                 formItems.forEach(i => {
-                    const submit = i.meta?.submit??true
+                    const submit = i.meta?.submit ?? true
                     const scope = i.meta?.scope?.includes('form')
                     if (submit && scope) {
                         formModel[i.key] = i?.default
@@ -116,7 +116,6 @@ export default {
                     pickedModel.id = defaultModel.value?.id
                     props.formDef?.actions?.update(pickedModel).then(res => handleResult(res))
                 }
-                ctx.emit('submit', pickedModel)
             }).catch((e) => {
                 Modal.error({
                     title: '提示',
@@ -131,7 +130,7 @@ export default {
 
         const formModel = reactive(getFormModel())
         props.formDef.formItems.forEach(i => {
-            const groupName = (i.meta?.group)??'基本信息'
+            const groupName = (i.meta?.group) ?? '基本信息'
             if (!groupedFormItems.value[groupName]?.length) {
                 groupedFormItems.value[groupName] = []
             }
@@ -143,6 +142,7 @@ export default {
         return {
             formRef,
             formModel,
+            formKeys,
             rules,
             defaultModel,
             groupedFormItems,
@@ -185,8 +185,8 @@ export default {
                     }
                 })
                 if (scope && continueByDp) {
-                    labelSpan = i?.meta?.labelSpan ? i.meta.labelSpan : singleColumn ? 9 : this.formDef.labelCol??8
-                    wrapperSpan = i?.meta?.wrapperSpan ? i.meta.wrapperSpan : singleColumn ? 4 : this.formDef.wrapperCol??16
+                    labelSpan = i?.meta?.labelSpan ? i.meta.labelSpan : singleColumn ? 9 : this.formDef.labelCol ?? 8
+                    wrapperSpan = i?.meta?.wrapperSpan ? i.meta.wrapperSpan : singleColumn ? 4 : this.formDef.wrapperCol ?? 16
                     return h(
                         resolveComponent('a-col'),
                         {
@@ -194,8 +194,8 @@ export default {
                             sm: {span: 24},
                             md: {span: 24},
                             lg: {span: 24},
-                            xl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24/(this.maxCols-1))},
-                            xxl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24/this.maxCols)},
+                            xl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24 / (this.maxCols - 1))},
+                            xxl: {span: i?.meta?.span ? i.meta.span : singleColumn ? 24 : Math.ceil(24 / this.maxCols)},
                         },
                         () => h(
                             resolveComponent('a-form-item'),
@@ -203,8 +203,8 @@ export default {
                                 ref: i.key,
                                 name: i.key,
                                 label: i.label,
-                                labelCol: { span : labelSpan },
-                                wrapperCol: { span: wrapperSpan},
+                                labelCol: {span: labelSpan},
+                                wrapperCol: {span: wrapperSpan},
                             },
                             {
                                 default: () => {
@@ -242,7 +242,7 @@ export default {
             )
         }
 
-        const submitButton = h(
+        const submitButton = this.$slots.default ? this.$slots.default(this.formDef, _.pick(this.formModel, this.formKeys)) : h(
             resolveComponent('a-row'),
             {
                 class: 'cus-form-submit-bar'

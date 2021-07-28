@@ -11,13 +11,17 @@
           </a-menu-item>
         </template>
       </cus-table>
+      <a-modal title="归还" v-model:visible="showReturn">
+        <cus-form :form-def="returnFormDef" />
+      </a-modal>
     </div>
   </cus-table-container>
 </template>
 
 <script>
 import {tableDef} from "@/definition/archive/archiveDef"
-import {CusTable, CusTableContainer} from '@/components'
+import {returnFormDef} from "@/definition/archiveBorrow/archiveBorrowDef";
+import {CusForm, CusTable, CusTableContainer} from '@/components'
 import {ref} from "vue";
 import router from "@/router";
 import store from '@/store'
@@ -25,11 +29,12 @@ import store from '@/store'
 export default {
   name: "Archive",
   components: {
-    CusTable, CusTableContainer
+    CusTable, CusTableContainer, CusForm
   },
   setup() {
     let refresh = ref(0)
     const searchModel = ref({})
+    const showReturn = ref(false)
     const onSubmit = (model) => {
       searchModel.value = model
       refresh.value++
@@ -40,11 +45,14 @@ export default {
     }
     const onReturn = (record) => {
       console.log(record)
+      showReturn.value = !showReturn.value
     }
     return {
       tableDef,
+      showReturn,
       refresh,
       searchModel,
+      returnFormDef,
       onSubmit,
       onBorrow,
       onReturn
