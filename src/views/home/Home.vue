@@ -55,7 +55,7 @@
           </a-list>
         </div>
       </div>
-      <a-modal v-model:visible="showMenuSetting" :width="800" @ok="onMenuSetConfirm">
+      <a-modal v-model:visible="showMenuSetting" :width="600" @ok="onMenuSetConfirm">
         <div v-for="(m,k) in menus" :key="k">
           <a-typography-title :level="3">{{ m.title}}</a-typography-title>
           <div class="menu-items">
@@ -73,8 +73,9 @@
 import CusMenuIcon from "@/components/menu/CusMenuIcon";
 import {BulbFilled, SettingOutlined} from "@ant-design/icons-vue";
 import {ref} from "vue";
-import {getMenuFromBasePlatform} from "@/funcLib/menuParse";
+import {generateMenuFromRawRoute, getMenuFromBasePlatform} from "@/funcLib/menuParse";
 import router from "@/router";
+import {convertArrayToTree} from "@/funcLib/arrayFunc";
 
 export default {
   name: "Home",
@@ -103,7 +104,9 @@ export default {
     let savedMenuSetting = JSON.parse(localStorage.getItem('HRMS_CUSTOM_MENUS')??'[]')
     if (savedMenuSetting.length === 0) {
       getMenuFromBasePlatform().then(res => {
-        savedMenuSetting = res.filter(r => r.type === 'subMenu')
+        const result = generateMenuFromRawRoute(convertArrayToTree(res)).filter(r => r.type === 'subMenu')
+        menus.value = result
+        confirmedMenus.value = result
       })
     }
     menus.value = savedMenuSetting

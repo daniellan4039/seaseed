@@ -5,10 +5,12 @@
 </template>
 <script>
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import {getMenuFromBasePlatform} from "@/funcLib/menuParse";
 
 export default {
   name: 'Root',
   setup(){
+    getMenuFromBasePlatform()
     return {
       locale: zhCN
     }

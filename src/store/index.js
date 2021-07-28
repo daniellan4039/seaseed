@@ -1,11 +1,14 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import userStore from "@/store/userStore"
 import employeeStore from "@/store/employeeStore";
+import {convertArrayToTree} from "@/funcLib/arrayFunc";
+import {generateMenuFromRawRoute} from "@/funcLib/menuParse";
 
 export default createStore({
   state: {
     currentPath: null,
-    route: null
+    route: null,
+    routeMap: null
   },
   mutations: {
     setCurrentPath(state, info){
@@ -13,6 +16,9 @@ export default createStore({
     },
     setRoute(state, info) {
       state.route = info
+    },
+    setRouteMap(state, info) {
+      state.routeMap = info
     }
   },
   actions: {
@@ -21,6 +27,34 @@ export default createStore({
     },
     setRoute(context, info){
       context.commit('setRoute', info)
+    },
+    setRouteMap(context, info) {
+      localStorage.setItem('HRMS_ROUTE_MAP', JSON.stringify(info))
+      context.commit('setRouteMap', info)
+    }
+  },
+  getters: {
+    parsedMenu(state) {
+      if (state.route) {
+        const tree = convertArrayToTree(state.route)
+        return generateMenuFromRawRoute(tree)
+      } else {
+        return null
+      }
+    },
+    routeMap(state) {
+      if (state.routeMap) {
+        return state.routeMap
+      } else {
+        const localStoredRouteMapStr = localStorage.getItem('HRMS_ROUTE_MAP')
+        if (localStoredRouteMapStr) {
+          const routeMap = JSON.parse(localStoredRouteMapStr)
+          state.routeMap = routeMap
+          return routeMap
+        } else {
+          return null
+        }
+      }
     }
   },
   modules: {

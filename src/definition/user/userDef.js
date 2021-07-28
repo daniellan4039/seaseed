@@ -20,7 +20,7 @@ export const formDef = {
             label: '用户名',
             inputType: 'input:string',
             placeholder: '请输入用户名',
-            default: 'admin',
+            default: '13984029019',
             rules: [
                 {
                     required: true,

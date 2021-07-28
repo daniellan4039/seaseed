@@ -43,12 +43,10 @@
 import CusMenu from '@/components/menu/CusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
 import CusTabs from '@/components/menu/CusTabs'
-import {reactive, ref, toRaw} from "vue";
+import {computed, reactive, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import {mapState} from "vuex";
-import {convertArrayToTree, retrieveSubItemByKey} from "@/funcLib/arrayFunc";
-import {generateMenuFromBase, getMenuFromBasePlatform} from "@/funcLib/menuParse";
-import {getRouteFromStore} from "@/funcLib/authorite";
+import {mapState, useStore} from "vuex";
+import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -60,14 +58,8 @@ export default {
     CusTabs
   },
   setup() {
-    const routers = ref({})
-    getMenuFromBasePlatform().then(res => {
-      const menuTree = generateMenuFromBase(convertArrayToTree(res))
-      routers.value = {
-        items: menuTree
-      }
-      getRouteFromStore()
-    })
+    const store = useStore()
+    const routers = computed(() => store.getters.parsedMenu)
     return {
       routers
     }

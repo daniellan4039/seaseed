@@ -1,11 +1,13 @@
 import store from '@/store/index'
 
-let authRoute = []
-
-export function getRouteFromStore() {
-    authRoute = store.state.route
+export function setRouteToStore(route) {
+    store.dispatch('setRoute', route)
 }
 
-export function authorite(key) {
-    return authRoute.find(a => a.code === key) !== null
+export function authorite(route) {
+    if (route.meta.auth){
+        return store.getters.routeMap[route.meta.key]
+    } else {
+        return true
+    }
 }

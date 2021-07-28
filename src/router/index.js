@@ -86,7 +86,7 @@ export const routes = [
         path: '/',
         component: DefaultLayout,
         meta: {
-            auth: true,
+            auth: false,
             title: '职工信息查询',
             key: 'home',
             type: 'subMenu'
@@ -98,7 +98,7 @@ export const routes = [
                 name: 'Home',
                 component: Home,
                 meta: {
-                    auth: true,
+                    auth: false,
                     title: '首页',
                     key: 'hrms:home',
                     visible: true
@@ -848,8 +848,8 @@ export const routes = [
                 name: 'EmployeeSelf',
                 component: EmployeeDetail,
                 meta: {
-                    auth: true,
-                    title: '职工自助',
+                    auth: false,
+                    title: '个人信息',
                     key: 'hrms:employee:self-service',
                     visible: true
                 }
@@ -885,7 +885,7 @@ export const routes = [
         name: 'Development',
         component: DefaultLayout,
         meta: {
-            auth: true,
+            auth: false,
             title: '开发系统',
             key: 'dev',
             visible: false,
@@ -897,7 +897,7 @@ export const routes = [
                 name: 'Login',
                 component: LoginForm,
                 meta: {
-                    auth: true,
+                    auth: false,
                     title: '登陆表单',
                     key: 'dev_login',
                     visible: false
@@ -912,15 +912,18 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to) => {
-    if(authorite(to.meta.key)){
+router.beforeEach((to, from) => {
+    if(authorite(to)){
         store.dispatch('setCurrentPath', to)
+        return true
     } else {
         Modal.error({
             title: '警告',
             content: '你还没授权使用此功能，请咨询你的管理员！'
         })
-        console.warn('HRMS: you have no auth to access this page.')
+        return {
+            path: from.path
+        }
     }
 
 })

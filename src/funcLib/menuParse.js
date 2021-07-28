@@ -18,7 +18,7 @@ export function generateMenuByRoutes(routes) {
     })
 }
 
-export function generateMenuFromBase(routes) {
+export function generateMenuFromRawRoute(routes) {
     return routes.map(r => {
         let menu = {}
         const children = r?.children?.find(ri => {
@@ -26,7 +26,7 @@ export function generateMenuFromBase(routes) {
         })
         if (children) {
             menu.type = 'subMenu'
-            const menuChildren = generateMenuFromBase(r.children)
+            const menuChildren = generateMenuFromRawRoute(r.children)
             menu.children = menuChildren
         } else if(r.meta.type === '0'){
             menu.type = 'menuItem'
@@ -44,6 +44,11 @@ export function generateMenuFromBase(routes) {
 export async function getMenuFromBasePlatform() {
     const {isSuccess, data} = await getRouter()
     if (isSuccess) {
+        let routeMap = {}
+        data.forEach(d => {
+            routeMap[d.code] = d
+        })
+        await store.dispatch('setRouteMap', routeMap)
         await store.dispatch('setRoute', data)
         return data
     } else {

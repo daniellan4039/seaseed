@@ -17,8 +17,7 @@ export default {
          * 其中type只能是：'menuItem'或者'subMenu'
          */
         dataSource: {
-            type: Object,
-            required: true
+            type: Object
         },
         /**
          * 表示是否折叠
@@ -77,7 +76,7 @@ export default {
         },
         selectedKeys(nv) {
             if (this.openOne??false){
-                const parentKey = this.findParentMenuItem(null, nv?.[0], this.dataSource.items)?.key
+                const parentKey = this.findParentMenuItem(null, nv?.[0], this.dataSource)?.key
                 this.clickKey = parentKey
                 parentKey ? (this.openVector = 1) : (this.openVector = 0)
             }
@@ -171,7 +170,7 @@ export default {
          * @param arg
          */
         onSelect(arg) {
-            const sourceItem = retrieveSubItemByKey(this.dataSource.items, 'key', arg.key)
+            const sourceItem = retrieveSubItemByKey(this.dataSource, 'key', arg.key)
             this.$emit('change:select',arg, sourceItem)
             this.$emit('update:selectedKeys', [arg.key])
         },
@@ -186,7 +185,7 @@ export default {
         },
     },
     render() {
-        const subMenus = this.setSubMenu(this.dataSource.items)
+        const subMenus = this.setSubMenu(this.dataSource)
         return h(resolveComponent('a-menu'),
             {
                 mode: 'inline',
