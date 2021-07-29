@@ -925,6 +925,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
+    console.log(to.fullPath, from.fullPath)
     if(authorite(to)){
         store.dispatch('setCurrentPath', to)
         return true

@@ -30,16 +30,19 @@ export default {
         },
         beforeSubmit: {
             type: Function
+        },
+        submit: {
+            type: Function
         }
     },
     emits: ['submit'],
     components: {
         CusFormInput
     },
-    setup(props) {
+    setup(props, ctx) {
         const formRef = ref()
         const defaultModel = ref({})
-        const formKeys = ref([])
+        const formKeys = []
         const rules = ref({})
         const groupedFormItems = ref({})
 
@@ -111,11 +114,13 @@ export default {
                 props.beforeSubmit && props.beforeSubmit(pickedModel)
                 if (!defaultModel.value?._edit) {
                     delete pickedModel.id
+                    console.log(props.formDef)
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
                     pickedModel.id = defaultModel.value?.id
                     props.formDef?.actions?.update(pickedModel).then(res => handleResult(res))
                 }
+                ctx.emit('submit', pickedModel)
             }).catch((e) => {
                 Modal.error({
                     title: '提示',

@@ -9,7 +9,7 @@ export const api = {
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,
     removeUrl: `${prefix}${module}/delete`,
-    getUrl: `${prefix}${module}/get`
+    getUrl: `${prefix}${module}/get`,
 }
 
 export function save(data) {

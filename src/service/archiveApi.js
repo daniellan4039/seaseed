@@ -9,7 +9,8 @@ export const api = {
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,
     removeUrl: `${prefix}${module}/delete`,
-    getUrl: `${prefix}${module}/get`
+    getUrl: `${prefix}${module}/get`,
+    returnUrl: `${prefix}${module}/returnArchive`
 }
 
 export function save(data) {
@@ -53,5 +54,12 @@ export function get(params) {
         {
             params: params
         }
+    )
+}
+
+export function returnArchive(data) {
+    return $.post(
+        api.returnUrl,
+        data
     )
 }
