@@ -6,7 +6,6 @@ export default {
     props: {
         tabs: {
             type: Array,
-            required: true
         },
         activeKey: String
     },

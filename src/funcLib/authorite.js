@@ -6,7 +6,8 @@ export function setRouteToStore(route) {
 
 export function authorite(route) {
     if (route.meta.auth){
-        return store.getters.routeMap[route.meta.key]
+        // return store.getters.routeMap[route.meta.key]
+        return true
     } else {
         return true
     }

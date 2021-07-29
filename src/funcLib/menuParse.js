@@ -41,18 +41,24 @@ export function generateMenuFromRawRoute(routes) {
     })
 }
 
-export async function getMenuFromBasePlatform() {
-    const {isSuccess, data} = await getRouter()
-    if (isSuccess) {
-        let routeMap = {}
-        data.forEach(d => {
-            routeMap[d.code] = d.name
+export function getMenuFromBasePlatform() {
+    return new Promise((resolve) => {
+        getRouter().then(res => {
+            const {isSuccess, data} = res
+            if (isSuccess) {
+                let routeMap = {}
+                data.forEach(d => {
+                    routeMap[d.code] = d.name
+                })
+                store.dispatch('setRouteMap', routeMap)
+                store.dispatch('setRoute', data)
+                resolve(data)
+            } else {
+                return resolve([])
+            }
         })
-        await store.dispatch('setRouteMap', routeMap)
-        await store.dispatch('setRoute', data)
-        return data
-    } else {
-        return []
-    }
+    })
+
+
 }
 

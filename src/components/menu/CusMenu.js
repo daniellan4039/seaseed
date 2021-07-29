@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import {h, watch, reactive, resolveComponent} from "vue";
 import {UserOutlined} from "@ant-design/icons-vue";
-import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 import { createFromIconfontCN } from "@ant-design/icons-vue";
+import store from '@/store'
 
 const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2501011_cut7wm6am1w.js',
@@ -170,7 +170,8 @@ export default {
          * @param arg
          */
         onSelect(arg) {
-            const sourceItem = retrieveSubItemByKey(this.dataSource, 'key', arg.key)
+            console.log(arg)
+            const sourceItem = store.state.route.find(r => r.code === arg.key)
             this.$emit('change:select',arg, sourceItem)
             this.$emit('update:selectedKeys', [arg.key])
         },

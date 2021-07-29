@@ -43,10 +43,10 @@
 import CusMenu from '@/components/menu/CusMenu'
 import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons-vue";
 import CusTabs from '@/components/menu/CusTabs'
+// eslint-disable-next-line no-unused-vars
 import {computed, reactive, toRaw} from "vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {mapState, useStore} from "vuex";
-import {retrieveSubItemByKey} from "@/funcLib/arrayFunc";
 
 const LAST_OPEN_TABS = 'HRMS_LAST_OPEN_TABS'
 const LAST_SELECTED_TAB = 'HRMS_LAST_SELECTED_MENU'
@@ -79,7 +79,7 @@ export default {
       },
       set(value) {
         this.menuSelectedKeys = [value]
-        const chooseTab = retrieveSubItemByKey(this.openTabs, 'key', value)
+        const chooseTab = this.openTabs.find(t => t.key === value)
         chooseTab && this.$router.push({
           path: chooseTab.path
         })

@@ -284,14 +284,6 @@ export default {
                                     remove: false
                                 }
                                 const children = []
-                                // update && children.push(<a onClick={() => self.onEditBtnClick(arg)}>编辑</a>)
-                                // detail && children.push(<a-divider type='vertical'/>) && children.push(<a
-                                //     onClick={() => self.onDetailBtnClick(arg)}>详情</a>)
-                                // remove && children.push(<a-divider type='vertical'/>) && children.push(<a
-                                //     onClick={() => self.onDeleteBtnClick(arg)}>删除</a>)
-                                //
-                                // this.$slots.actionExt && children.push(<a-divider type='vertical'/>) && children.push(this.$slots.actionExt(arg))
-                                // return children
                                 update && children.push({
                                     name: '编辑',
                                     onClick: () => self.onEditBtnClick(arg)
@@ -305,11 +297,9 @@ export default {
                                     onClick: () => self.onDeleteBtnClick(arg)
                                 })
                                 const actionBarSlot = {
-                                    default: () => this.$slots.actionExt(arg)
+                                    default: () => this.$slots.actionExt ? this.$slots.actionExt(arg) : null
                                 }
-                                const actionsBar = <cus-table-action actions={children} v-slots={actionBarSlot}>
-
-                                </cus-table-action>
+                                const actionsBar = <cus-table-action actions={children} v-slots={actionBarSlot} />
                                 return [
                                     actionsBar
                                 ]
