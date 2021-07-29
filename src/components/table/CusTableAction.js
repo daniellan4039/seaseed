@@ -39,11 +39,6 @@ export default {
                     <a>更多</a>
                 </a-dropdown>
                 bar.push(more)
-            } else if (this.actions.length === 2) {
-                const secondCom = this.actions[1]
-                bar.push(
-                    <a onClick={secondCom.onClick}>{secondCom.name}</a>
-                )
             }
         }
         return bar

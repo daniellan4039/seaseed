@@ -732,3 +732,32 @@ export const formDefForNew = {
         columns: 5
     }
 }
+
+export const returnFormDef = {
+    key: '',
+    formType: 'normal',
+    api: null,
+    actions: {
+    },
+    store: {
+        module: '',
+        key: ''
+    },
+    labelCol: 6,
+    wrapperCol: 18,
+    config: {},
+    formItems: [
+        {
+            key: '',
+            label: '',
+            placeholder: '',
+            inputType: '',
+            rules: [],
+            meta: {
+                submit: true,
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
+        },
+    ]
+}

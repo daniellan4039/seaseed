@@ -8,7 +8,8 @@ export default createStore({
   state: {
     currentPath: null,
     route: null,
-    routeMap: null
+    routeMap: null,
+    baseLog: null
   },
   mutations: {
     setCurrentPath(state, info){
@@ -19,6 +20,9 @@ export default createStore({
     },
     setRouteMap(state, info) {
       state.routeMap = info
+    },
+    setBaseLog(state, info) {
+      state.baseLog = info
     }
   },
   actions: {
@@ -31,6 +35,9 @@ export default createStore({
     setRouteMap(context, info) {
       localStorage.setItem('HRMS_ROUTE_MAP', JSON.stringify(info))
       context.commit('setRouteMap', info)
+    },
+    setBaseLog(context, info) {
+      context.commit('setBaseLog', info)
     }
   },
   getters: {

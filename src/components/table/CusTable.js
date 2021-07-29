@@ -50,6 +50,10 @@ export default {
         useDefaultPagination: {
             type: Boolean,
             default: false
+        },
+        extraActions: {
+            type: Array,
+            default: []
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -296,10 +300,14 @@ export default {
                                     name: '删除',
                                     onClick: () => self.onDeleteBtnClick(arg)
                                 })
-                                const actionBarSlot = {
-                                    default: () => this.$slots.actionExt ? this.$slots.actionExt(arg) : null
-                                }
-                                const actionsBar = <cus-table-action actions={children} v-slots={actionBarSlot} />
+                                this.extraActions.forEach(a => {
+                                    const action = {
+                                        name: a.name,
+                                        onClick: () => a.onClick(arg)
+                                    }
+                                    children.push(action)
+                                })
+                                const actionsBar = <cus-table-action actions={children}/>
                                 return [
                                     actionsBar
                                 ]

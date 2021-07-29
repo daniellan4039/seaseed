@@ -170,7 +170,6 @@ export default {
          * @param arg
          */
         onSelect(arg) {
-            console.log(arg)
             const sourceItem = store.state.route.find(r => r.code === arg.key)
             this.$emit('change:select',arg, sourceItem)
             this.$emit('update:selectedKeys', [arg.key])

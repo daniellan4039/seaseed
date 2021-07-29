@@ -114,7 +114,6 @@ export default {
                 props.beforeSubmit && props.beforeSubmit(pickedModel)
                 if (!defaultModel.value?._edit) {
                     delete pickedModel.id
-                    console.log(props.formDef)
                     props.formDef?.actions?.save(pickedModel).then(res => handleResult(res))
                 } else {
                     pickedModel.id = defaultModel.value?.id

@@ -19,9 +19,7 @@ export default {
   },
   setup () {
     const beforeSubmit = (record) => {
-      console.log(store.state)
       record.employeeId = store.state['employeeStore']['transferRecord'].employeeId
-      console.log(record)
     }
     return {
       beforeSubmit

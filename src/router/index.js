@@ -75,6 +75,8 @@ import Statistic from "@/views/statistic/Statistic";
 import {authorite} from "@/funcLib/authorite";
 import {Modal} from "ant-design-vue";
 import ArchiveBorrowForm from "@/views/archiveBorrow/ArchiveBorrowForm";
+import BaseLogTable from "@/views/baseLog/BaseLogTable";
+import BaseLogDetail from "@/views/baseLog/BaseLogDetail";
 
 /**
  * 因为要是用keep-alive，因此要缓存的组件不能使用函数式引入，应该使用import直接导入
@@ -866,6 +868,28 @@ export const routes = [
                     visible: true
                 }
             },
+            {
+              path: '/baseLog',
+              name: 'BaseLog',
+              component: BaseLogTable,
+              meta: {
+                title: '操作日志',
+                key: 'hrms:baseLog:table',
+                visible: true,
+                auth: true
+              }
+            },
+            {
+              path: '/baseLog/detail',
+              name: 'BaseLogDetail',
+              component: BaseLogDetail,
+              meta: {
+                title: '操作日志详细',
+                key: 'hrms:baseLog:detail',
+                visible: true,
+                auth: true
+              }
+            }
         ]
     },
     {
@@ -925,7 +949,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    console.log(to.fullPath, from.fullPath)
     if(authorite(to)){
         store.dispatch('setCurrentPath', to)
         return true

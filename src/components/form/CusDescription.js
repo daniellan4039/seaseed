@@ -12,10 +12,14 @@ export default {
         if (props.formDef.store) {
             const module = props.formDef.store?.module
             const key = props.formDef.store?.key
-            module && key && (defaultModel.value = store.state[module][key])
+            if (module && key) {
+                defaultModel.value = store.state[module][key]
+            } else if(!module && key) {
+                defaultModel.value = store.state[key]
+            }
             const echoMap = defaultModel.value?.echoMap
             for (let echoMapKey in echoMap) {
-                if(echoMapKey === 'employeeId') {
+                if (echoMapKey === 'employeeId') {
                     defaultModel.value[echoMapKey] = echoMap[echoMapKey].realName
                 } else {
                     defaultModel.value[echoMapKey] = echoMap[echoMapKey]
@@ -30,7 +34,7 @@ export default {
                 !length && (pageMap.value[groupName] = [])
                 let label = defaultModel?.value?.[fi.key] ?? '未知'
                 if (typeof label === 'boolean') {
-                    label  = label ? '是' : '否'
+                    label = label ? '是' : '否'
                 }
                 pageMap.value[groupName].push({
                     label: fi.label,
@@ -65,7 +69,8 @@ export default {
                 {
                     title: pageMapKey,
                     size: 'small',
-                    column: this.formDef?.meta?.columns??3
+                    // column: this.formDef?.meta?.columns ?? 3,
+                    ...this.formDef?.config
                 },
                 {
                     default: () => desItems
