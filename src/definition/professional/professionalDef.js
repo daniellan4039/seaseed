@@ -461,6 +461,19 @@ export const formDef = {
                 scope: ['form', 'detail'],
                 group: '基本信息'
             }
+        },
+        {
+            key: 'technicalTitle',
+            label: '技术职务',
+            placeholder: '请输入评审单位',
+            inputType: 'select:code',
+            rules: [],
+            meta: {
+                submit: true,
+                code: 'hr_technical_title',
+                scope: ['form', 'detail'],
+                group: '基本信息'
+            }
         }
     ]
 }

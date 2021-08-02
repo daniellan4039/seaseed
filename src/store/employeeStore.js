@@ -21,6 +21,7 @@ export default {
         archiveBorrow: null,
         archiveTransfer: null,
         dictionary: null,
+        parentDictionary: null,
         academic: null,
         transferRecord: null
     },
@@ -87,6 +88,9 @@ export default {
         },
         setDictionary(state, info) {
             state.dictionary = info
+        },
+        setParentDictionary(state, info) {
+            state.parentDictionary = info
         },
         setAcademic(state, info) {
             state.academic = info
@@ -158,6 +162,9 @@ export default {
         },
         setDictionary(context, info) {
             context.commit('setDictionary', info)
+        },
+        setParentDictionary(context, info) {
+            context.commit('setParentDictionary', info)
         },
         setAcademic(context, info) {
             context.commit('setAcademic', info)

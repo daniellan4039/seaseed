@@ -12,7 +12,7 @@ import CusDescription from "@/components/form/CusDescription";
 import {formDef} from '@/definition/archiveRoom/archiveRoomDef'
 
 export default {
-  name: "ArchiveRoomDetail",
+  name: "ArchiveRoomDetdail",
   components: {
     CusFormContainer, CusDescription
   },

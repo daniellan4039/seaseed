@@ -180,5 +180,9 @@ export const dictData = [
     {
         key: 'hr_professional_level',
         title: '职称等级'
+    },
+    {
+        key: 'hr_technical_title',
+        title: '技术职务'
     }
 ]

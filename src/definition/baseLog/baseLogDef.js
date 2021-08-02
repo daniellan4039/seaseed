@@ -37,10 +37,10 @@ export const tableDef = {
         },
         formItems: [
             {
-                key: 'request',
-                label: '操作类型',
-                placeholder: '请选择',
-                inputType: 'select',
+                key: 'description',
+                label: '操作内容',
+                placeholder: '请输入',
+                inputType: 'input:string',
                 rules: [],
                 meta: {
                     submit: true,
@@ -161,20 +161,6 @@ export const tableDef = {
             width: 120,
             ellipsis: true,
             slots: {customRender: 'startTime'}
-        },
-        {
-            title: '请求参数',
-            dataIndex: 'requestParams',
-            width: 200,
-            ellipsis: true,
-            slots: {customRender: 'requestParams'}
-        },
-        {
-            title: '响应结果',
-            dataIndex: 'response',
-            width: 200,
-            ellipsis: true,
-            slots: {customRender: 'response'}
         }
     ]
 }
@@ -219,15 +205,6 @@ export const formDef = {
             }
         },
         {
-            key: 'requestParams',
-            label: '请求参数',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
-            }
-        },
-        {
             key: 'startTime',
             label: '操作时间',
             meta: {
@@ -235,15 +212,6 @@ export const formDef = {
                 scope: ['detail'],
                 group: '基本信息',
                 detailSpan: 2
-            }
-        },
-        {
-            key: 'response',
-            label: '响应结果',
-            meta: {
-                submit: true,
-                scope: ['detail'],
-                group: '基本信息'
             }
         }
     ]

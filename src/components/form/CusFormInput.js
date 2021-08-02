@@ -77,7 +77,7 @@ export default {
                     {
                         placeholder: this.item.placeholder,
                         value: this.modelValue,
-                        'onChange': $event => this.$emit('update:modelValue', $event.target.value)
+                        'onChange': $event => this.$emit('update:modelValue', $event)
                     }
                 )
                 break

@@ -173,7 +173,7 @@ export const formDef = {
             }
         },
         {
-            key: 'readOnly',
+            key: 'readonly',
             label: '是否只读',
             placeholder: '请选择',
             inputType: 'select',

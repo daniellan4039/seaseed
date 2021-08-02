@@ -4,7 +4,7 @@ const prefix = '/base'
 const moduleAnyone = '/anyone'
 const module = '/baseDict'
 export const api = {
-    saveUrl: `${prefix}${module}/save`,
+    saveUrl: `${prefix}${module}/saveAuto`,
     updateUrl: `${prefix}${module}/update`,
     pageUrl: `${prefix}${module}/page`,
     listUrl: `${prefix}${module}/list`,

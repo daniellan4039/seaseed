@@ -4,7 +4,8 @@
       <div style="margin-right: 8px;">
         <a-input-search v-model:value="keywords" placeholder="请输入关键字" style="margin-bottom: 8px"/>
         <div :style="{ maxHeight: maxHeight + 'px'}" class="type-block">
-          <a-tree v-model:selectedKeys="treeSelectedKeys" :tree-data="dictData" @select="onTreeSelected"></a-tree>
+          <a-tree v-model:selectedKeys="treeSelectedKeys" :tree-data="dictData" @select="onTreeSelected"
+                  v-model:expanded-keys="expandedKey"></a-tree>
         </div>
       </div>
       <cus-table :refresh="refresh" :search-model="searchModel" :table-def="tableDef" class="table">
@@ -19,6 +20,7 @@ import {CusTable, CusTableContainer} from '@/components'
 import {onMounted, ref, watch} from "vue";
 import {dictData} from "@/views/dictionary/basicData";
 import {retrieveSubItemsByKey} from "@/funcLib/arrayFunc";
+import store from '@/store/index'
 
 export default {
   name: "Dictionary",
@@ -28,6 +30,8 @@ export default {
   setup() {
     let refresh = ref(0)
     let maxHeight = ref(200)
+    const expandedKey = ref([])
+
     const searchModel = ref({
       dictCodeEqual: true,
       ignoreParent: true
@@ -52,13 +56,22 @@ export default {
       })
     })
 
-    const onTreeSelected = (selectedKeys) => {
-      searchModel.value = {
-        dictCode: selectedKeys[0],
-        dictCodeEqual: true,
-        ignoreParent: true
+    const onTreeSelected = (selectedKeys, {node}) => {
+      if (node.children.length > 0) {
+        expandedKey.value = [selectedKeys[0]]
+      } else {
+        searchModel.value = {
+          dictCode: selectedKeys[0],
+          dictName: node.title,
+          dictCodeEqual: true,
+          ignoreParent: true
+        }
+        refresh.value++
+        store.dispatch('setParentDictionary', {
+          dictCode: searchModel.value.dictCode,
+          dictName: searchModel.value.dictName,
+        })
       }
-      refresh.value++
     }
 
     return {
@@ -69,6 +82,7 @@ export default {
       treeSelectedKeys,
       onSubmit,
       onTreeSelected,
+      expandedKey,
       dictData,
       tableDef,
     }
