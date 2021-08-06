@@ -69,6 +69,8 @@ export default {
                 {
                     title: pageMapKey,
                     size: 'small',
+                    column: 1,
+                    bordered: true,
                     // column: this.formDef?.meta?.columns ?? 3,
                     ...this.formDef?.config
                 },
@@ -78,7 +80,7 @@ export default {
             )
             desPanes.push(desBlock)
         }
-        return <div>
+        return <div class='des-block'>
             {desPanes}
         </div>
     }

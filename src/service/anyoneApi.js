@@ -6,6 +6,7 @@ const module = '/anyone'
 export const api = {
     routerUrl: `${prefix}${module}/router`,
     companyTreeUrl: `${prefix}${module}/getCompanyTree`,
+    getTokenByTicketUrl: `${prefix}/anno/getTokenByTicket`
 }
 
 export function getRouter () {

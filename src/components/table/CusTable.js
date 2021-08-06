@@ -54,6 +54,10 @@ export default {
         extraActions: {
             type: Array,
             default: []
+        },
+        showActionCol: {
+            type: Boolean,
+            default: true
         }
     },
     emits: ['addNew', 'edit', 'detail', 'delete'],
@@ -87,7 +91,7 @@ export default {
             })
             x.splice(0, 0, indexCol)
             if (props.tableDef.defaultActions) {
-                x.push(actionColWrapper)
+                props.showActionCol && x.push(actionColWrapper)
             }
             return x
         })

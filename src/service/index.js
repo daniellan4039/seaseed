@@ -27,6 +27,7 @@ import * as distributeApi from './distributeApi'
 import * as academicApi from './academicApi'
 import * as transferRecordApi from './transferRecordApi'
 import * as baseLogApi from './baseLogApi'
+import {jumpToAuth, warningUserForbidden} from "@/funcLib/menuParse";
 
 const $ = axios.create({
     baseURL: process.env.VUE_APP_BASE_URL,
@@ -47,8 +48,22 @@ $.interceptors.request.use((config) => {
 $.interceptors.response.use((response) => {
     const {code} = response
     switch (code) {
+        case 100000019:
+        case 100000020:
+        case 100000021:
+        case 100000023:
+        case 100000026:
         case 100000027:
-            break;
+            jumpToAuth()
+            break
+        case 100000025:
+        case 100000030:
+            // 员工被禁用
+            warningUserForbidden()
+            break
+        case 100000031:
+            warningUserForbidden('您所在的公司已被禁用，请联系公司管理员')
+            break
     }
     return response.data
 }, (error => {

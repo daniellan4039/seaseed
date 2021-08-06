@@ -12,7 +12,7 @@
       </div>
     </a-layout-sider>
     <a-layout>
-      <a-layout-content class="content-container">
+      <a-layout-content class="content-container" id="HRMS_TABLE_CONTAINER">
         <a-tabs :tab-bar-style="{ paddingLeft: '20px', paddingTop: '20px', paddingBottom: '20px', background: 'white'}" class="tabs"
                 type="card">
           <a-tab-pane key="new" class="tabs-pane" tab="变动统计">
@@ -39,17 +39,17 @@
                     <icon-card count="0" icon-background="#7585a2" icon-type="iconsiwang" title="死亡"/>
                   </div>
                 </div>
-                <div class="layout-center check-history-block">
-                  <span v-show="!showEmpHis" class="ops" @click="onCheckHis">
-                    <CaretDownOutlined/>
-                    <span>查看历史变化趋势</span>
-                  </span>
-                  <span v-show="showEmpHis" class="ops" @click="onCheckHis">
-                    <CaretUpOutlined/>
-                    <span>收起</span>
-                  </span>
-                  <div v-show="showEmpHis" class="graph"></div>
-                </div>
+<!--                <div class="layout-center check-history-block">-->
+<!--                  <span v-show="!showEmpHis" class="ops" @click="onCheckHis">-->
+<!--                    <CaretDownOutlined/>-->
+<!--                    <span>查看历史变化趋势</span>-->
+<!--                  </span>-->
+<!--                  <span v-show="showEmpHis" class="ops" @click="onCheckHis">-->
+<!--                    <CaretUpOutlined/>-->
+<!--                    <span>收起</span>-->
+<!--                  </span>-->
+<!--                  <div v-show="showEmpHis" class="graph"></div>-->
+<!--                </div>-->
               </a-card>
             </div>
             <div class="bottom-block">
@@ -120,7 +120,9 @@
           <a-tab-pane key="employee" tab="职工统计">
             <div class="item-block">
               <a-card title="人员统计">
-                <div class="card"></div>
+                <div class="card">
+                  <chart :option="departOption" id="department" :style="{width: '100%', height: '100%'}"/>
+                </div>
               </a-card>
             </div>
             <div class="item-block">
@@ -142,7 +144,7 @@
                         <chart :option="oEduOption" id="oEdu" />
                       </div>
                     </a-tab-pane>
-                    <a-tab-pane key="edu" tab="学历分布">
+                    <a-tab-pane key="marriage" tab="婚姻状况">
                       <div class="cus-box-shadow card">
                         <chart :option="marriageOption" id="marriage" />
                       </div>
@@ -202,10 +204,11 @@
           </a-tab-pane>
           <a-tab-pane key="company" class="company" tab="全部人员">
             <div class="ops-bar item-block">
-              <a-input-search placeholder="请输入职工姓名" style="width: 200px"/>
+              <a-input-search placeholder="请输入职工姓名" style="width: 200px" @search="searchEmpName"/>
             </div>
             <div class="table-block item-block">
-              <a-table :columns="empTableColumns" :data-source="empOfCompanySource" size="small"></a-table>
+              <cus-table :table-def="tableDef" :use-default-pagination="true" :auto-adopt="false" :show-action-col="false"
+                         :search-model="employeeName" :refresh="empTbFresh"></cus-table>
             </div>
           </a-tab-pane>
         </a-tabs>
@@ -216,22 +219,33 @@
 
 <script>
 import {computed, ref, watch} from "vue";
-import {companyApi, departmentApi} from "@/service";
+// eslint-disable-next-line no-unused-vars
+import {companyApi, departmentApi, employeeApi} from "@/service";
 import {convertArrayToTree} from "@/funcLib/arrayFunc";
 import {CaretDownOutlined, CaretUpOutlined} from "@ant-design/icons-vue";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import IconCard from "@/views/statistic/components/IconCard";
 import {getEmployeeInfo, getVariation} from "@/service/statisticApi";
 import Chart from "@/views/statistic/components/Chart";
-import {getAgeOption, getEduOption, getProOption, getSexOption, setBarOption, setPieOption} from "@/views/statistic/components/config";
+import {
+  getAgeOption,
+  getEduOption,
+  getMarriage, getOAgeOption, getOEduOption, getOProOption, getOSexOption,
+  getProOption,
+  getSexOption, parseOption,
+  setBarOption, tableDef
+} from "@/views/statistic/components/config";
+import CusTable from "@/components/table/CusTable";
 
 export default {
   name: "Statistic",
   components: {
+    CusTable,
+    // eslint-disable-next-line vue/no-unused-components
     CusDateRange, IconCard, CaretUpOutlined, CaretDownOutlined,
     Chart
   },
-  setup() {
+  setup: function () {
     const companyOrigin = []
     const companyData = ref([])
     const companyMap = ref({})
@@ -239,94 +253,84 @@ export default {
     const expandedComKeys = ref([])
     const keywords = ref()
     const empOfCompanySource = ref([])
-    const empTableColumns = ref([
-      {
-        title: '职工姓名',
-        dataIndex: 'employeeId',
-        width: 80,
-        ellipsis: true,
-        slots: {customRender: 'employeeId'}
-      },
-      {
-        title: '性别',
-        dataIndex: 'sex',
-        width: 80,
-        ellipsis: true,
-        slots: {customRender: 'sex'}
-      },
-      {
-        title: '年龄',
-        dataIndex: 'age',
-        width: 40,
-        ellipsis: true,
-        slots: {customRender: 'age'}
-      },
-      {
-        title: '部门',
-        dataIndex: 'department',
-        width: 80,
-        ellipsis: true,
-        slots: {customRender: 'department'}
-      },
-      {
-        title: '职位',
-        dataIndex: 'position',
-        width: 80,
-        ellipsis: true,
-        slots: {customRender: '80'}
-      },
-      {
-        title: '联系电话',
-        dataIndex: 'phoneNumber',
-        width: 100,
-        ellipsis: true,
-        slots: {customRender: 'phoneNumber'}
-      },
-      {
-        title: '操作',
-        dataIndex: 'action',
-        width: 80,
-        ellipsis: true,
-        slots: {customRender: 'action'}
-      }
-    ])
     const showEmpHis = ref(false)
     const variationRange = ref([])
     const selectedCompanyId = ref()
     const selectedDepartId = ref()
+    const employeeName = ref()
+    const empTbFresh = ref(1)
 
+    const statisticDataSource = ref()
     const variationDataSource = ref()
     const sexVariationDataSource = ref(getSexOption())
     const ageVariationDataSource = ref(getAgeOption())
-    const eduVarSrc = ref(getEduOption() )
+    const eduVarSrc = ref(getEduOption())
     const proVarSrc = ref(getProOption())
-    const oAgeOption = ref(setPieOption())
-    const oSexOption = ref(setPieOption())
-    const oEduOption = ref(setBarOption())
+    const oAgeOption = ref(getOAgeOption())
+    const oSexOption = ref(getOSexOption())
+    const oEduOption = ref(getOEduOption())
     const politicsOption = ref(setBarOption())
-    const oProOption = ref(setBarOption())
+    const oProOption = ref(getOProOption())
     const workAgeOption = ref(setBarOption())
     const onBoardAge = ref(setBarOption())
     const empTypeOption = ref(setBarOption())
     const sourceOption = ref(setBarOption())
     const stateOption = ref(setBarOption())
     const contractOption = ref(setBarOption())
-    const marriageOption = ref(setBarOption())
+    const marriageOption = ref(getMarriage())
+    const departOption = ref(setBarOption())
 
     // arg是包含点击节点的key的数组
-    const onCompanySelect = (arg) => {
+    const onCompanySelect = (arg, even) => {
       if (arg.length) {
-        setDepart(arg[0])
-        selectedCompanyId.value = arg[0]
-        getVariationData()
-        // setEmployeeStatistic(arg[0], null, '*')
+        const _type = even.selectedNodes[0].props._type
+        switch (_type) {
+          case 1:
+            selectedCompanyId.value = arg[0]
+            selectedDepartId.value = null
+            getVariationData()
+            setEmployeeStatistic(selectedCompanyId.value, selectedDepartId.value, '*')
+            searchEmpName()
+            break
+          case 2:
+            selectedDepartId.value = arg[0]
+            getVariationData()
+            setEmployeeStatistic(selectedCompanyId.value, selectedDepartId.value, '*')
+            searchEmpName()
+            break
+          case 3:
+            break
+          case 4:
+            break
+        }
       }
       expandedComKeys.value = [...arg, ...expandedComKeys.value]
     }
 
     const setEmployeeStatistic = (companyId, departId, codes) => {
-      getEmployeeInfo(codes, companyId).then(res => {
-        console.log(res)
+      getEmployeeInfo(codes, companyId, departId).then(res => {
+        const {isSuccess, data} = res
+        if (isSuccess) {
+          statisticDataSource.value = data
+          // eslint-disable-next-line no-unused-vars
+          const {contract_contract_type, emp_age, emp_all_working_age, emp_company, emp_depart, emp_education, emp_emp_status,
+            // eslint-disable-next-line no-unused-vars
+            emp_emp_type, emp_entry_channel, emp_local_working_age, emp_marriage_status, emp_politics_status, emp_professional, emp_sex}
+              = data
+          contractOption.value = parseOption(contract_contract_type, 'bar')
+          oAgeOption.value = parseOption(emp_age, 'bar')
+          workAgeOption.value = parseOption(emp_all_working_age, 'bar')
+          onBoardAge.value = parseOption(emp_local_working_age, 'bar')
+          oEduOption.value = parseOption(emp_education, 'bar')
+          stateOption.value = parseOption(emp_emp_status, 'pie', '职工状态', '在职')
+          empTypeOption.value = parseOption(emp_emp_type, 'pie', '职工类型', '在职')
+          marriageOption.value = parseOption(emp_marriage_status, 'pie', '职工婚姻', '在职')
+          politicsOption.value = parseOption(emp_politics_status, 'bar')
+          oProOption.value = parseOption(emp_professional, 'bar')
+          oSexOption.value=parseOption(emp_sex, 'pie', '职工性别', '在职')
+          departOption.value = parseOption(emp_depart, 'bar')
+          sourceOption.value = parseOption(emp_entry_channel, 'bar')
+        }
       })
     }
 
@@ -343,6 +347,7 @@ export default {
           } else {
             companyData.value = data
             for (let i = 0; i < data.length; i++) {
+              data[i]._type = 1
               companyMap.value[data[i].id] = i
             }
           }
@@ -363,6 +368,7 @@ export default {
           }).then(res => {
             const {data} = res
             for (let i = 0; i < data.length; i++) {
+              data[i]._type = 2 // 2为部门
               subDeparts?.children.push(data[i])
             }
           })
@@ -380,6 +386,7 @@ export default {
               name: '本公司部门',
               id: 'sub_depart'.concat(parent.id),
               type: 'subDepart',
+              _type: 4,
               children: []
             })
           }
@@ -388,6 +395,7 @@ export default {
               name: '分子公司',
               id: 'sub_com'.concat(parent.id),
               type: 'subCom',
+              _type: 3,
               children: [child]
             })
           } else {
@@ -440,7 +448,16 @@ export default {
         keys.push(dataKey)
         values.push(data[dataKey])
       }
-      return { keys, values }
+      return {keys, values}
+    }
+
+    const searchEmpName = (value) => {
+      employeeName.value = {
+        realName: value,
+        companyId: selectedCompanyId.value,
+        departmentId: selectedDepartId.value
+      }
+      empTbFresh.value++
     }
 
     watch(variationDataSource, (nv) => {
@@ -456,13 +473,14 @@ export default {
 
       proVarSrc.value.xAxis.data = proOption.keys
       proVarSrc.value.series[0].data = proOption.values
-
-
     }, {deep: true})
 
     setCompany()
 
     return {
+      tableDef,
+      empTbFresh,
+      employeeName,
       marriageOption,
       oAgeOption,
       oSexOption,
@@ -475,6 +493,7 @@ export default {
       sourceOption,
       stateOption,
       contractOption,
+      departOption,
       eduVarSrc,
       proVarSrc,
       sexVariationDataSource,
@@ -485,7 +504,6 @@ export default {
       expandedComKeys,
       keywords,
       empOfCompanySource,
-      empTableColumns,
       showEmpHis,
       variationRange,
       onCompanySelect,
@@ -497,7 +515,8 @@ export default {
       getVariationData,
       selectedCompanyId,
       selectedDepartId,
-      setEmployeeStatistic
+      setEmployeeStatistic,
+      searchEmpName
     }
   }
 }
@@ -510,11 +529,13 @@ export default {
 }
 
 .cus-sider {
-  max-height: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
   .sticky-block {
     position: sticky;
     top: 0;
     left: 2px;
+    right: 2px;
     padding: 8px;
     background: white;
     z-index: 100;
@@ -584,7 +605,8 @@ export default {
 }
 
 .company {
-
+  display: flex;
+  flex-direction: column;
   .ops-bar {
     background: white;
     padding: 20px;
@@ -593,7 +615,7 @@ export default {
   .table-block {
     background: white;
     padding: 20px;
-
+    flex-grow: 2;
   }
 }
 

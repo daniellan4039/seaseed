@@ -15,12 +15,12 @@
     <div class="form-block">
       <div class="ops-bar">
         <span>
-          <a-button style="margin-right: 8px;" type="default">下载模版</a-button>
+          <a-button style="margin-right: 8px;" type="default" @click="onDownTemp">下载模版</a-button>
           <cus-upload :custom-request="uploadFile" :enable-upload="false" :show-upload-list="false" text="导入Excel"/>
         </span>
         <span>
           <a-button type="default" style="margin-left: 8px;" @click="onExport">导出Excel</a-button>
-          <a-button type="primary" style="margin-left: 8px;">上传</a-button>
+          <a-button type="primary" style="margin-left: 8px;" @click="onUpload">上传</a-button>
         </span>
       </div>
       <div class="table-container">
@@ -38,6 +38,8 @@
 import {CusFormContainer, CusUpload} from "@/components";
 import {computed, ref} from "vue";
 import {readExcel, saveFile} from "@/funcLib/cusExcelJs";
+import {downTemp, importData} from "@/service/importApi";
+import {Modal} from "ant-design-vue";
 
 export default {
   name: "EmployeeBatchImport",
@@ -84,6 +86,24 @@ export default {
       console.log(re)
     }
 
+    const onDownTemp = () => {
+      downTemp().then(res => {
+        console.log(res)
+      })
+    }
+
+    const onUpload = () => {
+      if (nullWarning.value.length > 0) {
+        Modal.warning({
+          title: '警告',
+          content: '您导入的数据有问题, 请修正后上传'
+        })
+      } else {
+        let value = JSON.stringify(data.value);
+        importData(value)
+      }
+    }
+
     return {
       uploadFile,
       warningColor,
@@ -91,7 +111,9 @@ export default {
       columns,
       data,
       requiredConstraints,
-      onExport
+      onExport,
+      onDownTemp,
+      onUpload
     }
   },
   data: () => ({

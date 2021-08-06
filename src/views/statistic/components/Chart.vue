@@ -5,7 +5,7 @@
 
 <script>
 import * as echarts from 'echarts';
-import {onMounted, ref, watch} from "vue";
+import {onMounted, ref, toRef, watch} from "vue";
 
 export default {
   name: "Chart",
@@ -29,13 +29,14 @@ export default {
   },
   setup(props) {
     const myChart = ref()
+    const optionRef = toRef(props, 'option')
+
     onMounted(() => {
       const chartDom = document.getElementById(props.id);
       myChart.value = echarts.init(chartDom)
       props.option && myChart.value.setOption(props.option)
     })
-    watch(props.option, (nv) => {
-      console.log(nv)
+    watch(optionRef, (nv) => {
       nv && myChart.value.setOption(props.option)
     }, {deep:true})
     return {
