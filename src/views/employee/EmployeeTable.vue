@@ -7,9 +7,9 @@
           <a-button type="default" style="margin-left: 8px;" @click="uploadFile">批量导入</a-button>
         </template>
       </cus-table>
-      <a-modal title="高级搜索" v-model:visible="showMore">
-        <cus-table :table-def="searchMoreDef"></cus-table>
-      </a-modal>
+<!--      <a-modal title="高级搜索" v-model:visible="showMore">-->
+<!--        <cus-table :table-def="searchMoreDef"></cus-table>-->
+<!--      </a-modal>-->
     </div>
   </cus-table-container>
 </template>

@@ -95,7 +95,8 @@ export const tableDef = {
                     submit: true,
                     scope: ['form', 'detail'],
                     group: '基本信息',
-                    list: positionApi.list
+                    list: positionApi.list,
+                    text: 'name'
                 }
             },
             {
@@ -318,7 +319,7 @@ export const formDef = {
             key: 'distributeCompanyId',
             label: '分配组织',
             placeholder: '请选择',
-            inputType: 'select:list',
+            inputType: 'select:tree',
             rules: [],
             meta: {
                 submit: true,
@@ -343,6 +344,7 @@ export const formDef = {
                 scope: ['form', 'detail'],
                 group: '基本信息',
                 list: departmentApi.listDepartsOfCompany,
+                text: 'name'
             }
         },
         {
@@ -359,7 +361,8 @@ export const formDef = {
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '基本信息',
-                list: positionApi.list
+                list: positionApi.list,
+                text: 'name'
             }
         },
         {

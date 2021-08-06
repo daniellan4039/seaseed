@@ -17,22 +17,26 @@
                 type="card">
           <a-tab-pane key="new" class="tabs-pane" tab="变动统计">
             <div class="ops-block">
-              <span>查询范围：<cus-date-range/></span>
+              <span>
+                <span>查询范围：</span>
+                <cus-date-range v-model="variationRange"/>
+                <a-button type="primary" @click="getVariationData">查询</a-button>
+              </span>
             </div>
             <div>
               <a-card title="人员变动">
                 <div class="emp-change-block layout-center">
                   <div>
-                    <icon-card count="3" icon-background="#488bf8" icon-type="iconneibutiaoru" title="人员调动"/>
-                    <icon-card count="3" icon-background="#73deb3" icon-type="iconshehuizhaopin" title="社会招聘"/>
-                    <icon-card count="3" icon-background="#f7c739" icon-type="iconxuexiaozhaopin" title="学校招聘"/>
-                    <icon-card count="3" icon-background="#488bf8" icon-type="iconjunrenanzhi" title="军人安置"/>
+                    <icon-card count="0" icon-background="#488bf8" icon-type="iconneibutiaoru" title="内部掉入"/>
+                    <icon-card count="0" icon-background="#73deb3" icon-type="iconshehuizhaopin" title="社会招聘"/>
+                    <icon-card count="0" icon-background="#f7c739" icon-type="iconxuexiaozhaopin" title="学校招聘"/>
+                    <icon-card count="0" icon-background="#488bf8" icon-type="iconjunrenanzhi" title="军人安置"/>
                   </div>
                   <div>
-                    <icon-card count="3" icon-background="#488bf8" icon-type="iconjiechuhetong" title="解除合同"/>
-                    <icon-card count="3" icon-background="#73deb3" icon-type="icontiaozou" title="调走"/>
-                    <icon-card count="3" icon-background="#f7c739" icon-type="icontuixiu" title="退休"/>
-                    <icon-card count="3" icon-background="#7585a2" icon-type="iconsiwang" title="死亡"/>
+                    <icon-card count="0" icon-background="#488bf8" icon-type="iconjiechuhetong" title="解除合同"/>
+                    <icon-card count="0" icon-background="#73deb3" icon-type="icontiaozou" title="调走"/>
+                    <icon-card count="0" icon-background="#f7c739" icon-type="icontuixiu" title="退休"/>
+                    <icon-card count="0" icon-background="#7585a2" icon-type="iconsiwang" title="死亡"/>
                   </div>
                 </div>
                 <div class="layout-center check-history-block">
@@ -50,43 +54,63 @@
             </div>
             <div class="bottom-block">
               <a-row :gutter="8">
-                <a-col :span="8">
-                  <a-card title="性别比例" width="200">
-                    <div class="graph"></div>
+                <a-col :span="12">
+                  <a-card title="新增性别比例">
+                    <div class="graph">
+                      <chart id="sex" :style="{width: '500px', height: '400px'}" :option="sexVariationDataSource"/>
+                    </div>
                   </a-card>
                 </a-col>
-                <a-col :span="8">
-                  <a-card title="学历比例" width="200">
-                    <div class="graph"></div>
+                <a-col :span="12">
+                  <a-card title="新增职工工龄">
+                    <div class="graph">
+                      <chart id="age" :style="{width: '500px', height: '400px'}" :option="ageVariationDataSource"/>
+                    </div>
                   </a-card>
                 </a-col>
-                <a-col :span="8">
-                  <a-card title="科研成果统计" width="200">
-                    <div class="science">
-                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#FDBE05'}" icon-type="iconzhigongzhuanli">
-                        <template #title>
-                          <div>新增专利数</div>
-                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
-                        </template>
-                      </cus-menu-icon>
-                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#66BBEA'}" icon-type="iconkeyanchengguo">
-                        <template #title>
-                          <div>新增科研成果</div>
-                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
-                        </template>
-                      </cus-menu-icon>
-                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#F15478'}" icon-type="iconzhigongzhicheng">
-                        <template #title>
-                          <div>新增职称评定</div>
-                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
-                        </template>
-                      </cus-menu-icon>
-                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#14CDBD'}" icon-type="iconxueshulunwen">
-                        <template #title>
-                          <div>新增论文</div>
-                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>
-                        </template>
-                      </cus-menu-icon>
+<!--                <a-col :span="8">-->
+<!--                  <a-card title="科研成果统计" width="200">-->
+<!--                    <div class="science">-->
+<!--                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#FDBE05'}" icon-type="iconzhigongzhuanli">-->
+<!--                        <template #title>-->
+<!--                          <div>新增专利数</div>-->
+<!--                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>-->
+<!--                        </template>-->
+<!--                      </cus-menu-icon>-->
+<!--                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#66BBEA'}" icon-type="iconkeyanchengguo">-->
+<!--                        <template #title>-->
+<!--                          <div>新增科研成果</div>-->
+<!--                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>-->
+<!--                        </template>-->
+<!--                      </cus-menu-icon>-->
+<!--                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#F15478'}" icon-type="iconzhigongzhicheng">-->
+<!--                        <template #title>-->
+<!--                          <div>新增职称评定</div>-->
+<!--                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>-->
+<!--                        </template>-->
+<!--                      </cus-menu-icon>-->
+<!--                      <cus-menu-icon :icon-font-style="{fontSize: '110px', color: '#14CDBD'}" icon-type="iconxueshulunwen">-->
+<!--                        <template #title>-->
+<!--                          <div>新增论文</div>-->
+<!--                          <div style="color: #2c6da5;"><span style="font-size: 24px">8</span>项</div>-->
+<!--                        </template>-->
+<!--                      </cus-menu-icon>-->
+<!--                    </div>-->
+<!--                  </a-card>-->
+<!--                </a-col>-->
+              </a-row>
+              <a-row :gutter="8" style="margin-top: 8px;">
+                <a-col :span="12">
+                  <a-card title="新增职工学历" width="200">
+                    <div class="graph">
+                      <chart :option="eduVarSrc" id="edu" :style="{width: '500px', height: '400px'}"/>
+                    </div>
+                  </a-card>
+                </a-col>
+                <a-col :span="12">
+                  <a-card title="新增职工职称" width="200">
+                    <div class="graph">
+                      <chart :option="proVarSrc" id="pro" :style="{width: '500px', height: '400px'}"/>
                     </div>
                   </a-card>
                 </a-col>
@@ -105,17 +129,22 @@
                   <a-tabs :tab-bar-style="{margin:0}" type="card">
                     <a-tab-pane key="age" tab="年龄分布">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="oAgeOption" id="oAge" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="sex" tab="性别占比">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="oSexOption" id="oSex" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="edu" tab="学历分布">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="oEduOption" id="oEdu" />
+                      </div>
+                    </a-tab-pane>
+                    <a-tab-pane key="edu" tab="学历分布">
+                      <div class="cus-box-shadow card">
+                        <chart :option="marriageOption" id="marriage" />
                       </div>
                     </a-tab-pane>
                   </a-tabs>
@@ -124,22 +153,22 @@
                   <a-tabs :tab-bar-style="{margin:0}" type="card">
                     <a-tab-pane key="politic" tab="政治面貌">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="politicsOption" id="politics" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="professional" tab="职工职称">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="oProOption" id="oPro" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="workingAge" tab="工龄">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="workAgeOption" id="workAge" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="workingAgeLocal" tab="本企业工龄">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="onBoardAge" id="onBoard" />
                       </div>
                     </a-tab-pane>
                   </a-tabs>
@@ -148,22 +177,22 @@
                   <a-tabs :tab-bar-style="{margin:0}" type="card">
                     <a-tab-pane key="empType" tab="职工类型">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="empTypeOption" id="empType" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="empSource" tab="职工来源">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="sourceOption" id="source" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="empStatus" tab="职工状态">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="stateOption" id="state" />
                       </div>
                     </a-tab-pane>
                     <a-tab-pane key="empContractType" tab="职工合同类型">
                       <div class="cus-box-shadow card">
-
+                        <chart :option="contractOption" id="contract" />
                       </div>
                     </a-tab-pane>
                   </a-tabs>
@@ -186,20 +215,21 @@
 </template>
 
 <script>
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {companyApi, departmentApi} from "@/service";
 import {convertArrayToTree} from "@/funcLib/arrayFunc";
-import CusIcon from "@/components/icon/CusIcon";
-import {CaretDownOutlined, CaretLeftOutlined, CaretUpOutlined} from "@ant-design/icons-vue";
+import {CaretDownOutlined, CaretUpOutlined} from "@ant-design/icons-vue";
 import CusDateRange from "@/components/form/date/CusDateRange";
 import IconCard from "@/views/statistic/components/IconCard";
-import CusMenuIcon from "@/components/menu/CusMenuIcon";
+import {getEmployeeInfo, getVariation} from "@/service/statisticApi";
+import Chart from "@/views/statistic/components/Chart";
+import {getAgeOption, getEduOption, getProOption, getSexOption, setBarOption, setPieOption} from "@/views/statistic/components/config";
 
 export default {
   name: "Statistic",
   components: {
-    // eslint-disable-next-line vue/no-unused-components
-    CusIcon, CusMenuIcon, CusDateRange, IconCard, CaretUpOutlined, CaretLeftOutlined, CaretDownOutlined
+    CusDateRange, IconCard, CaretUpOutlined, CaretDownOutlined,
+    Chart
   },
   setup() {
     const companyOrigin = []
@@ -261,13 +291,43 @@ export default {
       }
     ])
     const showEmpHis = ref(false)
+    const variationRange = ref([])
+    const selectedCompanyId = ref()
+    const selectedDepartId = ref()
+
+    const variationDataSource = ref()
+    const sexVariationDataSource = ref(getSexOption())
+    const ageVariationDataSource = ref(getAgeOption())
+    const eduVarSrc = ref(getEduOption() )
+    const proVarSrc = ref(getProOption())
+    const oAgeOption = ref(setPieOption())
+    const oSexOption = ref(setPieOption())
+    const oEduOption = ref(setBarOption())
+    const politicsOption = ref(setBarOption())
+    const oProOption = ref(setBarOption())
+    const workAgeOption = ref(setBarOption())
+    const onBoardAge = ref(setBarOption())
+    const empTypeOption = ref(setBarOption())
+    const sourceOption = ref(setBarOption())
+    const stateOption = ref(setBarOption())
+    const contractOption = ref(setBarOption())
+    const marriageOption = ref(setBarOption())
 
     // arg是包含点击节点的key的数组
     const onCompanySelect = (arg) => {
       if (arg.length) {
         setDepart(arg[0])
+        selectedCompanyId.value = arg[0]
+        getVariationData()
+        // setEmployeeStatistic(arg[0], null, '*')
       }
       expandedComKeys.value = [...arg, ...expandedComKeys.value]
+    }
+
+    const setEmployeeStatistic = (companyId, departId, codes) => {
+      getEmployeeInfo(codes, companyId).then(res => {
+        console.log(res)
+      })
     }
 
     const setCompany = (companyId) => {
@@ -359,9 +419,66 @@ export default {
       showEmpHis.value = !showEmpHis.value
     }
 
+    const getVariationData = () => {
+      let from, to
+      if (variationRange.value.length && variationRange.value.length) {
+        from = variationRange.value[0]
+        to = variationRange.value[1]
+      }
+      getVariation(from, to, selectedCompanyId.value, selectedDepartId.value).then(res => {
+        const {isSuccess, data} = res
+        if (isSuccess) {
+          variationDataSource.value = data
+        }
+      })
+    }
+
+    const setGraphOption = (data) => {
+      const keys = []
+      const values = []
+      for (let dataKey in data) {
+        keys.push(dataKey)
+        values.push(data[dataKey])
+      }
+      return { keys, values }
+    }
+
+    watch(variationDataSource, (nv) => {
+      const {sex, age, education, profession} = nv
+      sexVariationDataSource.value.series[0].data = [{name: '男性', value: sex['男性']}, {name: '女性', value: sex['女性']}]
+      ageVariationDataSource.value.series[0].data = age.map(i => Number(i.size))
+
+      const eduOption = setGraphOption(education)
+      const proOption = setGraphOption(profession)
+
+      eduVarSrc.value.xAxis.data = eduOption.keys
+      eduVarSrc.value.series[0].data = eduOption.values
+
+      proVarSrc.value.xAxis.data = proOption.keys
+      proVarSrc.value.series[0].data = proOption.values
+
+
+    }, {deep: true})
+
     setCompany()
 
     return {
+      marriageOption,
+      oAgeOption,
+      oSexOption,
+      oEduOption,
+      politicsOption,
+      oProOption,
+      workAgeOption,
+      onBoardAge,
+      empTypeOption,
+      sourceOption,
+      stateOption,
+      contractOption,
+      eduVarSrc,
+      proVarSrc,
+      sexVariationDataSource,
+      ageVariationDataSource,
       companyData,
       companyTree,
       departData,
@@ -370,12 +487,17 @@ export default {
       empOfCompanySource,
       empTableColumns,
       showEmpHis,
+      variationRange,
       onCompanySelect,
       setCompany,
       setDepart,
       getCompanyTree,
       onSearch,
-      onCheckHis
+      onCheckHis,
+      getVariationData,
+      selectedCompanyId,
+      selectedDepartId,
+      setEmployeeStatistic
     }
   }
 }
@@ -438,16 +560,17 @@ export default {
       .graph {
         width: 100%;
         height: 400px;
-        background: aliceblue;
+        //background: aliceblue;
       }
     }
 
     .bottom-block {
       margin-top: 8px;
-
       .graph {
         height: 400px;
-        background: aliceblue;
+        display: flex;
+        justify-content: center;
+        //background: aliceblue;
       }
 
       .science {

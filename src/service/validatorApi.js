@@ -1,7 +1,7 @@
 import {$} from '@/service/index'
 import {generateRules} from "@/funcLib/validator";
 
-const prefix = '/base'
+const prefix = process.env.VUE_APP_BASE_PREFIX
 
 export const api = {
     validUrl: `${prefix}/form/validator`,

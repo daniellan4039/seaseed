@@ -1,6 +1,6 @@
 import {$} from '@/service/index'
 
-const prefix = '/base'
+const prefix = process.env.VUE_APP_BASE_PREFIX
 const moduleAnyone = '/anyone'
 const module = '/baseDict'
 export const api = {

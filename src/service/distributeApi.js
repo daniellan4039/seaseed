@@ -1,6 +1,6 @@
 import {$} from '@/service/index'
 
-const prefix = '/hrms'
+const prefix = process.env.VUE_APP_HRMS_PREFIX
 const module = '/hrEmpDistribution'
 
 export const api = {
