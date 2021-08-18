@@ -465,7 +465,7 @@ export const formDef = {
                 submit: true,
                 scope: ['form', 'detail'],
                 group: '基本信息',
-                detailSpan: 2
+                detailSpan: 1
             }
         },
         {

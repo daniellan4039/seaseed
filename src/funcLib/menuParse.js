@@ -56,7 +56,7 @@ export function getMenuFromBasePlatform(currentUrl) {
                 store.dispatch('setRouteMap', routeMap)
                 store.dispatch('setRoute', data)
                 // 跳转至首页
-                currentUrl ? (window.loaction = currentUrl) : this.$router.push({ path: '/' })
+                currentUrl ? (window.loaction = currentUrl) : null
                 resolve(data)
             } else {
                 return resolve([])
@@ -70,7 +70,7 @@ export function getTokenByTicket() {
     const currentUrl = router.params?.current
     if (ticket == null && currentUrl == null) {
         getMenuFromBasePlatform()
-        return Promise.reject('HRMS: not obtain valid ticket!')
+        return
     }
     const formData = new FormData()
     formData.append('ticket', ticket)

@@ -8,7 +8,7 @@
         <a-image :height="160" :width="117" :src="avatorUrl"/>
       </div>
       <div class="info">
-        <img v-if="employee?.transferRecordList?.length > 0" src="@/assets/已调出.png">
+        <img v-if="employee?.transferRecordList?.length > 0" src="@/assets/transfered.png">
       </div>
       <a-divider type="horizontal" />
       <div class="other-block">

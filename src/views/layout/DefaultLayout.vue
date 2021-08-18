@@ -2,6 +2,9 @@
   <a-layout style="min-height: 100vh; max-height: 100vh;">
     <a-layout-sider v-model:collapsed="collapsed" :style="{minHeight: '100%', maxHeight: '100%', overflow: 'auto'}" :trigger="null"
                     collapsible>
+      <div class="logo-container" v-if="!collapsed">
+        <img src="@/assets/logo.svg" class="logo">
+      </div>
       <cus-menu
           v-model:selectedKeys="menuSelectedKeys"
           :collapsed="collapsed"
@@ -198,4 +201,13 @@ export default {
   padding-left: 16px;
   padding-bottom: 16px;
 }
+.logo-container{
+  padding-top: 40px;
+  padding-bottom: 20px;
+  .logo{
+    width: 200px;
+    height: 80px;
+  }
+}
+
 </style>
