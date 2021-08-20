@@ -7,6 +7,7 @@
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {getTokenByTicket} from "@/funcLib/menuParse";
 
+// test
 export default {
   name: 'Root',
   setup(){
