@@ -1,15 +1,16 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+  <dv-button></dv-button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import DvButton from "../components/button/DvButton";
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DvButton
   }
 }
 </script>
