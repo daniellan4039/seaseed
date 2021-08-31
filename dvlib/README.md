@@ -1,4 +1,4 @@
-# seaseed
+# dvlib
 
 ## Project setup
 ```
