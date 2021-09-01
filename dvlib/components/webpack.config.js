@@ -11,7 +11,23 @@ module.exports = {
   // devtool: none, // see below
   module: {
     rules: [
-      // ... setting
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
     ]
+  },
+  externals: {
+    'element-plus': {
+      commonjs2: 'element-plus',
+      commonjs: 'element-plus',
+      root: 'element-plus'
+    }
   }
 }

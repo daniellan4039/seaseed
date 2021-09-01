@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import dvCom from '../components/index'
+import 'element-plus/dist/index.css'
+import dvLib from '../components/index'
+import ElementPlus from 'element-plus'
 
-createApp(App).use(dvCom).mount('#app')
+createApp(App).use(ElementPlus).use(dvLib).mount('#app')

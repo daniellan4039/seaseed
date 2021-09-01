@@ -5,12 +5,14 @@
 </template>
 
 <script>
-
-import DvButton from '../components/button/DvButton'
 export default {
   name: 'App',
   components: {
-    DvButton
+  },
+  setup () {
+    return {
+      hello: 'ssss'
+    }
   }
 }
 </script>
