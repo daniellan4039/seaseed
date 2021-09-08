@@ -13,14 +13,15 @@ class DvInput{
   }
 }
 
-export class DvInputString extends DvInput {
+export class DvInputStringDef extends DvInput {
   constructor (key, name, config) {
     super(key, name, config)
   }
 }
 
-export class DvSelect extends DvInput{
+export class DvSelectDef extends DvInput{
   constructor (key, name, config) {
     super(key, name, config)
   }
 }
+
