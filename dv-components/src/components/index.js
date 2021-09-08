@@ -1,8 +1,7 @@
-import '@/components/common/ComponentDefine'
-import DvSelect from "@/components/select/index";
+import DvSelect from './select/DvSelect'
 
 export default {
     install: (app) => {
-        app.use(DvSelect)
+        app.component(DvSelect.name, DvSelect)
     }
 }
