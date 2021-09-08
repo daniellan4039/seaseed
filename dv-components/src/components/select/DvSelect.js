@@ -1,4 +1,4 @@
-import { defineComponent, toRef } from 'vue'
+import { defineComponent, toRef, watch } from 'vue'
 import { DvSelectDef } from '../common/ComponentDefine'
 
 export default defineComponent({
@@ -9,9 +9,11 @@ export default defineComponent({
     }
   },
   emits: ['update:def'],
-  setup(props) {
+  setup(props, ctx) {
     const defRef = toRef(props, 'def')
-
+    watch(defRef, nv => {
+      ctx.emits('update:def', nv)
+    })
     return{
       defRef
     }
