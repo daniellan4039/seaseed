@@ -2,8 +2,9 @@
   <div style='width: 100px'>
     <div>
       <a-button @click='() => this.selectDef.toggleVisible()'>显示/隐藏</a-button>
+      <a-button @click='changeOptions'>新选项</a-button>
     </div>
-    <dv-select :def='selectDef'></dv-select>
+    <dv-select :def='selectDef' style='min-width: 200px;'></dv-select>
   </div>
 </template>
 
@@ -30,9 +31,18 @@ export default {
         ]
       )
     )
+    const changeOptions = () => {
+      selectDef.value.setOptions([
+        {
+          value: '3',
+          label: '小号'
+        }
+      ])
+    }
     // selectDef.toggleVisible()
     return {
-      selectDef
+      selectDef,
+      changeOptions
     }
   }
 }
