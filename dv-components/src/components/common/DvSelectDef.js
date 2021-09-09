@@ -7,14 +7,19 @@ import { DvInput } from './DvInput'
  * options: selection options
  */
 export class DvSelectDef extends DvInput {
-  constructor(key, value, config = {}, rules={}, options=[]) {
-    super(key, value, config, rules)
-    if (options instanceof Array) {
-      this.config['options'] = options
-    }
+  constructor(key, name, config = {}, rules, options=[]) {
+    super(key, name, config, rules)
     this.visible = true
+    this.options = options
     this.setLoad((options) => {
-      this.config['options'] = options
+      this.options = options
     })
+  }
+
+  set setOptions(options) {
+    this.options = options
+  }
+  get getOptions() {
+    return this.options
   }
 }

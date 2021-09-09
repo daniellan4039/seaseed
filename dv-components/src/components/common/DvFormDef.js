@@ -8,65 +8,81 @@
  * fields loading
  * form submitting
  */
-export class DvFormDef {
+import { ref } from 'vue'
 
-  #submitApi = null
+export class DvFormDef {
 
   /**
    *
-   * DvFormDef defines key, formMap, formItems, formModel, rules
+   * DvFormDef defines key, formMap, formItems, formModel, formChange, rules
    *
    * @param formRef
    * @param key
    * @param formItems
+   * @param defaultFormModel
    */
-  constructor(formRef, key, formItems) {
-    this.formRef = formRef
+  constructor(key, formItems, defaultFormModel, submitApi) {
     this.key = key
+    this.rules = {}
+    this.formModel = {}
+    this.formChange = {} // for tracing formModel properties
     this.formMap = {}
+    this.formItems = []
+    this.formRef = ref()
+    this.submitApi =  submitApi
+
     if (formItems instanceof Array) {
       this.formItems = formItems
       formItems.forEach((item) => {
         this.formMap[item.key] = item
+        this.rules[item.key] = item?.rules
+        if(item.submit) {
+          if (defaultFormModel instanceof Object || item.value !== null && item.value !== undefined) {
+            item.value = defaultFormModel[item.key] ?? item.value
+          }
+          this.formModel[item.key] = item.value
+          this.formChange[item.key] = item.value
+        }
       })
     }
-    this.rules = {}
-    this.formModel = {}
-    formItems.forEach(i => {
-      this.rules[i.key] = i.rules
-      if(i.submit) {
-        this.formModel[i.key] = null
-      }
-    })
+    this.dependenceChange()
   }
 
-  set submitApi(api) {
-    this.#submitApi = api
+  setRules(rules){
+    this.rules = rules
+  }
+
+  setSubmitApi(api) {
+    this.submitApi = api
   }
 
   dependenceChange() {
+    const self = this
     this.formItems.forEach(i => {
       if (i.dependency && i.dependency.key) {
         const { key, condition, values } = i.dependency
-        if (condition instanceof String) {
-          if (condition in ['include', 'exclude']) {
+        if (condition) {
+          if (['include', 'exclude'].includes(condition)) {
             let visible = true
-            if (condition === 'include') visible = true
-            if (condition === 'exclude') visible = false
-            if (values instanceof Array && values.length > 0) {
-              i.visible = values.includes(this.formMap[key]) && visible
-            } else {
-              const dependentItem = this.formMap[key]
-              if (dependentItem === null || dependentItem === undefined) {
-                i.visible = visible
-              }
+            if (condition === 'include') {
+              visible = true
             }
-          } else {
-            // condition === 'cascade'
-            if (i.changed) {
-              const cascadeItems = this.formItems?.filter?.(i => i.dependency?.condition === 'cascade' && i.dependency?.key === i.key)
-              cascadeItems.formItems(c => {
-                c.load?.()
+            if (condition === 'exclude') {
+              visible = false
+            }
+            if (values instanceof Array && values.length > 0) {
+              i.visible = values.includes(self.formModel[key]) === visible
+            } else {
+              const dependentValue = self.formModel[key]
+              i.visible = !!dependentValue
+            }
+          } else {// condition === 'cascade'
+            if (self.formModel[key] !== self.formChange[key]) { // check whether properties changed
+              self.formChange[key] = self.formModel[key] // consume this changed property info
+              self.formMap[i.key]?.load?.({
+                key: i.key,
+                value: self.formModel[key],
+                item: i
               })
             }
           }
@@ -75,10 +91,12 @@ export class DvFormDef {
     })
   }
 
+
+
   submit() {
     this.formRef?.value?.validate?.().then(() => {
       console.log('submitting form model: ', this.formModel)
-      return this.#submitApi(this.formModel)
+      return this.submitApi(this.formModel)
     })
   }
 }

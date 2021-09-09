@@ -1,5 +1,6 @@
 import SelectDemo from '../views/SelectDemo'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import FormDemo from '@/views/formDemo/FormDemo'
 
 const routes = [
   {
@@ -11,6 +12,14 @@ const routes = [
       key: 'SelectDemo',
       visible: true,
       auth: true
+    }
+  },
+  {
+    path: '/formDemo',
+    name: 'FormDemo',
+    component: FormDemo,
+    meta: {
+      title: 'Form表单'
     }
   }
 ]
