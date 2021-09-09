@@ -5,7 +5,8 @@ import { DvInput } from './DvInput'
  * key, unique key
  * config, official component configs
  * options, selection options
- * visible, whether this object be visible
+ * visible, whether this object should be visible, controlling this behavior is depended on this container, not this
+ * component self.
  */
 export class DvSelectDef extends DvInput {
   constructor(key, config, options) {

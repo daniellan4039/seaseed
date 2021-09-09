@@ -21,15 +21,11 @@ export default defineComponent({
   },
   render: function() {
     const config = this.defRef.config
-    if(!this.defRef.visible) {
-      return null
-    } else {
-      return h(resolveComponent('a-select'),
-        {
-          options: this.defRef?.options,
-          ...config
-        }
-      )
-    }
+    return h(resolveComponent('a-select'),
+      {
+        options: this.defRef?.options,
+        ...config
+      }
+    )
   }
 })

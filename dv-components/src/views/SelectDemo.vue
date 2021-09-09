@@ -1,10 +1,6 @@
 <template>
   <div style='width: 100px'>
-    <div>
-      <a-button @click='() => this.selectDef.toggleVisible()'>显示/隐藏</a-button>
-      <a-button @click='changeOptions'>新选项</a-button>
-    </div>
-    <dv-select :def='selectDef' style='min-width: 200px;'></dv-select>
+    <dv-select :def='selectDef' style='min-width: 200px;' v-model:value='selectValue'></dv-select>
   </div>
 </template>
 
@@ -18,7 +14,7 @@ export default {
     const selectDef = ref(
       new DvSelectDef(
         'baseSelect',
-        { placeholder: '请选择设置' },
+        { placeholder: '请选择设置', mode: 'multiple' },
         [
           {
             value: '1',
@@ -31,18 +27,11 @@ export default {
         ]
       )
     )
-    const changeOptions = () => {
-      selectDef.value.setOptions([
-        {
-          value: '3',
-          label: '小号'
-        }
-      ])
-    }
-    // selectDef.toggleVisible()
+    const selectValue = ref()
+
     return {
       selectDef,
-      changeOptions
+      selectValue
     }
   }
 }
