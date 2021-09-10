@@ -64,15 +64,14 @@ export class DvFormDef {
    */
   dependenceMarker = {}
 
-  constructor(key, formItems, submitApi) {
+  constructor(key, formItems, submitApi, formModel) {
     this.key = key
     this.formItems = formItems
     this.submitApi = submitApi
-
     formItems.forEach((i) => {
       this.formMap[i.key] = i
+      this.formModel[i.key] = formModel?.[i.key]
       this.formChangeMarker[i.key] = null
-      this.formModel[i.key] = null
       this.formKeys.push(i.key)
       this.rules[i.key] = i.rules
       if (i.submit) {
@@ -90,6 +89,7 @@ export class DvFormDef {
         }
       }
     })
+    this.dependenceChange()
   }
 
   setRules(outerRules) {
@@ -103,9 +103,10 @@ export class DvFormDef {
       const op = outerModel[p]
       if (op !== null && op !== undefined) {
         this.formModel[p] = outerModel[p]
-        this.formChangeMarker[p] = outerModel[p]
+        this.formChangeMarker[p] = null
       }
     })
+    this.dependenceChange()
   }
 
   setSubmitApi(api) {
@@ -118,28 +119,26 @@ export class DvFormDef {
       const fmi = self.formModel[it.key]
       const fmic = self.formChangeMarker[it.key]
       if (fmi !== fmic) { //check whether changed
-        self.formChangeMarker[it.key] = fmi
-        this.formChangeMarker[itk] = false // consume this change
+        self.formChangeMarker[it.key] = fmi // consume this change
         const dpKey = self.formKeys[itk]
         const dpValue = self.formModel[dpKey]
-        const dpProperty = self.formMap[dpKey]
+        const dpItem = self.formMap[dpKey]
         const dependencies = self.dependenceMarker[dpKey]
         dependencies?.forEach((dp) => {
-          const tgProperty = self.formMap[dp.key]
-          const tgpValue = self.formModel[dp.key]
+          const tgItem = self.formMap[dp.key]
           switch (dp.condition) {
             case 'include':
-              tgProperty.visible = dp.values?.includes(tgpValue)
+              tgItem.visible = dp.values?.includes(dpValue)
               break
             case 'exclude':
-              tgProperty.visible = !dp.values?.includes(tgpValue)
+              tgItem.visible = !dp.values?.includes(dpValue)
               break
             case 'cascade':
-              tgProperty.load?.({
+              tgItem.load?.({
                 key: dpKey,
                 value: dpValue,
-                item: dpProperty,
-                self: tgProperty
+                item: dpItem,
+                self: tgItem
               })
               break
           }

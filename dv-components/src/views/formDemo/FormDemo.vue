@@ -9,7 +9,7 @@
         <a-select v-model:value="firstFormDefRef.formModel.departmentId"
                   :options="firstFormDefRef.formMap['departmentId'].options"></a-select>
       </a-form-item>
-      <a-form-item label="Sex" name="sex">
+      <a-form-item label="Sex" name="sex" v-if="firstFormDefRef.formMap['sex'].visible">
         <a-select v-model:value="firstFormDefRef.formModel.sex" :options="firstFormDefRef.formMap['sex'].options"></a-select>
       </a-form-item>
       <a-form-item label="Nickname" name="nickName">
