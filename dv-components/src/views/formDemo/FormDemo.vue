@@ -5,11 +5,12 @@
       <a-form-item label="User Name" name="userName">
         <a-input v-model:value="firstFormDefRef.formModel.userName" />
       </a-form-item>
-      <a-form-item label="Gender" name="sex">
-        <a-select v-model:value="firstFormDefRef.formModel.sex"></a-select>
+      <a-form-item label="Department" name="departmentId" v-if="firstFormDefRef.formMap['departmentId'].visible">
+        <a-select v-model:value="firstFormDefRef.formModel.departmentId"
+                  :options="firstFormDefRef.formMap['departmentId'].options"></a-select>
       </a-form-item>
-      <a-form-item label="Department" name="departmentId" v-if="firstFormDefRef.formMap.departmentId.visible">
-        <a-select v-model:value="firstFormDefRef.formModel.departmentId" :options="firstFormDefRef.formMap.departmentId.options"></a-select>
+      <a-form-item label="Sex" name="sex">
+        <a-select v-model:value="firstFormDefRef.formModel.sex" :options="firstFormDefRef.formMap['sex'].options"></a-select>
       </a-form-item>
       <a-form-item label="Nickname" name="nickName">
         <a-input v-model:value="firstFormDefRef.formModel.nickName" />
@@ -29,6 +30,7 @@ import firstFormDef from './config/formConfig'
 export default {
   name: 'FormDemo',
   setup(){
+    console.log(firstFormDef)
     const firstFormDefRef = reactive(firstFormDef)
     const formRef = ref()
 

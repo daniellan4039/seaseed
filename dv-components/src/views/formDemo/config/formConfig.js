@@ -2,9 +2,8 @@ import DvInputStringDef from '@/components/common/DvInputStringDef'
 import { DvSelectDef } from '@/components/common/DvSelectDef'
 import { DvFormDef } from '@/components/common/DvFormDef'
 
-// eslint-disable-next-line no-unused-vars
 const getDep = function(param) {
-  if(param === 'lan') {
+  if (param === 'lan') {
     return Promise.resolve({
       isSuccess: true,
       data: [
@@ -18,7 +17,7 @@ const getDep = function(param) {
         }
       ]
     })
-  } else if(param === 'cheng') {
+  } else if (param === 'cheng') {
     return Promise.resolve({
       isSuccess: true,
       data: [
@@ -34,9 +33,30 @@ const getDep = function(param) {
     })
   } else {
     return Promise.resolve({
-      isSuccess: false
+      isSuccess: true,
+      data: [
+        {
+          dictValue: '0',
+          dictTxt: 'Unknown'
+        }
+      ]
     })
   }
+}
+const getSex = function() {
+  return Promise.resolve({
+    isSuccess: true,
+    data: [
+      {
+        label: 'Male',
+        value: '1'
+      },
+      {
+        label: 'Female',
+        value: '2'
+      }
+    ]
+  })
 }
 
 const userName = new DvInputStringDef('userName', 'User Name')
@@ -46,11 +66,35 @@ const sex = new DvSelectDef('sex', 'Sex', null, [
     message: 'Please select',
     trigger: 'blur'
   }
-])
-
-const department = new DvSelectDef('departmentId', 'Department', null,null,[
+], [
   {
-    label: 'default 1',
+    label: 'unknown',
+    value: '0'
+  },
+  {
+    label: 'Male',
+    value: '1'
+  },
+  {
+    label: 'Female',
+    value: '2'
+  }
+])
+sex.setLoad((condition) => {
+  getSex().then(res => {
+    if (res.isSuccess) {
+      condition.self.options = res.data
+    }
+  })
+})
+sex.dependency = {
+  key: 'departmentId',
+  condition: 'include',
+  values: ['3']
+}
+const department = new DvSelectDef('departmentId', 'Department', null, null, [
+  {
+    label: 'unknown',
     value: '0'
   }
 ])
@@ -60,8 +104,8 @@ department.dependency = {
 }
 department.setLoad((condition) => {
   getDep(condition.value).then(res => {
-    if(res.isSuccess) {
-      condition.item.options = res.data.map(i => {
+    if (res.isSuccess) {
+      condition.self.options = res.data.map(i => {
         return {
           label: i.dictTxt,
           value: i.dictValue
@@ -74,7 +118,7 @@ department.setLoad((condition) => {
 const nickName = new DvInputStringDef('nickName', 'Nick Name')
 
 const firstForm = new DvFormDef('firstForm', [
-  userName, sex, department, nickName
-], null)
+  userName, department, sex, nickName
+])
 
 export default firstForm
