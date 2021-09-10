@@ -33,7 +33,7 @@ const getDep = function(param) {
       ]
     })
   } else {
-    return Promise.reject({
+    return Promise.resolve({
       isSuccess: false
     })
   }
@@ -61,7 +61,7 @@ department.dependency = {
 department.setLoad((condition) => {
   getDep(condition.value).then(res => {
     if(res.isSuccess) {
-      department.setOptions = res.data.map(i => {
+      condition.item.options = res.data.map(i => {
         return {
           label: i.dictTxt,
           value: i.dictValue

@@ -1,21 +1,21 @@
 <template>
   <div class="container">
-    <a-form :ref="firstFormDefRef.formRef"
-            :rules="firstFormDefRef.rules"
-            v-model:model="formModel"
+    <a-form ref="formRef" :rules="firstFormDefRef.rules" :model="firstFormDefRef.formModel"
             :label-col="{span:6}" :wrapper-col="{span: 12}">
       <a-form-item label="User Name" name="userName">
-        <a-input v-model:value="formModel.userName" />
+        <a-input v-model:value="firstFormDefRef.formModel.userName" />
       </a-form-item>
       <a-form-item label="Gender" name="sex">
-        <a-select v-model:value="formModel.sex"></a-select>
+        <a-select v-model:value="firstFormDefRef.formModel.sex"></a-select>
       </a-form-item>
-      <a-form-item :label="formMap.departmentId.name" name="departmentId"
-                   v-if="formMap.departmentId.visible">
-        <a-select v-model:value="formModel.departmentId" :options="firstFormDefRef.formMap.departmentId.options"></a-select>
+      <a-form-item label="Department" name="departmentId" v-if="firstFormDefRef.formMap.departmentId.visible">
+        <a-select v-model:value="firstFormDefRef.formModel.departmentId" :options="firstFormDefRef.formMap.departmentId.options"></a-select>
       </a-form-item>
-      <a-form-item :label="formMap.nickName.name" name="nickName">
-        <a-input v-model:value="formModel.nickName" />
+      <a-form-item label="Nickname" name="nickName">
+        <a-input v-model:value="firstFormDefRef.formModel.nickName" />
+      </a-form-item>
+      <a-form-item label='Action'>
+        <a-button type='primary' @click='onSubmit'>Submit</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -30,17 +30,20 @@ export default {
   name: 'FormDemo',
   setup(){
     const firstFormDefRef = reactive(firstFormDef)
-    console.log(firstFormDefRef)
+    const formRef = ref()
+
+    const onSubmit = () => {
+      firstFormDefRef.submit(formRef)
+    }
 
     watch(firstFormDefRef.formModel, () => {
       firstFormDefRef.dependenceChange()
-      console.log(firstFormDefRef)
     })
 
     return{
+      formRef,
       firstFormDefRef,
-      formModel: firstFormDefRef.formModel,
-      formMap: firstFormDefRef.formMap
+      onSubmit
     }
   }
 }

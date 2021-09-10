@@ -8,8 +8,6 @@
  * fields loading
  * form submitting
  */
-import { ref } from 'vue'
-
 export class DvFormDef {
 
   /**
@@ -28,7 +26,6 @@ export class DvFormDef {
     this.formChange = {} // for tracing formModel properties
     this.formMap = {}
     this.formItems = []
-    this.formRef = ref()
     this.submitApi =  submitApi
 
     if (formItems instanceof Array) {
@@ -84,6 +81,7 @@ export class DvFormDef {
                 value: self.formModel[key],
                 item: i
               })
+              self.formModel[i.key] = null
             }
           }
         }
@@ -93,10 +91,10 @@ export class DvFormDef {
 
 
 
-  submit() {
-    this.formRef?.value?.validate?.().then(() => {
+  submit(formRef) {
+    formRef?.value.validate().then(() => {
       console.log('submitting form model: ', this.formModel)
-      return this.submitApi(this.formModel)
+      return this.submitApi?.(this.formModel)
     })
   }
 }
