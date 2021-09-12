@@ -31,6 +31,13 @@ export default class Dependent {
   dependentCount = 0
 
   /**
+   * it returns a promise object
+   */
+  cascadeService = () => {
+    console.log('cascade method not define')
+  }
+
+  /**
    * set type include by default
    *
    * @param type
@@ -42,13 +49,19 @@ export default class Dependent {
   /**
    *
    * @param key
-   * @param values
+   * @param values it is array for 'include' type, or a method for 'cascade' type
    */
   setDependentKey (key, values) {
-    if (key !== null && key !== undefined && values instanceof Array && values.length > 0) {
+    if(this.type === 'include') {
+      if (key !== null && key !== undefined && values instanceof Array && values.length > 0) {
+        this.dependentKeys.push(key)
+        this.dependentValues.push(values)
+        this.dependentCount = this.dependentKeys.length
+      }
+    } else {
+      // for cascade
       this.dependentKeys.push(key)
-      this.dependentValues.push(values)
-      this.dependentCount = this.dependentKeys.length
+      this.cascadeService = values
     }
   }
 
@@ -72,6 +85,10 @@ export default class Dependent {
    * @param self this input item
    */
   cascade(target, self) {
-    self.reload?.(target)
+    if(this.cascadeService && this.cascadeService instanceof Function) {
+      this.cascadeService({ self: self, target: target }).then(res => {
+        self.reload(res)
+      })
+    }
   }
 }

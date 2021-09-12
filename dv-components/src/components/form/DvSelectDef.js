@@ -12,4 +12,8 @@ export default class DvSelectDef extends DvInputDef{
   setOptions(options) {
     this.options = options
   }
+
+  reload(data){
+    this.options = data
+  }
 }

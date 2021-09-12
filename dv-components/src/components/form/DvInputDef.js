@@ -44,11 +44,6 @@ export default class DvInputDef {
    */
   visible = true
 
-  /**
-   * reload function
-   */
-  reload = () => {}
-
   constructor (key, label) {
     this.key = key
     this.label = label
@@ -82,7 +77,6 @@ export default class DvInputDef {
   responseChange(target) {
     if(this.dependent.type === 'include') {
       this.visible = this.dependent.include(target)
-      console.log('this.visible:', this.visible)
     } else {
       this.dependent.cascade(target, this)
     }
@@ -93,5 +87,12 @@ export default class DvInputDef {
     this.subscribers.forEach(s => {
       s.responseChange(self)
     })
+  }
+
+  /**
+   * reload function
+   */
+  reload() {
+    console.log('this component not defines reload method')
   }
 }
