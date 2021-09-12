@@ -75,17 +75,17 @@ export default class DvInputDef {
     } else {
       this.dependent.cascade(target, this)
     }
+    this.counter++
   }
 
   notify(dpValue){
-    if(dpValue !== this.value) {
+    if(dpValue !== this.value || this.counter === 0) {
       this.setValue(dpValue)
       const self = this
       this.subscribers.forEach(s => {
         s.responseChange(self)
       })
     }
-    this.counter++
   }
 
   /**

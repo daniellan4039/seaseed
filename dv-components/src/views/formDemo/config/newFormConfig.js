@@ -50,7 +50,6 @@ const department = new DvSelectDef('departmentId', 'Department', departmentOptio
 const sex = new DvSelectDef('sex', 'Sex', sexOptions)
 
 sex.setDependent('userName', ['lan', 'jian', 'cheng', 'ting'], 'include')
-sex.setDependent('nickName', ['daniel'])
 
 department.setDependent('userName', departReloadApi, 'cascade')
 
