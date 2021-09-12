@@ -53,6 +53,10 @@ export default class DvFormDef {
     }
   }
 
+  resetForm(formRef) {
+    formRef.value.resetFields();
+  }
+
   setRules(rules) {
     for (const key in rules) {
       if (!this.rules[key]) {
