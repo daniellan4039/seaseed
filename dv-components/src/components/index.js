@@ -1,7 +1,5 @@
-import DvSelect from './select/DvSelect'
-
 export default {
+    // eslint-disable-next-line no-unused-vars
     install: (app) => {
-        app.component(DvSelect.name, DvSelect)
     }
 }

@@ -21,6 +21,7 @@ export default class DvFormDef {
         })
       }
     }
+    this.refreshDependency()
   }
 
   setModel(model) {
@@ -35,13 +36,7 @@ export default class DvFormDef {
       const formItem = this.formItems[i]
       const key = formItem.key
       const value =  this.formModel[key]
-      if(formItem.value !== value) {
-        formItem.setValue(value)
-      }
-      if (formItem.changed) {
-        formItem.notify()
-        formItem.changed = false
-      }
+      formItem.notify(value)
     }
     console.log(this)
   }

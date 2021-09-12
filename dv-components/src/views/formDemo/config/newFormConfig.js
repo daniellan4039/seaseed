@@ -53,5 +53,6 @@ sex.setDependent('userName', ['lan', 'jian', 'cheng', 'ting'], 'include')
 sex.setDependent('nickName', ['daniel'])
 
 department.setDependent('userName', departReloadApi, 'cascade')
+
 const form = new DvFormDef([userName, nickName, department, sex])
 export default form

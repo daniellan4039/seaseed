@@ -2,6 +2,8 @@ import Dependent from '@/components/form/depend/Dependent'
 
 export default class DvInputDef {
 
+  counter = 0
+
   /**
    *
    * @type {string}
@@ -19,12 +21,6 @@ export default class DvInputDef {
    * @type {Object}
    */
   value=null
-
-  /**
-   * change marker
-   * @type {boolean}
-   */
-  changed = false
 
   /**
    *
@@ -51,7 +47,6 @@ export default class DvInputDef {
 
   setValue(val){
     this.value = val
-    this.changed = true
   }
 
   subscribe(item) {
@@ -75,18 +70,22 @@ export default class DvInputDef {
    * called by dependent input item
    */
   responseChange(target) {
-    if(this.dependent.type === 'include') {
+    if(this.dependent.type === 'include' || this.counter === 0) {
       this.visible = this.dependent.include(target)
     } else {
       this.dependent.cascade(target, this)
     }
   }
 
-  notify(){
-    const self = this
-    this.subscribers.forEach(s => {
-      s.responseChange(self)
-    })
+  notify(dpValue){
+    if(dpValue !== this.value) {
+      this.setValue(dpValue)
+      const self = this
+      this.subscribers.forEach(s => {
+        s.responseChange(self)
+      })
+    }
+    this.counter++
   }
 
   /**

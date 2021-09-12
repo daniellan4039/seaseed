@@ -73,7 +73,7 @@ export default class Dependent {
   include (target) {
     const indexOfTarget = this.dependentKeys.findIndex(i => i === target.key)
     if (indexOfTarget !== -1) {
-      this.dynamicValues[indexOfTarget] = this.dependentValues[indexOfTarget].includes(target.value) ? 1 : 0
+      this.dynamicValues[indexOfTarget] = this.dependentValues[indexOfTarget]?.includes(target.value) ? 1 : 0
     }
     const dynCount = eval(this.dynamicValues.join('+'))
     return dynCount === this.dependentCount
