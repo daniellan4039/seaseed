@@ -1,77 +1,74 @@
-import DvInputStringDef from '@/components/common/DvInputStringDef'
-import { DvSelectDef } from '@/components/common/DvSelectDef'
-import { DvFormDef } from '@/components/common/DvFormDef'
+import DvSelectDef from '@/components/form/DvSelectDef'
+import DvInputDef from '@/components/form/DvInputDef'
+import DvFormDef from '@/components/form/DvFormDef'
 
-// eslint-disable-next-line no-unused-vars
-const getDep = function(param) {
-  if (param === 'lan') {
-    return Promise.resolve({
-      isSuccess: true,
-      data: [
-        {
-          dictValue: '1',
-          dictTxt: 'Dep A'
-        },
-        {
-          dictValue: '2',
-          dictTxt: 'Dep B'
-        }
-      ]
-    })
-  } else if (param === 'cheng') {
-    return Promise.resolve({
-      isSuccess: true,
-      data: [
-        {
-          dictValue: '3',
-          dictTxt: 'Dep C'
-        },
-        {
-          dictValue: '4',
-          dictTxt: 'Dep D'
-        }
-      ]
-    })
+const departmentOptions = [
+  {
+    label: 'Depart A',
+    value: 1
+  },
+  {
+    label: 'Depart B',
+    value: 2
+  }
+]
+
+const sexOptions = [
+  {
+    label: 'Male',
+    value: 1
+  },
+  {
+    label: 'Femal',
+    value: 2
+  }
+]
+
+const rules = {
+  userName: [
+    {
+      required: true,
+      message: 'Please write your username',
+      trigger: 'blur'
+    }
+  ]
+}
+
+
+
+const departReloadApi = (name) => {
+  if(name) {
+    const { value } = name.target
+    const count = 3
+    const options = []
+    for (let i = 1; i <= count; i++) {
+      options.push({
+        label: 'Depart ' + value + ' ' + i,
+        value: i
+      })
+    }
+    return Promise.resolve(options)
   } else {
-    return Promise.resolve({
-      isSuccess: true,
-      data: [
-        {
-          dictValue: '0',
-          dictTxt: 'Unknown'
-        }
-      ]
+    return Promise.reject({
+      isSuccess: false,
+      message: 'name cannot be false or absance'
     })
   }
 }
-// eslint-disable-next-line no-unused-vars
-const getSex = function() {
-  return Promise.resolve({
-    isSuccess: true,
-    data: [
-      {
-        label: 'Male',
-        value: '1'
-      },
-      {
-        label: 'Female',
-        value: '2'
-      }
-    ]
-  })
+
+const rulesApi = () => {
+  return Promise.resolve(rules)
 }
 
-const userName = new DvInputStringDef('userName', 'User Name')
-const sex = new DvSelectDef('sex', 'Sex', null, )
-const department = new DvSelectDef('departmentId', 'Department')
-const nickName = new DvInputStringDef('nickName', 'Nick Name')
+const userName = new DvInputDef('userName', 'Username')
+const nickName = new DvInputDef('nickName', 'Nick Name')
+const department = new DvSelectDef('departmentId', 'Department', departmentOptions)
+const sex = new DvSelectDef('sex', 'Sex', sexOptions)
 
-const firstForm = new DvFormDef('firstForm', [
-  userName, department, sex, nickName
-])
+sex.setDependent('userName', ['lan', 'jian', 'cheng', 'ting'], 'include')
 
-/****************************************************************/
+department.setDependent('userName', departReloadApi, 'cascade')
 
-
-
-export default firstForm
+const form = new DvFormDef([userName, nickName, department, sex])
+form.setAsynRules(rulesApi)
+export default form
