@@ -18,6 +18,7 @@
       </a-form-item>
       <a-form-item label='Action'>
         <a-button type='primary' @click='onSubmit'>Submit</a-button>
+        <a-button @click='reset'>Submit</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -33,23 +34,21 @@ export default {
   setup(){
     const form = reactive(newForm)
     const formRef = ref()
-    form.setModel({
-      userName: 'lan',
-      sex: 1,
-      departmentId: 1,
-      nickName: 'daniel'
-    })
     watch(form.formModel, () => {
       form.refreshDependency()
     })
     const onSubmit = () => {
       form.submit(formRef)
     }
+    const reset = () => {
+      form.resetForm(formRef)
+    }
     console.log(form)
     return{
       form,
       formRef,
-      onSubmit
+      onSubmit,
+      reset
     }
   }
 }

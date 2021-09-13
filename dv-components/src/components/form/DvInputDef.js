@@ -70,7 +70,7 @@ export default class DvInputDef {
    * called by dependent input item
    */
   responseChange(target) {
-    if(this.dependent.type === 'include' || this.counter === 0) {
+    if(this.dependent.type === 'include') {
       this.visible = this.dependent.include(target)
     } else {
       this.dependent.cascade(target, this)

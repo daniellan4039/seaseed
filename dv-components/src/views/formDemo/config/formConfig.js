@@ -2,17 +2,6 @@ import DvSelectDef from '@/components/form/DvSelectDef'
 import DvInputDef from '@/components/form/DvInputDef'
 import DvFormDef from '@/components/form/DvFormDef'
 
-const departmentOptions = [
-  {
-    label: 'Depart A',
-    value: 1
-  },
-  {
-    label: 'Depart B',
-    value: 2
-  }
-]
-
 const sexOptions = [
   {
     label: 'Male',
@@ -62,7 +51,7 @@ const rulesApi = () => {
 
 const userName = new DvInputDef('userName', 'Username')
 const nickName = new DvInputDef('nickName', 'Nick Name')
-const department = new DvSelectDef('departmentId', 'Department', departmentOptions)
+const department = new DvSelectDef('departmentId', 'Department')
 const sex = new DvSelectDef('sex', 'Sex', sexOptions)
 
 sex.setDependent('userName', ['lan', 'jian', 'cheng', 'ting'], 'include')
