@@ -72,5 +72,4 @@ export default class DvFormDef {
       this.setRules(rules)
     })
   }
-
 }
