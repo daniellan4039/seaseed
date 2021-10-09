@@ -17,8 +17,10 @@
         <a-input v-model:value="form.formModel.nickName" />
       </a-form-item>
       <a-form-item label='Action'>
-        <a-button type='primary' @click='onSubmit'>Submit</a-button>
-        <a-button @click='reset'>Submit</a-button>
+        <a-space>
+          <a-button type='primary' @click='onSubmit'>Submit</a-button>
+          <a-button @click='reset'>Reset</a-button>
+        </a-space>
       </a-form-item>
     </a-form>
   </div>
@@ -38,12 +40,13 @@ export default {
       form.refreshDependency()
     })
     const onSubmit = () => {
-      form.submit(formRef)
+      formRef.value.validate().then(() => {
+        console.log('form submit with model:', form.formModel)
+      })
     }
     const reset = () => {
-      form.resetForm(formRef)
+      formRef.value.resetFields()
     }
-    console.log(form)
     return{
       form,
       formRef,

@@ -45,18 +45,6 @@ export default class DvFormDef {
     }
   }
 
-  submit (formRef) {
-    if (formRef) {
-      formRef.value.validate().then(() => {
-        console.log(this.formModel)
-      })
-    }
-  }
-
-  resetForm(formRef) {
-    formRef.value.resetFields();
-  }
-
   setRules(rules) {
     for (const key in rules) {
       if (!this.rules[key]) {
@@ -67,8 +55,7 @@ export default class DvFormDef {
   }
 
   setAsynRules(asynService) {
-    asynService?.().then?.((rules)=>{
-      setTimeout
+    asynService?.().then?.((rules) => {
       this.setRules(rules)
     })
   }

@@ -60,4 +60,5 @@ department.setDependent('userName', departReloadApi, 'cascade')
 
 const form = new DvFormDef([userName, nickName, department, sex])
 form.setAsynRules(rulesApi)
+
 export default form
