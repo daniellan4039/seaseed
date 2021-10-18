@@ -31,6 +31,7 @@ export default class Dependent {
   dependentCount = 0
 
   /**
+   * cascade service callback, it provide target object as target and self object as self.
    * it returns a promise object
    */
   cascadeService = () => {

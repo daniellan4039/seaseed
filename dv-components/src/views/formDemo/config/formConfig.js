@@ -1,6 +1,6 @@
-import DvSelectDef from '@/components/form/DvSelectDef'
-import DvInputDef from '@/components/form/DvInputDef'
-import DvFormDef from '@/components/form/DvFormDef'
+import DvSelectDef from '@/lib/form/DvSelectDef'
+import DvInputDef from '@/lib/form/DvInputDef'
+import DvFormDef from '@/lib/form/DvFormDef'
 
 const sexOptions = [
   {

@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <a-divider></a-divider>
     <a-form ref="formRef" :model="form.formModel" :rules="form.rules"
             :label-col="{span:6}" :wrapper-col="{span: 12}">
       <a-form-item label="User Name" name="userName">
@@ -27,7 +26,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import { reactive, ref, watch } from 'vue'
 import newForm from './config/formConfig'
 

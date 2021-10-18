@@ -1,4 +1,4 @@
-import Dependent from '@/components/form/depend/Dependent'
+import Dependent from '@/lib/form/depend/Dependent'
 
 export default class DvInputDef {
 
@@ -52,6 +52,7 @@ export default class DvInputDef {
   subscribe(item) {
     this.subscribers.push(item)
   }
+
   unSubscribe(key){
     if(key) {
       const index = this.subscribers.find(i => i.key === key)

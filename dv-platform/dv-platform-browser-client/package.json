@@ -1,26 +1,18 @@
 {
-  "name": "dv-components",
+  "name": "dv-platform-browser-client",
   "version": "0.1.0",
   "private": true,
-  "main": "./dist/dv-component.common.js",
-  "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
-  ],
   "scripts": {
-    "serve-component": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name dv-component src/lib/index.js",
-    "lint": "vue-cli-service lint"
+    "serve-platform": "vue-cli-service serve",
+    "build-platform": "vue-cli-service build",
+    "lint-platform": "vue-cli-service lint"
   },
   "dependencies": {
-    "ant-design-vue": "^2.2.6",
+    "ant-design-vue": "^2.2.8",
     "core-js": "^3.6.5",
+    "pixi.js": "^6.1.3",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -36,9 +28,6 @@
     "env": {
       "node": true
     },
-    "ignorePatterns": [
-      "dv-component.common.js"
-    ],
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended"
