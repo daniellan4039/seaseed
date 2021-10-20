@@ -12,7 +12,6 @@ const sexOptions = [
     value: 2
   }
 ]
-
 const rules = {
   userName: [
     {
@@ -22,9 +21,6 @@ const rules = {
     }
   ]
 }
-
-
-
 const departReloadApi = (name) => {
   if(name) {
     const { value } = name.target
@@ -44,7 +40,6 @@ const departReloadApi = (name) => {
     })
   }
 }
-
 const rulesApi = () => {
   return Promise.resolve(rules)
 }
@@ -55,7 +50,6 @@ const department = new DvSelectDef('departmentId', 'Department')
 const sex = new DvSelectDef('sex', 'Sex', sexOptions)
 
 sex.setDependent('userName', ['lan', 'jian', 'cheng', 'ting'], 'include')
-
 department.setDependent('userName', departReloadApi, 'cascade')
 
 const form = new DvFormDef([userName, nickName, department, sex])
