@@ -15,6 +15,9 @@
       <a-form-item label="Nickname" name="nickName">
         <a-input v-model:value="form.formModel.nickName" />
       </a-form-item>
+      <a-form-item label="Test">
+        <dv-input />
+      </a-form-item>
       <a-form-item label='Action'>
         <a-space>
           <a-button type='primary' @click='onSubmit'>Submit</a-button>
@@ -29,9 +32,11 @@
 // eslint-disable-next-line no-unused-vars
 import { reactive, ref, watch } from 'vue'
 import newForm from './config/formConfig'
+import { DvInput } from "../../lib/component";
 
 export default {
   name: 'FormDemo',
+  components: { DvInput },
   setup(){
     const form = reactive(newForm)
     const formRef = ref()
@@ -40,7 +45,7 @@ export default {
     })
     const onSubmit = () => {
       formRef.value.validate().then(() => {
-        console.log('form submit with model:', form.formModel)
+        console.log('definition submit with model:', form.formModel)
       })
     }
     const reset = () => {

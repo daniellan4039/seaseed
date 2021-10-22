@@ -1,6 +1,6 @@
-import DvFormDef from '@/lib/form/DvFormDef'
-import DvInputDef from '@/lib/form/DvInputDef'
-import DvSelectDef from '@/lib/form/DvSelectDef'
+import DvFormDef from '@/lib/definition/DvFormDef'
+import DvInputDef from '@/lib/definition/DvInputDef'
+import DvSelectDef from '@/lib/definition/DvSelectDef'
 
 export default {
     DvFormDef,
